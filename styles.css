@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/*
-Colores Oficiales de Resaving (Extraídos de Figma y Guía de Estilos):
-- Principal: #0F5B3A
-- Dark-Principal: #0B4A30
-- Acent: #1D8A57
-- Attention: #F4B942
-- Background Canvas: #F4F8F5
-- Text Principal: #14251B
-- Muted / Secundario: #5F7066
-- Líneas / Bordes: #DBE7DF
-*/
+/* ========================================================
+   VARIABLES DE COLOR Y ESTILOS (Extraídos de Figma Mockup D01)
+   - Ink: #14251B
+   - Canvas: #F4F8F5
+   - Surface: #FFFFFF
+   - Principal (Green 800): #0F5B3A
+   - Dark Principal (Green 900): #0B4A30
+   - Deep Dark (Green 950): #073522
+   - Accent (Green 600 / 700): #1D8A57 / #147348
+   - Attention (Amber): #F4B942
+   - Muted: #5F7066
+   - Line / Border: #DBE7DF
+   ======================================================== */
 
 /* Reset del Modelo de Caja (U3.S10 P2 - Diapositiva 8) */
 * {
@@ -28,10 +30,20 @@ body {
 }
 
 /* ========================================================
-   Clases Utilitarias (Flexbox y Colores - U3.S10 P1 y P2)
+   CLASES UTILITARIAS Y CONTENEDOR (Flexbox - U3.S10 P2)
    ======================================================== */
+.container {
+    width: 90%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 .flex {
     display: flex;
+}
+
+.flex-1 {
+    flex: 1;
 }
 
 .center {
@@ -63,8 +75,38 @@ body {
     color: #F4B942;
 }
 
+.muted {
+    color: #5F7066 !important;
+}
+
+/* Encabezados y Textos de Sección */
+.eyebrow {
+    font-size: 13px;
+    font-weight: 800;
+    color: #147348;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #14251B;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #5F7066;
+    line-height: 1.5;
+    max-width: 680px;
+}
+
 /* ========================================================
-   Header / Encabezado (U3.S9 P2 - Semántica y Flexbox)
+   1. HEADER / ENCABEZADO (Sticky & Semántico)
    ======================================================== */
 .site-header {
     background-color: #FFFFFF;
@@ -104,7 +146,7 @@ body {
 
 .brand-name {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.4px;
 }
 
@@ -122,11 +164,7 @@ body {
     transition: background-color 0.2s, color 0.2s;
 }
 
-.nav-link:hover {
-    color: #0F5B3A;
-    background-color: #F0F9F3;
-}
-
+.nav-link:hover,
 .nav-link.active {
     color: #0F5B3A;
     background-color: #F0F9F3;
@@ -165,7 +203,7 @@ body {
 }
 
 /* ========================================================
-   Hero Section (Fondo, Gradiente y Flexbox)
+   2. HERO SECTION
    ======================================================== */
 .hero-section {
     position: relative;
@@ -228,7 +266,6 @@ body {
     margin-bottom: 24px;
 }
 
-/* Barra de Búsqueda */
 .hero-search-bar {
     background-color: #FFFFFF;
     border-radius: 14px;
@@ -274,7 +311,6 @@ body {
     background-color: #0B4A30;
 }
 
-/* Botones de Acción Rápida */
 .hero-actions {
     gap: 12px;
     margin-bottom: 24px;
@@ -315,7 +351,6 @@ body {
     height: 20px;
 }
 
-/* Fila de Beneficios */
 .hero-benefits {
     gap: 20px;
     margin-bottom: 28px;
@@ -334,7 +369,6 @@ body {
     height: 17px;
 }
 
-/* Accesos a Audiencias (Solicitar información / Gestores) */
 .hero-audiences {
     gap: 24px;
     max-width: 600px;
@@ -374,31 +408,518 @@ body {
 }
 
 /* ========================================================
-   Footer / Pie de Página (U3.S9 P2 y U3.S10 P2)
+   3. CÓMO FUNCIONA (Los 3 Pasos)
    ======================================================== */
-.site-footer {
-    background-color: #FFFFFF;
-    border-top: 1px solid #DBE7DF;
-    padding: 48px 0;
-    margin-top: 40px;
+.landing-steps {
+    padding: 64px 0 32px 0;
 }
 
-.footer-inner {
-    width: 90%;
-    max-width: 1280px;
-    margin: 0 auto;
-    justify-content: space-between;
-    gap: 40px;
+.steps-grid {
+    margin-top: 28px;
+    border-top: 1px solid #DBE7DF;
+    border-bottom: 1px solid #DBE7DF;
+}
+
+.step-card {
+    flex: 1;
+    padding: 24px 28px;
+    position: relative;
+    border-right: 1px solid #DBE7DF;
+    gap: 14px;
+    background-color: transparent;
+}
+
+.step-card:last-child {
+    border-right: none;
+}
+
+.step-icon-wrap {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+.step-icon-wrap img {
+    width: 32px;
+    height: 32px;
+}
+
+.step-info strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #14251B;
+    margin-bottom: 4px;
+}
+
+.step-info small {
+    display: block;
+    font-size: 14px;
+    color: #5F7066;
+    line-height: 1.4;
+}
+
+.step-badge {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #1D8A57;
+}
+
+/* ========================================================
+   4. CONTEXT GALLERY (Galería de 3 Residuos)
+   ======================================================== */
+.context-gallery {
+    gap: 24px;
+    padding: 32px 0 64px 0;
+}
+
+.gallery-card {
+    flex: 1;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-4px);
+}
+
+.gallery-img-wrap {
+    height: 250px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(7, 53, 34, 0.08);
+}
+
+.gallery-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-card-body {
+    padding-top: 14px;
+}
+
+.gallery-card-body strong {
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+    color: #14251B;
+    margin-bottom: 4px;
+}
+
+.gallery-card-body small {
+    display: block;
+    font-size: 13px;
+    color: #5F7066;
+}
+
+/* ========================================================
+   5. SECCIÓN INFORMACIÓN CONFIABLE (Trust Section)
+   ======================================================== */
+.trust-section {
+    border-top: 1px solid #DBE7DF;
+    border-bottom: 1px solid #DBE7DF;
+    padding: 56px 0;
+    gap: 48px;
+}
+
+.trust-copy {
+    flex: 1;
+}
+
+.trust-actions {
+    gap: 12px;
+    margin-top: 24px;
     flex-wrap: wrap;
 }
 
+.btn-trust-primary {
+    background-color: #0F5B3A;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 12px 20px;
+    border-radius: 12px;
+    gap: 8px;
+    box-shadow: 0 8px 12px rgba(15, 91, 58, 0.2);
+    transition: background-color 0.2s;
+}
+
+.btn-trust-primary:hover {
+    background-color: #0B4A30;
+}
+
+.btn-trust-primary img,
+.btn-trust-secondary img {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-trust-secondary {
+    background-color: #FFFFFF;
+    color: #0F5B3A;
+    border: 1px solid #DBE7DF;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 12px 20px;
+    border-radius: 12px;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-trust-secondary:hover {
+    background-color: #F0F9F3;
+}
+
+.trust-cards {
+    flex: 1.2;
+}
+
+.trust-card {
+    flex: 1;
+    border-left: 1px solid #DBE7DF;
+    padding: 10px 24px 20px 24px;
+}
+
+.trust-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 12px;
+}
+
+.trust-card strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #14251B;
+    margin-bottom: 6px;
+}
+
+.trust-card small {
+    display: block;
+    font-size: 13.5px;
+    color: #5F7066;
+    line-height: 1.5;
+}
+
+/* ========================================================
+   6. SOLICITUD DE INFORMACIÓN (Media + Formulario)
+   ======================================================== */
+.registration-section {
+    background-color: #FFFFFF;
+    border: 1px solid #DBE7DF;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(7, 53, 34, 0.10);
+    margin: 64px auto;
+}
+
+.registration-media {
+    flex: 0.9;
+    position: relative;
+    min-height: 580px;
+    background-color: #073522;
+    overflow: hidden;
+}
+
+.media-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 38, 23, 0.15) 10%, rgba(5, 38, 23, 0.92) 85%);
+}
+
+.media-content {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    color: #FFFFFF;
+}
+
+.media-title {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+
+.media-desc {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.media-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.media-checklist li {
+    gap: 10px;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.media-checklist img {
+    width: 18px;
+    height: 18px;
+}
+
+.registration-panel {
+    flex: 1.4;
+    padding: 42px 48px;
+}
+
+.registration-lead {
+    font-size: 15px;
+    color: #5F7066;
+    margin: 8px 0 24px 0;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-row {
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #14251B;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #DBE7DF;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    color: #14251B;
+    background-color: #FFFFFF;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0F5B3A;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Nota de Seguridad */
+.security-note {
+    background-color: #FFF7E6;
+    border: 1px solid #EDC96B;
+    border-radius: 12px;
+    padding: 12px 16px;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.lock-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.security-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #14251B;
+    margin-bottom: 2px;
+}
+
+.security-text small {
+    display: block;
+    font-size: 13px;
+    color: #594A2D;
+    line-height: 1.4;
+}
+
+/* Fila de Consentimiento */
+.consent-row {
+    gap: 10px;
+    margin: 6px 0;
+}
+
+.consent-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #0F5B3A;
+    cursor: pointer;
+}
+
+.consent-row label {
+    font-size: 13.5px;
+    color: #5F7066;
+    cursor: pointer;
+}
+
+.consent-row a {
+    color: #0F5B3A;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+/* Botón Submit */
+.form-submit {
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.btn-submit {
+    background-color: #0F5B3A;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 800;
+    border-radius: 12px;
+    cursor: pointer;
+    gap: 8px;
+    box-shadow: 0 8px 14px rgba(15, 91, 58, 0.2);
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #0B4A30;
+}
+
+.btn-submit img {
+    width: 18px;
+    height: 18px;
+}
+
+.form-feedback {
+    font-size: 13.5px;
+    color: #5F7066;
+}
+
+/* ========================================================
+   7. GLOSARIO CONTEXTUAL (Details & Summary - U3.S9 P2)
+   ======================================================== */
+.home-glossary {
+    border-top: 1px solid #DBE7DF;
+    padding: 56px 0 72px 0;
+    gap: 48px;
+}
+
+.glossary-head {
+    flex: 1;
+}
+
+.glossary-accordion {
+    flex: 1.8;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.glossary-item {
+    background-color: #FFFFFF;
+    border: 1px solid #DBE7DF;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.glossary-item[open] {
+    border-color: #0F5B3A;
+}
+
+.glossary-summary {
+    list-style: none;
+    padding: 16px 20px;
+    cursor: pointer;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 800;
+    color: #073522;
+    user-select: none;
+}
+
+.glossary-summary::-webkit-details-marker {
+    display: none;
+}
+
+.chevron-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.glossary-item[open] .chevron-icon {
+    transform: rotate(180deg);
+}
+
+.glossary-content {
+    padding: 0 20px 18px 20px;
+}
+
+.glossary-content p {
+    font-size: 14.5px;
+    color: #5F7066;
+    line-height: 1.6;
+}
+
+/* ========================================================
+   8. FOOTER / PIE DE PÁGINA (Oscuro con Contraste)
+   ======================================================== */
+.site-footer {
+    background-color: #073522;
+    color: #FFFFFF;
+    padding: 56px 0 28px 0;
+}
+
+.footer-grid {
+    justify-content: space-between;
+    gap: 36px;
+    margin-bottom: 42px;
+}
+
 .footer-brand {
-    max-width: 340px;
+    max-width: 360px;
 }
 
 .footer-brand p {
-    font-size: 13px;
-    color: #5F7066;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
     line-height: 1.6;
 }
 
@@ -411,17 +932,77 @@ body {
 .footer-col h5 {
     font-size: 14px;
     font-weight: 700;
-    color: #14251B;
-    margin-bottom: 4px;
+    color: #C9EFD5;
+    margin-bottom: 6px;
 }
 
 .footer-col a {
     text-decoration: none;
-    font-size: 13px;
-    color: #5F7066;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.82);
     transition: color 0.2s;
 }
 
 .footer-col a:hover {
-    color: #0F5B3A;
+    color: #FFFFFF;
+}
+
+.accessibility-note {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.4;
+    margin-top: 4px;
+    max-width: 240px;
+}
+
+.footer-legal {
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding-top: 20px;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN (Media Queries - U3.S10 P2)
+   ======================================================== */
+@media (max-width: 992px) {
+    .registration-section {
+        flex-direction: column;
+    }
+    .registration-media {
+        min-height: 380px;
+    }
+    .trust-section,
+    .home-glossary {
+        flex-direction: column;
+        gap: 32px;
+    }
+    .footer-grid {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 38px;
+    }
+    .steps-grid,
+    .context-gallery {
+        flex-direction: column;
+    }
+    .step-card {
+        border-right: none;
+        border-bottom: 1px solid #DBE7DF;
+    }
+    .form-row {
+        flex-direction: column;
+    }
+    .main-nav {
+        display: none; /* En mobile se adaptará a menú desplegable */
+    }
+    .footer-legal {
+        flex-direction: column;
+        gap: 8px;
+    }
 }
