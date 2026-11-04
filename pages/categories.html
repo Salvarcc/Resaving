@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Las 4 Categorías de Residuos</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="categories.html" class="nav-link active">Residuos</a>
+                <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
+                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+            </nav>
+            
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                </a>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="categories-page container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Inicio</a> / <span>Categorías de residuos</span>
+        </nav>
+
+        <section class="categories-header">
+            <p class="eyebrow">Identificacion</p>
+            <h1 class="section-title">Las cuatro categorías de residuos</h1>
+            <p class="section-subtitle">Aprende a diferenciar cada grupo según el código de colores oficial del Perú para entregarlos en las mejores condiciones.</p>
+        </section>
+
+        <section class="categories-grid flex">
+            <article class="category-card card-recyclable">
+                <div class="category-img-box">
+                    <img src="../Images/category-recyclables.png" alt="Residuos Aprovechables">
+                    <span class="category-badge badge-green">Tacho Verde</span>
+                </div>
+                <div class="category-card-body">
+                    <h3>Aprovechables</h3>
+                    <p class="category-desc">Materiales limpios y secos que pueden transformarse en nuevos productos mediante reciclaje.</p>
+                    <ul class="category-examples">
+                        <li>Plásticos (botellas, envases)</li>
+                        <li>Papel, periódicos y cartón corrugado</li>
+                        <li>Envases de vidrio y frascos sin tapa</li>
+                        <li>Latas de leche, atún y bebidas</li>
+                        <li>Envases de Tetra Brik</li>
+                    </ul>
+                    <a href="search-results.html?cat=aprovechables" class="btn-category-action flex Ycenter">
+                        <span>Ver materiales aprovechables</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+                </div>
+            </article>
+
+            <article class="category-card card-organic">
+                <div class="category-img-box">
+                    <img src="../Images/category-organic.png" alt="Residuos Orgánicos">
+                    <span class="category-badge badge-brown">Tacho Marrón</span>
+                </div>
+                <div class="category-card-body">
+                    <h3>Orgánicos</h3>
+                    <p class="category-desc">Residuos de origen natural o biológico que se degradan rápidamente y sirven para elaborar compost.</p>
+                    <ul class="category-examples">
+                        <li>Cáscaras de frutas y verduras</li>
+                        <li>Restos de comida y café pasado</li>
+                        <li>Hojas secas, flores y ramas podadas</li>
+                        <li>Cáscaras de huevo trituradas</li>
+                    </ul>
+                    <a href="search-results.html?cat=organicos" class="btn-category-action flex Ycenter">
+                        <span>Ver manejo de orgánicos</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+                </div>
+            </article>
+
+            <article class="category-card card-hazardous">
+                <div class="category-img-box">
+                    <img src="../Images/category-hazardous.png" alt="Residuos Peligrosos">
+                    <span class="category-badge badge-red">Tacho Rojo</span>
+                </div>
+                <div class="category-card-body">
+                    <h3>Peligrosos</h3>
+                    <p class="category-desc">Representan un riesgo para la salud humana o el medio ambiente. Requieren acopio especializado.</p>
+                    <ul class="category-examples">
+                        <li>Pilas de botón y baterías alcalinas</li>
+                        <li>Focos ahorradores y tubos fluorescentes</li>
+                        <li>Medicinas vencidas o blísteres vacíos</li>
+                        <li>Envases de insecticidas o pinturas</li>
+                        <li>Residuos de aparatos electrónicos</li>
+                    </ul>
+                    <a href="search-results.html?cat=peligrosos" class="btn-category-action flex Ycenter">
+                        <span>Puntos para residuos peligrosos</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+                </div>
+            </article>
+
+            <article class="category-card card-sanitary">
+                <div class="category-img-box">
+                    <img src="../Images/category-sanitary.png" alt="Residuos No Aprovechables">
+                    <span class="category-badge badge-black">Tacho Negro</span>
+                </div>
+                <div class="category-card-body">
+                    <h3>No Aprovechables</h3>
+                    <p class="category-desc">Materiales que no pueden reciclarse ni biodegradarse en procesos convencionales y van a relleno sanitario.</p>
+                    <ul class="category-examples">
+                        <li>Papel higiénico, pañales y toallitas húmedas</li>
+                        <li>Mascarillas descartables y guantes</li>
+                        <li>Papel encerado, plastificado o carbón</li>
+                        <li>Colillas de cigarro y chicles</li>
+                        <li>Cerámicas rotas y envases de tecnopor</li>
+                    </ul>
+                    <a href="search-results.html?cat=no-aprovechables" class="btn-category-action flex Ycenter">
+                        <span>Revisar alternativas</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <section class="category-callout flex Ycenter">
+            <div class="callout-text">
+                <h3>¿No estás seguro de a qué categoría pertenece tu residuo?</h3>
+                <p>Puedes buscarlo directamente por su nombre o subir una fotografía para que la plataforma lo identifique de forma automática.</p>
+            </div>
+            <div class="callout-actions flex">
+                <a href="scan-camera.html" class="btn-callout-camera flex Ycenter">
+                    <img src="../Images/icon-camera.svg" alt="">
+                    <span>Identificar con foto</span>
+                </a>
+                <a href="../index.html#Hero" class="btn-callout-search flex Ycenter">
+                    <img src="../Images/icon-search.svg" alt="">
+                    <span>Buscar por texto</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container">
+            <div class="footer-grid flex">
+                <div class="footer-brand">
+                    <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
+                        <div class="brand-mark flex center" style="width: 36px; height: 36px;">
+                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                        </div>
+                        <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
+                    </a>
+                    <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Explorar</h5>
+                    <a href="categories.html">Categorías</a>
+                    <a href="collection-map.html">Puntos de acopio</a>
+                    <a href="delivery.html">Mi entrega</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Confianza</h5>
+                    <a href="../index.html#vigencia">Vigencia de datos</a>
+                    <a href="../index.html#privacidad">Privacidad y seguridad</a>
+                    <a href="../index.html#reportar">Reportar información</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Accesibilidad</h5>
+                    <a href="../index.html#audio">Escuchar esta pantalla</a>
+                    <a href="../index.html#mapa-texto">Alternativa textual al mapa</a>
+                    <p class="accessibility-note">Navegable con teclado y etiquetas visibles.</p>
+                </div>
+            </div>
+
+            <div class="footer-legal flex Ycenter">
+                <p>© 2026 Resaving.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

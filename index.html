@@ -19,16 +19,16 @@
 
             <nav class="main-nav flex Ycenter">
                 <a href="index.html" class="nav-link active">Inicio</a>
-                <a href="#residuos" class="nav-link">Residuos</a>
-                <a href="#puntos" class="nav-link">Puntos de acopio</a>
-                <a href="#entrega" class="nav-link">Mi entrega</a>
+                <a href="pages/categories.html" class="nav-link">Residuos</a>
+                <a href="pages/collection-map.html" class="nav-link">Puntos de acopio</a>
+                <a href="pages/delivery.html" class="nav-link">Mi entrega</a>
                 <a href="#guia" class="nav-link">Guía de materiales</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
-                <button type="button" class="btn-icon" aria-label="Buscar residuo">
+                <a href="pages/search-results.html" class="btn-icon" aria-label="Buscar residuo">
                     <img src="Images/icon-header-search.svg" alt="Buscar">
-                </button>
+                </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
                 </div>
@@ -45,9 +45,9 @@
                 <h1 class="hero-title">Reciclar empieza<br>por saber qué<br>tienes</h1>
                 <p class="hero-subtitle">Identifica cualquier residuo, aprende a prepararlo y encuentra un punto de acopio confiable cerca de ti.</p>
 
-                <form class="hero-search-bar flex Ycenter" role="search">
+                <form class="hero-search-bar flex Ycenter" role="search" action="pages/search-results.html" method="GET">
                     <img src="Images/icon-search.svg" alt="" class="search-input-icon">
-                    <input type="text" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre">
+                    <input type="text" name="q" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre">
                     <button type="submit" class="btn-search">Buscar</button>
                 </form>
 
@@ -56,10 +56,10 @@
                         <img src="Images/icon-camera.svg" alt="">
                         <span>Adjuntar imagen</span>
                     </button>
-                    <button type="button" class="btn-action-outline flex Ycenter">
+                    <a href="pages/categories.html" class="btn-action-outline flex Ycenter" style="text-decoration: none;">
                         <img src="Images/icon-categories.svg" alt="">
                         <span>Ver las 4 categorías</span>
-                    </button>
+                    </a>
                 </div>
 
                 <div class="hero-benefits flex Ycenter">
@@ -409,9 +409,9 @@
 
                 <div class="footer-col">
                     <h5>Explorar</h5>
-                    <a href="#residuos">Categorías</a>
-                    <a href="#puntos">Puntos de acopio</a>
-                    <a href="#entrega">Mi entrega</a>
+                    <a href="pages/categories.html">Categorías</a>
+                    <a href="pages/collection-map.html">Puntos de acopio</a>
+                    <a href="pages/delivery.html">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
