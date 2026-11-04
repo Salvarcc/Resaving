@@ -8,12 +8,8 @@
 </head>
 <body>
 
-    <!-- ========================================================
-         1. ENCABEZADO DEL SITIO (Header Semántico)
-         ======================================================== -->
     <header class="site-header flex Ycenter">
         <div class="header-inner flex Ycenter">
-            <!-- Logotipo y Nombre de Marca -->
             <a href="index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
                     <img id="logo" src="Images/resaving-mark.webp" alt="Isotipo Resaving">
@@ -21,7 +17,6 @@
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
 
-            <!-- Navegación Principal -->
             <nav class="main-nav flex Ycenter">
                 <a href="index.html" class="nav-link active">Inicio</a>
                 <a href="#residuos" class="nav-link">Residuos</a>
@@ -30,7 +25,6 @@
                 <a href="#guia" class="nav-link">Guía de materiales</a>
             </nav>
             
-            <!-- Acciones del Encabezado -->
             <div class="header-actions flex Ycenter">
                 <button type="button" class="btn-icon" aria-label="Buscar residuo">
                     <img src="Images/icon-header-search.svg" alt="Buscar">
@@ -43,27 +37,20 @@
     </header>
 
     <main>
-        <!-- ========================================================
-             2. SECCIÓN HERO (Buscador Principal y Accesos Rápidos)
-             ======================================================== -->
         <section id="Hero" class="hero-section">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <!-- Píldora de atención -->
                 <span class="attention-badge">Reciclaje claro y cercano</span>
 
-                <!-- Título principal H1 y bajada -->
                 <h1 class="hero-title">Reciclar empieza<br>por saber qué<br>tienes</h1>
                 <p class="hero-subtitle">Identifica cualquier residuo, aprende a prepararlo y encuentra un punto de acopio confiable cerca de ti.</p>
 
-                <!-- Barra de búsqueda principal (Formulario accesible) -->
                 <form class="hero-search-bar flex Ycenter" role="search">
                     <img src="Images/icon-search.svg" alt="" class="search-input-icon">
                     <input type="text" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre">
                     <button type="submit" class="btn-search">Buscar</button>
                 </form>
 
-                <!-- Botones de acción rápida -->
                 <div class="hero-actions flex">
                     <button type="button" class="btn-action-white flex Ycenter">
                         <img src="Images/icon-camera.svg" alt="">
@@ -75,7 +62,6 @@
                     </button>
                 </div>
 
-                <!-- Fila de beneficios destacados -->
                 <div class="hero-benefits flex Ycenter">
                     <div class="benefit-item flex Ycenter">
                         <img src="Images/icon-guide.svg" alt="">
@@ -91,7 +77,6 @@
                     </div>
                 </div>
 
-                <!-- Accesos secundarios para audiencias específicas -->
                 <div class="hero-audiences flex">
                     <a href="#solicitar-info" class="audience-card flex Ycenter">
                         <div class="audience-icon-wrap flex center">
@@ -115,9 +100,6 @@
             </div>
         </section>
 
-        <!-- ========================================================
-             3. SECCIÓN CÓMO FUNCIONA (Los 3 Pasos del Flujo)
-             ======================================================== -->
         <section class="landing-steps container">
             <div class="section-head">
                 <p class="eyebrow">CÓMO FUNCIONA</p>
@@ -126,7 +108,6 @@
             </div>
 
             <div class="steps-grid flex">
-                <!-- Paso 1 -->
                 <article class="step-card flex Ycenter">
                     <div class="step-icon-wrap flex center">
                         <img src="Images/step-identify.svg" alt="Paso 1: Identifica">
@@ -138,7 +119,6 @@
                     <span class="step-badge">1</span>
                 </article>
 
-                <!-- Paso 2 -->
                 <article class="step-card flex Ycenter">
                     <div class="step-icon-wrap flex center">
                         <img src="Images/step-prepare.svg" alt="Paso 2: Prepara">
@@ -150,7 +130,6 @@
                     <span class="step-badge">2</span>
                 </article>
 
-                <!-- Paso 3 -->
                 <article class="step-card flex Ycenter">
                     <div class="step-icon-wrap flex center">
                         <img src="Images/step-deliver.svg" alt="Paso 3: Entrega">
@@ -164,11 +143,7 @@
             </div>
         </section>
 
-        <!-- ========================================================
-             4. SECCIÓN GALERÍA DE ACCESOS RÁPIDOS (Residuos Comunes)
-             ======================================================== -->
         <section class="context-gallery container flex" id="residuos">
-            <!-- Tarjeta 1: Botella de Plástico -->
             <article class="gallery-card">
                 <div class="gallery-img-wrap">
                     <img src="Images/gallery-plastic-bottle.png" alt="Botella de plástico">
@@ -179,7 +154,6 @@
                 </div>
             </article>
 
-            <!-- Tarjeta 2: Vidrio -->
             <article class="gallery-card">
                 <div class="gallery-img-wrap">
                     <img src="Images/gallery-glass.png" alt="Envase de vidrio">
@@ -190,7 +164,6 @@
                 </div>
             </article>
 
-            <!-- Tarjeta 3: Residuos Especiales -->
             <article class="gallery-card">
                 <div class="gallery-img-wrap">
                     <img src="Images/gallery-special-waste.png" alt="Residuos especiales y pilas">
@@ -202,11 +175,7 @@
             </article>
         </section>
 
-        <!-- ========================================================
-             5. SECCIÓN CONFIANZA Y VERIFICACIÓN DE DATOS
-             ======================================================== -->
         <section class="trust-section container flex">
-            <!-- Columna Izquierda: Información y Acciones -->
             <div class="trust-copy">
                 <p class="eyebrow muted">INFORMACIÓN CONFIABLE</p>
                 <h2 class="section-title">Los datos deben mostrar quién los actualizó y cuándo</h2>
@@ -224,7 +193,6 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Tarjetas de Principios de Confianza -->
             <div class="trust-cards flex">
                 <article class="trust-card">
                     <img src="Images/trust-validity.svg" alt="Vigencia visible" class="trust-icon">
@@ -246,11 +214,7 @@
             </div>
         </section>
 
-        <!-- ========================================================
-             6. SECCIÓN SOLICITUD DE INFORMACIÓN (Formulario Accesible)
-             ======================================================== -->
         <section class="registration-section container flex" id="solicitar-info">
-            <!-- Panel Lateral con Fotografía del Campus -->
             <aside class="registration-media">
                 <img src="Images/student-campus.png" alt="Estudiante consultando reciclaje en campus" class="media-bg">
                 <div class="media-overlay"></div>
@@ -276,7 +240,6 @@
                 </div>
             </aside>
 
-            <!-- Panel con Formulario Accesible -->
             <div class="registration-panel">
                 <p class="eyebrow">MÁS INFORMACIÓN</p>
                 <h2 class="section-title">Solicita información</h2>
@@ -329,7 +292,6 @@
                         <textarea id="consulta" name="consulta" rows="3" placeholder="Escribe brevemente tu consulta" required></textarea>
                     </div>
 
-                    <!-- Nota de Privacidad y Seguridad -->
                     <div class="security-note flex Ycenter">
                         <img src="Images/icon-lock.svg" alt="Seguridad" class="lock-icon">
                         <div class="security-text">
@@ -338,13 +300,11 @@
                         </div>
                     </div>
 
-                    <!-- Fila de Consentimiento -->
                     <div class="consent-row flex Ycenter">
                         <input type="checkbox" id="consentimiento" name="consentimiento" required>
                         <label for="consentimiento">Acepto el tratamiento de mis datos para recibir información sobre Resaving. <a href="#privacidad">Leer privacidad</a></label>
                     </div>
 
-                    <!-- Botón de Envío -->
                     <div class="form-submit flex Ycenter">
                         <button type="submit" class="btn-submit flex Ycenter">
                             <span>Solicitar información</span>
@@ -356,9 +316,6 @@
             </div>
         </section>
 
-        <!-- ========================================================
-             7. SECCIÓN GLOSARIO / PREGUNTAS FRECUENTES (Details & Summary)
-             ======================================================== -->
         <section class="home-glossary container flex">
             <div class="glossary-head">
                 <p class="eyebrow">AYUDA CONTEXTUAL</p>
@@ -400,13 +357,9 @@
         </section>
     </main>
 
-    <!-- ========================================================
-         8. PIE DE PÁGINA (Footer Semántico)
-         ======================================================== -->
     <footer class="site-footer">
         <div class="footer-inner container">
             <div class="footer-grid flex">
-                <!-- Columna Marca -->
                 <div class="footer-brand">
                     <a href="index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
@@ -417,7 +370,6 @@
                     <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables.</p>
                 </div>
 
-                <!-- Columna 1: Explorar -->
                 <div class="footer-col">
                     <h5>Explorar</h5>
                     <a href="#residuos">Categorías</a>
@@ -425,7 +377,6 @@
                     <a href="#entrega">Mi entrega</a>
                 </div>
 
-                <!-- Columna 2: Confianza -->
                 <div class="footer-col">
                     <h5>Confianza</h5>
                     <a href="#vigencia">Vigencia de datos</a>
@@ -433,7 +384,6 @@
                     <a href="#reportar">Reportar información</a>
                 </div>
 
-                <!-- Columna 3: Accesibilidad -->
                 <div class="footer-col">
                     <h5>Accesibilidad</h5>
                     <a href="#audio">Escuchar esta pantalla</a>
@@ -442,7 +392,6 @@
                 </div>
             </div>
 
-            <!-- Barra Legal Inferior -->
             <div class="footer-legal flex Ycenter">
                 <p>© 2026 Resaving. Todos los derechos reservados.</p>
                 <p>HCI for UX Design - UPC</p>

@@ -1,20 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* ========================================================
-   VARIABLES DE COLOR Y ESTILOS (Extraídos de Figma Mockup D01)
-   - Ink: #14251B
-   - Canvas: #F4F8F5
-   - Surface: #FFFFFF
-   - Principal (Green 800): #0F5B3A
-   - Dark Principal (Green 900): #0B4A30
-   - Deep Dark (Green 950): #073522
-   - Accent (Green 600 / 700): #1D8A57 / #147348
-   - Attention (Amber): #F4B942
-   - Muted: #5F7066
-   - Line / Border: #DBE7DF
-   ======================================================== */
-
-/* Reset del Modelo de Caja (U3.S10 P2 - Diapositiva 8) */
 * {
     margin: 0;
     padding: 0;
@@ -29,9 +14,6 @@ body {
     line-height: 1.5;
 }
 
-/* ========================================================
-   CLASES UTILITARIAS Y CONTENEDOR (Flexbox - U3.S10 P2)
-   ======================================================== */
 .container {
     width: 90%;
     max-width: 1280px;
@@ -79,7 +61,6 @@ body {
     color: #5F7066 !important;
 }
 
-/* Encabezados y Textos de Sección */
 .eyebrow {
     font-size: 13px;
     font-weight: 800;
@@ -105,9 +86,6 @@ body {
     max-width: 680px;
 }
 
-/* ========================================================
-   1. HEADER / ENCABEZADO (Sticky & Semántico)
-   ======================================================== */
 .site-header {
     background-color: #FFFFFF;
     border-bottom: 1px solid #DBE7DF;
@@ -202,9 +180,6 @@ body {
     cursor: pointer;
 }
 
-/* ========================================================
-   2. HERO SECTION
-   ======================================================== */
 .hero-section {
     position: relative;
     background-image: url('Images/hero-banner.png');
@@ -407,9 +382,6 @@ body {
     line-height: 1.3;
 }
 
-/* ========================================================
-   3. CÓMO FUNCIONA (Los 3 Pasos)
-   ======================================================== */
 .landing-steps {
     padding: 64px 0 32px 0;
 }
@@ -468,9 +440,6 @@ body {
     color: #1D8A57;
 }
 
-/* ========================================================
-   4. CONTEXT GALLERY (Galería de 3 Residuos)
-   ======================================================== */
 .context-gallery {
     gap: 24px;
     padding: 32px 0 64px 0;
@@ -518,9 +487,6 @@ body {
     color: #5F7066;
 }
 
-/* ========================================================
-   5. SECCIÓN INFORMACIÓN CONFIABLE (Trust Section)
-   ======================================================== */
 .trust-section {
     border-top: 1px solid #DBE7DF;
     border-bottom: 1px solid #DBE7DF;
@@ -609,9 +575,6 @@ body {
     line-height: 1.5;
 }
 
-/* ========================================================
-   6. SOLICITUD DE INFORMACIÓN (Media + Formulario)
-   ======================================================== */
 .registration-section {
     background-color: #FFFFFF;
     border: 1px solid #DBE7DF;
@@ -742,7 +705,6 @@ body {
     resize: vertical;
 }
 
-/* Nota de Seguridad */
 .security-note {
     background-color: #FFF7E6;
     border: 1px solid #EDC96B;
@@ -773,7 +735,6 @@ body {
     line-height: 1.4;
 }
 
-/* Fila de Consentimiento */
 .consent-row {
     gap: 10px;
     margin: 6px 0;
@@ -798,7 +759,6 @@ body {
     text-decoration: underline;
 }
 
-/* Botón Submit */
 .form-submit {
     gap: 16px;
     margin-top: 4px;
@@ -832,9 +792,6 @@ body {
     color: #5F7066;
 }
 
-/* ========================================================
-   7. GLOSARIO CONTEXTUAL (Details & Summary - U3.S9 P2)
-   ======================================================== */
 .home-glossary {
     border-top: 1px solid #DBE7DF;
     padding: 56px 0 72px 0;
@@ -898,9 +855,6 @@ body {
     line-height: 1.6;
 }
 
-/* ========================================================
-   8. FOOTER / PIE DE PÁGINA (Oscuro con Contraste)
-   ======================================================== */
 .site-footer {
     background-color: #073522;
     color: #FFFFFF;
@@ -963,9 +917,6 @@ body {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* ========================================================
-   RESPONSIVE DESIGN (Media Queries - U3.S10 P2)
-   ======================================================== */
 @media (max-width: 992px) {
     .registration-section {
         flex-direction: column;
@@ -999,7 +950,7 @@ body {
         flex-direction: column;
     }
     .main-nav {
-        display: none; /* En mobile se adaptará a menú desplegable */
+        display: none;
     }
     .footer-legal {
         flex-direction: column;
