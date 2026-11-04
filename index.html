@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Buscar un residuo por su nombre</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado del sitio (Header Semántico) -->
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <!-- Logotipo y Nombre de marca -->
+            <a href="index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="Images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <!-- Navegación principal -->
+            <nav class="main-nav flex Ycenter">
+                <a href="index.html" class="nav-link active">Inicio</a>
+                <a href="#residuos" class="nav-link">Residuos</a>
+                <a href="#puntos" class="nav-link">Puntos de acopio</a>
+                <a href="#entrega" class="nav-link">Mi entrega</a>
+                <a href="#guia" class="nav-link">Guía de materiales</a>
+            </nav>
+            
+            <!-- Acciones del encabezado -->
+            <div class="header-actions flex Ycenter">
+                <button type="button" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="Images/icon-header-search.svg" alt="Buscar">
+                </button>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Hero Principal -->
+        <section id="Hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <!-- Píldora de atención -->
+                <span class="attention-badge">Reciclaje claro y cercano</span>
+
+                <!-- Título principal H1 y bajada -->
+                <h1 class="hero-title">Reciclar empieza<br>por saber qué<br>tienes</h1>
+                <p class="hero-subtitle">Identifica cualquier residuo, aprende a prepararlo y encuentra un punto de acopio confiable cerca de ti.</p>
+
+                <!-- Barra de búsqueda principal (Formulario accesible) -->
+                <form class="hero-search-bar flex Ycenter" role="search">
+                    <img src="Images/icon-search.svg" alt="" class="search-input-icon">
+                    <input type="text" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre">
+                    <button type="submit" class="btn-search">Buscar</button>
+                </form>
+
+                <!-- Botones de acción rápida -->
+                <div class="hero-actions flex">
+                    <button type="button" class="btn-action-white flex Ycenter">
+                        <img src="Images/icon-camera.svg" alt="">
+                        <span>Adjuntar imagen</span>
+                    </button>
+                    <button type="button" class="btn-action-outline flex Ycenter">
+                        <img src="Images/icon-categories.svg" alt="">
+                        <span>Ver las 4 categorías</span>
+                    </button>
+                </div>
+
+                <!-- Fila de beneficios destacados -->
+                <div class="hero-benefits flex Ycenter">
+                    <div class="benefit-item flex Ycenter">
+                        <img src="Images/icon-guide.svg" alt="">
+                        <span>Guía paso a paso</span>
+                    </div>
+                    <div class="benefit-item flex Ycenter">
+                        <img src="Images/icon-pin.svg" alt="">
+                        <span>Puntos con vigencia visible</span>
+                    </div>
+                    <div class="benefit-item flex Ycenter">
+                        <img src="Images/icon-book.svg" alt="">
+                        <span>Términos explicados</span>
+                    </div>
+                </div>
+
+                <!-- Accesos secundarios para audiencias específicas -->
+                <div class="hero-audiences flex">
+                    <div class="audience-card flex Ycenter">
+                        <div class="audience-icon-wrap flex center">
+                            <img src="Images/icon-info-request.svg" alt="">
+                        </div>
+                        <div class="audience-text">
+                            <strong>Solicitar información</strong>
+                            <small>Recibe orientación por correo.</small>
+                        </div>
+                    </div>
+                    <div class="audience-card flex Ycenter">
+                        <div class="audience-icon-wrap flex center">
+                            <img src="Images/icon-recycler.svg" alt="">
+                        </div>
+                        <div class="audience-text">
+                            <strong>Soy reciclador o encargado</strong>
+                            <small>Administra un punto de acopio.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página (Footer Semántico) -->
+    <footer class="site-footer">
+        <div class="footer-inner flex">
+            <div class="footer-brand">
+                <div class="flex Ycenter" style="gap: 10px; margin-bottom: 12px;">
+                    <img src="Images/resaving-mark.webp" alt="Resaving Logo" width="32">
+                    <span class="brand-name dark-principal" style="font-size: 16px;">Resaving</span>
+                </div>
+                <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Explorar</h5>
+                <a href="#categorias">Categorías</a>
+                <a href="#puntos">Puntos de acopio</a>
+                <a href="#entrega">Mi entrega</a>
+            </div>
+            <div class="footer-col">
+                <h5>Transparencia</h5>
+                <a href="#vigencia">Vigencia de datos</a>
+                <a href="#privacidad">Privacidad y seguridad</a>
+                <a href="#reportar">Reportar información</a>
+            </div>
+            <div class="footer-col">
+                <h5>Accesibilidad</h5>
+                <a href="#audio">Escuchar esta pantalla</a>
+                <a href="#mapa-texto">Alternativa textual al mapa</a>
+                <a href="#teclado">Navegable con teclado</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
