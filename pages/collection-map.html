@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Puntos de Acopio: Mapa Interactivo</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="categories.html" class="nav-link">Residuos</a>
+                <a href="collection-map.html" class="nav-link active">Puntos de acopio</a>
+                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+            </nav>
+            
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                </a>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="collection-map-page container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Inicio</a> / <span>Puntos de acopio</span>
+        </nav>
+
+        <section class="categories-header">
+            <p class="eyebrow">Entrega y ubicacion</p>
+            <h1 class="section-title">Puntos de acopio en Lima Metropolitana</h1>
+            <p class="section-subtitle">Localiza estaciones de reciclaje y contenedores municipales verificados para entregar tus residuos clasificados de manera formal y segura.</p>
+        </section>
+
+        <section class="filter-toolbar">
+            <div class="toolbar-row-top">
+                <div class="location-input-group">
+                    <label for="district-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B;">Distrito:</label>
+                    <select id="district-selector" class="location-select">
+                        <option value="san-miguel" selected>San Miguel</option>
+                        <option value="pueblo-libre">Pueblo Libre</option>
+                        <option value="magdalena">Magdalena del Mar</option>
+                        <option value="jesus-maria">Jesús María</option>
+                        <option value="miraflores">Miraflores</option>
+                        <option value="san-isidro">San Isidro</option>
+                        <option value="surco">Santiago de Surco</option>
+                        <option value="san-borja">San Borja</option>
+                        <option value="barranco">Barranco</option>
+                        <option value="la-molina">La Molina</option>
+                        <option value="lince">Lince</option>
+                        <option value="cercado">Cercado de Lima</option>
+                    </select>
+
+                    <button type="button" class="btn-my-location">
+                        <img src="../Images/icon-pin.svg" alt="" style="width: 16px; height: 16px;">
+                        <span>Usar mi ubicación</span>
+                    </button>
+                </div>
+
+                <div class="view-switcher">
+                    <a href="collection-map.html" class="view-tab active">Mapa</a>
+                    <a href="collection-list.html" class="view-tab">Lista</a>
+                </div>
+            </div>
+
+            <div class="toolbar-row-filters">
+                <span class="filter-label">Filtrar por material:</span>
+                <a href="#" class="filter-chip active">Todos los materiales</a>
+                <a href="#" class="filter-chip">Plástico PET</a>
+                <a href="#" class="filter-chip">Vidrio</a>
+                <a href="#" class="filter-chip">Papel y Cartón</a>
+                <a href="#" class="filter-chip">Latas y Metales</a>
+                <a href="#" class="filter-chip">Residuos Especiales</a>
+            </div>
+        </section>
+
+        <section class="map-split-view">
+            <div class="map-points-list">
+                <article class="point-card selected">
+                    <div class="point-card-header">
+                        <h2 class="point-card-title">1. Estación Recicla San Miguel</h2>
+                        <span class="point-status-badge badge-open">Abierto</span>
+                    </div>
+                    <p class="point-card-distance">
+                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <span>0.8 km · 11 min a pie · Cruce Av. La Marina con Av. Universitaria</span>
+                    </p>
+                    <p class="point-card-address">Ingreso peatonal frente a Plaza San Miguel. Atiende de lunes a domingo de 08:00 a 18:00.</p>
+                    <div class="point-materials-row">
+                        <span class="mat-tag">Plástico PET</span>
+                        <span class="mat-tag">Vidrio</span>
+                        <span class="mat-tag">Cartón</span>
+                        <span class="mat-tag">Latas</span>
+                    </div>
+                    <a href="point-detail.html" class="btn-primary-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
+                        <span>Ver detalle y cómo llegar</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+                </article>
+
+                <article class="point-card">
+                    <div class="point-card-header">
+                        <h2 class="point-card-title">2. Punto Limpio Parque Juan Pablo II</h2>
+                        <span class="point-status-badge badge-open">Abierto</span>
+                    </div>
+                    <p class="point-card-distance">
+                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <span>1.4 km · 18 min a pie · Av. Riva Agüero cdra. 8</span>
+                    </p>
+                    <p class="point-card-address">Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.</p>
+                    <div class="point-materials-row">
+                        <span class="mat-tag">Plástico PET</span>
+                        <span class="mat-tag">Latas de conserva</span>
+                        <span class="mat-tag">Papel</span>
+                    </div>
+                    <a href="point-detail.html?punto=juan-pablo" class="btn-outline-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
+                        <span>Ver detalle</span>
+                    </a>
+                </article>
+
+                <article class="point-card">
+                    <div class="point-card-header">
+                        <h2 class="point-card-title">3. Contenedor Verde Metro La Marina</h2>
+                        <span class="point-status-badge badge-open">Abierto 24h</span>
+                    </div>
+                    <p class="point-card-distance">
+                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <span>1.9 km · 25 min a pie · Av. La Marina 2500</span>
+                    </p>
+                    <p class="point-card-address">Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.</p>
+                    <div class="point-materials-row">
+                        <span class="mat-tag">Plástico PET</span>
+                        <span class="mat-tag">Vidrio</span>
+                    </div>
+                    <a href="point-detail.html?punto=metro" class="btn-outline-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
+                        <span>Ver detalle</span>
+                    </a>
+                </article>
+
+                <article class="point-card">
+                    <div class="point-card-header">
+                        <h2 class="point-card-title">4. Estación Ambiental Plaza Bandera</h2>
+                        <span class="point-status-badge badge-closing">Cierra a las 17:00</span>
+                    </div>
+                    <p class="point-card-distance">
+                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <span>2.3 km · 7 min en auto · Límite con Pueblo Libre</span>
+                    </p>
+                    <p class="point-card-address">Punto de acopio municipal para materiales aprovechables y contenedor seguro para pilas usadas.</p>
+                    <div class="point-materials-row">
+                        <span class="mat-tag">Multimaterial</span>
+                        <span class="mat-tag">Pilas y baterías</span>
+                    </div>
+                    <a href="point-detail.html?punto=plaza-bandera" class="btn-outline-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
+                        <span>Ver detalle</span>
+                    </a>
+                </article>
+            </div>
+
+            <div class="map-visual-container">
+                <img src="../Images/map-collection-points.png" alt="Mapa de puntos de acopio en San Miguel y distritos vecinos" class="map-image-layer">
+
+                <div class="map-marker marker-1">1</div>
+                <div class="map-marker marker-2">2</div>
+                <div class="map-marker marker-3">3</div>
+                <div class="map-marker marker-4">4</div>
+
+                <div class="map-popup-card">
+                    <h4>Estación Recicla San Miguel</h4>
+                    <p>0.8 km · Abierto hoy hasta 18:00 · Acepta botellas PET, vidrio y cartón.</p>
+                    <a href="point-detail.html" class="btn-primary-action flex center" style="padding: 8px 14px; font-size: 12.5px; width: 100%;">
+                        <span>Cómo llegar</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-cta-bar" style="margin-top: 40px;">
+            <div class="detail-cta-text">
+                <h3>¿Prefieres entrega a domicilio o ruta municipal?</h3>
+                <p>Las municipalidades coordinan días específicos de recolección selectiva puerta a puerta mediante asociaciones de recicladores acreditados.</p>
+            </div>
+            <div class="detail-cta-actions">
+                <a href="collection-list.html#rutas" class="btn-cta-light">
+                    <span>Ver rutas domiciliarias</span>
+                    <img src="../Images/icon-arrow-right.svg" alt="">
+                </a>
+                <a href="delivery.html" class="btn-cta-outline-white">Planificar mi entrega</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container">
+            <div class="footer-top flex">
+                <div class="footer-brand-col">
+                    <a href="../index.html" class="brand flex Ycenter" style="margin-bottom: 12px; text-decoration: none;">
+                        <div class="brand-mark flex center">
+                            <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                        </div>
+                        <span class="brand-name dark-principal">Resaving</span>
+                    </a>
+                    <p class="footer-tagline">Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
+                    <p class="footer-subtext">Diseñado para ciudadanos, familias y recicladores de base bajo la Norma Técnica Peruana NTP 900.058:2019.</p>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Explorar</h4>
+                    <ul class="footer-links">
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="collection-map.html">Puntos de acopio</a></li>
+                        <li><a href="delivery.html">Mi entrega</a></li>
+                        <li><a href="scan-camera.html">Identificar con foto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Confianza</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#vigencia">Vigencia de datos</a></li>
+                        <li><a href="../index.html#privacidad">Privacidad y seguridad</a></li>
+                        <li><a href="../index.html#reportar">Reportar información</a></li>
+                        <li><a href="../index.html#metodologia">Metodología de validación</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Accesibilidad</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#audio">Escuchar esta pantalla</a></li>
+                        <li><a href="../index.html#mapa-texto">Alternativa textual al mapa</a></li>
+                        <li><a href="../index.html#alto-contraste">Modo alto contraste</a></li>
+                        <li><a href="../index.html#atajos">Navegación por teclado</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom flex Ycenter">
+                <p class="footer-copy">© 2026 Resaving. Plataforma académica desarrollada para el curso HCI for UX Design - UPC.</p>
+                <div class="footer-legal flex Ycenter">
+                    <a href="../index.html#privacidad">Privacidad</a>
+                    <span class="separator">·</span>
+                    <a href="../index.html#accesibilidad">Accesibilidad</a>
+                    <span class="separator">·</span>
+                    <a href="../index.html#ayuda">Ayuda</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
