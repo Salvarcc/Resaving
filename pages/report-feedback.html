@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Reportar o Sugerir Punto de Acopio</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="categories.html" class="nav-link">Residuos</a>
+                <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
+                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+            </nav>
+            
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                </a>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 36px; padding-bottom: 72px;">
+        <nav class="breadcrumb">
+            <a href="../index.html">Inicio</a> / <a href="collection-map.html">Puntos de acopio</a> / <span>Reportes ciudadanos</span>
+        </nav>
+
+        <section class="categories-header">
+            <p class="eyebrow">Participacion y validacion comunitaria</p>
+            <h1 class="section-title">Reportes ciudadanos y nuevos puntos de acopio</h1>
+            <p class="section-subtitle">Ayúdanos a mantener la red de puntos de acopio actualizada, verificada y confiable para toda la comunidad de Lima Metropolitana. Cada envío es evaluado por promotores ambientales.</p>
+        </section>
+
+        <div class="report-forms-grid">
+            <article class="report-form-card">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <span class="match-chip" style="margin-bottom: 0;">HU-038 · Corrección</span>
+                </div>
+                <h2 class="section-block-title" style="margin-bottom: 8px;">Reportar información desactualizada</h2>
+                <p class="section-block-desc" style="margin-bottom: 22px;">Si encontraste una estación clausurada, con horarios distintos a los mostrados o contenedores llenos, repórtalo aquí para corregir los datos de la ficha.</p>
+
+                <div class="notice-box">
+                    <strong>Compromiso de verificación rápida:</strong> Los reportes recibidos son derivados a fiscalización ambiental del distrito y validados en un plazo de 24 a 48 horas.
+                </div>
+
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('¡Gracias por tu reporte! Ha sido enviado para verificación técnica de los datos del punto de acopio.');">
+                    <div class="form-group">
+                        <label for="punto-select">Punto de acopio observado</label>
+                        <select id="punto-select" class="form-select" required>
+                            <option value="">Selecciona el punto de acopio...</option>
+                            <option value="san-miguel" selected>Estación Recicla San Miguel - Parque Las Leyendas</option>
+                            <option value="tupac-amaru">Punto Verde Municipal - Plaza Túpac Amaru (Magdalena)</option>
+                            <option value="salaverry">Ecopunto Residencial Salaverry (Jesús María)</option>
+                            <option value="benavides">Contenedor Especial Wong Benavides (Miraflores)</option>
+                            <option value="san-borja">Estación Metro Javier Prado (San Borja)</option>
+                            <option value="otro">Otro punto no listado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo-reporte">Tipo de discrepancia o problema observado</label>
+                        <select id="tipo-reporte" class="form-select" required>
+                            <option value="">Selecciona el tipo de error...</option>
+                            <option value="horario">El horario de atención no coincide con la realidad</option>
+                            <option value="lleno">Contenedores permanentemente saturados o sin capacidad</option>
+                            <option value="inoperativo">El punto se encuentra cerrado, trasladado o inoperativo</option>
+                            <option value="materiales">Ya no reciben uno o varios de los materiales indicados</option>
+                            <option value="ubicacion">La dirección o ubicación en el mapa es errónea</option>
+                            <option value="otro">Otro motivo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion-reporte">Detalle de lo ocurrido</label>
+                        <textarea id="descripcion-reporte" class="form-textarea" placeholder="Describe brevemente lo que presenciaste (por ejemplo: asistí el martes a las 3:00 pm en horario publicado pero el módulo estaba cerrado con candado)..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto de evidencia (opcional)</label>
+                        <div class="file-upload-box">
+                            <img src="../Images/icon-camera.svg" alt="" style="width: 28px; height: 28px; margin: 0 auto 8px auto; display: block; opacity: 0.65;">
+                            <span>Haz clic para subir o arrastra una fotografía del punto</span>
+                            <small style="color: #6C8A79; font-size: 11.5px; margin-top: 4px; display: block;">Archivos JPG o PNG hasta 5 MB</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary-action flex center" style="width: 100%; margin-top: 10px;">
+                        <span>Enviar reporte de corrección</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </button>
+                </form>
+            </article>
+
+            <article class="report-form-card">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <span class="match-chip" style="margin-bottom: 0; background-color: #1F6B47;">HU-039 · Nuevo Punto</span>
+                </div>
+                <h2 class="section-block-title" style="margin-bottom: 8px;">Sugerir un nuevo punto de acopio</h2>
+                <p class="section-block-desc" style="margin-bottom: 22px;">¿Conoces una estación comunal, campana municipal o centro de acopio formal que no figura en Resaving? Sugiere su inclusión.</p>
+
+                <div class="notice-box">
+                    <strong>Trazabilidad y seguridad:</strong> Solo incorporamos puntos con autorización municipal, convenios de recicladores formales o estaciones debidamente administradas.
+                </div>
+
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('¡Excelente iniciativa! El punto sugerido ha sido registrado para que nuestro equipo contacte a la administración del lugar.');">
+                    <div class="form-group">
+                        <label for="nombre-nuevo-punto">Nombre de la estación o lugar</label>
+                        <input type="text" id="nombre-nuevo-punto" class="form-input" placeholder="Ej. Canje Ecológico Colegio Claretiano" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="distrito-nuevo-punto">Distrito</label>
+                        <select id="distrito-nuevo-punto" class="form-select" required>
+                            <option value="">Selecciona el distrito...</option>
+                            <option value="san-miguel">San Miguel</option>
+                            <option value="magdalena">Magdalena del Mar</option>
+                            <option value="jesus-maria">Jesús María</option>
+                            <option value="pueblo-libre">Pueblo Libre</option>
+                            <option value="miraflores">Miraflores</option>
+                            <option value="san-isidro">San Isidro</option>
+                            <option value="surco">Santiago de Surco</option>
+                            <option value="lima">Cercado de Lima</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion-nuevo-punto">Dirección o referencia exacta</label>
+                        <input type="text" id="direccion-nuevo-punto" class="form-input" placeholder="Ej. Jr. Huancavelica 1300, frente al parque recreativo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Materiales que recibe (marca todos los que conozcas)</label>
+                        <div class="materials-checkboxes-row">
+                            <label class="mat-check-label">
+                                <input type="checkbox" name="mat" value="pet" checked> Plásticos (PET #1, PEAD #2)
+                            </label>
+                            <label class="mat-check-label">
+                                <input type="checkbox" name="mat" value="vidrio" checked> Vidrio limpio
+                            </label>
+                            <label class="mat-check-label">
+                                <input type="checkbox" name="mat" value="carton" checked> Cartón y papel
+                            </label>
+                            <label class="mat-check-label">
+                                <input type="checkbox" name="mat" value="latas" checked> Latas y metales
+                            </label>
+                            <label class="mat-check-label">
+                                <input type="checkbox" name="mat" value="pilas"> Pilas y baterías
+                            </label>
+                            <label class="mat-check-label">
+                                <input type="checkbox" name="mat" value="raee"> RAEE (Aparatos eléctricos)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="horario-nuevo-punto">Horario o días habituales (opcional)</label>
+                        <input type="text" id="horario-nuevo-punto" class="form-input" placeholder="Ej. Lunes a Sábado de 8:00 am a 6:00 pm">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="referencia-nuevo-punto">Contacto o enlace web de referencia (opcional)</label>
+                        <input type="text" id="referencia-nuevo-punto" class="form-input" placeholder="Ej. Teléfono, web municipal o página de la asociación">
+                    </div>
+
+                    <button type="submit" class="btn-primary-action flex center" style="width: 100%; margin-top: 10px; background-color: #1F6B47;">
+                        <span>Enviar sugerencia de nuevo punto</span>
+                        <img src="../Images/icon-arrow-right.svg" alt="">
+                    </button>
+                </form>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container">
+            <div class="footer-top flex">
+                <div class="footer-brand-col">
+                    <a href="../index.html" class="brand flex Ycenter" style="margin-bottom: 12px; text-decoration: none;">
+                        <div class="brand-mark flex center">
+                            <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                        </div>
+                        <span class="brand-name dark-principal">Resaving</span>
+                    </a>
+                    <p class="footer-tagline">Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
+                    <p class="footer-subtext">Diseñado para ciudadanos, familias y recicladores de base bajo la Norma Técnica Peruana NTP 900.058:2019.</p>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Explorar</h4>
+                    <ul class="footer-links">
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="collection-map.html">Puntos de acopio</a></li>
+                        <li><a href="delivery.html">Mi entrega</a></li>
+                        <li><a href="scan-camera.html">Identificar con foto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Confianza</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#vigencia">Vigencia de datos</a></li>
+                        <li><a href="../index.html#privacidad">Privacidad y seguridad</a></li>
+                        <li><a href="report-feedback.html">Reportar información</a></li>
+                        <li><a href="../index.html#metodologia">Metodología de validación</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Accesibilidad</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#audio">Escuchar esta pantalla</a></li>
+                        <li><a href="../index.html#mapa-texto">Alternativa textual al mapa</a></li>
+                        <li><a href="../index.html#alto-contraste">Modo alto contraste</a></li>
+                        <li><a href="../index.html#atajos">Navegación por teclado</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom flex Ycenter">
+                <p class="footer-copy">© 2026 Resaving. Plataforma académica desarrollada para el curso HCI for UX Design - UPC.</p>
+                <div class="footer-legal flex Ycenter">
+                    <a href="../index.html#privacidad">Privacidad</a>
+                    <span class="separator">·</span>
+                    <a href="../index.html#accesibilidad">Accesibilidad</a>
+                    <span class="separator">·</span>
+                    <a href="../index.html#ayuda">Ayuda</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
