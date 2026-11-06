@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Sugerencias de Búsqueda</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="categories.html" class="nav-link">Residuos</a>
+                <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
+                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+            </nav>
+            
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                </a>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 36px; padding-bottom: 72px;">
+        <nav class="breadcrumb">
+            <a href="../index.html">Inicio</a> / <a href="search-results.html">Búsqueda</a> / <span>Sugerencias instantáneas</span>
+        </nav>
+
+        <section class="categories-header">
+            <p class="eyebrow">Identificacion · HU-002</p>
+            <h1 class="section-title">Sugerencias de búsqueda</h1>
+            <p class="section-subtitle">Elige una coincidencia instantánea sin terminar de escribir el nombre completo del material.</p>
+        </section>
+
+        <div style="max-width: 680px; margin: 0 auto;">
+            <div class="hero-search-bar flex Ycenter" style="box-shadow: 0 4px 16px rgba(7, 53, 34, 0.08); border-color: #0B4A30;">
+                <div class="search-input-wrap flex Ycenter" style="flex: 1;">
+                    <img src="../Images/icon-search.svg" alt="" class="search-icon">
+                    <input type="text" class="search-field" value="bot" placeholder="Escribe el nombre del residuo...">
+                </div>
+                <a href="search-results.html?q=bot" class="btn-search flex center" style="text-decoration: none;">
+                    <span>Buscar</span>
+                </a>
+            </div>
+
+            <div class="suggestions-dropdown">
+                <div class="suggestions-header">
+                    <span>Sugerencias instantáneas encontradas</span>
+                </div>
+
+                <a href="waste-detail.html" class="suggestion-item">
+                    <div>
+                        <div class="suggestion-title">Botella de plástico (PET #1)</div>
+                        <div class="suggestion-desc">Envase de bebida transparente · Aprovechable</div>
+                    </div>
+                    <img src="../Images/icon-arrow-right.svg" alt="" style="width: 14px; opacity: 0.6;">
+                </a>
+
+                <a href="waste-detail.html" class="suggestion-item">
+                    <div>
+                        <div class="suggestion-title">Botella de vidrio</div>
+                        <div class="suggestion-desc">Envase entero para bebidas · Separar la tapa</div>
+                    </div>
+                    <img src="../Images/icon-arrow-right.svg" alt="" style="width: 14px; opacity: 0.6;">
+                </a>
+
+                <a href="waste-detail.html" class="suggestion-item">
+                    <div>
+                        <div class="suggestion-title">Botella de aceite de cocina</div>
+                        <div class="suggestion-desc">Envase con grasa residual · Requiere limpieza especial</div>
+                    </div>
+                    <img src="../Images/icon-arrow-right.svg" alt="" style="width: 14px; opacity: 0.6;">
+                </a>
+
+                <a href="search-results.html" class="suggestion-item" style="background-color: #F7FAF8;">
+                    <div>
+                        <div class="suggestion-title" style="color: #0B4A30; font-size: 13.5px;">Ver todos los resultados para "bot"...</div>
+                    </div>
+                    <span style="font-size: 12px; font-weight: 700; color: #0B4A30;">14 coincidencias</span>
+                </a>
+            </div>
+
+            <div style="margin-top: 24px; text-align: center;">
+                <a href="search-history.html" style="font-size: 13.5px; color: #1F6B47; font-weight: 700; text-decoration: none;">
+                    ← Ver mi historial de consultas recientes en esta sesión
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container">
+            <div class="footer-top flex">
+                <div class="footer-brand-col">
+                    <a href="../index.html" class="brand flex Ycenter" style="margin-bottom: 12px; text-decoration: none;">
+                        <div class="brand-mark flex center">
+                            <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                        </div>
+                        <span class="brand-name dark-principal">Resaving</span>
+                    </a>
+                    <p class="footer-tagline">Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
+                    <p class="footer-subtext">Diseñado para ciudadanos, familias y recicladores de base bajo la Norma Técnica Peruana NTP 900.058:2019.</p>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Explorar</h4>
+                    <ul class="footer-links">
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="collection-map.html">Puntos de acopio</a></li>
+                        <li><a href="delivery.html">Mi entrega</a></li>
+                        <li><a href="scan-camera.html">Identificar con foto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Confianza</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#vigencia">Vigencia de datos</a></li>
+                        <li><a href="../index.html#privacidad">Privacidad y seguridad</a></li>
+                        <li><a href="report-feedback.html">Reportar información</a></li>
+                        <li><a href="../index.html#metodologia">Metodología de validación</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Accesibilidad</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#audio">Escuchar esta pantalla</a></li>
+                        <li><a href="../index.html#mapa-texto">Alternativa textual al mapa</a></li>
+                        <li><a href="../index.html#alto-contraste">Modo alto contraste</a></li>
+                        <li><a href="../index.html#atajos">Navegación por teclado</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom flex Ycenter">
+                <p class="footer-copy">© 2026 Resaving. Plataforma académica desarrollada para el curso HCI for UX Design - UPC.</p>
+                <div class="footer-legal flex Ycenter">
+                    <a href="../index.html#privacidad">Privacidad</a>
+                    <span class="separator">·</span>
+                    <a href="../index.html#accesibilidad">Accesibilidad</a>
+                    <span class="separator">·</span>
+                    <a href="../index.html#ayuda">Ayuda</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
