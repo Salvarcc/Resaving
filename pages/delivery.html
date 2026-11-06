@@ -50,7 +50,10 @@
         <div class="delivery-layout">
             <div class="delivery-main-col">
                 <section>
-                    <h2 class="section-block-title">Residuos en tu lote actual (4 materiales)</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h2 class="section-block-title" style="margin-bottom: 0;">Residuos en tu lote actual (4 materiales)</h2>
+                        <a href="delivery-add.html" style="padding: 8px 14px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 12.5px; font-weight: 700; text-decoration: none;">+ Agregar material</a>
+                    </div>
                     <p class="section-block-desc">Materiales preparados en esta sesión listos para entrega en el distrito de San Miguel.</p>
 
                     <div class="lot-items-grid">
@@ -180,9 +183,13 @@
                         </li>
                     </ul>
 
-                    <a href="point-detail.html" class="btn-primary-action flex center" style="width: 100%; margin-bottom: 10px;">
-                        <span>Cómo llegar a esta estación</span>
+                    <a href="delivery-check.html" class="btn-primary-action flex center" style="width: 100%; margin-bottom: 10px;">
+                        <span>Validar compatibilidad de la bolsa</span>
                         <img src="../Images/icon-arrow-right.svg" alt="">
+                    </a>
+
+                    <a href="point-directions.html" class="btn-outline-action flex center" style="width: 100%; font-size: 13.5px; margin-bottom: 10px;">
+                        <span>Cómo llegar a esta estación</span>
                     </a>
 
                     <a href="collection-map.html" class="btn-outline-action flex center" style="width: 100%; font-size: 13.5px;">
@@ -192,11 +199,15 @@
 
                 <article class="detail-subcard">
                     <h3 class="detail-subcard-title">Confirmar y registrar entrega</h3>
-                    <p class="section-block-desc" style="margin-bottom: 18px;">Notifica al promotor ambiental de la estación para asegurar disponibilidad en tolva y agilizar la recepción.</p>
+                    <p class="section-block-desc" style="margin-bottom: 18px;">Notifica al promotor ambiental de la estación para asegurar disponibilidad en tolva y generar tu comprobante cívico.</p>
 
-                    <button type="button" class="btn-primary-action flex center" style="width: 100%; background-color: #1F6B47;" onclick="alert('¡Excelente! Has registrado tu lote de entrega para la Estación Recicla San Miguel. Tu visita fue programada con éxito.')">
-                        <span>Registrar mi visita de entrega</span>
-                    </button>
+                    <a href="delivery-confirm.html" class="btn-primary-action flex center" style="width: 100%; background-color: #1F6B47; text-decoration: none; margin-bottom: 10px;">
+                        <span>Generar constancia de entrega</span>
+                    </a>
+
+                    <a href="delivery-history.html" style="display: block; text-align: center; font-size: 12.5px; font-weight: 700; color: #0B4A30; text-decoration: underline;">
+                        Ver historial de entregas acumuladas &rarr;
+                    </a>
                 </article>
             </div>
         </div>

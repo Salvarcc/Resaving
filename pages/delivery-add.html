@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Agregar Material a Mi Entrega</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="categories.html" class="nav-link">Residuos</a>
+                <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
+                <a href="delivery.html" class="nav-link active">Mi entrega</a>
+                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+            </nav>
+            
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                </a>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="delivery-page container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Inicio</a> / <a href="delivery.html">Mi entrega</a> / <span>Agregar material</span>
+        </nav>
+
+        <section class="categories-header">
+            <p class="eyebrow">Gestión de lote de entrega</p>
+            <h1 class="section-title">Agregar material acondicionado al lote</h1>
+            <p class="section-subtitle">Registra la cantidad y el estado de tus residuos para calcular el volumen y verificar compatibilidad con las estaciones de tu distrito.</p>
+        </section>
+
+        <div class="delivery-layout">
+            <div class="delivery-main-col">
+                <form action="delivery.html" method="GET" style="background-color: #FFFFFF; border: 1.5px solid #0B4A30; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(7, 53, 34, 0.06);">
+                    <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 20px;">1. Selecciona el tipo de material aprovechable</h2>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px;">
+                        <label style="border: 2px solid #0B4A30; background-color: #EBF7F0; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
+                            <input type="radio" name="material-type" value="pet" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <div>
+                                <strong style="font-size: 14.5px; color: #14251B; display: block;">Botellas plásticas (PET #1)</strong>
+                                <span style="font-size: 12px; color: #6C8A79;">Agua, gaseosas, néctares</span>
+                            </div>
+                        </label>
+
+                        <label style="border: 1px solid #DBE7DF; background-color: #FFFFFF; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
+                            <input type="radio" name="material-type" value="glass" style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <div>
+                                <strong style="font-size: 14.5px; color: #14251B; display: block;">Frascos y botellas de vidrio</strong>
+                                <span style="font-size: 12px; color: #6C8A79;">Transparente, ámbar o verde</span>
+                            </div>
+                        </label>
+
+                        <label style="border: 1px solid #DBE7DF; background-color: #FFFFFF; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
+                            <input type="radio" name="material-type" value="can" style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <div>
+                                <strong style="font-size: 14.5px; color: #14251B; display: block;">Latas de aluminio y hojalata</strong>
+                                <span style="font-size: 12px; color: #6C8A79;">Bebidas, conservas lavadas</span>
+                            </div>
+                        </label>
+
+                        <label style="border: 1px solid #DBE7DF; background-color: #FFFFFF; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
+                            <input type="radio" name="material-type" value="cardboard" style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <div>
+                                <strong style="font-size: 14.5px; color: #14251B; display: block;">Cartón corrugado y papel bond</strong>
+                                <span style="font-size: 12px; color: #6C8A79;">Desarmado, seco y limpio</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 14px;">2. Cantidad estimada de unidades</h2>
+                    
+                    <div style="background-color: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 12px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <div>
+                            <span style="font-size: 13.5px; font-weight: 700; color: #14251B; display: block;">Número de envases acondicionados</span>
+                            <span style="font-size: 12px; color: #6C8A79;">Equivalente aproximado a 0.45 kg de plástico recuperable</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <button type="button" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #DBE7DF; background-color: #FFFFFF; font-size: 18px; font-weight: 800; color: #0B4A30; cursor: pointer;">-</button>
+                            <input type="number" value="15" style="width: 60px; height: 36px; text-align: center; border: 1.5px solid #0B4A30; border-radius: 8px; font-size: 16px; font-weight: 800; color: #14251B;" readonly>
+                            <button type="button" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #DBE7DF; background-color: #FFFFFF; font-size: 18px; font-weight: 800; color: #0B4A30; cursor: pointer;">+</button>
+                        </div>
+                    </div>
+
+                    <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 14px;">3. Confirmación obligatoria de preparación</h2>
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;">
+                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;">
+                            <input type="checkbox" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <span>Los envases fueron enjuagados rápidamente y están completamente secos (sin residuos líquidos).</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;">
+                            <input type="checkbox" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <span>Se desenroscaron las tapas plásticas (polipropileno #5) y se separaron del cuerpo PET.</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;">
+                            <input type="checkbox" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <span>Las botellas fueron aplastadas desde la base para reducir su volumen de transporte.</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 12px; padding-top: 18px; border-top: 1px solid #EEF3F0;">
+                        <a href="delivery.html" style="padding: 12px 20px; background-color: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 8px; font-size: 13.5px; font-weight: 700; color: #6C8A79; text-decoration: none;">Cancelar</a>
+                        <button type="submit" style="padding: 12px 24px; background-color: #0B4A30; color: #FFFFFF; border: none; border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: pointer;">Agregar al lote de entrega</button>
+                    </div>
+                </form>
+            </div>
+
+            <aside class="delivery-sidebar">
+                <div style="background-color: #FFFFFF; border: 1px solid #DBE7DF; border-radius: 14px; padding: 22px; margin-bottom: 20px;">
+                    <h3 style="font-size: 15.5px; font-weight: 800; color: #14251B; margin-bottom: 10px;">¿Por qué registrar la cantidad?</h3>
+                    <p style="font-size: 13px; color: #6C8A79; line-height: 1.5; margin-bottom: 14px;">El pesaje estimado permite a los operadores de estaciones y recicladores del programa municipal anticipar el aforo diario y planificar la recolección sin colapsos.</p>
+                    <a href="prep-guide.html" style="font-size: 12.5px; font-weight: 700; color: #0B4A30; text-decoration: none;">Revisar guía de preparación completa &rarr;</a>
+                </div>
+
+                <div style="background-color: #EBF7F0; border: 1px solid #B8DEC9; border-radius: 14px; padding: 22px;">
+                    <span style="font-size: 11px; font-weight: 800; color: #1D8A57; text-transform: uppercase;">Estación predeterminada</span>
+                    <h4 style="font-size: 15px; font-weight: 800; color: #0B4A30; margin: 4px 0 6px 0;">Estación Recicla San Miguel</h4>
+                    <p style="font-size: 12.5px; color: #14251B; margin-bottom: 10px;">Distrito: San Miguel · 350 metros de distancia</p>
+                    <span style="background-color: #FFFFFF; color: #0B4A30; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 5px;">Acepta botellas PET</span>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container flex">
+            <div class="footer-brand">
+                <div class="brand flex Ycenter">
+                    <div class="brand-mark flex center">
+                        <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    </div>
+                    <span class="brand-name white">Resaving</span>
+                </div>
+                <p class="footer-desc">Plataforma ciudadana para el reciclaje y segregación responsable de residuos conforme a la normativa peruana NTP 900.058:2019.</p>
+            </div>
+            <div class="footer-links-grid flex">
+                <div class="footer-col">
+                    <h3 class="footer-col-title">Secciones</h3>
+                    <a href="../index.html" class="footer-link">Inicio</a>
+                    <a href="categories.html" class="footer-link">Categorías</a>
+                    <a href="collection-map.html" class="footer-link">Puntos de acopio</a>
+                    <a href="delivery.html" class="footer-link">Mi entrega</a>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-col-title">Normativa</h3>
+                    <a href="waste-source.html" class="footer-link">NTP 900.058:2019</a>
+                    <a href="waste-source.html" class="footer-link">MINAM</a>
+                    <a href="waste-source.html" class="footer-link">INACAL</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom container flex Ycenter">
+            <p class="footer-copy">© 2026 Resaving. Todos los derechos reservados.</p>
+            <p class="footer-tagline">Recicla con certeza, cuida tu comunidad.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
