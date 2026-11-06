@@ -72,16 +72,17 @@
 
             <div class="toolbar-row-filters">
                 <span class="filter-label">Filtrar por material:</span>
-                <a href="#" class="filter-chip active">Todos (4 puntos)</a>
-                <a href="#" class="filter-chip">Plástico PET (4)</a>
-                <a href="#" class="filter-chip">Vidrio (2)</a>
-                <a href="#" class="filter-chip">Cartón y Papel (3)</a>
-                <a href="#" class="filter-chip">Pilas (1)</a>
+                <button type="button" class="filter-chip active" data-filter="all">Todos los materiales</button>
+                <button type="button" class="filter-chip" data-filter="pet">Botellas plásticas (PET)</button>
+                <button type="button" class="filter-chip" data-filter="vidrio">Vidrio</button>
+                <button type="button" class="filter-chip" data-filter="papel">Papel y Cartón</button>
+                <button type="button" class="filter-chip" data-filter="metal">Latas y Metales</button>
+                <button type="button" class="filter-chip" data-filter="especial">Pilas y Especiales</button>
             </div>
         </section>
 
         <section class="list-view-grid">
-            <article class="list-point-item">
+            <article class="list-point-item" data-materials="pet vidrio papel metal">
                 <div class="list-point-info">
                     <div class="point-card-header">
                         <h2 class="point-card-title">1. Estación Recicla San Miguel</h2>
@@ -108,7 +109,7 @@
                 </div>
             </article>
 
-            <article class="list-point-item">
+            <article class="list-point-item" data-materials="pet metal papel">
                 <div class="list-point-info">
                     <div class="point-card-header">
                         <h2 class="point-card-title">2. Punto Limpio Parque Juan Pablo II</h2>
@@ -133,7 +134,7 @@
                 </div>
             </article>
 
-            <article class="list-point-item">
+            <article class="list-point-item" data-materials="pet vidrio">
                 <div class="list-point-info">
                     <div class="point-card-header">
                         <h2 class="point-card-title">3. Contenedor Verde Metro La Marina</h2>
@@ -157,7 +158,7 @@
                 </div>
             </article>
 
-            <article class="list-point-item">
+            <article class="list-point-item" data-materials="pet especial">
                 <div class="list-point-info">
                     <div class="point-card-header">
                         <h2 class="point-card-title">4. Estación Ambiental Plaza Bandera</h2>

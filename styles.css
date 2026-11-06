@@ -4479,3 +4479,16 @@ body {
         display: inline;
     }
 }
+.hero-search-wrap {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .hero-search-wrap {
+        margin: 0 auto;
+    }
+}
+
+.material-choice-card:hover {
+    box-shadow: 0 4px 12px rgba(7, 53, 34, 0.08);
+}

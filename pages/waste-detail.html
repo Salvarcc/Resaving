@@ -38,20 +38,28 @@
 
     <main class="waste-detail-page container">
         <nav class="breadcrumb">
-            <a href="../index.html">Inicio</a> / <a href="categories.html">Residuos</a> / <span>Botella de plástico PET</span>
+            <a href="../index.html">Inicio</a> / <a href="categories.html">Residuos</a> / <span id="breadcrumb-current-mat">Botellas plásticas (PET #1)</span>
         </nav>
+
+        <div class="material-switcher-bar flex Ycenter" style="gap: 10px; margin-bottom: 22px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch;">
+            <span style="font-size: 13px; font-weight: 800; color: #14251B; white-space: nowrap;">Ficha de material:</span>
+            <button type="button" class="mat-switch-btn active" data-mat="pet" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #0B4A30; background-color: #0B4A30; color: #FFFFFF; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Botellas plásticas (PET #1)</button>
+            <button type="button" class="mat-switch-btn" data-mat="vidrio" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Frascos de vidrio</button>
+            <button type="button" class="mat-switch-btn" data-mat="carton" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Cajas de cartón y Tetra Pak</button>
+            <button type="button" class="mat-switch-btn" data-mat="metal" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Latas de aluminio</button>
+        </div>
 
         <section class="detail-hero flex">
             <div class="detail-img-box flex center">
                 <span class="detail-img-badge">Aprovechable</span>
-                <img src="../Images/waste-pet-bottle.png" alt="Botella de plástico PET transparente para bebidas">
-                <span class="detail-code-badge">PET #1</span>
+                <img src="../Images/waste-pet-bottle.png" id="detail-main-img" alt="Botella de plástico PET transparente para bebidas">
+                <span id="detail-code-badge" class="detail-code-badge">PET #1</span>
             </div>
 
             <div class="detail-info">
                 <p class="eyebrow">Información del material</p>
-                <h1 class="detail-title">Este residuo sí es aprovechable</h1>
-                <p class="detail-subtitle">La botella de plástico PET puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.</p>
+                <h1 id="detail-title" class="detail-title">Botellas de plástico de agua y gaseosa (PET #1)</h1>
+                <p id="detail-subtitle" class="detail-subtitle">La botella de plástico PET puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.</p>
 
                 <div class="detail-status-banner flex Ycenter">
                     <img src="../Images/icon-check.svg" alt="" style="width: 22px; height: 22px;">
