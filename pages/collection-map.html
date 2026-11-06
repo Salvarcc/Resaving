@@ -80,18 +80,18 @@
 
             <div class="toolbar-row-filters">
                 <span class="filter-label">Filtrar por material:</span>
-                <a href="#" class="filter-chip active">Todos los materiales</a>
-                <a href="#" class="filter-chip">Plástico PET</a>
-                <a href="#" class="filter-chip">Vidrio</a>
-                <a href="#" class="filter-chip">Papel y Cartón</a>
-                <a href="#" class="filter-chip">Latas y Metales</a>
-                <a href="#" class="filter-chip">Residuos Especiales</a>
+                <a href="#" class="filter-chip active" data-filter="all">Todos los materiales</a>
+                <a href="#" class="filter-chip" data-filter="pet">Plástico PET</a>
+                <a href="#" class="filter-chip" data-filter="vidrio">Vidrio</a>
+                <a href="#" class="filter-chip" data-filter="papel">Papel y Cartón</a>
+                <a href="#" class="filter-chip" data-filter="metal">Latas y Metales</a>
+                <a href="#" class="filter-chip" data-filter="especial">Residuos Especiales</a>
             </div>
         </section>
 
         <section class="map-split-view">
             <div class="map-points-list">
-                <article class="point-card selected">
+                <article class="point-card selected" data-point-id="1" data-materials="pet vidrio papel metal">
                     <div class="point-card-header">
                         <h2 class="point-card-title">1. Estación Recicla San Miguel</h2>
                         <span class="point-status-badge badge-open">Abierto</span>
@@ -113,7 +113,7 @@
                     </a>
                 </article>
 
-                <article class="point-card">
+                <article class="point-card" data-point-id="2" data-materials="pet vidrio">
                     <div class="point-card-header">
                         <h2 class="point-card-title">2. Punto Limpio Parque Juan Pablo II</h2>
                         <span class="point-status-badge badge-open">Abierto</span>
@@ -133,7 +133,7 @@
                     </a>
                 </article>
 
-                <article class="point-card">
+                <article class="point-card" data-point-id="3" data-materials="pet vidrio papel metal">
                     <div class="point-card-header">
                         <h2 class="point-card-title">3. Contenedor Verde Metro La Marina</h2>
                         <span class="point-status-badge badge-open">Abierto 24h</span>
@@ -152,7 +152,7 @@
                     </a>
                 </article>
 
-                <article class="point-card">
+                <article class="point-card" data-point-id="4" data-materials="pet">
                     <div class="point-card-header">
                         <h2 class="point-card-title">4. Estación Ambiental Plaza Bandera</h2>
                         <span class="point-status-badge badge-closing">Cierra a las 17:00</span>
@@ -226,7 +226,7 @@
                         <li><a href="categories.html">Categorías</a></li>
                         <li><a href="collection-map.html">Puntos de acopio</a></li>
                         <li><a href="delivery.html">Mi entrega</a></li>
-                        <li><a href="scan-camera.html">Identificar con foto</a></li>
+                        <li><a href="scan-camera.html"><span class="text-desktop-tablet">Adjuntar imagen</span><span class="text-mobile">Adjuntar foto o tomar foto</span></a></li>
                     </ul>
                 </div>
 

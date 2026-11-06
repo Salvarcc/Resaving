@@ -45,11 +45,14 @@
                 <h1 class="hero-title">Reciclar empieza<br>por saber qué<br>tienes</h1>
                 <p class="hero-subtitle">Identifica cualquier residuo, aprende a prepararlo y encuentra un punto de acopio confiable cerca de ti.</p>
 
-                <form class="hero-search-bar flex Ycenter" role="search" action="pages/search-results.html" method="GET">
-                    <img src="Images/icon-search.svg" alt="" class="search-input-icon">
-                    <input type="text" name="q" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre">
-                    <button type="submit" class="btn-search">Buscar</button>
-                </form>
+                <div style="position: relative; width: 100%; max-width: 680px; margin: 0 auto;">
+                    <form class="hero-search-bar flex Ycenter" role="search" action="pages/search-results.html" method="GET">
+                        <img src="Images/icon-search.svg" alt="" class="search-input-icon">
+                        <input type="text" id="hero-search-input" name="q" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre" autocomplete="off">
+                        <button type="submit" class="btn-search">Buscar</button>
+                    </form>
+                    <div id="hero-search-suggestions" class="suggestions-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 100; background: #FFFFFF; border: 1.5px solid #0B4A30; border-radius: 12px; box-shadow: 0 12px 32px rgba(7, 53, 34, 0.16); overflow: hidden;"></div>
+                </div>
 
                 <div class="hero-actions flex">
                     <label for="hero-file-upload" class="btn-action-white flex Ycenter" style="cursor: pointer; text-decoration: none;">
