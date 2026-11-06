@@ -1,3 +1,11 @@
+.text-mobile {
+    display: none;
+}
+
+.text-desktop-tablet {
+    display: inline;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
@@ -4459,5 +4467,15 @@ body {
     .week-calendar-grid {
         grid-template-columns: 1fr;
         gap: 8px;
+    }
+}
+
+@media (max-width: 767px) {
+    .text-desktop-tablet {
+        display: none;
+    }
+
+    .text-mobile {
+        display: inline;
     }
 }

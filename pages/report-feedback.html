@@ -93,11 +93,13 @@
 
                     <div class="form-group">
                         <label>Foto de evidencia (opcional)</label>
-                        <div class="file-upload-box">
+                        <label class="file-upload-box" for="report-file-input" style="cursor: pointer; display: block;">
                             <img src="../Images/icon-camera.svg" alt="" style="width: 28px; height: 28px; margin: 0 auto 8px auto; display: block; opacity: 0.65;">
-                            <span>Haz clic para subir o arrastra una fotografía del punto</span>
-                            <small style="color: #6C8A79; font-size: 11.5px; margin-top: 4px; display: block;">Archivos JPG o PNG hasta 5 MB</small>
-                        </div>
+                            <span class="text-desktop-tablet">Haz clic para adjuntar imagen o arrastra el archivo</span>
+                            <span class="text-mobile">Adjuntar foto o tomar foto</span>
+                            <input type="file" id="report-file-input" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                            <small id="report-file-status" style="color: #6C8A79; font-size: 11.5px; margin-top: 4px; display: block;">Archivos JPG o PNG hasta 5 MB</small>
+                        </label>
                     </div>
 
                     <button type="submit" class="btn-primary-action flex center" style="width: 100%; margin-top: 10px;">

@@ -52,10 +52,12 @@
                 </form>
 
                 <div class="hero-actions flex">
-                    <a href="pages/scan-camera.html" class="btn-action-white flex Ycenter" style="text-decoration: none;">
+                    <label for="hero-file-upload" class="btn-action-white flex Ycenter" style="cursor: pointer; text-decoration: none;">
                         <img src="Images/icon-camera.svg" alt="">
-                        <span>Adjuntar imagen</span>
-                    </a>
+                        <span class="text-desktop-tablet">Adjuntar imagen</span>
+                        <span class="text-mobile">Adjuntar foto o tomar foto</span>
+                        <input type="file" id="hero-file-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                    </label>
                     <a href="pages/categories.html" class="btn-action-outline flex Ycenter" style="text-decoration: none;">
                         <img src="Images/icon-categories.svg" alt="">
                         <span>Ver las 4 categorías</span>

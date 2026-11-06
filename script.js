@@ -44,4 +44,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateProgress();
     }
+
+    const heroFileInput = document.getElementById('hero-file-upload');
+    if (heroFileInput) {
+        heroFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                window.location.href = 'pages/scan-confirm.html';
+            }
+        });
+    }
+
+    const uploadPhoto = document.getElementById('upload-photo');
+    if (uploadPhoto) {
+        uploadPhoto.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                window.location.href = 'scan-confirm.html';
+            }
+        });
+    }
+
+    const shutterBtn = document.querySelector('.btn-shutter');
+    if (shutterBtn) {
+        shutterBtn.addEventListener('click', () => {
+            shutterBtn.style.transform = 'scale(0.92)';
+            setTimeout(() => {
+                window.location.href = 'scan-confirm.html';
+            }, 300);
+        });
+    }
+
+    const reportFileInput = document.getElementById('report-file-input');
+    const reportFileStatus = document.getElementById('report-file-status');
+    if (reportFileInput && reportFileStatus) {
+        reportFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                reportFileStatus.textContent = `Archivo seleccionado: ${e.target.files[0].name}`;
+                reportFileStatus.style.color = '#1D8A57';
+                reportFileStatus.style.fontWeight = '700';
+            }
+        });
+    }
 });
