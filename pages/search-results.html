@@ -22,7 +22,7 @@
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
                 <a href="delivery.html" class="nav-link">Mi entrega</a>
-                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
@@ -42,23 +42,23 @@
         </nav>
 
         <section class="search-bar-section">
-            <form class="results-search-bar flex Ycenter" role="search">
+            <form class="results-search-bar flex Ycenter" role="search" id="form-search-results">
                 <img src="../Images/icon-search.svg" alt="" class="search-input-icon">
-                <input type="text" value="botella" placeholder="Buscar un residuo por nombre..." aria-label="Buscar un residuo">
+                <input type="text" id="search-input-field" value="" placeholder="Buscar un residuo por nombre o categoría..." aria-label="Buscar un residuo">
                 <button type="submit" class="btn-search">Buscar</button>
             </form>
 
-            <div class="filter-chips flex Ycenter">
-                <button type="button" class="chip active">Todos (14)</button>
-                <button type="button" class="chip">Plásticos (6)</button>
-                <button type="button" class="chip">Vidrio (4)</button>
-                <button type="button" class="chip">Especiales (2)</button>
-                <button type="button" class="chip">Otros (2)</button>
+            <div class="filter-chips flex Ycenter" id="search-filter-chips">
+                <button type="button" class="chip active" data-filter="all">Todos</button>
+                <button type="button" class="chip" data-filter="aprovechables">Aprovechables</button>
+                <button type="button" class="chip" data-filter="organicos">Orgánicos</button>
+                <button type="button" class="chip" data-filter="peligrosos">Peligrosos</button>
+                <button type="button" class="chip" data-filter="no-aprovechables">No aprovechables</button>
             </div>
         </section>
 
         <section class="results-meta flex Ycenter">
-            <p class="results-count">Se encontraron <strong>14 resultados</strong> para <em>«botella»</em></p>
+            <p class="results-count" id="search-results-count">Cargando catálogo de materiales...</p>
             <div class="results-sort flex Ycenter">
                 <label for="sort-select">Ordenar por:</label>
                 <select id="sort-select">
@@ -69,86 +69,7 @@
             </div>
         </section>
 
-        <section class="results-list flex">
-            <article class="result-card flex Ycenter">
-                <div class="result-img-wrap">
-                    <img src="../Images/waste-pet-bottle.png" alt="Botella de plástico PET">
-                </div>
-                <div class="result-body flex-1">
-                    <div class="result-badges flex Ycenter">
-                        <span class="badge badge-green">Aprovechable</span>
-                        <span class="badge badge-gray">Plástico PET #1</span>
-                    </div>
-                    <h3>Botella de plástico PET (Bebidas y agua)</h3>
-                    <p class="result-desc">Aceptada en todas las estaciones de acopio y contenedores verdes. Debe entregarse vacía, limpia, seca y compactada con la tapa separada.</p>
-                </div>
-                <div class="result-action">
-                    <a href="waste-detail.html" class="btn-primary-action flex Ycenter">
-                        <span>Ver cómo preparar</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
-                    </a>
-                </div>
-            </article>
-
-            <article class="result-card flex Ycenter">
-                <div class="result-img-wrap">
-                    <img src="../Images/gallery-glass.png" alt="Botella de vidrio">
-                </div>
-                <div class="result-body flex-1">
-                    <div class="result-badges flex Ycenter">
-                        <span class="badge badge-green">Aprovechable</span>
-                        <span class="badge badge-gray">Vidrio</span>
-                    </div>
-                    <h3>Botella de vidrio para bebidas</h3>
-                    <p class="result-desc">Material 100% reciclable en infinitos ciclos. Debe entregarse entera, limpia y sin tapas metálicas ni corchos.</p>
-                </div>
-                <div class="result-action">
-                    <a href="waste-detail.html?tipo=vidrio" class="btn-primary-action flex Ycenter">
-                        <span>Ver cómo preparar</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
-                    </a>
-                </div>
-            </article>
-
-            <article class="result-card flex Ycenter">
-                <div class="result-img-wrap">
-                    <img src="../Images/gallery-plastic-bottle.png" alt="Botella de plástico PEAD">
-                </div>
-                <div class="result-body flex-1">
-                    <div class="result-badges flex Ycenter">
-                        <span class="badge badge-green">Aprovechable</span>
-                        <span class="badge badge-gray">Plástico PEAD #2</span>
-                    </div>
-                    <h3>Botella plástica de detergente o champú</h3>
-                    <p class="result-desc">Plástico rígido de alta densidad. Se debe enjuagar completamente para eliminar restos de jabón o químicos antes de entregar.</p>
-                </div>
-                <div class="result-action">
-                    <a href="waste-detail.html?tipo=pead" class="btn-primary-action flex Ycenter">
-                        <span>Ver cómo preparar</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
-                    </a>
-                </div>
-            </article>
-
-            <article class="result-card flex Ycenter">
-                <div class="result-img-wrap">
-                    <img src="../Images/gallery-special-waste.png" alt="Frasco de medicamento">
-                </div>
-                <div class="result-body flex-1">
-                    <div class="result-badges flex Ycenter">
-                        <span class="badge badge-red">Peligroso / Especial</span>
-                        <span class="badge badge-gray">Vidrio o plástico medicinal</span>
-                    </div>
-                    <h3>Frasco o botella de medicamento líquido / jarabe</h3>
-                    <p class="result-desc">No se debe desechar en el tacho verde ni en la basura común. Requiere contenedores especiales en farmacias y centros de salud autorizados.</p>
-                </div>
-                <div class="result-action">
-                    <a href="waste-detail.html?tipo=medicamento" class="btn-primary-action flex Ycenter">
-                        <span>Puntos especiales</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
-                    </a>
-                </div>
-            </article>
+        <section class="results-list flex" id="search-results-list">
         </section>
 
         <section class="no-results-help flex Ycenter">

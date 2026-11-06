@@ -22,7 +22,7 @@
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
                 <a href="delivery.html" class="nav-link active">Mi entrega</a>
-                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
@@ -49,61 +49,20 @@
 
         <div class="delivery-layout">
             <div class="delivery-main-col">
-                <section>
+                <section id="section-lot-items">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <h2 class="section-block-title" style="margin-bottom: 0;">Residuos en tu lote actual (4 materiales)</h2>
-                        <a href="delivery-add.html" style="padding: 8px 14px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 12.5px; font-weight: 700; text-decoration: none;">+ Agregar material</a>
+                        <h2 id="lot-items-header" class="section-block-title" style="margin-bottom: 0;">Residuos en tu lote actual</h2>
+                        <div style="display: flex; gap: 8px;">
+                            <button type="button" id="btn-clear-lot" style="display: none; padding: 7px 12px; background: none; border: 1px solid #C0392B; color: #C0392B; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;">Vaciar lote</button>
+                            <a href="delivery-add.html" style="padding: 8px 14px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 12.5px; font-weight: 700; text-decoration: none;">+ Agregar material</a>
+                        </div>
                     </div>
-                    <p class="section-block-desc">Materiales preparados en esta sesión listos para entrega en el distrito de San Miguel.</p>
+                    <p id="lot-items-desc" class="section-block-desc">Materiales acondicionados listos para entrega en centros de acopio autorizados.</p>
 
-                    <div class="lot-items-grid">
-                        <article class="lot-item-card">
-                            <div class="lot-item-img">
-                                <img src="../Images/delivery-bottle.png" alt="Botellas de plástico PET">
-                            </div>
-                            <div class="lot-item-info">
-                                <h3 class="lot-item-title">Botellas plásticas (PET #1)</h3>
-                                <p class="lot-item-sub">15 unidades · Preparación completa (enjuagadas, secas, sin tapa y aplastadas)</p>
-                            </div>
-                            <span class="lot-chip chip-ready">Listo</span>
-                        </article>
-
-                        <article class="lot-item-card">
-                            <div class="lot-item-img">
-                                <img src="../Images/delivery-can.png" alt="Latas de aluminio y hojalata">
-                            </div>
-                            <div class="lot-item-info">
-                                <h3 class="lot-item-title">Latas de conserva y aluminio</h3>
-                                <p class="lot-item-sub">6 unidades · Limpias y sin residuos de contenido graso</p>
-                            </div>
-                            <span class="lot-chip chip-ready">Listo</span>
-                        </article>
-
-                        <article class="lot-item-card">
-                            <div class="lot-item-img">
-                                <img src="../Images/delivery-glass.png" alt="Botellas de vidrio para bebidas">
-                            </div>
-                            <div class="lot-item-info">
-                                <h3 class="lot-item-title">Botellas de vidrio transparente</h3>
-                                <p class="lot-item-sub">4 unidades · Enteras y sin tapas metálicas</p>
-                            </div>
-                            <span class="lot-chip chip-ready">Listo</span>
-                        </article>
-
-                        <article class="lot-item-card">
-                            <div class="lot-item-img">
-                                <img src="../Images/delivery-cardboard.png" alt="Cajas de cartón corrugado">
-                            </div>
-                            <div class="lot-item-info">
-                                <h3 class="lot-item-title">Cajas de cartón corrugado</h3>
-                                <p class="lot-item-sub">3 unidades · Desarmadas, planas y libres de cintas plásticas</p>
-                            </div>
-                            <span class="lot-chip chip-ready">Listo</span>
-                        </article>
-                    </div>
+                    <div id="lot-items-container" class="lot-items-grid"></div>
                 </section>
 
-                <section>
+                <section id="section-lot-table" style="margin-top: 32px;">
                     <h2 class="section-block-title">Requisitos consolidados de entrega</h2>
                     <p class="section-block-desc">Resumen técnico de verificación de acuerdo con los estándares de los recicladores acreditados.</p>
 
@@ -118,36 +77,7 @@
                                     <th>Tolva asignada</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Plástico PET</strong></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><span class="lot-chip chip-ready">Listo</span></td>
-                                    <td>Boca 1 (Plásticos)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Latas y metales</strong></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><span class="lot-chip chip-ready">Listo</span></td>
-                                    <td>Boca 2 (Metales)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Vidrio entero</strong></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><span class="lot-chip chip-ready">Listo</span></td>
-                                    <td>Boca 3 (Vidrio)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Cartón plano</strong></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><img src="../Images/icon-check.svg" alt="Sí" style="width: 16px; height: 16px;"></td>
-                                    <td><span class="lot-chip chip-ready">Listo</span></td>
-                                    <td>Boca 4 (Papeles)</td>
-                                </tr>
-                            </tbody>
+                            <tbody id="lot-table-body"></tbody>
                         </table>
                     </div>
                 </section>
@@ -160,28 +90,11 @@
 
             <aside class="delivery-side-col">
                 <article class="match-point-card">
-                    <span class="match-chip">Mejor coincidencia encontrada</span>
-                    <h2 class="match-title">Estación Recicla San Miguel</h2>
-                    <p class="match-stats">0.8 km · Abierto hoy hasta 18:00 · 4 de 4 compatibles</p>
+                    <span class="match-chip" id="sidebar-match-chip">Mejor coincidencia encontrada</span>
+                    <h2 class="match-title" id="sidebar-match-title">Estación Recicla San Miguel</h2>
+                    <p class="match-stats" id="sidebar-match-stats">0.8 km · Abierto hoy hasta 18:00</p>
 
-                    <ul class="match-checklist">
-                        <li class="match-check-item check-ok">
-                            <img src="../Images/icon-check.svg" alt="" style="width: 16px; height: 16px;">
-                            <span>Acepta Botellas PET (Capacidad alta)</span>
-                        </li>
-                        <li class="match-check-item check-ok">
-                            <img src="../Images/icon-check.svg" alt="" style="width: 16px; height: 16px;">
-                            <span>Acepta Latas de aluminio</span>
-                        </li>
-                        <li class="match-check-item check-ok">
-                            <img src="../Images/icon-check.svg" alt="" style="width: 16px; height: 16px;">
-                            <span>Acepta Botellas de vidrio</span>
-                        </li>
-                        <li class="match-check-item check-ok">
-                            <img src="../Images/icon-check.svg" alt="" style="width: 16px; height: 16px;">
-                            <span>Acepta Cartón y papel seco</span>
-                        </li>
-                    </ul>
+                    <ul class="match-checklist" id="sidebar-match-list"></ul>
 
                     <a href="delivery-check.html" class="btn-primary-action flex center" style="width: 100%; margin-bottom: 10px;">
                         <span>Validar compatibilidad de la bolsa</span>
@@ -259,7 +172,7 @@
             </div>
 
             <div class="footer-bottom flex Ycenter">
-                <p class="footer-copy">© 2026 Resaving. Plataforma académica desarrollada para el curso HCI for UX Design - UPC.</p>
+                <p class="footer-copy">© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
                 <div class="footer-legal flex Ycenter">
                     <a href="../index.html#privacidad">Privacidad</a>
                     <span class="separator">·</span>

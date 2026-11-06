@@ -867,6 +867,40 @@ body {
     padding: 56px 0 28px 0;
 }
 
+.site-footer a,
+.footer-links a,
+.footer-nav-col a,
+.footer-links li a,
+.footer-inner a,
+.footer-brand a,
+.footer-bottom a,
+.footer-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-footer a:visited,
+.footer-links a:visited,
+.footer-nav-col a:visited,
+.footer-links li a:visited,
+.footer-bottom a:visited,
+.footer-link:visited {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.site-footer a:hover,
+.footer-links a:hover,
+.footer-nav-col a:hover,
+.footer-links li a:hover,
+.footer-inner a:hover,
+.footer-brand a:hover,
+.footer-bottom a:hover,
+.footer-link:hover {
+    color: #FFFFFF !important;
+    text-decoration: underline;
+}
+
 .footer-grid {
     justify-content: space-between;
     gap: 36px;
@@ -2903,6 +2937,14 @@ body {
 .map-marker:hover {
     transform: scale(1.15);
     background-color: #1F6B47;
+}
+
+.map-marker.selected,
+.map-marker.active {
+    background-color: #D35400;
+    transform: scale(1.22);
+    z-index: 10;
+    box-shadow: 0 6px 14px rgba(211, 84, 0, 0.45);
 }
 
 .marker-1 {

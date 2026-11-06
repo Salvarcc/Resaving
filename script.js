@@ -6,13 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSuggestions = document.getElementById('hero-search-suggestions');
 
     const searchCatalog = [
-        { name: 'Botellas de agua y gaseosa (Plástico PET #1)', cat: 'Plásticos · Aprovechable', url: 'waste-detail.html?tipo=pet', color: '#1D8A57' },
-        { name: 'Frascos y botellas de vidrio de conserva', cat: 'Vidrio · Aprovechable', url: 'waste-detail.html?tipo=vidrio', color: '#1D8A57' },
-        { name: 'Cajas de cartón y empaques de jugo (Tetra Pak)', cat: 'Papel y Cartón · Aprovechable', url: 'waste-detail.html?tipo=carton', color: '#1D8A57' },
-        { name: 'Latas de bebidas y conservas de aluminio', cat: 'Metales · Aprovechable', url: 'waste-detail.html?tipo=lata', color: '#1D8A57' },
-        { name: 'Envases de shampoo y detergente (PEAD #2)', cat: 'Plásticos · Aprovechable', url: 'waste-detail.html?tipo=pead', color: '#1D8A57' },
-        { name: 'Bolsas plásticas de compras (PEBD #4)', cat: 'Plásticos · No aprovechable en tacho común', url: 'waste-detail.html?tipo=bolsa', color: '#D97706' },
-        { name: 'Pilas y baterías de linterna o control', cat: 'Peligrosos · Punto especial', url: 'waste-detail.html?tipo=pilas', color: '#B91C1C' }
+        { name: 'Botellas plásticas para bebidas', cat: 'Aprovechable · Tacho Verde', url: 'waste-detail.html?tipo=pet', color: '#1D8A57' },
+        { name: 'Frascos y botellas de vidrio entero', cat: 'Aprovechable · Tacho Verde', url: 'waste-detail.html?tipo=vidrio', color: '#1D8A57' },
+        { name: 'Cajas de cartón corrugado y papel', cat: 'Aprovechable · Tacho Verde', url: 'waste-detail.html?tipo=carton', color: '#1D8A57' },
+        { name: 'Latas de bebidas y conservas', cat: 'Aprovechable · Tacho Verde', url: 'waste-detail.html?tipo=lata', color: '#1D8A57' },
+        { name: 'Envases rígidos de detergente o champú', cat: 'Aprovechable · Tacho Verde', url: 'waste-detail.html?tipo=pead', color: '#1D8A57' },
+        { name: 'Bolsas plásticas de compras', cat: 'Especial · No tacho común', url: 'waste-detail.html?tipo=bolsa', color: '#D97706' },
+        { name: 'Pilas y baterías alcalinas', cat: 'Peligrosos · Punto especial', url: 'waste-detail.html?tipo=pilas', color: '#B91C1C' },
+        { name: 'Cáscaras de frutas y verduras', cat: 'Orgánicos · Tacho Marrón', url: 'search-results.html?cat=organicos', color: '#7D4F27' },
+        { name: 'Papel higiénico y servilletas usadas', cat: 'No aprovechable · Tacho Negro', url: 'search-results.html?cat=no-aprovechables', color: '#2C3E50' }
     ];
 
     if (heroSearchInput && heroSuggestions) {
@@ -61,9 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderSuggestions(matches, false);
             } else {
                 heroSuggestions.innerHTML = `
-                    <div style="padding: 16px; text-align: center; color: #6C8A79; font-size: 13px;">
-                        <span>No encontramos coincidencias exactas para "${query}".</span>
-                        <a href="${basePath}search-no-results.html" style="display: block; margin-top: 6px; font-weight: 700; color: #0B4A30; text-decoration: underline;">Ver opciones alternativas</a>
+                    <div style="padding: 16px 18px; text-align: center;">
+                        <p style="font-size: 13px; color: #5F7066; margin-bottom: 8px;">No encontramos coincidencias exactas para "${query}"</p>
+                        <a href="${basePath}search-results.html?q=${encodeURIComponent(query)}" style="font-size: 12.5px; font-weight: 700; color: #0B4A30; text-decoration: underline;">
+                            Buscar en todo el catálogo de residuos &rarr;
+                        </a>
                     </div>
                 `;
                 heroSuggestions.style.display = 'block';
@@ -101,219 +105,389 @@ document.addEventListener('DOMContentLoaded', () => {
             shutterBtn.style.transform = 'scale(0.92)';
             setTimeout(() => {
                 window.location.href = 'scan-confirm.html';
-            }, 250);
+            }, 180);
         });
     }
 
     const btnFlip = document.getElementById('btn-flip-camera');
+    let isFrontCamera = false;
     if (btnFlip) {
-        let isFront = false;
         btnFlip.addEventListener('click', () => {
-            isFront = !isFront;
+            isFrontCamera = !isFrontCamera;
             const icon = btnFlip.querySelector('img');
             const span = btnFlip.querySelector('span');
-            if (icon) {
-                icon.style.transition = 'transform 0.4s ease';
-                icon.style.transform = isFront ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
+            if (btnFlip.classList) btnFlip.classList.toggle('flipped');
             if (span) {
-                span.textContent = isFront ? 'Frontal' : 'Voltear';
+                span.textContent = isFrontCamera ? 'Cámara frontal' : 'Cámara posterior';
             }
         });
     }
 
-    const materialRadios = document.querySelectorAll('input[name="material-type"]');
+    const formAddMaterial = document.getElementById('form-add-material');
+    const inputWasteQty = document.getElementById('input-waste-qty');
+    const labelEstimatedWeight = document.getElementById('label-estimated-weight');
+    const btnQtyMinus = document.getElementById('btn-qty-minus');
+    const btnQtyPlus = document.getElementById('btn-qty-plus');
     const materialChoiceCards = document.querySelectorAll('.material-choice-card');
-    const qtyInput = document.getElementById('qty-bottles');
-    const weightLabel = document.getElementById('weight-estimation-label');
-    const btnMinus = document.getElementById('btn-qty-minus');
-    const btnPlus = document.getElementById('btn-qty-plus');
-    const conditionCheckboxes = document.querySelectorAll('input[id^="check-cond-"]');
-
-    const materialSpecs = {
-        pet: {
-            density: 0.03,
-            unitLabel: 'plástico PET (botellas de 500 ml)',
-            checks: [
-                'Los envases fueron enjuagados rápidamente y están completamente secos (sin residuos líquidos).',
-                'Se desenroscaron las tapas plásticas (polipropileno #5) y se separaron del cuerpo PET.',
-                'Las botellas fueron aplastadas desde la base para reducir su volumen de transporte.'
-            ]
-        },
-        glass: {
-            density: 0.25,
-            unitLabel: 'vidrio aprovechable (frascos de conserva)',
-            checks: [
-                'Los frascos están enteros y limpios, sin restos de salsas, aderezos o alimentos.',
-                'Se retiraron las tapas de hojalata o corchos y se colocaron por separado.',
-                'Ningún frasco presenta roturas, fisuras ni astillas cortantes que arriesguen al reciclador.'
-            ]
-        },
-        can: {
-            density: 0.02,
-            unitLabel: 'aluminio y latas de conserva',
-            checks: [
-                'Las latas de bebida y conserva se vaciaron y enjuagaron para no atraer insectos.',
-                'Las anillas abre-fácil quedaron dobladas hacia el interior sin desprenderse.',
-                'Las latas fueron suavemente comprimidas de costado sin dejar bordes filosos.'
-            ]
-        },
-        cardboard: {
-            density: 0.15,
-            unitLabel: 'cartón corrugado y Tetra Pak',
-            checks: [
-                'Las cajas están 100% secas y libres de restos de grasa de comida o pizza.',
-                'Se despegaron las cintas plásticas de embalaje y grapas metálicas gruesas.',
-                'Las cajas fueron desarmadas y aplanadas en fardos ordenados.'
-            ]
-        }
-    };
-
-    if (materialRadios.length > 0) {
-        const updateMaterialSelection = (selectedVal) => {
-            materialChoiceCards.forEach(card => {
-                const radio = card.querySelector('input[type="radio"]');
-                if (radio) {
-                    if (radio.value === selectedVal) {
-                        card.style.borderColor = '#0B4A30';
-                        card.style.borderWidth = '2px';
-                        card.style.backgroundColor = '#EBF7F0';
-                    } else {
-                        card.style.borderColor = '#DBE7DF';
-                        card.style.borderWidth = '1px';
-                        card.style.backgroundColor = '#FFFFFF';
-                    }
-                }
-            });
-
-            const currentQty = parseInt(qtyInput ? qtyInput.value : 15, 10) || 15;
-            const spec = materialSpecs[selectedVal] || materialSpecs.pet;
-            const totalKg = (currentQty * spec.density).toFixed(2);
-
-            if (weightLabel) {
-                weightLabel.textContent = `Equivalente aproximado a ${totalKg} kg de ${spec.unitLabel}`;
-            }
-
-            if (conditionCheckboxes.length === 3 && spec.checks) {
-                conditionCheckboxes.forEach((cb, idx) => {
-                    const span = cb.nextElementSibling;
-                    if (span && spec.checks[idx]) {
-                        span.textContent = spec.checks[idx];
-                    }
-                });
-            }
-        };
-
-        materialRadios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                if (radio.checked) {
-                    updateMaterialSelection(radio.value);
-                }
-            });
-        });
-
-        const checkedRadio = document.querySelector('input[name="material-type"]:checked');
-        if (checkedRadio) {
-            updateMaterialSelection(checkedRadio.value);
-        }
-    }
-
-    if (qtyInput && btnMinus && btnPlus) {
-        const recalculateWeight = () => {
-            const checkedRadio = document.querySelector('input[name="material-type"]:checked');
-            const selectedVal = checkedRadio ? checkedRadio.value : 'pet';
-            const spec = materialSpecs[selectedVal] || materialSpecs.pet;
-            const val = parseInt(qtyInput.value, 10) || 1;
-            const kg = (val * spec.density).toFixed(2);
-            if (weightLabel) {
-                weightLabel.textContent = `Equivalente aproximado a ${kg} kg de ${spec.unitLabel}`;
-            }
-        };
-
-        btnMinus.addEventListener('click', () => {
-            let val = parseInt(qtyInput.value, 10) || 1;
-            if (val > 1) {
-                val--;
-                qtyInput.value = val;
-                recalculateWeight();
-            }
-        });
-
-        btnPlus.addEventListener('click', () => {
-            let val = parseInt(qtyInput.value, 10) || 1;
-            if (val < 200) {
-                val++;
-                qtyInput.value = val;
-                recalculateWeight();
-            }
-        });
-    }
-
     const cond1 = document.getElementById('check-cond-1');
     const cond2 = document.getElementById('check-cond-2');
     const cond3 = document.getElementById('check-cond-3');
-    const label2 = document.getElementById('label-cond-2');
-    const label3 = document.getElementById('label-cond-3');
+    const labelCond2 = document.getElementById('label-cond-2');
+    const labelCond3 = document.getElementById('label-cond-3');
+    const spanCond1 = document.getElementById('span-cond-1');
+    const spanCond2 = document.getElementById('span-cond-2');
+    const spanCond3 = document.getElementById('span-cond-3');
     const btnSubmitDelivery = document.getElementById('btn-submit-delivery');
+    const sidebarAcceptedTag = document.getElementById('sidebar-accepted-tag');
+
+    const materialConfig = {
+        pet: {
+            name: 'Botellas plásticas para bebidas',
+            unitWeight: 0.030,
+            weightLabel: 'botellas plásticas',
+            tag: 'Acepta botellas plásticas para bebidas',
+            img: '../Images/delivery-bottle.png',
+            tolva: 'Boca 1 (Plásticos)',
+            prepSummary: 'Enjuagada, escurrida, compactada y sin tapa',
+            cond1: 'Los envases fueron enjuagados rápidamente y están completamente secos (sin residuos líquidos).',
+            cond2: 'Se desenroscaron las tapas plásticas y se separaron del envase principal.',
+            cond3: 'Las botellas fueron aplastadas desde la base para reducir su volumen de transporte.'
+        },
+        can: {
+            name: 'Latas de aluminio y hojalata',
+            unitWeight: 0.015,
+            weightLabel: 'latas de aluminio',
+            tag: 'Acepta latas de aluminio y hojalata',
+            img: '../Images/delivery-can.png',
+            tolva: 'Boca 3 (Metales)',
+            prepSummary: 'Enjuagada, seca y comprimida sin filo',
+            cond1: 'Las latas fueron escurridas y enjuagadas para eliminar restos de grasa o líquido.',
+            cond2: 'Las tapas sueltas fueron introducidas dentro del envase sin filos descubiertos.',
+            cond3: 'Las latas fueron comprimidas lateralmente con cuidado para optimizar el espacio.'
+        },
+        cardboard: {
+            name: 'Cartón corrugado y papel bond',
+            unitWeight: 0.250,
+            weightLabel: 'cartón corrugado y papel',
+            tag: 'Acepta cartón y papel limpio',
+            img: '../Images/delivery-cardboard.png',
+            tolva: 'Boca 4 (Papel y Cartón)',
+            prepSummary: 'Desarmado, plano, seco y atado',
+            cond1: 'Las cajas y papeles están 100% secos (sin manchas de grasa, comida o humedad).',
+            cond2: 'Se retiraron cintas plásticas de embalaje gruesas y grapas de gran tamaño.',
+            cond3: 'Las cajas fueron desarmadas y dobladas planas para formar un paquete compacto.'
+        }
+    };
+
+    const getSelectedMaterialKey = () => {
+        const checked = document.querySelector('input[name="material-type"]:checked');
+        return checked ? checked.value : 'pet';
+    };
+
+    const recalculateWeight = () => {
+        if (!inputWasteQty || !labelEstimatedWeight) return;
+        let qty = parseInt(inputWasteQty.value, 10);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        if (qty > 500) qty = 500;
+        inputWasteQty.value = qty;
+
+        const currentKey = getSelectedMaterialKey();
+        const conf = materialConfig[currentKey] || materialConfig.pet;
+        const totalKg = (qty * conf.unitWeight).toFixed(2);
+        labelEstimatedWeight.textContent = `Equivalente aproximado a ${totalKg} kg de ${conf.weightLabel}`;
+    };
+
+    if (materialChoiceCards.length > 0) {
+        materialChoiceCards.forEach(card => {
+            const radio = card.querySelector('input[type="radio"]');
+            if (!radio) return;
+
+            card.addEventListener('click', () => {
+                materialChoiceCards.forEach(c => {
+                    c.style.borderColor = '#DBE7DF';
+                    c.style.backgroundColor = '#FFFFFF';
+                });
+                card.style.borderColor = '#0B4A30';
+                card.style.backgroundColor = '#F4FAF6';
+                radio.checked = true;
+
+                const currentKey = radio.value;
+                const conf = materialConfig[currentKey] || materialConfig.pet;
+                if (spanCond1) spanCond1.textContent = conf.cond1;
+                if (spanCond2) spanCond2.textContent = conf.cond2;
+                if (spanCond3) spanCond3.textContent = conf.cond3;
+                if (sidebarAcceptedTag) sidebarAcceptedTag.textContent = conf.tag;
+
+                recalculateWeight();
+            });
+
+            radio.addEventListener('change', () => {
+                recalculateWeight();
+            });
+        });
+
+        const initialKey = getSelectedMaterialKey();
+        const initialCard = document.querySelector(`input[name="material-type"][value="${initialKey}"]`);
+        if (initialCard) {
+            const parentLabel = initialCard.closest('.material-choice-card');
+            if (parentLabel) {
+                parentLabel.style.borderColor = '#0B4A30';
+                parentLabel.style.backgroundColor = '#F4FAF6';
+            }
+        }
+    }
+
+    if (inputWasteQty) {
+        inputWasteQty.addEventListener('input', recalculateWeight);
+        inputWasteQty.addEventListener('change', recalculateWeight);
+    }
+
+    if (btnQtyMinus && inputWasteQty) {
+        btnQtyMinus.addEventListener('click', () => {
+            let cur = parseInt(inputWasteQty.value, 10) || 1;
+            if (cur > 1) {
+                inputWasteQty.value = cur - 1;
+                recalculateWeight();
+            }
+        });
+    }
+
+    if (btnQtyPlus && inputWasteQty) {
+        btnQtyPlus.addEventListener('click', () => {
+            let cur = parseInt(inputWasteQty.value, 10) || 1;
+            if (cur < 500) {
+                inputWasteQty.value = cur + 1;
+                recalculateWeight();
+            }
+        });
+    }
+
+    const updateDeliveryCascade = () => {
+        if (!cond1 || !cond2 || !cond3 || !btnSubmitDelivery) return;
+
+        if (cond1.checked) {
+            cond2.disabled = false;
+            if (labelCond2) {
+                labelCond2.style.cursor = 'pointer';
+                labelCond2.style.opacity = '1';
+            }
+        } else {
+            cond2.checked = false;
+            cond2.disabled = true;
+            if (labelCond2) {
+                labelCond2.style.cursor = 'not-allowed';
+                labelCond2.style.opacity = '0.6';
+            }
+            cond3.checked = false;
+            cond3.disabled = true;
+            if (labelCond3) {
+                labelCond3.style.cursor = 'not-allowed';
+                labelCond3.style.opacity = '0.6';
+            }
+        }
+
+        if (cond2.checked && cond1.checked) {
+            cond3.disabled = false;
+            if (labelCond3) {
+                labelCond3.style.cursor = 'pointer';
+                labelCond3.style.opacity = '1';
+            }
+        } else {
+            cond3.checked = false;
+            cond3.disabled = true;
+            if (labelCond3) {
+                labelCond3.style.cursor = 'not-allowed';
+                labelCond3.style.opacity = '0.6';
+            }
+        }
+
+        if (cond1.checked && cond2.checked && cond3.checked) {
+            btnSubmitDelivery.disabled = false;
+            btnSubmitDelivery.style.cursor = 'pointer';
+            btnSubmitDelivery.style.opacity = '1';
+            btnSubmitDelivery.style.backgroundColor = '#0B4A30';
+        } else {
+            btnSubmitDelivery.disabled = true;
+            btnSubmitDelivery.style.cursor = 'not-allowed';
+            btnSubmitDelivery.style.opacity = '0.7';
+            btnSubmitDelivery.style.backgroundColor = '#6C8A79';
+        }
+    };
 
     if (cond1 && cond2 && cond3) {
-        const updateDeliveryCascade = () => {
-            if (!cond1.checked) {
-                cond2.checked = false;
-                cond2.disabled = true;
-                if (label2) { label2.style.opacity = '0.55'; label2.style.cursor = 'not-allowed'; }
-                cond3.checked = false;
-                cond3.disabled = true;
-                if (label3) { label3.style.opacity = '0.55'; label3.style.cursor = 'not-allowed'; }
-            } else {
-                cond2.disabled = false;
-                if (label2) { label2.style.opacity = '1'; label2.style.cursor = 'pointer'; }
-                if (!cond2.checked) {
-                    cond3.checked = false;
-                    cond3.disabled = true;
-                    if (label3) { label3.style.opacity = '0.55'; label3.style.cursor = 'not-allowed'; }
-                } else {
-                    cond3.disabled = false;
-                    if (label3) { label3.style.opacity = '1'; label3.style.cursor = 'pointer'; }
-                }
-            }
-
-            const allChecked = cond1.checked && cond2.checked && cond3.checked;
-            if (btnSubmitDelivery) {
-                if (allChecked) {
-                    btnSubmitDelivery.disabled = false;
-                    btnSubmitDelivery.style.backgroundColor = '#0B4A30';
-                    btnSubmitDelivery.style.opacity = '1';
-                    btnSubmitDelivery.style.cursor = 'pointer';
-                } else {
-                    btnSubmitDelivery.disabled = true;
-                    btnSubmitDelivery.style.backgroundColor = '#6C8A79';
-                    btnSubmitDelivery.style.opacity = '0.65';
-                    btnSubmitDelivery.style.cursor = 'not-allowed';
-                }
-            }
-        };
-
         cond1.addEventListener('change', updateDeliveryCascade);
         cond2.addEventListener('change', updateDeliveryCascade);
         cond3.addEventListener('change', updateDeliveryCascade);
         updateDeliveryCascade();
     }
 
-    const matSwitchBtns = document.querySelectorAll('.mat-switch-btn');
-    const detailTitle = document.getElementById('detail-title');
-    const detailSubtitle = document.getElementById('detail-subtitle');
-    const detailImg = document.getElementById('detail-main-img');
-    const detailBadge = document.getElementById('detail-code-badge');
-    const breadcrumbMat = document.getElementById('breadcrumb-current-mat');
+    if (formAddMaterial) {
+        formAddMaterial.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (btnSubmitDelivery && btnSubmitDelivery.disabled) {
+                alert('Debes confirmar los 3 pasos de preparación obligatoria antes de agregar el residuo al lote.');
+                return;
+            }
+
+            const currentKey = getSelectedMaterialKey();
+            const conf = materialConfig[currentKey] || materialConfig.pet;
+            const qty = parseInt(inputWasteQty.value, 10) || 1;
+            const totalKg = (qty * conf.unitWeight).toFixed(2);
+
+            let currentLot = [];
+            try {
+                const stored = localStorage.getItem('resaving_user_lot');
+                if (stored) currentLot = JSON.parse(stored);
+                if (!Array.isArray(currentLot)) currentLot = [];
+            } catch (err) {
+                currentLot = [];
+            }
+
+            const newItem = {
+                id: 'item_' + Date.now(),
+                key: currentKey,
+                name: conf.name,
+                qty: qty,
+                weight: totalKg,
+                img: conf.img,
+                tolva: conf.tolva,
+                prepSummary: conf.prepSummary,
+                condition: 'Limpio, seco y compactado'
+            };
+
+            currentLot.push(newItem);
+            localStorage.setItem('resaving_user_lot', JSON.stringify(currentLot));
+            window.location.href = 'delivery.html';
+        });
+    }
+
+    const lotContainer = document.getElementById('lot-items-container');
+    const lotTableBody = document.getElementById('lot-table-body');
+    const sectionLotTable = document.getElementById('section-lot-table');
+    const btnClearLot = document.getElementById('btn-clear-lot');
+    const sidebarMatchChip = document.getElementById('sidebar-match-chip');
+    const sidebarMatchTitle = document.getElementById('sidebar-match-title');
+    const sidebarMatchStats = document.getElementById('sidebar-match-stats');
+    const sidebarMatchList = document.getElementById('sidebar-match-list');
+
+    const renderDeliveryLot = () => {
+        if (!lotContainer) return;
+
+        let lot = [];
+        try {
+            const raw = localStorage.getItem('resaving_user_lot');
+            if (raw) lot = JSON.parse(raw);
+            if (!Array.isArray(lot)) lot = [];
+        } catch (e) {
+            lot = [];
+        }
+
+        if (lot.length === 0) {
+            lotContainer.innerHTML = `
+                <div class="empty-lot-card" style="background-color: #F7FAF8; border: 2px dashed #B8DDC8; border-radius: 14px; padding: 40px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                    <div style="width: 56px; height: 56px; border-radius: 50%; background-color: #EBF7F0; display: flex; align-items: center; justify-content: center;">
+                        <img src="../Images/icon-recycler.svg" alt="" style="width: 28px; height: 28px;">
+                    </div>
+                    <h3 style="font-size: 18px; font-weight: 800; color: #14251B; margin: 0;">Tu lote actual está vacío</h3>
+                    <p style="font-size: 13.5px; color: #5F7066; max-width: 440px; margin: 0; line-height: 1.5;">Aún no has agregado materiales para tu entrega. Puedes añadir botellas plásticas, latas, cartón u otros residuos aprovechables ya acondicionados.</p>
+                    <a href="delivery-add.html" style="margin-top: 6px; padding: 10px 20px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>+ Agregar mi primer material</span>
+                    </a>
+                </div>
+            `;
+
+            if (sectionLotTable) sectionLotTable.style.display = 'none';
+            if (btnClearLot) btnClearLot.style.display = 'none';
+
+            if (sidebarMatchChip) sidebarMatchChip.textContent = 'Lote en preparación';
+            if (sidebarMatchTitle) sidebarMatchTitle.textContent = 'Selecciona materiales';
+            if (sidebarMatchStats) sidebarMatchStats.textContent = '0 materiales registrados · 0 kg acumulados';
+            if (sidebarMatchList) {
+                sidebarMatchList.innerHTML = '<li><span>Agrega materiales para verificar la compatibilidad de tolva</span></li>';
+            }
+            return;
+        }
+
+        lotContainer.innerHTML = lot.map(item => `
+            <article class="lot-item-card" data-lot-id="${item.id}">
+                <div class="lot-item-img">
+                    <img src="${item.img}" alt="${item.name}">
+                </div>
+                <div class="lot-item-info">
+                    <h3 class="lot-item-title">${item.name}</h3>
+                    <p class="lot-item-sub">${item.qty} unidades · Estimado: ${item.weight} kg · ${item.condition}</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <span class="lot-chip chip-ready">Listo para entrega</span>
+                    <button type="button" class="btn-remove-lot-item" data-lot-id="${item.id}" aria-label="Eliminar ${item.name}" style="background: none; border: 1px solid #E0E7E3; border-radius: 8px; padding: 6px 12px; color: #C0392B; cursor: pointer; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+                        <img src="../Images/icon-trash-delete.svg" alt="" style="width: 14px; height: 14px;">
+                        <span>Eliminar</span>
+                    </button>
+                </div>
+            </article>
+        `).join('');
+
+        if (lotTableBody) {
+            lotTableBody.innerHTML = lot.map(item => `
+                <tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
+                    <td><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
+                    <td>${item.prepSummary}</td>
+                    <td><span class="badge badge-green">${item.tolva}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        if (sectionLotTable) sectionLotTable.style.display = 'block';
+        if (btnClearLot) btnClearLot.style.display = 'inline-block';
+
+        const totalUnits = lot.reduce((acc, it) => acc + (parseInt(it.qty, 10) || 0), 0);
+        const totalKg = lot.reduce((acc, it) => acc + (parseFloat(it.weight) || 0), 0).toFixed(2);
+
+        if (sidebarMatchChip) sidebarMatchChip.textContent = 'Mejor coincidencia encontrada';
+        if (sidebarMatchTitle) sidebarMatchTitle.textContent = 'Estación Recicla San Miguel';
+        if (sidebarMatchStats) sidebarMatchStats.textContent = `0.8 km · Abierto hoy hasta 18:00 · ${totalUnits} unidades (${totalKg} kg)`;
+        if (sidebarMatchList) {
+            sidebarMatchList.innerHTML = lot.map(item => `
+                <li>
+                    <img src="../Images/icon-check.svg" alt="" style="width: 14px; height: 14px;">
+                    <span>${item.name} (${item.qty} un · ${item.weight} kg)</span>
+                </li>
+            `).join('');
+        }
+
+        const removeBtns = lotContainer.querySelectorAll('.btn-remove-lot-item');
+        removeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idToRemove = btn.getAttribute('data-lot-id');
+                let updatedLot = lot.filter(it => it.id !== idToRemove);
+                localStorage.setItem('resaving_user_lot', JSON.stringify(updatedLot));
+                renderDeliveryLot();
+            });
+        });
+    };
+
+    if (btnClearLot) {
+        btnClearLot.addEventListener('click', () => {
+            if (confirm('¿Deseas vaciar todos los materiales de tu lote actual?')) {
+                localStorage.removeItem('resaving_user_lot');
+                renderDeliveryLot();
+            }
+        });
+    }
+
+    if (lotContainer) {
+        renderDeliveryLot();
+    }
 
     const detailMatData = {
         pet: {
-            title: 'Botellas de plástico de agua y gaseosa (PET #1)',
-            sub: 'La botella de plástico PET puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.',
+            title: 'Botellas plásticas para bebidas (Agua y refrescos)',
+            sub: 'La botella plástica transparente puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.',
             img: '../Images/waste-pet-bottle.png',
-            badge: 'PET #1',
-            crumb: 'Botellas plásticas (PET #1)',
+            badge: 'Tacho Verde · Plástico',
+            crumb: 'Botellas plásticas para bebidas',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Clasificación oficial según la Norma Técnica Peruana NTP 900.058:2019 de segregación de residuos.',
@@ -321,33 +495,33 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
-                { label: 'Material', val: 'Plástico PET #1 (Tereftalato de polietileno)' },
-                { label: 'Apariencia', val: 'Transparente o cristalino' },
+                { label: 'Material', val: 'Plástico transparente de bebidas' },
+                { label: 'Apariencia', val: 'Cristalino o ligeramente azulado' },
                 { label: 'Peso promedio', val: 'Ligero (~28 g por envase de 500 ml)' },
                 { label: 'Recuperación', val: 'Alta (100% mecánicamente reciclable)' },
                 { label: 'Uso habitual', val: 'Bebidas hidratantes, aguas y gaseosas' }
             ],
             parts: [
-                { name: 'Cuerpo de la botella', tag: 'Aprovechable', mat: 'Tereftalato de polietileno (PET #1)', desc: 'Componente de mayor valor comercial. Se tritura en hojuelas limpias para producir nuevas botellas y fibras textiles.' },
-                { name: 'Tapa rosca', tag: 'Separar', mat: 'Polipropileno rígido (PP #5)', desc: 'Desenroscar y separar. Se destina a campañas solidarias de tapitas o molinos de inyección plástica.' },
-                { name: 'Etiqueta envolvente', tag: 'Opcional', mat: 'Film termoencogible (PVC / BOPP)', desc: 'Retirar si cuenta con abre-fácil punteado. Si no, las plantas de lavado la separan por flotación.' }
+                { name: 'Cuerpo de la botella', tag: 'Aprovechable', mat: 'Plástico transparente', desc: 'Componente de mayor valor comercial. Se tritura en hojuelas limpias para producir nuevas botellas y fibras textiles.' },
+                { name: 'Tapa rosca', tag: 'Separar', mat: 'Plástico rígido coloreado', desc: 'Desenroscar y separar. Se destina a campañas solidarias de tapitas o molinos de inyección plástica.' },
+                { name: 'Etiqueta envolvente', tag: 'Opcional', mat: 'Película plástica impresa', desc: 'Retirar si cuenta con abre-fácil punteado. Si no, las plantas de lavado la separan por flotación.' }
             ],
             partsDesc: 'Cada elemento de la botella plástica tiene un tratamiento específico de reciclaje. Revisa cómo separar cada parte antes de entregarla.',
-            destDesc: 'Canales formales y recomendados para entregar botellas de plástico PET en Lima Metropolitana.',
-            ctaTitle: '¿Listo para acondicionar tu botella PET?',
+            destDesc: 'Canales formales y recomendados para entregar botellas plásticas en Lima Metropolitana.',
+            ctaTitle: '¿Listo para acondicionar tu botella plástica?',
             ctaDesc: 'Sigue la guía rápida de preparación de 4 pasos en orden de cascada para asegurarte de que tu residuo sea recibido sin observaciones.',
             ctaPrepText: 'Ir a Guía de preparación',
             faq: [
                 { q: '¿Por qué es necesario vaciar y escurrir la botella antes de reciclarla?', a: 'Los líquidos residuales fermentan, producen malos olores y humedecen papeles y cartones cercanos en el tacho verde, inutilizando todo el lote reciclable.' },
                 { q: '¿Es obligatorio aplastar o compactar la botella?', a: 'Sí, reduce el volumen hasta en un 70%, permitiendo almacenar más residuos en casa y facilitando que el reciclador de base traslade el triple de peso.' },
-                { q: '¿Qué pasa si la botella contenía aceite comestible?', a: 'Las botellas con aceite residual NO deben mezclarse con las PET regulares. Requieren lavado con agua caliente y detergente o entregarse en centros de acopio de aceite usado.' }
+                { q: '¿Qué pasa si la botella contenía aceite comestible?', a: 'Las botellas con aceite residual NO deben mezclarse con las de bebidas. Requieren lavado con agua caliente y detergente o entregarse en centros de acopio de aceite usado.' }
             ]
         },
         vidrio: {
             title: 'Botellas y frascos de vidrio (100% aprovechables)',
             sub: 'El vidrio es un recurso noble infinitamente reciclable que nunca pierde calidad ni pureza. Debe entregarse entero y limpio.',
             img: '../Images/delivery-glass.png',
-            badge: 'VIDRIO',
+            badge: 'Tacho Verde · Vidrio',
             crumb: 'Frascos y botellas de vidrio',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
@@ -356,16 +530,16 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
-                { label: 'Material', val: 'Vidrio sodocálcico silíceo' },
+                { label: 'Material', val: 'Vidrio sódico silíceo' },
                 { label: 'Apariencia', val: 'Transparente, verde o ámbar' },
                 { label: 'Peso promedio', val: 'Pesado (~250 g a 450 g por envase)' },
                 { label: 'Recuperación', val: 'Infinita (100% reciclable en ciclo cerrado)' },
                 { label: 'Uso habitual', val: 'Conservas de mermelada, salsas, café y bebidas' }
             ],
             parts: [
-                { name: 'Cuerpo del envase de vidrio', tag: 'Aprovechable', mat: 'Sílice fundida (SiO2)', desc: 'Debe entregarse ENTERO. Nunca rompas los frascos porque los fragmentos afilados causan heridas graves a los recicladores.' },
-                { name: 'Tapa metálica de conserva', tag: 'Separar', mat: 'Hojalata con barniz alimentario', desc: 'Desenroscar la tapa y depositarla separada o en el contenedor de metales.' },
-                { name: 'Etiqueta adhesiva de papel', tag: 'Opcional', mat: 'Papel con adhesivo base agua', desc: 'No es indispensable retirarla; los hornos de fundición a más de 1500 °C incineran el papel sin dejar rastros.' }
+                { name: 'Cuerpo del envase de vidrio', tag: 'Aprovechable', mat: 'Sílice fundida', desc: 'Debe entregarse ENTERO. Nunca rompas los frascos porque los fragmentos afilados causan heridas graves a los recicladores.' },
+                { name: 'Tapa metálica de conserva', tag: 'Separar', mat: 'Hojalata con barniz alimentario', desc: 'Desenroscar la tapa y depositarla separada en el contenedor de metales.' },
+                { name: 'Etiqueta adhesiva de papel', tag: 'Opcional', mat: 'Papel con adhesivo base agua', desc: 'No es indispensable retirarla; los hornos de fundición incineran el papel sin dejar rastros.' }
             ],
             partsDesc: 'El envase de vidrio se compone de sílice pura y tapa metálica separable. Revisa cómo acondicionarlo sin riesgos de corte.',
             destDesc: 'Canales formales para entregar frascos y botellas de vidrio enteros en Lima Metropolitana.',
@@ -378,11 +552,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         carton: {
-            title: 'Cajas de cartón corrugado y empaques Tetra Pak',
+            title: 'Cajas de cartón corrugado y empaques de jugo',
             sub: 'Las fibras de celulosa pueden reciclarse hasta 7 veces. Deben mantenerse completamente secas y dobladas para optimizar el transporte.',
             img: '../Images/delivery-cardboard.png',
-            badge: 'CARTÓN / PAPEL',
-            crumb: 'Cajas de cartón y Tetra Pak',
+            badge: 'Tacho Verde · Papel y Cartón',
+            crumb: 'Cajas de cartón y empaques',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Aceptado por todas las asociaciones de recicladores municipales cuando se mantiene seco y limpio.',
@@ -398,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             parts: [
                 { name: 'Láminas de cartón corrugado', tag: 'Aprovechable', mat: 'Pulpa de celulosa reciclable', desc: 'Aplanar completamente despegando las aletas para optimizar el espacio de almacenamiento.' },
-                { name: 'Cinta plástica de embalaje', tag: 'Separar', mat: 'Polipropileno adhesivo', desc: 'Desprende las tiras de cinta plástica gruesa para evitar que se traben en los pulpers industriales.' },
+                { name: 'Cinta plástica de embalaje', tag: 'Separar', mat: 'Cinta adhesiva sintética', desc: 'Desprende las tiras de cinta plástica gruesa para evitar que se traben en los molinos industriales.' },
                 { name: 'Grapas metálicas', tag: 'Opcional', mat: 'Alambre de acero galvanizado', desc: 'Los imanes industriales las retiran automáticamente en planta, pero es preferible sacarlas.' }
             ],
             partsDesc: 'El cartón y los empaques multicapa se reciclan eficientemente al retirar materiales sintéticos adheridos.',
@@ -415,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Latas de bebidas y conservas de aluminio / hojalata',
             sub: 'El reciclaje de aluminio ahorra el 95% de la energía frente a la extracción virgen. Enjuaga la lata y comprímela suavemente antes de entregar.',
             img: '../Images/delivery-can.png',
-            badge: 'ALUMINIO / LATA',
+            badge: 'Tacho Verde · Metales',
             crumb: 'Latas de aluminio',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
@@ -424,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
-                { label: 'Material', val: 'Aleación de aluminio 3004 / Hojalata acerada' },
+                { label: 'Material', val: 'Aleación de aluminio / Hojalata alimentaria' },
                 { label: 'Apariencia', val: 'Metálico cilíndrico brillante' },
                 { label: 'Peso promedio', val: 'Ultraligero (~15 g por lata de 355 ml)' },
                 { label: 'Recuperación', val: 'Infinita (100% fundible sin pérdida de propiedades)' },
@@ -432,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             parts: [
                 { name: 'Cuerpo de la lata', tag: 'Aprovechable', mat: 'Aluminio o acero estañado', desc: 'Enjuagar con un chorrito de agua para retirar restos azucarados o salmuera y comprimir de costado.' },
-                { name: 'Anilla abre-fácil', tag: 'Aprovechable', mat: 'Aluminio grado 5182', desc: 'No la arranques ni la arrojes al suelo; déjala empujada hacia el interior del envase.' },
+                { name: 'Anilla abre-fácil', tag: 'Aprovechable', mat: 'Aluminio puro', desc: 'No la arranques ni la arrojes al suelo; déjala empujada hacia el interior del envase.' },
                 { name: 'Tapa suelta de conserva', tag: 'Aprovechable', mat: 'Hojalata plana', desc: 'Introdúcela dentro de la lata y aprieta el borde para evitar bordes cortantes que puedan herir.' }
             ],
             partsDesc: 'Las latas están hechas de metales nobles fácilmente separables por corrientes de Foucault o imanes.',
@@ -442,16 +616,15 @@ document.addEventListener('DOMContentLoaded', () => {
             ctaPrepText: 'Ir a Guía de preparación de latas',
             faq: [
                 { q: '¿Las latas de atún en aceite se reciclan?', a: 'Sí, pero debes escurrir el aceite residual y enjuagar con una gota de detergente para evitar olores y fauna nociva en acopio.' },
-                { q: '¿Se aceptan latas de aerosol presurizado?', a: 'Las latas de pintura o insecticida presurizado son residuos peligrosos. Solo se aceptan perforadas y despresurizadas en puntos especiales.' }
+                { q: '¿Se aceptan latas de aerosol presurizado?', a: 'Las latas de pintura o insecticida presurizado son residuos peligrosos. Solo se aceptan despresurizadas en puntos especiales.' }
             ]
         },
-        metal: null,
         pead: {
-            title: 'Envases rígidos de detergente, champú y yogur (PEAD #2)',
-            sub: 'El polietileno de alta densidad es un plástico rígido muy duradero. Se recicla para fabricar tuberías de riego, baldes y nuevas galoneras.',
+            title: 'Envases rígidos de detergente, champú y yogur',
+            sub: 'El plástico rígido de alta densidad es muy duradero. Se recicla para fabricar tuberías de riego, baldes y nuevas galoneras.',
             img: '../Images/gallery-plastic-bottle.png',
-            badge: 'PEAD #2',
-            crumb: 'Envases PEAD #2',
+            badge: 'Tacho Verde · Plástico rígido',
+            crumb: 'Envases de detergente y champú',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Plástico de gran demanda industrial. Requiere enjuague previo para evitar contaminación química.',
@@ -459,40 +632,40 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
-                { label: 'Material', val: 'Polietileno de alta densidad (PEAD / HDPE #2)' },
+                { label: 'Material', val: 'Plástico opaco de alta densidad' },
                 { label: 'Apariencia', val: 'Opaco, coloreado o blanco mate' },
                 { label: 'Peso promedio', val: 'Medio (~45 g a 90 g por botella)' },
                 { label: 'Recuperación', val: 'Alta (granzas para extrusión e inyección)' },
                 { label: 'Uso habitual', val: 'Galoneras de lejía, botellas de champú y yogur' }
             ],
             parts: [
-                { name: 'Cuerpo de la galonera o envase', tag: 'Aprovechable', mat: 'Polietileno de alta densidad', desc: 'Enjuagar dos veces con agua tibia para retirar residuos viscosos de jabón o detergente.' },
+                { name: 'Cuerpo de la galonera o envase', tag: 'Aprovechable', mat: 'Plástico rígido opaco', desc: 'Enjuagar dos veces con agua tibia para retirar residuos viscosos de jabón o detergente.' },
                 { name: 'Bomba dispensadora', tag: 'Separar', mat: 'Multimaterial con resorte de acero', desc: 'Desenroscar y retirar el dosificador porque el resorte de metal daña los molinos de plástico.' },
-                { name: 'Tapa rosca simple', tag: 'Aprovechable', mat: 'Polipropileno o PEAD', desc: 'Se enrosca ligeramente una vez seco el interior del envase.' }
+                { name: 'Tapa rosca simple', tag: 'Aprovechable', mat: 'Plástico rígido', desc: 'Se enrosca ligeramente una vez seco el interior del envase.' }
             ],
-            partsDesc: 'Los envases PEAD cuentan con componentes plásticos rígidos y bombas mecánicas que deben segregarse.',
-            destDesc: 'Puntos limpios y tolvas municipales para envases de polietileno de alta densidad.',
-            ctaTitle: '¿Listo para acondicionar tus envases PEAD #2?',
+            partsDesc: 'Los envases de limpieza cuentan con componentes plásticos rígidos y bombas mecánicas que deben segregarse.',
+            destDesc: 'Puntos limpios y tolvas municipales para envases de limpieza y champú.',
+            ctaTitle: '¿Listo para acondicionar tus envases de limpieza?',
             ctaDesc: 'Sigue la guía rápida de preparación de 4 pasos en orden de cascada para enjuagar y retirar dispensadores.',
-            ctaPrepText: 'Ir a Guía de preparación PEAD',
+            ctaPrepText: 'Ir a Guía de preparación',
             faq: [
                 { q: '¿Puedo entregar botellas con restos de lejía?', a: 'Sí, siempre que estén completamente enjuagadas con agua para que no desprendan vapores ni irriten la piel de los recicladores.' }
             ]
         },
         pilas: {
-            title: 'Pilas alcalinas y baterías domésticas (Residuo Peligroso / Especial)',
-            sub: 'Las pilas contienen metales pesados (zinc, manganeso, cadmio). ¡NUNCA las arrojes al tacho verde ni negro! Requieren entrega en contenedores rojos o ecopuntos especiales.',
+            title: 'Pilas alcalinas y baterías domésticas',
+            sub: 'Las pilas contienen metales pesados. NUNCA las arrojes al tacho verde ni negro. Requieren entrega en contenedores rojos o ecopuntos especiales.',
             img: '../Images/category-hazardous.png',
-            badge: 'PELIGROSO',
+            badge: 'Tacho Rojo · Peligroso',
             crumb: 'Pilas y baterías alcalinas',
             category: 'Peligrosos · Punto Especial',
-            bannerStatus: '¡Atención de Seguridad: Tacho Rojo o Punto Especial!',
+            bannerStatus: 'Atención de Seguridad: Tacho Rojo o Punto Especial',
             bannerDesc: 'Prohibido mezclar con residuos aprovechables comunes. Debe depositarse en contenedores rotulados para pilas en supermercados o municipios.',
             bannerIcon: '../Images/trust-alternative.svg',
             bannerColor: '#FDE8E8',
             bannerBorder: '#F87171',
             attrs: [
-                { label: 'Material', val: 'Zinc, dióxido de manganeso y electrólito alcalino' },
+                { label: 'Material', val: 'Zinc, dióxido de manganeso y electrolito' },
                 { label: 'Apariencia', val: 'Cilíndrico metálico sellado (AA, AAA, D, 9V, botón)' },
                 { label: 'Peso promedio', val: 'Pesado (~24 g por unidad AA)' },
                 { label: 'Tratamiento', val: 'Disposición segura y encapsulado en celdas de seguridad' },
@@ -508,15 +681,15 @@ document.addEventListener('DOMContentLoaded', () => {
             ctaDesc: 'Sigue la guía de acondicionamiento seguro de 4 pasos en cascada para proteger el medio ambiente.',
             ctaPrepText: 'Ir a Guía de seguridad de pilas',
             faq: [
-                { q: '¿Qué hago si una pila sulfató o botó polvo blanco?', a: 'Tómala con una bolsa plástica sin tocar con la piel desnuda. Introdúcela en una botella PET seca con tapa rosca y llévala al punto de pilas.' },
+                { q: '¿Qué hago si una pila sulfató o botó polvo blanco?', a: 'Tómala con una bolsa plástica sin tocar con la piel desnuda. Introdúcela en una botella plástica seca con tapa y llévala al punto de pilas.' },
                 { q: '¿Por qué no va al tacho verde?', a: 'Porque el tacho verde es para reciclaje manual de envases limpios. El ácido de una pila sulfatada inutiliza toneladas de material reciclable.' }
             ]
         },
         bolsa: {
-            title: 'Bolsas plásticas de un solo uso y láminas flexibles (PEBD #4)',
-            sub: 'Las bolsas plásticas delgadas no se procesan en tachos verdes comunes de Lima porque traban los molinos trituradores. Requieren ecopuntos de film específico.',
+            title: 'Bolsas plásticas de compras y láminas flexibles',
+            sub: 'Las bolsas delgadas no se procesan en tachos verdes comunes de Lima porque traban los molinos trituradores. Requieren ecopuntos de película plástica específica.',
             img: '../Images/category-sanitary.png',
-            badge: 'PEBD #4',
+            badge: 'Tacho Especial · Film',
             crumb: 'Bolsas plásticas de compras',
             category: 'Punto Específico',
             bannerStatus: 'Condición especial: No colocar en el tacho verde común',
@@ -525,14 +698,14 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerColor: '#FEF3C7',
             bannerBorder: '#FCD34D',
             attrs: [
-                { label: 'Material', val: 'Polietileno de baja densidad (PEBD / LDPE #4)' },
-                { label: 'Apariencia', val: 'Película flexible transparente o impresa' },
+                { label: 'Material', val: 'Película flexible transparente o impresa' },
+                { label: 'Apariencia', val: 'Lámina plástica flexible' },
                 { label: 'Peso promedio', val: 'Ultraligero (~6 g por bolsa de mercado)' },
                 { label: 'Recuperación', val: 'Especializada (aglomeración y peletizado térmico)' },
                 { label: 'Uso habitual', val: 'Bolsas de compras, fundas de pan y film de embalaje' }
             ],
             parts: [
-                { name: 'Cuerpo de la bolsa', tag: 'Especial', mat: 'Film polimérico de baja densidad', desc: 'Limpiar de restos de comida y comprimir dentro de una botella plástica si se elaboran ecoladrillos.' }
+                { name: 'Cuerpo de la bolsa', tag: 'Especial', mat: 'Lámina polimérica flexible', desc: 'Limpiar de restos de comida y comprimir dentro de una botella plástica si se elaboran ecoladrillos.' }
             ],
             partsDesc: 'Las bolsas requieren tratamiento por separado para no obstaculizar maquinaria rotativa.',
             destDesc: 'Centros comunales y ecomódulos autorizados para plásticos flexibles.',
@@ -545,6 +718,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     detailMatData.metal = detailMatData.lata;
+
+    const matSwitchBtns = document.querySelectorAll('.mat-switch-btn');
+    const detailTitle = document.getElementById('detail-title');
+    const detailSubtitle = document.getElementById('detail-subtitle');
+    const detailImg = document.getElementById('detail-main-img');
+    const detailBadge = document.getElementById('detail-code-badge');
+    const breadcrumbMat = document.getElementById('breadcrumb-current-mat');
 
     if (matSwitchBtns.length > 0 && detailTitle) {
         const switchMaterial = (matKey) => {
@@ -594,11 +774,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const bannerDesc = document.getElementById('detail-status-desc');
             const bannerIcon = document.getElementById('detail-status-icon');
             if (banner && data.bannerStatus) {
-                banner.style.backgroundColor = data.bannerColor || '#EBF7F0';
-                banner.style.borderColor = data.bannerBorder || '#B8DEC9';
+                banner.style.backgroundColor = data.bannerColor;
+                banner.style.borderColor = data.bannerBorder;
                 if (bannerTitle) bannerTitle.textContent = data.bannerStatus;
                 if (bannerDesc) bannerDesc.textContent = data.bannerDesc;
-                if (bannerIcon && data.bannerIcon) bannerIcon.src = data.bannerIcon;
+                if (bannerIcon) bannerIcon.src = data.bannerIcon;
             }
 
             const attrGrid = document.getElementById('detail-attr-grid');
@@ -614,45 +794,38 @@ document.addEventListener('DOMContentLoaded', () => {
             const partsTitle = document.getElementById('detail-parts-title');
             const partsDesc = document.getElementById('detail-parts-desc');
             const partsGrid = document.getElementById('detail-parts-grid');
-            if (partsTitle && data.badge) {
-                partsTitle.textContent = `¿De qué componentes está formado (${data.badge})?`;
-            }
-            if (partsDesc && data.partsDesc) {
-                partsDesc.textContent = data.partsDesc;
-            }
+            if (partsTitle) partsTitle.textContent = `Partes y componentes de: ${data.crumb}`;
+            if (partsDesc && data.partsDesc) partsDesc.textContent = data.partsDesc;
             if (partsGrid && data.parts) {
                 partsGrid.innerHTML = data.parts.map(part => {
                     let tagClass = 'tag-recycle';
-                    if (part.tag === 'Separar' || part.tag === 'Aislar') tagClass = 'tag-separate';
-                    else if (part.tag === 'Opcional' || part.tag === 'Especial') tagClass = 'tag-optional';
-                    else if (part.tag === 'Peligroso' || part.tag === 'Desechar') tagClass = 'tag-separate';
+                    if (part.tag === 'Separar' || part.tag === 'Peligroso') tagClass = 'tag-separate';
+                    if (part.tag === 'Opcional' || part.tag === 'Especial') tagClass = 'tag-optional';
                     return `
-                        <article class="part-card">
+                        <div class="part-card">
                             <div class="part-header">
                                 <h3 class="part-name">${part.name}</h3>
                                 <span class="part-tag ${tagClass}">${part.tag}</span>
                             </div>
-                            <p class="part-material">${part.mat}</p>
+                            <span class="part-material">${part.mat}</span>
                             <p class="part-desc">${part.desc}</p>
-                        </article>
+                        </div>
                     `;
                 }).join('');
             }
 
             const destDesc = document.getElementById('detail-dest-desc');
-            if (destDesc && data.destDesc) {
-                destDesc.textContent = data.destDesc;
-            }
+            if (destDesc && data.destDesc) destDesc.textContent = data.destDesc;
 
             const faqAccordion = document.getElementById('detail-faq-accordion');
             if (faqAccordion && data.faq) {
-                faqAccordion.innerHTML = data.faq.map((item, idx) => `
-                    <details class="glossary-item"${idx === 0 ? ' open' : ''}>
-                        <summary class="glossary-question flex Ycenter">
+                faqAccordion.innerHTML = data.faq.map(item => `
+                    <details class="faq-item">
+                        <summary class="faq-question">
                             <span>${item.q}</span>
-                            <img src="../Images/icon-chevron-down.svg" alt="" class="chevron-icon">
+                            <img src="../Images/icon-chevron-down.svg" alt="" class="faq-arrow">
                         </summary>
-                        <div class="glossary-answer">
+                        <div class="faq-answer">
                             <p>${item.a}</p>
                         </div>
                     </details>
@@ -663,12 +836,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const ctaDesc = document.getElementById('detail-cta-desc');
             const ctaPrepBtn = document.getElementById('detail-cta-prep-btn');
             const actionPrepBtn = document.getElementById('detail-action-prep-btn');
-            if (ctaTitle) ctaTitle.textContent = data.ctaTitle || `¿Listo para acondicionar ${data.crumb}?`;
-            if (ctaDesc) ctaDesc.textContent = data.ctaDesc || 'Sigue la guía rápida de preparación de 4 pasos en orden de cascada para asegurarte de que tu residuo sea recibido sin observaciones.';
+            if (ctaTitle && data.ctaTitle) ctaTitle.textContent = data.ctaTitle;
+            if (ctaDesc && data.ctaDesc) ctaDesc.textContent = data.ctaDesc;
             if (ctaPrepBtn) {
                 ctaPrepBtn.href = `prep-guide.html?tipo=${normKey}`;
                 const span = ctaPrepBtn.querySelector('span');
-                if (span) span.textContent = data.ctaPrepText || 'Ir a Guía de preparación';
+                if (span && data.ctaPrepText) span.textContent = data.ctaPrepText;
             }
             if (actionPrepBtn) {
                 actionPrepBtn.href = `prep-guide.html?tipo=${normKey}`;
@@ -677,45 +850,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
         matSwitchBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const mat = btn.getAttribute('data-mat');
-                switchMaterial(mat);
+                const key = btn.getAttribute('data-mat');
+                switchMaterial(key);
             });
         });
 
-        const params = new URLSearchParams(window.location.search);
-        const tipoParam = params.get('tipo');
-        if (tipoParam && detailMatData[tipoParam]) {
-            switchMaterial(tipoParam);
-        }
+        const urlParams = new URLSearchParams(window.location.search);
+        const requestedType = urlParams.get('tipo') || 'pet';
+        switchMaterial(requestedType);
     }
 
     const districtStations = {
         'san-miguel': [
-            { id: '1', name: '1. Estación Recicla San Miguel', status: 'Abierto', badge: 'badge-open', dist: '0.8 km · 11 min a pie · Cruce Av. La Marina con Universitaria', addr: 'Ingreso peatonal frente a Plaza San Miguel. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas de agua y gaseosa (PET)', 'Vidrio', 'Cartón y papel'] },
-            { id: '2', name: '2. Punto Limpio Parque Juan Pablo II', status: 'Abierto', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Riva Agüero cdra. 8', addr: 'Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Latas de conserva', 'Papel'] },
-            { id: '3', name: '3. Contenedor Verde Metro La Marina', status: 'Abierto 24h', badge: 'badge-open', dist: '1.9 km · 25 min a pie · Av. La Marina 2500', addr: 'Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.', mats: 'pet vidrio', tags: ['Botellas plásticas (PET)', 'Vidrio de conserva'] },
-            { id: '4', name: '4. Estación Ambiental Plaza Bandera', status: 'Cierra a las 17:00', badge: 'badge-closing', dist: '2.3 km · 7 min en auto · Límite con Pueblo Libre', addr: 'Punto de acopio municipal para materiales aprovechables y contenedor para pilas usadas.', mats: 'pet metal especial', tags: ['Multimaterial', 'Pilas y baterías'] }
+            { id: '1', num: '1', name: 'Estación Recicla San Miguel', status: 'Abierto hoy', badge: 'badge-open', dist: '0.8 km · 11 min a pie · Cruce Av. La Marina con Universitaria', addr: 'Ingreso peatonal frente a Plaza San Miguel. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel'], x: 48, y: 42, promoter: 'Edgar Ramos (Reg. #SM-402)', capacity: '85% libre (vaciado hoy)' },
+            { id: '2', num: '2', name: 'Punto Limpio Parque Juan Pablo II', status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Riva Agüero cdra. 8', addr: 'Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Latas de conserva', 'Papel'], x: 65, y: 30, promoter: 'Rosa Quispe (Reg. #SM-205)', capacity: '60% libre' },
+            { id: '3', num: '3', name: 'Contenedor Verde Metro La Marina', status: 'Abierto 24h', badge: 'badge-open', dist: '1.9 km · 25 min a pie · Av. La Marina 2500', addr: 'Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.', mats: 'pet vidrio', tags: ['Botellas plásticas', 'Vidrio de conserva'], x: 35, y: 60, promoter: 'Caseta de Seguridad Metro', capacity: '75% libre' },
+            { id: '4', num: '4', name: 'Estación Ambiental Plaza Bandera', status: 'Cierra a las 17:00', badge: 'badge-closing', dist: '2.3 km · 7 min en auto · Límite con Pueblo Libre', addr: 'Punto de acopio municipal para materiales aprovechables y contenedor para pilas usadas.', mats: 'pet metal especial', tags: ['Multimaterial', 'Pilas y baterías'], x: 80, y: 25, promoter: 'Carlos Dávila (Reg. #SM-318)', capacity: '40% libre' }
         ],
         'pueblo-libre': [
-            { id: '1', name: '1. Ecopunto Plaza Bolívar', status: 'Abierto', badge: 'badge-open', dist: '0.6 km · 8 min a pie · Jr. Vivanco frente a Municipalidad', addr: 'Centro de reciclaje selectivo comunal. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel'] },
-            { id: '2', name: '2. Módulo Ambiental Parque El Carmen', status: 'Abierto', badge: 'badge-open', dist: '1.2 km · 15 min a pie · Av. Sucre cdra. 12', addr: 'Isla de segregación con promotor vecinal. Horario: 09:00 a 18:00.', mats: 'pet papel metal', tags: ['Plásticos PET', 'Latas de aluminio', 'Papel bond'] }
+            { id: '1', num: '1', name: 'Ecopunto Plaza Bolívar', status: 'Abierto hoy', badge: 'badge-open', dist: '0.6 km · 8 min a pie · Jr. Vivanco frente a Municipalidad', addr: 'Centro de reciclaje selectivo comunal. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel'], x: 50, y: 45, promoter: 'María Elena Fuentes (Reg. #PL-110)', capacity: '70% libre' },
+            { id: '2', num: '2', name: 'Módulo Ambiental Parque El Carmen', status: 'Abierto hoy', badge: 'badge-open', dist: '1.1 km · 14 min a pie · Av. Sucre cdra. 12', addr: 'Isla de segregación con promotor vecinal. Horario: 09:00 a 18:00.', mats: 'pet papel metal', tags: ['Botellas plásticas', 'Latas de aluminio', 'Papel bond'], x: 68, y: 35, promoter: 'Juan Paredes (Reg. #PL-142)', capacity: '50% libre' },
+            { id: '3', num: '3', name: 'Punto Verde Parque Candamo', status: 'Abierto hoy', badge: 'badge-open', dist: '1.8 km · 22 min a pie · Av. Del Río cuadra 3', addr: 'Contenedores para plástico, vidrio y contenedor rojo de pilas. Horario: 07:00 a 19:00.', mats: 'pet vidrio especial', tags: ['Botellas plásticas', 'Vidrio', 'Pilas alcalinas'], x: 32, y: 58, promoter: 'Sofía Delgado (Reg. #PL-203)', capacity: '80% libre' }
         ],
         'miraflores': [
-            { id: '1', name: '1. Punto Limpio Parque Kennedy', status: 'Abierto 24h', badge: 'badge-open', dist: '0.4 km · 5 min a pie · Av. Larco con Diagonal', addr: 'Estación soterrada de alta capacidad para residuos reciclables.', mats: 'pet vidrio papel metal', tags: ['Botellas de bebidas', 'Vidrio', 'Aluminio'] },
-            { id: '2', name: '2. Estación Comunal Wong Benavides', status: 'Abierto', badge: 'badge-open', dist: '1.1 km · 14 min a pie · Av. Benavides 1450', addr: 'Contenedor especial municipal con pesaje voluntario. Horario: 08:00 a 20:00.', mats: 'pet vidrio especial', tags: ['Plásticos', 'Vidrio', 'Pilas y RAEE'] }
+            { id: '1', num: '1', name: 'Punto Limpio Parque Kennedy', status: 'Abierto 24h', badge: 'badge-open', dist: '0.5 km · 7 min a pie · Parque Central de Miraflores (Diagonal)', addr: 'Estación soterrada de 4 bocas con promotor diurno. Horario 24h.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Latas'], x: 52, y: 48, promoter: 'Programa Basura Cero Miraflores', capacity: '90% libre' },
+            { id: '2', num: '2', name: 'Estación Ecológica Reducto', status: 'Abierto hoy', badge: 'badge-open', dist: '1.2 km · 15 min a pie · Parque Reducto N° 2 (Av. Benavides)', addr: 'Centro de segregación municipal y recepción de pequeños aparatos. Horario: 08:30 a 18:00.', mats: 'pet papel metal especial', tags: ['Cartón corrugado', 'Plásticos', 'Aparatos electrónicos'], x: 40, y: 65, promoter: 'Asoc. Recicladores Miraflores', capacity: '65% libre' },
+            { id: '3', num: '3', name: 'Ecopunto Malecón Cisneros', status: 'Abierto hoy', badge: 'badge-open', dist: '1.6 km · 20 min a pie · Malecón Cisneros cdra. 5', addr: 'Frente al Parque del Faro. Contenedores de alta capacidad. Horario: 07:00 a 19:00.', mats: 'pet vidrio', tags: ['Botellas de bebidas', 'Vidrio'], x: 25, y: 32, promoter: 'Serenazgo Miraflores Costa', capacity: '80% libre' },
+            { id: '4', num: '4', name: 'Centro de Acopio Estadio Manuel Bonilla', status: 'Abierto hoy', badge: 'badge-open', dist: '2.1 km · 8 min en auto · Av. Del Ejército cdra. 13', addr: 'Recepción general multimaterial, tolva para aceite vegetal y pilas. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal especial', tags: ['Multimaterial', 'Aceite vegetal', 'Pilas'], x: 72, y: 22, promoter: 'Subgerencia Limpieza Pública', capacity: '55% libre' }
         ],
         'magdalena': [
-            { id: '1', name: '1. Punto Verde Plaza Túpac Amaru', status: 'Abierto', badge: 'badge-open', dist: '0.5 km · 7 min a pie · Jr. Bolognesi cdra. 4', addr: 'Isla de reciclaje vecinal asistida por personal municipal.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón'] },
-            { id: '2', name: '2. Módulo Malecón Castagnola', status: 'Abierto', badge: 'badge-open', dist: '1.3 km · 16 min a pie · Circuito de Playas', addr: 'Contenedores verdes ubicados junto al parque canino.', mats: 'pet metal', tags: ['Plásticos PET', 'Latas'] }
+            { id: '1', num: '1', name: 'Estación Recicla Plaza Túpac Amaru', status: 'Abierto hoy', badge: 'badge-open', dist: '0.7 km · 9 min a pie · Jr. Bolognesi cdra. 3', addr: 'Centro comunal frente a la iglesia del Sagrado Corazón. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Cartón', 'Latas'], x: 45, y: 40, promoter: 'Asoc. Recicla Magdalena', capacity: '75% libre' },
+            { id: '2', num: '2', name: 'Ecopunto Malecón Castagnola', status: 'Abierto hoy', badge: 'badge-open', dist: '1.3 km · 16 min a pie · Jr. Diego Ferré cruce con Malecón', addr: 'Contenedores verdes instalados con vista al mar. Horario: 07:00 a 18:00.', mats: 'pet vidrio', tags: ['Botellas para bebidas', 'Frascos de vidrio'], x: 30, y: 60, promoter: 'Serenazgo Costanera', capacity: '85% libre' },
+            { id: '3', num: '3', name: 'Punto Limpio Mercado Magdalena', status: 'Cierra a las 16:00', badge: 'badge-closing', dist: '1.5 km · 19 min a pie · Jr. Leoncio Prado cdra. 7', addr: 'Bahía de reciclaje posterior del mercado municipal. Horario: 07:00 a 16:00.', mats: 'pet papel organico', tags: ['Envases plásticos', 'Cartón limpio'], x: 65, y: 30, promoter: 'Comité Ambiental Mercado', capacity: '50% libre' }
         ],
         'surco': [
-            { id: '1', name: '1. Estación Surco Recicla - Parque de la Amistad', status: 'Abierto', badge: 'badge-open', dist: '0.9 km · 12 min a pie · Av. Caminos del Inca', addr: 'Planta de segregación y módulo educativo municipal.', mats: 'pet vidrio papel metal especial', tags: ['Multimaterial', 'Vidrio', 'Pilas'] }
+            { id: '1', num: '1', name: 'Planta de Reciclaje EMUSAP Surco', status: 'Abierto hoy', badge: 'badge-open', dist: '0.9 km · 12 min a pie · Jr. Combate de Angamos s/n', addr: 'Planta modelo de segregación y valorización de residuos. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal especial', tags: ['Plásticos', 'Vidrio', 'Papel y cartón', 'Metales'], x: 55, y: 46, promoter: 'Programa Surco Recicla (EMUSAP)', capacity: '90% libre' },
+            { id: '2', num: '2', name: 'Ecopunto Parque de la Amistad', status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Caminos del Inca cruce con Benavides', addr: 'Punto limpio turístico al costado de la estación del tren. Horario: 08:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Frascos', 'Cartón'], x: 42, y: 32, promoter: 'Promotores Amistad Verde', capacity: '70% libre' },
+            { id: '3', num: '3', name: 'Módulo Verde Jockey Plaza', status: 'Abierto hoy', badge: 'badge-open', dist: '2.0 km · 6 min en auto · Av. Javier Prado Este 4200', addr: 'Zona de estacionamiento peatonal puerta 1. Horario comercial: 09:00 a 21:00.', mats: 'pet vidrio metal', tags: ['Botellas plásticas', 'Latas de bebidas'], x: 75, y: 20, promoter: 'Sostenibilidad Jockey', capacity: '80% libre' },
+            { id: '4', num: '4', name: 'Punto de Acopio Parque Voces por el Clima', status: 'Abierto hoy', badge: 'badge-open', dist: '2.8 km · 9 min en auto · Av. Los Castillos s/n', addr: 'Pabellón de reciclaje ecológico y recepción de ecoladrillos. Horario: 09:00 a 17:00.', mats: 'pet papel metal especial', tags: ['Multimaterial', 'Ecoladrillos', 'Pilas'], x: 60, y: 68, promoter: 'Centro Educación Ambiental Surco', capacity: '60% libre' }
         ]
     };
 
     const districtSelector = document.getElementById('district-selector');
     const mapPointsContainer = document.querySelector('.map-points-list');
     const listPointsContainer = document.querySelector('.list-view-grid');
+    const mapMarkersLayer = document.getElementById('map-markers-layer');
+    const popupTitle = document.getElementById('popup-point-title');
+    const popupDesc = document.getElementById('popup-point-desc');
+    const popupLink = document.getElementById('popup-point-link');
+
+    const updateMapPopup = (st, districtKey) => {
+        if (!popupTitle || !popupDesc || !popupLink) return;
+        popupTitle.textContent = st.name;
+        popupDesc.textContent = `${st.dist} · ${st.status} · Acepta ${st.tags.join(', ')}.`;
+        popupLink.href = `point-detail.html?punto=${districtKey}-${st.id}`;
+    };
 
     const renderDistrictStations = (districtKey) => {
         const stations = districtStations[districtKey] || districtStations['san-miguel'];
@@ -724,7 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mapPointsContainer.innerHTML = stations.map((st, i) => `
                 <article class="point-card ${i === 0 ? 'selected' : ''}" data-point-id="${st.id}" data-materials="${st.mats}">
                     <div class="point-card-header">
-                        <h2 class="point-card-title">${st.name}</h2>
+                        <h2 class="point-card-title">${st.num}. ${st.name}</h2>
                         <span class="point-status-badge ${st.badge}">${st.status}</span>
                     </div>
                     <p class="point-card-distance">
@@ -740,8 +929,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
                 </article>
             `).join('');
+        }
 
-            bindMarkerClickEvents();
+        if (mapMarkersLayer) {
+            mapMarkersLayer.innerHTML = stations.map((st, i) => `
+                <div class="map-marker marker-${st.id} ${i === 0 ? 'selected' : ''}" data-point-id="${st.id}" style="top: ${st.y}%; left: ${st.x}%;">${st.num}</div>
+            `).join('');
+        }
+
+        if (stations.length > 0) {
+            updateMapPopup(stations[0], districtKey);
         }
 
         if (listPointsContainer) {
@@ -749,7 +946,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <article class="list-point-item" data-materials="${st.mats}">
                     <div class="list-point-info">
                         <div class="point-card-header">
-                            <h2 class="point-card-title">${st.name}</h2>
+                            <h2 class="point-card-title">${st.num}. ${st.name}</h2>
                             <span class="point-status-badge ${st.badge}">${st.status}</span>
                         </div>
                         <p class="point-card-distance">
@@ -772,36 +969,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 </article>
             `).join('');
         }
+
+        bindMarkerAndCardEvents(districtKey, stations);
+    };
+
+    const bindMarkerAndCardEvents = (districtKey, stations) => {
+        const pointCards = document.querySelectorAll('.point-card');
+        const mapMarkers = document.querySelectorAll('.map-marker[data-point-id]');
+
+        mapMarkers.forEach(marker => {
+            marker.addEventListener('click', () => {
+                const pid = marker.getAttribute('data-point-id');
+                const matchedSt = stations.find(s => s.id === pid);
+                if (matchedSt) updateMapPopup(matchedSt, districtKey);
+
+                mapMarkers.forEach(m => m.classList.remove('selected'));
+                marker.classList.add('selected');
+
+                pointCards.forEach(c => {
+                    if (c.getAttribute('data-point-id') === pid) {
+                        c.classList.add('selected');
+                        c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        c.classList.remove('selected');
+                    }
+                });
+            });
+        });
+
+        pointCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return;
+                const pid = card.getAttribute('data-point-id');
+                const matchedSt = stations.find(s => s.id === pid);
+                if (matchedSt) updateMapPopup(matchedSt, districtKey);
+
+                pointCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+
+                mapMarkers.forEach(m => {
+                    if (m.getAttribute('data-point-id') === pid) {
+                        m.classList.add('selected');
+                    } else {
+                        m.classList.remove('selected');
+                    }
+                });
+            });
+        });
     };
 
     if (districtSelector) {
         districtSelector.addEventListener('change', () => {
             renderDistrictStations(districtSelector.value);
         });
+        renderDistrictStations(districtSelector.value);
     }
-
-    function bindMarkerClickEvents() {
-        const pointCards = document.querySelectorAll('.point-card');
-        const mapMarkers = document.querySelectorAll('.map-visual-container .map-marker[data-point-id]');
-
-        if (mapMarkers.length > 0 && pointCards.length > 0) {
-            mapMarkers.forEach(marker => {
-                marker.addEventListener('click', () => {
-                    const pid = marker.getAttribute('data-point-id');
-                    pointCards.forEach(card => {
-                        if (card.getAttribute('data-point-id') === pid) {
-                            card.classList.add('selected');
-                            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        } else {
-                            card.classList.remove('selected');
-                        }
-                    });
-                });
-            });
-        }
-    }
-
-    bindMarkerClickEvents();
 
     const allFilterChips = document.querySelectorAll('.filter-chip[data-filter]');
     if (allFilterChips.length > 0) {
@@ -817,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetCards.forEach(card => {
                     const mats = card.getAttribute('data-materials') || '';
                     if (filter === 'all' || mats.includes(filter)) {
-                        card.style.display = 'block';
+                        card.style.display = '';
                     } else {
                         card.style.display = 'none';
                     }
@@ -839,64 +1061,630 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const searchResultsChips = document.querySelectorAll('.filter-chips .chip');
-    const resultCards = document.querySelectorAll('.results-list .result-card');
-    if (searchResultsChips.length > 0 && resultCards.length > 0) {
-        searchResultsChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                searchResultsChips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                const text = chip.textContent.toLowerCase();
+    const pointDetailTitle = document.getElementById('point-detail-title');
+    if (pointDetailTitle) {
+        const pointUrlParams = new URLSearchParams(window.location.search);
+        const puntoParam = pointUrlParams.get('punto') || 'san-miguel-1';
 
-                resultCards.forEach(card => {
-                    const cardText = card.textContent.toLowerCase();
-                    if (text.includes('todos')) {
-                        card.style.display = 'flex';
-                    } else if (text.includes('plásticos') && cardText.includes('plástico')) {
-                        card.style.display = 'flex';
-                    } else if (text.includes('vidrio') && cardText.includes('vidrio')) {
-                        card.style.display = 'flex';
-                    } else if (text.includes('especiales') && cardText.includes('peligroso')) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+        const allStationsDictionary = {
+            'san-miguel-1': {
+                name: 'Estación Recicla San Miguel',
+                entity: 'Municipalidad Distrital de San Miguel & Programa Recicla Lima',
+                status: 'Abierto hoy · 08:00 a 18:00',
+                badgeClass: 'badge-open',
+                addr: 'Cruce Av. La Marina con Av. Universitaria (Frente a Plaza San Miguel)',
+                dist: '0.8 km (11 min a pie)',
+                capacity: '85% libre (vaciado hoy)',
+                promoter: 'Edgar Ramos (Reg. #SM-402)',
+                tip: 'Este punto recibe botellas plásticas, latas, vidrio y cartón limpios y secos. Cuenta con promotor permanente para verificar condiciones de entrega.'
+            },
+            'san-miguel-2': {
+                name: 'Punto Limpio Parque Juan Pablo II',
+                entity: 'Municipalidad Distrital de San Miguel',
+                status: 'Abierto hoy · 07:00 a 19:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Riva Agüero cdra. 8 (Junto a caseta de serenazgo)',
+                dist: '1.4 km (18 min a pie)',
+                capacity: '60% libre',
+                promoter: 'Rosa Quispe (Reg. #SM-205)',
+                tip: 'Dispone de tolvas separadas para plásticos, latas y papeles secos. Se ubica frente al área infantil del parque.'
+            },
+            'san-miguel-3': {
+                name: 'Contenedor Verde Metro La Marina',
+                entity: 'Supermercados Metro & Asociación de Recicladores San Miguel',
+                status: 'Abierto 24 horas',
+                badgeClass: 'badge-open',
+                addr: 'Av. La Marina 2500 (Estacionamiento posterior)',
+                dist: '1.9 km (25 min a pie)',
+                capacity: '75% libre',
+                promoter: 'Caseta de Seguridad Metro',
+                tip: 'Acceso vehicular y peatonal las 24 horas para depositar botellas de bebidas y frascos de vidrio.'
+            },
+            'san-miguel-4': {
+                name: 'Estación Ambiental Plaza Bandera',
+                entity: 'Programa Metropolitano de Residuos Especiales',
+                status: 'Cierra hoy a las 17:00',
+                badgeClass: 'badge-closing',
+                addr: 'Plaza de la Bandera s/n (Límite con Pueblo Libre)',
+                dist: '2.3 km (7 min en auto)',
+                capacity: '40% libre',
+                promoter: 'Carlos Dávila (Reg. #SM-318)',
+                tip: 'Punto multimodal de acopio con módulo especial de seguridad para pilas alcalinas y baterías domésticas.'
+            },
+            'pueblo-libre-1': {
+                name: 'Ecopunto Plaza Bolívar',
+                entity: 'Municipalidad de Pueblo Libre · Gerencia Ambiental',
+                status: 'Abierto hoy · 08:00 a 17:00',
+                badgeClass: 'badge-open',
+                addr: 'Jr. Vivanco frente al Palacio Municipal de Pueblo Libre',
+                dist: '0.6 km (8 min a pie)',
+                capacity: '70% libre',
+                promoter: 'María Elena Fuentes (Reg. #PL-110)',
+                tip: 'Centro cívico de acopio para vecinos de Pueblo Libre. Acepta botellas plásticas, latas, vidrio y cartón desarmado.'
+            },
+            'pueblo-libre-2': {
+                name: 'Módulo Ambiental Parque El Carmen',
+                entity: 'Asociación de Recicladores Pueblo Libre Sostenible',
+                status: 'Abierto hoy · 09:00 a 18:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Sucre cdra. 12 (Interior parque El Carmen)',
+                dist: '1.1 km (14 min a pie)',
+                capacity: '50% libre',
+                promoter: 'Juan Paredes (Reg. #PL-142)',
+                tip: 'Atención con pesaje in situ para lotes medianos de cartón, papel bond y plásticos limpios.'
+            },
+            'pueblo-libre-3': {
+                name: 'Punto Verde Parque Candamo',
+                entity: 'Municipalidad de Pueblo Libre',
+                status: 'Abierto hoy · 07:00 a 19:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Del Río cuadra 3 (Cerca a Av. Brasil)',
+                dist: '1.8 km (22 min a pie)',
+                capacity: '80% libre',
+                promoter: 'Sofía Delgado (Reg. #PL-203)',
+                tip: 'Contenedores verdes de boca ancha y tacho rojo seguro para pilas alcalinas.'
+            },
+            'miraflores-1': {
+                name: 'Punto Limpio Parque Kennedy',
+                entity: 'Municipalidad de Miraflores · Programa Basura Cero',
+                status: 'Abierto 24 horas',
+                badgeClass: 'badge-open',
+                addr: 'Parque Central de Miraflores s/n (Paseo Diagonal)',
+                dist: '0.5 km (7 min a pie)',
+                capacity: '90% libre (vaciado permanente)',
+                promoter: 'Equipo Basura Cero Miraflores',
+                tip: 'Estación soterrada de alta tecnología para envases limpios, botellas de agua, vidrio y latas de aluminio.'
+            },
+            'miraflores-2': {
+                name: 'Estación Ecológica Reducto',
+                entity: 'Municipalidad de Miraflores & Asociación de Recicladores',
+                status: 'Abierto hoy · 08:30 a 18:00',
+                badgeClass: 'badge-open',
+                addr: 'Parque Reducto N° 2 (Ingreso por Av. Alfredo Benavides)',
+                dist: '1.2 km (15 min a pie)',
+                capacity: '65% libre',
+                promoter: 'Asociación de Recicladores Miraflores',
+                tip: 'Recepción de fardos de cartón, plásticos y módulo de residuos de aparatos eléctricos y electrónicos en desuso.'
+            },
+            'miraflores-3': {
+                name: 'Ecopunto Malecón Cisneros',
+                entity: 'Municipalidad de Miraflores',
+                status: 'Abierto hoy · 07:00 a 19:00',
+                badgeClass: 'badge-open',
+                addr: 'Malecón Cisneros cdra. 5 (Frente al Parque del Faro)',
+                dist: '1.6 km (20 min a pie)',
+                capacity: '80% libre',
+                promoter: 'Serenazgo Miraflores Costa',
+                tip: 'Tolvas preparadas para resistir brisa marina, destinadas a botellas para bebidas y frascos de vidrio.'
+            },
+            'miraflores-4': {
+                name: 'Centro de Acopio Estadio Manuel Bonilla',
+                entity: 'Subgerencia de Limpieza Pública y Medio Ambiente',
+                status: 'Abierto hoy · 08:00 a 17:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Del Ejército cdra. 13 (Ingreso vehicular)',
+                dist: '2.1 km (8 min en auto)',
+                capacity: '55% libre',
+                promoter: 'Personal Operativo Bonilla',
+                tip: 'Centro integral con pesaje industrial para vecinos y empresas. Recibe multimaterial, aceite usado y pilas.'
+            },
+            'magdalena-1': {
+                name: 'Estación Recicla Plaza Túpac Amaru',
+                entity: 'Municipalidad de Magdalena del Mar & Asociación Local',
+                status: 'Abierto hoy · 08:00 a 18:00',
+                badgeClass: 'badge-open',
+                addr: 'Jr. Bolognesi cdra. 3 (Plaza Central de Magdalena)',
+                dist: '0.7 km (9 min a pie)',
+                capacity: '75% libre',
+                promoter: 'Asociación Recicla Magdalena',
+                tip: 'Punto neurálgico del distrito. Tolvas para botellas de plástico, latas de conserva, frascos y cartón limpio.'
+            },
+            'magdalena-2': {
+                name: 'Ecopunto Malecón Castagnola',
+                entity: 'Municipalidad de Magdalena del Mar',
+                status: 'Abierto hoy · 07:00 a 18:00',
+                badgeClass: 'badge-open',
+                addr: 'Jr. Diego Ferré cruce con Malecón Castagnola',
+                dist: '1.3 km (16 min a pie)',
+                capacity: '85% libre',
+                promoter: 'Serenazgo Costanera',
+                tip: 'Ubicado en el circuito costero de Magdalena para deportistas y familias. Ideal para botellas de agua y bebidas.'
+            },
+            'magdalena-3': {
+                name: 'Punto Limpio Mercado Magdalena',
+                entity: 'Comité Ambiental Mercado Magdalena',
+                status: 'Cierra hoy a las 16:00',
+                badgeClass: 'badge-closing',
+                addr: 'Jr. Leoncio Prado cdra. 7 (Área de carga)',
+                dist: '1.5 km (19 min a pie)',
+                capacity: '50% libre',
+                promoter: 'Comité Vecinal Mercado',
+                tip: 'Recepción especializada de cartón seco de embalaje y envases plásticos de comerciantes y vecinos.'
+            },
+            'surco-1': {
+                name: 'Planta de Reciclaje EMUSAP Surco',
+                entity: 'Empresa Municipal Santiago de Surco (EMUSAP)',
+                status: 'Abierto hoy · 08:00 a 17:00',
+                badgeClass: 'badge-open',
+                addr: 'Jr. Combate de Angamos s/n (Cerca a Av. Tomás Marsano)',
+                dist: '0.9 km (12 min a pie)',
+                capacity: '90% libre (planta procesadora)',
+                promoter: 'Programa Surco Recicla (EMUSAP)',
+                tip: 'La planta de reciclaje modelo más grande del país. Recibe todos los materiales aprovechables y especiales debidamente acondicionados.'
+            },
+            'surco-2': {
+                name: 'Ecopunto Parque de la Amistad',
+                entity: 'Municipalidad de Santiago de Surco',
+                status: 'Abierto hoy · 08:00 a 19:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Caminos del Inca cruce con Av. Benavides',
+                dist: '1.4 km (18 min a pie)',
+                capacity: '70% libre',
+                promoter: 'Promotores Amistad Verde',
+                tip: 'Estación accesible con asistencia ciudadana. Depósito de envases plásticos, frascos y cartón corrugado.'
+            },
+            'surco-3': {
+                name: 'Módulo Verde Jockey Plaza',
+                entity: 'Jockey Plaza Shopping Center & Surco Recicla',
+                status: 'Abierto hoy · 09:00 a 21:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Javier Prado Este 4200 (Ingreso peatonal Puerta 1)',
+                dist: '2.0 km (6 min en auto)',
+                capacity: '80% libre',
+                promoter: 'Sostenibilidad Jockey',
+                tip: 'Horario extendido ideal para compras y visitas. Dispone de bocas para botellas de plástico y latas de bebidas.'
+            },
+            'surco-4': {
+                name: 'Punto de Acopio Parque Voces por el Clima',
+                entity: 'Centro de Educación Ambiental Surco',
+                status: 'Abierto hoy · 09:00 a 17:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Los Castillos s/n (Urb. Los Próceres)',
+                dist: '2.8 km (9 min en auto)',
+                capacity: '60% libre',
+                promoter: 'Centro Educación Ambiental Surco',
+                tip: 'Parque temático ecológico. Acepta ecoladrillos, multimaterial aprovechable y residuos de pilas.'
+            }
+        };
+
+        const pointData = allStationsDictionary[puntoParam] || allStationsDictionary['san-miguel-1'];
+
+        pointDetailTitle.textContent = pointData.name;
+        document.title = `Resaving - ${pointData.name}`;
+
+        const bCrumb = document.getElementById('point-breadcrumb-name');
+        if (bCrumb) bCrumb.textContent = pointData.name;
+
+        const entName = document.getElementById('point-entity-name');
+        if (entName) entName.textContent = pointData.entity;
+
+        const statBadge = document.getElementById('point-status-badge');
+        if (statBadge) {
+            statBadge.textContent = pointData.status;
+            statBadge.className = `point-status-badge ${pointData.badgeClass}`;
+        }
+
+        const metaAddr = document.getElementById('point-meta-address');
+        if (metaAddr) metaAddr.textContent = pointData.addr;
+
+        const metaDist = document.getElementById('point-meta-distance');
+        if (metaDist) metaDist.textContent = pointData.dist;
+
+        const metaCap = document.getElementById('point-meta-capacity');
+        if (metaCap) metaCap.textContent = pointData.capacity;
+
+        const metaProm = document.getElementById('point-meta-promoter');
+        if (metaProm) metaProm.textContent = pointData.promoter;
+
+        const safeTip = document.getElementById('point-safety-tip');
+        if (safeTip) {
+            safeTip.innerHTML = `<strong>Aviso importante:</strong> ${pointData.tip}`;
+        }
+    }
+
+    const searchResultsList = document.getElementById('search-results-list');
+    const searchResultsCount = document.getElementById('search-results-count');
+    const searchInputField = document.getElementById('search-input-field');
+    const formSearchResults = document.getElementById('form-search-results');
+    const searchFilterChips = document.querySelectorAll('#search-filter-chips .chip');
+    const sortSelect = document.getElementById('sort-select');
+
+    const fullMaterialsCatalog = [
+        {
+            id: 'pet',
+            name: 'Botella plástica para bebidas (Agua y gaseosas)',
+            category: 'aprovechables',
+            catLabel: 'Aprovechable · Tacho Verde',
+            badgeClass: 'badge-green',
+            subBadge: 'Plástico transparente',
+            desc: 'Aceptada en todas las estaciones de acopio y contenedores verdes. Debe entregarse vacía, limpia, seca y compactada con la tapa separada.',
+            img: '../Images/waste-pet-bottle.png',
+            url: 'waste-detail.html?tipo=pet'
+        },
+        {
+            id: 'vidrio',
+            name: 'Botellas y frascos de vidrio entero',
+            category: 'aprovechables',
+            catLabel: 'Aprovechable · Tacho Verde',
+            badgeClass: 'badge-green',
+            subBadge: 'Vidrio',
+            desc: 'Material 100% reciclable en infinitos ciclos. Debe entregarse entero, limpio y sin tapas metálicas ni corchos.',
+            img: '../Images/gallery-glass.png',
+            url: 'waste-detail.html?tipo=vidrio'
+        },
+        {
+            id: 'carton',
+            name: 'Cajas de cartón corrugado y papel bond',
+            category: 'aprovechables',
+            catLabel: 'Aprovechable · Tacho Verde',
+            badgeClass: 'badge-green',
+            subBadge: 'Papel y Cartón',
+            desc: 'Cajas de encomiendas y hojas de papel secas. Desarmar las cajas para ahorrar espacio y atar en paquetes limpios.',
+            img: '../Images/delivery-cardboard.png',
+            url: 'waste-detail.html?tipo=carton'
+        },
+        {
+            id: 'lata',
+            name: 'Latas de aluminio y conservas',
+            category: 'aprovechables',
+            catLabel: 'Aprovechable · Tacho Verde',
+            badgeClass: 'badge-green',
+            subBadge: 'Metales',
+            desc: 'Latas de bebidas y conservas enjuagadas sin restos de alimentos. Comprimir suavemente para facilitar transporte.',
+            img: '../Images/delivery-can.png',
+            url: 'waste-detail.html?tipo=lata'
+        },
+        {
+            id: 'pead',
+            name: 'Envase de champú, detergente y yogur',
+            category: 'aprovechables',
+            catLabel: 'Aprovechable · Tacho Verde',
+            badgeClass: 'badge-green',
+            subBadge: 'Plástico rígido',
+            desc: 'Envases plásticos opacos de alta densidad. Enjuagar para retirar restos de jabón o líquido y desenroscar dosificadores.',
+            img: '../Images/gallery-plastic-bottle.png',
+            url: 'waste-detail.html?tipo=pead'
+        },
+        {
+            id: 'tetra',
+            name: 'Envases multicapa de jugo y leche (Tetra Brik)',
+            category: 'aprovechables',
+            catLabel: 'Aprovechable · Tacho Verde',
+            badgeClass: 'badge-green',
+            subBadge: 'Multicapa cartón',
+            desc: 'Compuestos de cartón, aluminio y polietileno. Deben abrirse de las esquinas, enjuagarse y aplanarse secos.',
+            img: '../Images/category-recyclables.png',
+            url: 'waste-detail.html?tipo=carton'
+        },
+        {
+            id: 'frutas',
+            name: 'Cáscaras de frutas, verduras y hortalizas',
+            category: 'organicos',
+            catLabel: 'Orgánicos · Tacho Marrón',
+            badgeClass: 'badge-brown',
+            subBadge: 'Compostaje natural',
+            desc: 'Restos vegetales crudos ideales para elaborar abono orgánico o compost municipal. No deben mezclarse con plásticos ni bolsas.',
+            img: '../Images/category-organic.png',
+            url: 'waste-detail.html?tipo=organico'
+        },
+        {
+            id: 'cafe',
+            name: 'Restos y posos de café pasado, té e infusiones',
+            category: 'organicos',
+            catLabel: 'Orgánicos · Tacho Marrón',
+            badgeClass: 'badge-brown',
+            subBadge: 'Abono fértil',
+            desc: 'Aportan nitrógeno y enriquecen la tierra de parques y biohuertos comunales. Retirar grapas metálicas de saquitos de té.',
+            img: '../Images/category-organic.png',
+            url: 'waste-detail.html?tipo=organico'
+        },
+        {
+            id: 'hojas',
+            name: 'Hojas secas, flores y ramas pequeñas de jardín',
+            category: 'organicos',
+            catLabel: 'Orgánicos · Tacho Marrón',
+            badgeClass: 'badge-brown',
+            subBadge: 'Restos de poda',
+            desc: 'Materia orgánica seca que equilibra el compostaje. Deben entregarse sin alambres, plásticos ni piedras.',
+            img: '../Images/category-organic.png',
+            url: 'waste-detail.html?tipo=organico'
+        },
+        {
+            id: 'huevo',
+            name: 'Cáscaras de huevo trituradas',
+            category: 'organicos',
+            catLabel: 'Orgánicos · Tacho Marrón',
+            badgeClass: 'badge-brown',
+            subBadge: 'Mineral y calcio',
+            desc: 'Excelente aporte de calcio para suelos. Se deben enjuagar ligeramente para no atraer moscas antes de colocarlas en el tacho marrón.',
+            img: '../Images/category-organic.png',
+            url: 'waste-detail.html?tipo=organico'
+        },
+        {
+            id: 'pilas',
+            name: 'Pilas alcalinas y baterías domésticas (AA, AAA, 9V, botón)',
+            category: 'peligrosos',
+            catLabel: 'Peligrosos · Tacho Rojo',
+            badgeClass: 'badge-red',
+            subBadge: 'Punto especial',
+            desc: 'Contienen metales pesados contaminantes. Prohibido arrojarlas al tacho verde o negro. Depositar en contenedores rojos o puntos en supermercados.',
+            img: '../Images/category-hazardous.png',
+            url: 'waste-detail.html?tipo=pilas'
+        },
+        {
+            id: 'medicamento',
+            name: 'Medicamentos vencidos o en desuso y blísteres',
+            category: 'peligrosos',
+            catLabel: 'Peligrosos · Punto Especial',
+            badgeClass: 'badge-red',
+            subBadge: 'Contenedor farmacias',
+            desc: 'No tirar por el inodoro ni a la basura común. Deben llevarse a los puntos azules de acopio instalados en farmacias y centros de salud.',
+            img: '../Images/gallery-special-waste.png',
+            url: 'waste-detail.html?tipo=medicamento'
+        },
+        {
+            id: 'focos',
+            name: 'Focos ahorradores y tubos fluorescentes',
+            category: 'peligrosos',
+            catLabel: 'Peligrosos · Tacho Rojo',
+            badgeClass: 'badge-red',
+            subBadge: 'Vapor de mercurio',
+            desc: 'Contienen mercurio gaseoso. Deben entregarse enteros dentro de su caja de cartón en centros de atención especializada.',
+            img: '../Images/category-hazardous.png',
+            url: 'waste-detail.html?tipo=focos'
+        },
+        {
+            id: 'raee',
+            name: 'Aparatos electrónicos menores, cargadores y cables en desuso',
+            category: 'peligrosos',
+            catLabel: 'Especiales · RAEE',
+            badgeClass: 'badge-red',
+            subBadge: 'Aparatos eléctricos',
+            desc: 'Equipos electrónicos en desuso que requieren campañas municipales de acopio RAEE para recuperar metales valiosos y neutralizar tóxicos.',
+            img: '../Images/category-hazardous.png',
+            url: 'waste-detail.html?tipo=raee'
+        },
+        {
+            id: 'higienico',
+            name: 'Papel higiénico, pañuelos y toallas absorbentes usadas',
+            category: 'no-aprovechables',
+            catLabel: 'No Aprovechable · Tacho Negro',
+            badgeClass: 'badge-black',
+            subBadge: 'Relleno sanitario',
+            desc: 'Residuos con carga biológica o sanitaria que no pueden recuperarse. Deben ir en bolsa bien cerrada al tacho negro común.',
+            img: '../Images/category-sanitary.png',
+            url: 'waste-detail.html?tipo=no-aprovechable'
+        },
+        {
+            id: 'colillas',
+            name: 'Colillas de cigarro y cenizas',
+            category: 'no-aprovechables',
+            catLabel: 'No Aprovechable · Tacho Negro',
+            badgeClass: 'badge-black',
+            subBadge: 'Tóxico no reciclable',
+            desc: 'Los filtros de acetato de celulosa tardan más de una década en degradarse y concentran químicos tóxicos. Van al tacho negro.',
+            img: '../Images/category-sanitary.png',
+            url: 'waste-detail.html?tipo=no-aprovechable'
+        },
+        {
+            id: 'snacks',
+            name: 'Envolturas metalizadas de golosinas, galletas y papas fritas',
+            category: 'no-aprovechables',
+            catLabel: 'No Aprovechable · Tacho Negro',
+            badgeClass: 'badge-black',
+            subBadge: 'Film metalizado',
+            desc: 'Películas complejas de polipropileno con vaporizado de aluminio que no se separan industrialmente en Lima. Tacho negro.',
+            img: '../Images/category-sanitary.png',
+            url: 'waste-detail.html?tipo=no-aprovechable'
+        },
+        {
+            id: 'ceramica',
+            name: 'Cerámica rota, loza y vajilla desgastada',
+            category: 'no-aprovechables',
+            catLabel: 'No Aprovechable · Tacho Negro',
+            badgeClass: 'badge-black',
+            subBadge: 'Inerte común',
+            desc: 'No funde con el vidrio de botellas por tener temperaturas distintas. Debe envolverse en papel grueso y disponerse en tacho negro.',
+            img: '../Images/category-sanitary.png',
+            url: 'waste-detail.html?tipo=no-aprovechable'
+        }
+    ];
+
+    if (searchResultsList) {
+        let currentFilter = 'all';
+        let currentQuery = '';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlCat = urlParams.get('cat');
+        const urlQ = urlParams.get('q');
+
+        if (urlCat) {
+            currentFilter = urlCat;
+        }
+        if (urlQ) {
+            currentQuery = urlQ.trim();
+            if (searchInputField) searchInputField.value = currentQuery;
+        }
+
+        const renderMaterials = () => {
+            let filtered = fullMaterialsCatalog.filter(item => {
+                const matchesCategory = (currentFilter === 'all') || (item.category === currentFilter);
+                if (!matchesCategory) return false;
+
+                if (currentQuery.length === 0) return true;
+                const q = currentQuery.toLowerCase();
+                return item.name.toLowerCase().includes(q) ||
+                       item.desc.toLowerCase().includes(q) ||
+                       item.subBadge.toLowerCase().includes(q) ||
+                       item.catLabel.toLowerCase().includes(q);
+            });
+
+            if (sortSelect && sortSelect.value === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortSelect && sortSelect.value === 'category') {
+                filtered.sort((a, b) => a.catLabel.localeCompare(b.catLabel));
+            }
+
+            if (searchResultsCount) {
+                let contextLabel = '';
+                if (currentFilter !== 'all') {
+                    const catMap = {
+                        'aprovechables': 'Aprovechables (Tacho Verde)',
+                        'organicos': 'Orgánicos (Tacho Marrón)',
+                        'peligrosos': 'Peligrosos (Tacho Rojo / Especiales)',
+                        'no-aprovechables': 'No aprovechables (Tacho Negro)'
+                    };
+                    contextLabel = ` en «${catMap[currentFilter] || currentFilter}»`;
+                }
+                if (currentQuery.length > 0) {
+                    searchResultsCount.innerHTML = `Se encontraron <strong>${filtered.length} resultados</strong> para <em>«${currentQuery}»</em>${contextLabel}`;
+                } else {
+                    searchResultsCount.innerHTML = `Mostrando <strong>${filtered.length} materiales</strong>${contextLabel}`;
+                }
+            }
+
+            if (filtered.length === 0) {
+                searchResultsList.innerHTML = `
+                    <div style="background-color: #F7FAF8; border: 1.5px dashed #DBE7DF; border-radius: 14px; padding: 36px 20px; text-align: center; width: 100%;">
+                        <h3 style="font-size: 17px; font-weight: 800; color: #14251B; margin-bottom: 8px;">No se encontraron materiales para esta búsqueda</h3>
+                        <p style="font-size: 13.5px; color: #5F7066; margin-bottom: 16px;">Prueba buscando con palabras más generales (ej: plástico, papel, pilas) o explora nuestras categorías.</p>
+                        <button type="button" id="btn-reset-search" style="padding: 9px 18px; background-color: #0B4A30; color: #FFFFFF; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer;">Ver todos los materiales</button>
+                    </div>
+                `;
+                const resetBtn = document.getElementById('btn-reset-search');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        currentFilter = 'all';
+                        currentQuery = '';
+                        if (searchInputField) searchInputField.value = '';
+                        updateActiveChip();
+                        renderMaterials();
+                    });
+                }
+                return;
+            }
+
+            searchResultsList.innerHTML = filtered.map(item => `
+                <article class="result-card flex Ycenter">
+                    <div class="result-img-wrap">
+                        <img src="${item.img}" alt="${item.name}">
+                    </div>
+                    <div class="result-body flex-1">
+                        <div class="result-badges flex Ycenter">
+                            <span class="badge ${item.badgeClass}">${item.catLabel}</span>
+                            <span class="badge badge-gray">${item.subBadge}</span>
+                        </div>
+                        <h3>${item.name}</h3>
+                        <p class="result-desc">${item.desc}</p>
+                    </div>
+                    <div class="result-action">
+                        <a href="${item.url}" class="btn-primary-action flex Ycenter">
+                            <span>Ver detalles y preparación</span>
+                            <img src="../Images/icon-arrow-right.svg" alt="">
+                        </a>
+                    </div>
+                </article>
+            `).join('');
+        };
+
+        const updateActiveChip = () => {
+            searchFilterChips.forEach(chip => {
+                const f = chip.getAttribute('data-filter');
+                if (f === currentFilter) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+        };
+
+        updateActiveChip();
+        renderMaterials();
+
+        searchFilterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                currentFilter = chip.getAttribute('data-filter') || 'all';
+                updateActiveChip();
+                renderMaterials();
             });
         });
+
+        if (searchInputField) {
+            searchInputField.addEventListener('input', () => {
+                currentQuery = searchInputField.value.trim();
+                renderMaterials();
+            });
+        }
+
+        if (formSearchResults) {
+            formSearchResults.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (searchInputField) currentQuery = searchInputField.value.trim();
+                renderMaterials();
+            });
+        }
+
+        if (sortSelect) {
+            sortSelect.addEventListener('change', renderMaterials);
+        }
     }
 
     const btnClearHistory = document.getElementById('btn-clear-history');
     const historyList = document.querySelector('.history-list');
     const historyContainer = document.getElementById('history-container');
 
-    if (btnClearHistory && historyContainer) {
+    if (btnClearHistory && (historyList || historyContainer)) {
         btnClearHistory.addEventListener('click', () => {
             if (historyList) {
                 historyList.style.display = 'none';
             }
-            btnClearHistory.style.display = 'none';
-
+            if (historyContainer) {
+                historyContainer.style.display = 'none';
+            }
             let emptyBox = document.getElementById('history-empty-notice');
             if (!emptyBox) {
                 emptyBox = document.createElement('div');
                 emptyBox.id = 'history-empty-notice';
-                emptyBox.style.padding = '36px 20px';
-                emptyBox.style.textAlign = 'center';
-                emptyBox.style.backgroundColor = '#F7FAF8';
-                emptyBox.style.border = '1px solid #DBE7DF';
-                emptyBox.style.borderRadius = '14px';
-                emptyBox.style.marginTop = '16px';
+                emptyBox.className = 'empty-notice-card';
                 emptyBox.innerHTML = `
-                    <div style="font-size: 28px; margin-bottom: 8px;">✓</div>
-                    <strong style="display: block; font-size: 15px; color: #14251B; margin-bottom: 4px;">Historial temporal vaciado</strong>
-                    <p style="font-size: 13px; color: #6C8A79; margin: 0 0 16px 0;">No tienes consultas registradas en esta sesión. Tus nuevas búsquedas aparecerán aquí.</p>
-                    <a href="../index.html" class="btn-primary-action flex center" style="display: inline-flex; padding: 10px 20px; font-size: 13px; text-decoration: none;">
-                        <span>Volver a buscar</span>
-                    </a>
+                    <div style="background-color: #FFFFFF; border: 1.5px dashed #DBE7DF; border-radius: 14px; padding: 48px 24px; text-align: center; margin: 24px 0;">
+                        <img src="../Images/icon-check.svg" alt="" style="width: 44px; height: 44px; margin-bottom: 12px; opacity: 0.7;">
+                        <h3 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 8px;">Historial eliminado con éxito</h3>
+                        <p style="font-size: 13.5px; color: #6C8A79; max-width: 460px; margin: 0 auto 20px auto; line-height: 1.5;">Tus consultas y registros locales han sido borrados de este navegador. Puedes iniciar una nueva búsqueda cuando lo desees.</p>
+                        <a href="search-results.html" class="btn-primary-action" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13.5px; text-decoration: none;">
+                            <span>Explorar residuos</span>
+                            <img src="../Images/icon-arrow-right.svg" alt="">
+                        </a>
+                    </div>
                 `;
-                historyContainer.appendChild(emptyBox);
+                const parent = (historyList && historyList.parentNode) || (historyContainer && historyContainer.parentNode);
+                if (parent) {
+                    parent.appendChild(emptyBox);
+                }
+            } else {
+                emptyBox.style.display = 'block';
             }
+            btnClearHistory.style.display = 'none';
         });
     }
 
@@ -924,7 +1712,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prepMatData = {
         pet: {
-            pageTitle: 'Prepara tu botella de plástico PET',
+            pageTitle: 'Prepara tu botella plástica para bebidas',
             sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para acondicionar tu botella antes de la entrega.',
             steps: [
                 {
@@ -947,7 +1735,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 {
                     title: '4. Separa la tapa y compacta la botella',
-                    desc: 'Desenrosca la tapa de polipropileno (PP #5) y guárdala por separado. Aplasta el cuerpo de la botella desde la base hacia el pico para ahorrar hasta 70% de volumen.',
+                    desc: 'Desenrosca la tapa de plástico y guárdala por separado. Aplasta el cuerpo de la botella desde la base hacia el pico para ahorrar hasta 70% de volumen.',
                     tip: 'Las botellas compactadas permiten al reciclador de base recolectar el triple de material en un solo viaje.',
                     label: 'Paso 4 completado: Tapa retirada y envase compactado'
                 }
@@ -958,243 +1746,250 @@ document.addEventListener('DOMContentLoaded', () => {
             sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para garantizar una entrega 100% segura para los recicladores.',
             steps: [
                 {
-                    title: '1. Vacía todo el producto o conserva',
-                    desc: 'Retira hasta la última cucharada de mermelada, salsa o aderezo. Puedes usar una espátula de silicona para aprovechar todo el alimento.',
-                    tip: 'Asegúrate de retirar residuos sólidos orgánicos espesos que puedan descomponerse.',
-                    label: 'Paso 1 completado: Frasco totalmente vacío'
+                    title: '1. Retira todo el contenido sólido o líquido',
+                    desc: 'Drena aceites, mermeladas o jugos del frasco con una espátula o cuchara. Los restos grasos atraen plagas y complican el acopio.',
+                    tip: 'Nunca entregues frascos quebrados ni astillados; pueden causar cortes graves a los operarios.',
+                    label: 'Paso 1 completado: Frasco completamente libre de contenido'
                 },
                 {
-                    title: '2. Enjuaga con un poco de agua tibia',
-                    desc: 'Agrega medio vaso de agua, remueve y enjuaga las paredes de vidrio. Si tenía aceite o mayonesa, agrega una gota de lavavajillas.',
-                    tip: 'Usa agua reutilizada del fregadero para cuidar el recurso hídrico.',
-                    label: 'Paso 2 completado: Paredes de vidrio limpias sin grasa espesa'
+                    title: '2. Enjuaga con agua corriente',
+                    desc: 'Pasa un chorrito de agua para que las paredes de vidrio queden cristalinas y sin olores fermentados.',
+                    tip: 'El vidrio no absorbe químicos ni grasa, por lo que un enjuague rápido basta.',
+                    label: 'Paso 2 completado: Vidrio lavado y sin olores'
                 },
                 {
-                    title: '3. Escurre y seca al ambiente',
-                    desc: 'Coloca el frasco boca abajo sobre una rejilla hasta que el agua evapore por completo.',
-                    tip: 'Evita meter paños de tela que puedan dejar pelusas en el fondo.',
-                    label: 'Paso 3 completado: Seco y sin condensación interna'
+                    title: '3. Deja escurrir boca abajo hasta secar',
+                    desc: 'Colócalo invertido sobre un secador. La estación de acopio exige material seco para no manchar otras entregas.',
+                    tip: 'No dejes agua estancada dentro del frasco cerrado con tapa.',
+                    label: 'Paso 3 completado: Vidrio seco'
                 },
                 {
-                    title: '4. Separa tapas metálicas y mantén el envase ENTERO',
-                    desc: 'Desenrosca la tapa de hojalata y colócala aparte. ¡NUNCA rompas el envase! Los recicladores reciben vidrio entero para no accidentarse.',
-                    tip: 'Los vidrios rotos cortan las bolsas y las manos de los recolectores de base.',
-                    label: 'Paso 4 completado: Tapas separadas y vidrio íntegro sin fisuras'
+                    title: '4. Retira la tapa metálica',
+                    desc: 'Desenrosca la tapa de hojalata y colócala en el contenedor de metales. Entrega el frasco destapado para su inspección visual.',
+                    tip: 'Las tapas de metal se funden a temperaturas distintas al vidrio sódico.',
+                    label: 'Paso 4 completado: Frasco destapado y listo'
                 }
             ]
         },
         carton: {
-            pageTitle: 'Prepara tus cajas de cartón y Tetra Pak',
-            sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para proteger las fibras de celulosa de la humedad.',
+            pageTitle: 'Prepara tus cajas de cartón corrugado',
+            sub: 'Sigue estos pasos en orden de cascada para desarmar, secar y atar tus fardos de cartón para entrega.',
             steps: [
                 {
-                    title: '1. Retira restos de alimentos o envoltorios',
-                    desc: 'Abre la caja y retira plásticos de burbujas, tecnopor o migas de pan que hayan quedado dentro.',
-                    tip: 'Las partes con grasa de pizza o aceite deben cortarse y enviarse al tacho negro.',
-                    label: 'Paso 1 completado: Libre de comida y plásticos interiores'
+                    title: '1. Desarma la caja desde las solapas inferiores',
+                    desc: 'Abre las solapas con cuidado para que la caja quede completamente plana en una sola lámina rectangular.',
+                    tip: 'El cartón plano ocupa 8 veces menos espacio en casa y en el camión de acopio.',
+                    label: 'Paso 1 completado: Caja desarmada y aplanada'
                 },
                 {
-                    title: '2. Despega cinta adhesiva plástica gruesa',
-                    desc: 'Tira de las tiras de cinta de embalaje plástica para que la caja quede solo en cartón limpio.',
-                    tip: 'No es necesario retirar el 100% del pegamento, solo la cinta plástica externa.',
-                    label: 'Paso 2 completado: Cintas plásticas desprendidas'
+                    title: '2. Retira cintas plásticas de embalaje y grapas',
+                    desc: 'Desprende las tiras de cinta gruesa plástica y alambres para evitar que traben las aspas de las plantas de pulpeo.',
+                    tip: 'Si la cinta está muy adherida, córtala con tijeras sin romper el cartón.',
+                    label: 'Paso 2 completado: Cinta plástica retirada'
                 },
                 {
-                    title: '3. Aplana completamente la caja',
-                    desc: 'Despliega las aletas superiores e inferiores y presiona la caja hasta que quede plana como una lámina.',
-                    tip: 'El cartón aplanado ocupa una décima parte del espacio en tu hogar.',
-                    label: 'Paso 3 completado: Caja totalmente desarmada y aplanada'
+                    title: '3. Verifica que esté completamente seco y limpio',
+                    desc: 'Asegúrate de que no tenga manchas de aceite de pizza, comida ni hongos. Las partes sucias van al tacho negro.',
+                    tip: 'Una sola caja de cartón con grasa de comida puede contaminar 50 kg de celulosa limpia.',
+                    label: 'Paso 3 completado: Cartón seco y sin grasa'
                 },
                 {
-                    title: '4. Apila y amarra en fardo seco',
-                    desc: 'Junta varias cajas planas y átalas con pabilo o mételas dentro de otra caja plana. Almacénalas lejos de humedad.',
-                    tip: 'El cartón húmedo genera hongos en 24 horas y pierde todo su valor comercial.',
-                    label: 'Paso 4 completado: Fardo seco, amarrado y listo'
+                    title: '4. Agrupa y ata con soga o pita',
+                    desc: 'Junta de 5 a 10 cajas aplanadas del mismo tamaño y átalas con pabilo o soga biodegradable para facilitar su transporte.',
+                    tip: 'Los recicladores de base agradecen los paquetes atados porque aceleran su pesaje y carga.',
+                    label: 'Paso 4 completado: Paquete de cartón atado'
                 }
             ]
         },
         lata: {
             pageTitle: 'Prepara tus latas de bebidas y conservas',
-            sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para maximizar la pureza del aluminio.',
+            sub: 'Cuatro pasos en cascada para entregar aluminio y hojalata limpia, segura y sin bordes cortantes.',
             steps: [
                 {
-                    title: '1. Drena todo el líquido o contenido alimenticio',
-                    desc: 'Vacía completamente la bebida o escurre el aceite de la conserva de atún o verduras.',
-                    tip: 'Si es lata de leche o sopa, aprovecha todo el contenido antes de descartar.',
-                    label: 'Paso 1 completado: Contenido drenado por completo'
+                    title: '1. Escurre todo residuo de jugo o salmuera',
+                    desc: 'Vacía la lata al 100%. Si era una lata de atún, escurre bien el aceite para evitar manchas en tu bolsa.',
+                    tip: 'No viertas el aceite de conservas al lavadero; guárdalo en una botella para acopio de aceite usado.',
+                    label: 'Paso 1 completado: Lata vaciada'
                 },
                 {
-                    title: '2. Pasa un chorrito de agua',
-                    desc: 'Enjuaga brevemente el interior para disolver los azúcares o salmuera residual.',
-                    tip: 'No gastes mucha agua potable; un enjuague rápido es suficiente.',
-                    label: 'Paso 2 completado: Enjuague sin restos pegajosos'
+                    title: '2. Enjuaga con una gota de detergente',
+                    desc: 'Pasa agua y una esponja rápida para remover la capa interna azucarada o salada.',
+                    tip: 'Una lata limpia no genera olores en tu hogar durante los días previos a la entrega.',
+                    label: 'Paso 2 completado: Lata enjuagada'
                 },
                 {
-                    title: '3. Seca al aire boca abajo',
-                    desc: 'Deja la lata unos minutos sobre una bandeja para que escurra toda gota de agua.',
-                    tip: 'La hojalata puede oxidarse si se deja con charcos de agua por semanas.',
-                    label: 'Paso 3 completado: Lata escurrida y seca'
+                    title: '3. Deja secar al aire libre',
+                    desc: 'Coloca la lata invertida para que no queden charcos de agua en el fondo.',
+                    tip: 'El metal se seca en pocos minutos si está boca abajo en un lugar ventilado.',
+                    label: 'Paso 3 completado: Lata escurrida'
                 },
                 {
-                    title: '4. Comprime suavemente y protege filos',
-                    desc: 'Para latas de bebidas, aplasta de lado con el pie. En latas de conserva, mete la tapa cortante dentro del cuerpo y presiona el borde.',
-                    tip: 'Protege a los recicladores de base cubriendo bordes afilados.',
-                    label: 'Paso 4 completado: Lata compactada con filos protegidos'
+                    title: '4. Comprime lateralmente protegiendo bordes',
+                    desc: 'Para latas de bebidas, aplasta de costado con el pie o la mano. Para conservas con tapa filuda, empuja la tapa adentro.',
+                    tip: 'Nunca dejes tapas de conserva sueltas con filo hacia afuera para proteger las manos del reciclador.',
+                    label: 'Paso 4 completado: Lata compactada de forma segura'
                 }
             ]
         },
         pead: {
-            pageTitle: 'Prepara tus envases plásticos PEAD #2',
-            sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para evitar contaminación por residuos jabonosos.',
+            pageTitle: 'Prepara tus envases de limpieza y champú',
+            sub: 'Acondiciona tus envases plásticos opacos para una recolección segura y sin químicos residuales.',
             steps: [
                 {
-                    title: '1. Usa todo el producto hasta el fondo',
-                    desc: 'Agrega dos cucharadas de agua al frasco casi vacío de champú o lavavajillas para aprovechar la última porción.',
-                    tip: 'El residuo químico concentrado arruina la calidad del plástico recuperado.',
-                    label: 'Paso 1 completado: Producto químico agotado'
+                    title: '1. Vacía el producto restante',
+                    desc: 'Usa hasta la última gota de champú o detergente agregando un poco de agua al final.',
+                    tip: 'Aprovecha todo el producto antes de acondicionar el frasco para reciclaje.',
+                    label: 'Paso 1 completado: Envase vacío'
                 },
                 {
-                    title: '2. Enjuaga con agua tibia',
-                    desc: 'Llena un cuarto con agua, tapa con la mano, agita vigorosamente y vacía en el lavadero.',
-                    tip: 'Repite una vez hasta que no salga espuma densa.',
-                    label: 'Paso 2 completado: Libre de espuma densa'
+                    title: '2. Enjuaga dos veces el interior',
+                    desc: 'Enjuaga bien para que no quede espuma persistente ni restos resbalosos.',
+                    tip: 'El agua jabonosa del enjuague sirve para limpiar el piso del baño o patio.',
+                    label: 'Paso 2 completado: Sin residuos químicos'
                 },
                 {
-                    title: '3. Escurre invertido',
-                    desc: 'Coloca el envase boca abajo sin tapa hasta que no queden gotas de agua jabonosa.',
-                    tip: 'Guárdalo destapado para que ventile el aroma.',
-                    label: 'Paso 3 completado: Escurrido y seco'
+                    title: '3. Deja escurrir boca abajo',
+                    desc: 'Seca el frasco invertido para eliminar el agua del enjuague.',
+                    tip: 'Un envase bien seco no genera moho en almacenamiento.',
+                    label: 'Paso 3 completado: Envase seco'
                 },
                 {
-                    title: '4. Desenrosca el dispensador o bomba',
-                    desc: 'Las bombas dosificadoras contienen resortes metálicos incompatibles con el reciclaje de PEAD; retíralas.',
-                    tip: 'El cuerpo PEAD se recicla limpiamente una vez separada la bomba.',
-                    label: 'Paso 4 completado: Bomba o dispensador retirado'
+                    title: '4. Retira el dispensador mecánico',
+                    desc: 'Desenrosca las bombas con resorte de metal (van al tacho negro). Si la tapa es simple, enróscala ligeramente.',
+                    tip: 'Los resortes metálicos de los dosificadores dañan los molinos de picado de plástico.',
+                    label: 'Paso 4 completado: Dosificador separado'
                 }
             ]
         },
         pilas: {
-            pageTitle: 'Acondiciona tus pilas y baterías alcalinas',
-            sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para manipular residuos peligrosos con total seguridad cívica.',
+            pageTitle: 'Acondiciona tus pilas y baterías domésticas',
+            sub: 'Medidas de seguridad obligatorias en cascada para aislar y entregar pilas sin riesgo de fugas ácidas.',
             steps: [
                 {
-                    title: '1. Retira del dispositivo y verifica su estado',
-                    desc: 'Extrae las pilas gastadas de controles, linternas o juguetes. Revisa que no tengan derrames blanquecinos o sulfato ácido.',
-                    tip: 'Si tiene sulfato blanco, no lo toques con la mano desnuda; usa una bolsa o guante.',
-                    label: 'Paso 1 completado: Pilas extraídas e inspeccionadas'
+                    title: '1. Identifica y separa por tipo',
+                    desc: 'Separa pilas alcalinas comunes (AA, AAA, D) de baterías recargables de litio o pilas de botón.',
+                    tip: 'NUNCA recargues ni calientes una pila que no sea expresamente rotulada como recargable.',
+                    label: 'Paso 1 completado: Pilas clasificadas'
                 },
                 {
-                    title: '2. Coloca cinta aislante en ambos polos',
-                    desc: 'Corta un trozo pequeño de cinta adhesiva transparente o de embalaje y cubre el polo positivo (+) y el polo negativo (-).',
-                    tip: 'Aislar los polos previene cortocircuitos accidentales y chispas al juntar varias pilas.',
+                    title: '2. Protege ambos polos con cinta adhesiva transparente',
+                    desc: 'Coloca un trozo de cinta aislante o de embalaje cubriendo el polo positivo (+) y negativo (-) de cada pila.',
+                    tip: 'El encintado de polos previene cortocircuitos e incendios por fricción dentro del contenedor.',
                     label: 'Paso 2 completado: Polos aislados con cinta'
                 },
                 {
-                    title: '3. Almacena en un contenedor plástico rígido seco',
-                    desc: 'Guarda las pilas encintadas en una botella PET seca o frasco plástico con tapa rosca, fuera del alcance de niños y mascotas.',
-                    tip: 'NUNCA las guardes en bolsas delgadas ni en recipientes metálicos.',
-                    label: 'Paso 3 completado: Empacadas en recipiente seco cerrado'
+                    title: '3. Almacena en un envase plástico seco con tapa',
+                    desc: 'Usa una botella plástica limpia o frasco plástico hermético para guardar las pilas en tu hogar.',
+                    tip: 'Guarda el frasco en un lugar fresco y fuera del alcance de niños y mascotas.',
+                    label: 'Paso 3 completado: Envasadas en contenedor seco'
                 },
                 {
-                    title: '4. Ubica un contenedor municipal rojo o punto de pilas',
-                    desc: 'Lleva el frasco al ecopunto municipal, supermercado autorizado o punto de acopio especial. ¡NUNCA las eches al tacho verde ni negro!',
-                    tip: 'Una sola pila alcalina contamina hasta 600 mil litros de agua si llega a un relleno común.',
-                    label: 'Paso 4 completado: Destino en contenedor especial verificado'
+                    title: '4. Ubica un contenedor especial rojo o de supermercado',
+                    desc: 'Llévalas a los depósitos identificados para pilas en farmacias, supermercados o municipios autorizados.',
+                    tip: 'NUNCA arrojes pilas en el tacho verde ni en la basura común de casa.',
+                    label: 'Paso 4 completado: Punto especial identificado'
                 }
             ]
         }
     };
     prepMatData.metal = prepMatData.lata;
 
-    if (prepCards[0] && prepCbs[0]) {
-        const urlParams = new URLSearchParams(window.location.search);
-        let curMat = urlParams.get('tipo') || 'pet';
+    if (prepCbs[0] && prepCards[0]) {
+        const prepUrlParams = new URLSearchParams(window.location.search);
+        let curMat = prepUrlParams.get('tipo') || 'pet';
         if (curMat === 'metal') curMat = 'lata';
-        const matData = prepMatData[curMat] || prepMatData.pet;
+
+        const curData = prepMatData[curMat] || prepMatData.pet;
 
         const pageTitle = document.getElementById('prep-page-title');
         const pageSub = document.getElementById('prep-page-subtitle');
         const wasteBreadcrumb = document.getElementById('breadcrumb-waste-link');
-        if (pageTitle) pageTitle.textContent = matData.pageTitle;
-        if (pageSub) pageSub.textContent = matData.sub;
+        if (pageTitle) pageTitle.textContent = curData.pageTitle;
+        if (pageSub) pageSub.textContent = curData.sub;
         if (wasteBreadcrumb) wasteBreadcrumb.href = `waste-detail.html?tipo=${curMat}`;
 
         const chips = document.querySelectorAll('.prep-mat-chip');
         chips.forEach(chip => {
-            const chipMat = chip.getAttribute('data-mat');
-            if (chipMat === curMat) {
+            const m = chip.getAttribute('data-mat');
+            if (m === curMat || (m === 'metal' && curMat === 'lata')) {
+                chip.classList.add('active');
                 chip.style.backgroundColor = '#0B4A30';
                 chip.style.color = '#FFFFFF';
-                chip.style.borderColor = '#0B4A30';
             } else {
+                chip.classList.remove('active');
                 chip.style.backgroundColor = '#FFFFFF';
                 chip.style.color = '#14251B';
-                chip.style.borderColor = '#DBE7DF';
             }
         });
 
-        matData.steps.forEach((st, idx) => {
+        curData.steps.forEach((step, idx) => {
             const titleEl = document.getElementById(`step-${idx + 1}-title`);
             const descEl = document.getElementById(`step-${idx + 1}-desc`);
             const tipEl = document.getElementById(`step-${idx + 1}-tip`);
             const labelEl = document.getElementById(`step-${idx + 1}-label`);
-            if (titleEl) titleEl.textContent = st.title;
-            if (descEl) descEl.textContent = st.desc;
-            if (tipEl) tipEl.innerHTML = `<strong>Recomendación:</strong> ${st.tip}`;
-            if (labelEl) labelEl.textContent = st.label;
+            if (titleEl) titleEl.textContent = step.title;
+            if (descEl) descEl.textContent = step.desc;
+            if (tipEl) tipEl.textContent = step.tip;
+            if (labelEl) labelEl.textContent = step.label;
         });
 
         const updateCascade = () => {
             let completed = 0;
-            prepCbs.forEach((cb, idx) => {
-                const card = prepCards[idx];
-                const pill = prepPills[idx];
-                if (!cb || !card) return;
 
-                const isPreviousCompleted = (idx === 0) || (prepCbs[idx - 1] && prepCbs[idx - 1].checked);
+            for (let i = 0; i < prepCbs.length; i++) {
+                const cb = prepCbs[i];
+                const card = prepCards[i];
+                const pill = prepPills[i];
 
-                if (!isPreviousCompleted) {
-                    cb.checked = false;
-                    cb.disabled = true;
-                    card.classList.add('locked');
-                    card.classList.remove('active-step', 'completed');
-                    if (pill) {
-                        pill.className = 'step-lock-pill';
-                        pill.textContent = `🔒 Bloqueado: Completa Paso ${idx}`;
-                    }
-                } else {
+                if (!cb || !card) continue;
+
+                if (i === 0) {
                     cb.disabled = false;
-                    card.classList.remove('locked');
-                    if (cb.checked) {
-                        completed++;
-                        card.classList.add('completed');
-                        card.classList.remove('active-step');
-                        if (pill) {
-                            pill.className = 'step-lock-pill done';
-                            pill.textContent = '✓ Listo';
-                        }
+                    card.classList.remove('card-disabled');
+                    card.style.opacity = '1';
+                } else {
+                    const prevChecked = prepCbs[i - 1].checked;
+                    if (prevChecked) {
+                        cb.disabled = false;
+                        card.classList.remove('card-disabled');
+                        card.style.opacity = '1';
                     } else {
-                        card.classList.remove('completed');
-                        card.classList.add('active-step');
-                        if (pill) {
-                            pill.className = 'step-lock-pill active';
-                            pill.textContent = '▶ En progreso';
-                        }
+                        cb.checked = false;
+                        cb.disabled = true;
+                        card.classList.add('card-disabled');
+                        card.style.opacity = '0.55';
                     }
                 }
-            });
 
-            const pct = completed * 25;
-            if (progressBarFill) progressBarFill.style.width = `${pct}%`;
-            if (progressBadge) progressBadge.textContent = `${completed} de 4`;
-            if (progressDesc) {
-                if (completed === 4) {
-                    progressDesc.textContent = '¡Excelente! Has completado los 4 pasos en orden de cascada. Tu residuo cumple todas las condiciones para una entrega exitosa.';
-                } else if (completed === 0) {
-                    progressDesc.textContent = 'Comienza marcando el Paso 1. Cada paso se desbloqueará en cascada conforme acondiciones tu residuo.';
+                if (cb.checked) {
+                    completed++;
+                    card.classList.add('card-completed');
+                    card.style.borderColor = '#1D8A57';
+                    card.style.backgroundColor = '#F4FAF6';
+                    if (pill) {
+                        pill.textContent = 'Completado';
+                        pill.style.backgroundColor = '#DFF3E6';
+                        pill.style.color = '#0B4A30';
+                    }
                 } else {
-                    progressDesc.textContent = `Paso ${completed} completado. Ahora puedes realizar y marcar el Paso ${completed + 1}.`;
+                    card.classList.remove('card-completed');
+                    card.style.borderColor = '#DBE7DF';
+                    card.style.backgroundColor = '#FFFFFF';
+                    if (pill) {
+                        pill.textContent = `Paso ${i + 1}`;
+                        pill.style.backgroundColor = '#EBF7F0';
+                        pill.style.color = '#0B4A30';
+                    }
                 }
+            }
+
+            const percent = (completed / 4) * 100;
+            if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+            if (progressBadge) progressBadge.textContent = `${completed} de 4 completados`;
+            if (progressDesc) {
+                if (completed === 0) progressDesc.textContent = 'Inicia con el Paso 1 para desbloquear los siguientes pasos en cascada.';
+                else if (completed === 4) progressDesc.textContent = '¡Excelente! Cumpliste todos los pasos obligatorios. Tu residuo está listo para la entrega.';
+                else progressDesc.textContent = `Has avanzado ${completed} de 4 pasos. Continúa con el Paso ${completed + 1}.`;
             }
 
             const btnSummary = document.getElementById('btn-to-summary') || document.querySelector('a[href^="prep-summary.html"]');
@@ -1204,7 +1999,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btnSummary.style.opacity = '0.6';
                     btnSummary.style.cursor = 'not-allowed';
                     btnSummary.style.backgroundColor = '#6C8A79';
-                    btnSummary.innerHTML = `<span>Completa los 4 pasos para continuar (${completed}/4)</span>`;
+                    btnSummary.innerHTML = `<span>Completa los 4 pasos en orden para continuar (${completed}/4)</span>`;
                     btnSummary.onclick = (e) => {
                         e.preventDefault();
                         alert(`Debes completar los pasos en orden de cascada. Actualmente te encuentras en el Paso ${completed + 1}.`);
@@ -1213,7 +2008,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btnSummary.style.opacity = '1';
                     btnSummary.style.cursor = 'pointer';
                     btnSummary.style.backgroundColor = '#0B4A30';
-                    btnSummary.innerHTML = `<span>✓ ¡Preparación completa! Ver resumen final</span><img src="../Images/icon-arrow-right.svg" alt="">`;
+                    btnSummary.innerHTML = `<span>¡Preparación completa! Ver resumen final</span><img src="../Images/icon-arrow-right.svg" alt="">`;
                     btnSummary.onclick = null;
                 }
             }
@@ -1243,98 +2038,110 @@ document.addEventListener('DOMContentLoaded', () => {
     const breadcrumbWaste = document.getElementById('breadcrumb-summary-waste');
     const breadcrumbGuide = document.getElementById('breadcrumb-summary-guide');
 
-    if (summaryTitle && summaryChecklist) {
-        const params = new URLSearchParams(window.location.search);
-        let curMat = params.get('tipo') || 'pet';
-        if (curMat === 'metal') curMat = 'lata';
+    const summaryMatData = {
+        pet: {
+            title: '¡Tu botella plástica para bebidas está lista!',
+            sub: 'Has completado los 4 pasos obligatorios de preparación. Tu residuo cumple todos los estándares para ser recibido en cualquier estación de acopio municipal.',
+            img: '../Images/prep-bottle-checklist.png',
+            crumb: 'Botellas plásticas',
+            checks: [
+                'Vaciada al 100% sin residuos de líquidos o refrescos fermentables.',
+                'Enjuagada rápidamente para evitar olores y fauna nociva.',
+                'Escurrida boca abajo y completamente seca al tacto.',
+                'Tapa desenroscada y guardada por separado para campañas de tapitas.',
+                'Cuerpo aplastado desde la base para ahorrar hasta 70% de volumen.'
+            ]
+        },
+        vidrio: {
+            title: '¡Tus envases de vidrio están listos!',
+            sub: 'Completaste los pasos de preparación segura. El vidrio entero limpio protege las manos de los recicladores y se funde al 100% sin merma.',
+            img: '../Images/delivery-glass.png',
+            crumb: 'Vidrio limpio',
+            checks: [
+                'Frasco totalmente limpio de mermelada, salsas o café.',
+                'Enjuagado con agua corriente sin manchas.',
+                'Escurrido e inspeccionado: frasco 100% entero sin fisuras.',
+                'Tapa metálica separada para el contenedor de metales.'
+            ]
+        },
+        carton: {
+            title: '¡Tus cajas de cartón están listas!',
+            sub: 'Cartón desarmado, libre de cintas y completamente seco. Listo para ser pesado y procesado en las plantas de celulosa.',
+            img: '../Images/delivery-cardboard.png',
+            crumb: 'Cartón y papel',
+            checks: [
+                'Cajas desarmadas y plegadas planas.',
+                'Cintas de embalaje y grapas retiradas.',
+                'Material 100% seco sin manchas de aceite ni humedad.',
+                'Paquetes apilados y atados para traslado seguro.'
+            ]
+        },
+        lata: {
+            title: '¡Tus latas de aluminio están listas!',
+            sub: 'Metales enjuagados, sin filos descubiertos y compactados lateralmente.',
+            img: '../Images/delivery-can.png',
+            crumb: 'Latas de aluminio',
+            checks: [
+                'Vaciadas de bebidas o conservas.',
+                'Enjuagadas con una gota de detergente para eliminar grasa.',
+                'Escurridas y secas.',
+                'Tapas filudas dobladas al interior y lata compactada.'
+            ]
+        },
+        pead: {
+            title: '¡Tus envases de limpieza están listos!',
+            sub: 'Galoneras y botellas de champú enjuagadas, secas y con dosificadores separados.',
+            img: '../Images/gallery-plastic-bottle.png',
+            crumb: 'Envases de limpieza',
+            checks: [
+                'Contenido agotado en su totalidad.',
+                'Interior enjuagado dos veces con agua limpia.',
+                'Envase seco al tacto.',
+                'Bombas dosificadoras mecánicas con resorte retiradas.'
+            ]
+        },
+        pilas: {
+            title: '¡Tus pilas están acondicionadas de forma segura!',
+            sub: 'Terminales aislados con cinta para prevenir chispas y guardadas en frasco plástico sellado para su entrega en puntos especiales.',
+            img: '../Images/category-hazardous.png',
+            crumb: 'Pilas y baterías',
+            checks: [
+                'Pilas clasificadas por tipo (alcalinas / recargables).',
+                'Polos positivo y negativo cubiertos con cinta adhesiva.',
+                'Guardadas en botella o envase plástico seco con tapa.',
+                'Listas para depositar en el contenedor rojo autorizado.'
+            ]
+        }
+    };
+    summaryMatData.metal = summaryMatData.lata;
 
-        const summaryData = {
-            pet: {
-                title: 'Tu botella PET está lista para entregar',
-                sub: 'Cumple con todas las condiciones técnicas exigidas por el Ministerio del Ambiente y los recicladores de Lima para ingresar a la cadena de valor sin ser rechazada.',
-                img: '../Images/waste-pet-bottle.png',
-                items: [
-                    { t: '1. Totalmente vacía', d: 'Sin restos de líquido residual ni sedimentos en el fondo.' },
-                    { t: '2. Enjuagada responsablemente', d: 'Sin manchas pegajosas, azúcares ni suciedad que atraiga insectos.' },
-                    { t: '3. Secada al aire', d: 'Completamente escurrida para no humedecer cartones ni papeles vecinos.' },
-                    { t: '4. Tapa separada y volumen reducido', d: 'Tapa de polipropileno aparte y cuerpo compactado al 70%.' }
-                ]
-            },
-            vidrio: {
-                title: 'Tu frasco o botella de vidrio está listo para entregar',
-                sub: 'Asegura la salud física de los recicladores y garantiza un ciclo de reciclaje infinito al 100% de pureza.',
-                img: '../Images/delivery-glass.png',
-                items: [
-                    { t: '1. Totalmente vacío', d: 'Sin restos de salsas, aderezos ni comida fermentada.' },
-                    { t: '2. Enjuagado sin grasa', d: 'Paredes de vidrio limpias y transparentes.' },
-                    { t: '3. Secado al aire', d: 'Sin agua estancada ni condensación interior.' },
-                    { t: '4. Tapas de hojalata separadas y vidrio ENTERO', d: 'Envase íntegro sin fisuras ni quiebres cortantes.' }
-                ]
-            },
-            carton: {
-                title: 'Tus cajas de cartón y Tetra Pak están listas para entregar',
-                sub: 'Fibras de celulosa preservadas de la humedad para un reciclaje óptimo de hasta 7 nuevos ciclos.',
-                img: '../Images/delivery-cardboard.png',
-                items: [
-                    { t: '1. Sin restos de alimentos', d: 'Completamente libre de grasas de comida o plásticos interiores.' },
-                    { t: '2. Cintas plásticas desprendidas', d: 'Sin cintas de embalaje gruesas que traben los pulpers.' },
-                    { t: '3. Totalmente aplanado', d: 'Aletas desplegadas para optimizar espacio.' },
-                    { t: '4. Atado en fardo seco', d: 'Apilado y protegido de cualquier fuente de humedad.' }
-                ]
-            },
-            lata: {
-                title: 'Tus latas de bebidas y conservas están listas para entregar',
-                sub: 'Aluminio y hojalata limpios de altísimo valor para las asociaciones de recicladores formalizados.',
-                img: '../Images/delivery-can.png',
-                items: [
-                    { t: '1. Drenadas por completo', d: 'Sin residuos líquidos ni aceite residual.' },
-                    { t: '2. Enjuagadas', d: 'Libres de salmuera o almíbar azucarado.' },
-                    { t: '3. Secadas al ambiente', d: 'Sin charcos de agua que causen corrosión prematura.' },
-                    { t: '4. Compactadas con filos protegidos', d: 'Tapas de conserva introducidas y borde apretado.' }
-                ]
-            },
-            pead: {
-                title: 'Tus envases PEAD #2 están listos para entregar',
-                sub: 'Plástico rígido descontaminado listo para molienda e inyección de nuevos productos duraderos.',
-                img: '../Images/gallery-plastic-bottle.png',
-                items: [
-                    { t: '1. Producto consumido', d: 'Aprovechado hasta la última gota de champú o detergente.' },
-                    { t: '2. Enjuagado con agua tibia', d: 'Sin espuma densa ni residuos químicos en las paredes.' },
-                    { t: '3. Escurrido boca abajo', d: 'Completamente seco al tacto.' },
-                    { t: '4. Bomba dispensadora retirada', d: 'Sin resortes metálicos que contaminen el lote de PEAD.' }
-                ]
-            },
-            pilas: {
-                title: 'Tus pilas alcalinas están acondicionadas con seguridad',
-                sub: 'Residuos peligrosos manipulados con responsabilidad cívica para no contaminar fuentes de agua ni tierra.',
-                img: '../Images/category-hazardous.png',
-                items: [
-                    { t: '1. Inspeccionadas', d: 'Revisadas sin fugas ácidas ni sulfatos libres.' },
-                    { t: '2. Polos aislados', d: 'Cinta adhesiva colocada en terminales positivo y negativo.' },
-                    { t: '3. Envasadas en plástico rígido', d: 'Guardadas en botella o frasco seco con tapa rosca.' },
-                    { t: '4. Destino especial verificado', d: 'Identificado contenedor rojo o punto de pilas municipal.' }
-                ]
-            }
-        };
+    if (summaryTitle) {
+        const sumParams = new URLSearchParams(window.location.search);
+        let sMat = sumParams.get('tipo') || 'pet';
+        if (sMat === 'metal') sMat = 'lata';
 
-        const sData = summaryData[curMat] || summaryData.pet;
+        const sData = summaryMatData[sMat] || summaryMatData.pet;
+
         summaryTitle.textContent = sData.title;
         if (summarySubtitle) summarySubtitle.textContent = sData.sub;
-        if (summaryImg) summaryImg.src = sData.img;
-        if (summaryBackLink) summaryBackLink.href = `prep-guide.html?tipo=${curMat}`;
-        if (breadcrumbWaste) breadcrumbWaste.href = `waste-detail.html?tipo=${curMat}`;
-        if (breadcrumbGuide) breadcrumbGuide.href = `prep-guide.html?tipo=${curMat}`;
+        if (summaryImg) {
+            summaryImg.src = sData.img;
+            summaryImg.alt = sData.title;
+        }
+        if (breadcrumbWaste) breadcrumbWaste.href = `waste-detail.html?tipo=${sMat}`;
+        if (breadcrumbGuide) breadcrumbGuide.href = `prep-guide.html?tipo=${sMat}`;
+        if (summaryBackLink) summaryBackLink.href = `prep-guide.html?tipo=${sMat}`;
 
-        summaryChecklist.innerHTML = sData.items.map(it => `
-            <li class="summary-check-item">
-                <img src="../Images/icon-check.svg" alt="">
-                <div class="summary-check-item-text">
-                    <strong>${it.t}</strong>
-                    <span>${it.d}</span>
+        if (summaryChecklist && sData.checks) {
+            summaryChecklist.innerHTML = sData.checks.map(c => `
+                <div class="summary-check-item flex Ycenter">
+                    <div class="summary-check-icon flex center">
+                        <img src="../Images/icon-check.svg" alt="" style="width: 14px; height: 14px;">
+                    </div>
+                    <span>${c}</span>
                 </div>
-                <span class="summary-status-tag">Listo</span>
-            </li>
-        `).join('');
+            `).join('');
+        }
     }
 
     const reportFileInput = document.getElementById('report-file-input');
@@ -1342,9 +2149,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reportFileInput && reportFileStatus) {
         reportFileInput.addEventListener('change', (e) => {
             if (e.target.files && e.target.files.length > 0) {
-                reportFileStatus.textContent = `Archivo seleccionado: ${e.target.files[0].name}`;
+                reportFileStatus.textContent = `Foto adjunta: ${e.target.files[0].name} (${Math.round(e.target.files[0].size / 1024)} KB)`;
                 reportFileStatus.style.color = '#1D8A57';
-                reportFileStatus.style.fontWeight = '700';
             }
         });
     }
@@ -1352,12 +2158,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const locationBtn = document.querySelector('.btn-my-location');
     if (locationBtn) {
         locationBtn.addEventListener('click', () => {
-            locationBtn.style.backgroundColor = '#EBF7F0';
-            locationBtn.style.color = '#0B4A30';
-            locationBtn.style.borderColor = '#1D8A57';
-            const span = locationBtn.querySelector('span');
-            if (span) {
-                span.textContent = 'Ubicación activa (San Miguel)';
+            const locInput = document.getElementById('loc-input') || document.querySelector('input[type="text"][placeholder*="dirección"]');
+            if (locInput) {
+                locInput.value = 'Av. La Marina con Av. Universitaria, San Miguel, Lima';
+                const span = locationBtn.querySelector('span');
+                if (span) span.textContent = 'Ubicación obtenida';
+                locationBtn.style.backgroundColor = '#EBF7F0';
             }
         });
     }
@@ -1366,7 +2172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formReport) {
         formReport.addEventListener('submit', (e) => {
             e.preventDefault();
-            window.location.href = 'report-success.html?ticket=INC-' + Math.floor(1000 + Math.random() * 9000);
+            window.location.href = 'report-success.html';
         });
     }
 
@@ -1374,7 +2180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formSuggest) {
         formSuggest.addEventListener('submit', (e) => {
             e.preventDefault();
-            window.location.href = 'report-success.html?ticket=SUG-' + Math.floor(1000 + Math.random() * 9000);
+            window.location.href = 'report-success.html';
         });
     }
 });

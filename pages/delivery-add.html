@@ -22,7 +22,7 @@
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
                 <a href="delivery.html" class="nav-link active">Mi entrega</a>
-                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
@@ -49,14 +49,14 @@
 
         <div class="delivery-layout">
             <div class="delivery-main-col">
-                <form action="delivery.html" method="GET" style="background-color: #FFFFFF; border: 1.5px solid #0B4A30; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(7, 53, 34, 0.06);">
+                <form id="form-add-material" action="delivery.html" method="GET" style="background-color: #FFFFFF; border: 1.5px solid #0B4A30; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(7, 53, 34, 0.06);">
                     <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 20px;">1. Selecciona el tipo de material aprovechable</h2>
 
                     <div class="material-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px;">
                         <label class="material-choice-card" style="border: 2px solid #0B4A30; background-color: #EBF7F0; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all 0.2s ease;">
                             <input type="radio" name="material-type" value="pet" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
                             <div>
-                                <strong style="font-size: 14.5px; color: #14251B; display: block;">Botellas plásticas (PET #1)</strong>
+                                <strong style="font-size: 14.5px; color: #14251B; display: block;">Botellas plásticas para bebidas</strong>
                                 <span style="font-size: 12px; color: #6C8A79;">Agua, gaseosas, néctares</span>
                             </div>
                         </label>
@@ -91,11 +91,11 @@
                     <div style="background-color: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 12px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                         <div>
                             <span style="font-size: 13.5px; font-weight: 700; color: #14251B; display: block;">Número de envases acondicionados</span>
-                            <span id="label-estimated-weight" style="font-size: 12px; color: #6C8A79;">Equivalente aproximado a 0.45 kg de plástico recuperable</span>
+                            <span id="label-estimated-weight" style="font-size: 12px; color: #6C8A79;">Equivalente aproximado a 0.45 kg de botellas plásticas</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <button type="button" id="btn-qty-minus" aria-label="Disminuir cantidad" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #DBE7DF; background-color: #FFFFFF; font-size: 18px; font-weight: 800; color: #0B4A30; cursor: pointer;">-</button>
-                            <input type="number" id="input-waste-qty" value="15" min="1" max="200" style="width: 60px; height: 36px; text-align: center; border: 1.5px solid #0B4A30; border-radius: 8px; font-size: 16px; font-weight: 800; color: #14251B;" readonly>
+                            <input type="number" id="input-waste-qty" value="15" min="1" max="200" style="width: 68px; height: 36px; text-align: center; border: 1.5px solid #0B4A30; border-radius: 8px; font-size: 16px; font-weight: 800; color: #14251B;">
                             <button type="button" id="btn-qty-plus" aria-label="Aumentar cantidad" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #DBE7DF; background-color: #FFFFFF; font-size: 18px; font-weight: 800; color: #0B4A30; cursor: pointer;">+</button>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         </label>
                         <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: not-allowed; opacity: 0.6;" id="label-cond-2">
                             <input type="checkbox" id="check-cond-2" disabled style="accent-color: #0B4A30; width: 18px; height: 18px;">
-                            <span id="span-cond-2">Se desenroscaron las tapas plásticas (polipropileno #5) y se separaron del cuerpo PET.</span>
+                            <span id="span-cond-2">Se desenroscaron las tapas plásticas y se separaron del envase principal.</span>
                         </label>
                         <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: not-allowed; opacity: 0.6;" id="label-cond-3">
                             <input type="checkbox" id="check-cond-3" disabled style="accent-color: #0B4A30; width: 18px; height: 18px;">
@@ -134,7 +134,7 @@
                     <span style="font-size: 11px; font-weight: 800; color: #1D8A57; text-transform: uppercase;">Estación predeterminada</span>
                     <h4 style="font-size: 15px; font-weight: 800; color: #0B4A30; margin: 4px 0 6px 0;">Estación Recicla San Miguel</h4>
                     <p style="font-size: 12.5px; color: #14251B; margin-bottom: 10px;">Distrito: San Miguel · 350 metros de distancia</p>
-                    <span style="background-color: #FFFFFF; color: #0B4A30; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 5px;">Acepta botellas PET</span>
+                    <span style="background-color: #FFFFFF; color: #0B4A30; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 5px;" id="sidebar-accepted-tag">Acepta botellas plásticas para bebidas</span>
                 </div>
             </aside>
         </div>

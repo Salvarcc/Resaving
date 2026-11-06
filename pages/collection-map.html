@@ -22,7 +22,7 @@
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link active">Puntos de acopio</a>
                 <a href="delivery.html" class="nav-link">Mi entrega</a>
-                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
@@ -81,7 +81,7 @@
             <div class="toolbar-row-filters">
                 <span class="filter-label">Filtrar por material:</span>
                 <button type="button" class="filter-chip active" data-filter="all">Todos los materiales</button>
-                <button type="button" class="filter-chip" data-filter="pet">Botellas plásticas (PET)</button>
+                <button type="button" class="filter-chip" data-filter="pet">Botellas plásticas para bebidas</button>
                 <button type="button" class="filter-chip" data-filter="vidrio">Vidrio</button>
                 <button type="button" class="filter-chip" data-filter="papel">Papel y Cartón</button>
                 <button type="button" class="filter-chip" data-filter="metal">Latas y Metales</button>
@@ -102,7 +102,7 @@
                     </p>
                     <p class="point-card-address">Ingreso peatonal frente a Plaza San Miguel. Atiende de lunes a domingo de 08:00 a 18:00.</p>
                     <div class="point-materials-row">
-                        <span class="mat-tag">Plástico PET</span>
+                        <span class="mat-tag">Botellas plásticas</span>
                         <span class="mat-tag">Vidrio</span>
                         <span class="mat-tag">Cartón</span>
                         <span class="mat-tag">Latas</span>
@@ -124,7 +124,7 @@
                     </p>
                     <p class="point-card-address">Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.</p>
                     <div class="point-materials-row">
-                        <span class="mat-tag">Plástico PET</span>
+                        <span class="mat-tag">Botellas plásticas</span>
                         <span class="mat-tag">Latas de conserva</span>
                         <span class="mat-tag">Papel</span>
                     </div>
@@ -144,7 +144,7 @@
                     </p>
                     <p class="point-card-address">Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.</p>
                     <div class="point-materials-row">
-                        <span class="mat-tag">Plástico PET</span>
+                        <span class="mat-tag">Botellas plásticas</span>
                         <span class="mat-tag">Vidrio</span>
                     </div>
                     <a href="point-detail.html?punto=metro" class="btn-outline-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
@@ -172,19 +172,21 @@
                 </article>
             </div>
 
-            <div class="map-visual-container">
+            <div class="map-visual-container" id="map-visual-container">
                 <img src="../Images/map-collection-points.svg" alt="Mapa de puntos de acopio en San Miguel y distritos vecinos" class="map-image-layer">
 
-                <div class="map-marker marker-1">1</div>
-                <div class="map-marker marker-2">2</div>
-                <div class="map-marker marker-3">3</div>
-                <div class="map-marker marker-4">4</div>
+                <div id="map-markers-layer">
+                    <div class="map-marker marker-1 selected" data-point-id="1">1</div>
+                    <div class="map-marker marker-2" data-point-id="2">2</div>
+                    <div class="map-marker marker-3" data-point-id="3">3</div>
+                    <div class="map-marker marker-4" data-point-id="4">4</div>
+                </div>
 
-                <div class="map-popup-card">
-                    <h4>Estación Recicla San Miguel</h4>
-                    <p>0.8 km · Abierto hoy hasta 18:00 · Acepta botellas PET, vidrio y cartón.</p>
-                    <a href="point-detail.html" class="btn-primary-action flex center" style="padding: 8px 14px; font-size: 12.5px; width: 100%;">
-                        <span>Cómo llegar</span>
+                <div class="map-popup-card" id="map-popup-card">
+                    <h4 id="popup-point-title">Estación Recicla San Miguel</h4>
+                    <p id="popup-point-desc">0.8 km · Abierto hoy hasta 18:00 · Acepta botellas plásticas para bebidas, vidrio y cartón.</p>
+                    <a id="popup-point-link" href="point-detail.html?punto=san-miguel-1" class="btn-primary-action flex center" style="padding: 8px 14px; font-size: 12.5px; width: 100%;">
+                        <span>Ver detalles</span>
                         <img src="../Images/icon-arrow-right.svg" alt="">
                     </a>
                 </div>
@@ -252,7 +254,7 @@
             </div>
 
             <div class="footer-bottom flex Ycenter">
-                <p class="footer-copy">© 2026 Resaving. Plataforma académica desarrollada para el curso HCI for UX Design - UPC.</p>
+                <p class="footer-copy">© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
                 <div class="footer-legal flex Ycenter">
                     <a href="../index.html#privacidad">Privacidad</a>
                     <span class="separator">·</span>

@@ -22,7 +22,7 @@
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link active">Puntos de acopio</a>
                 <a href="delivery.html" class="nav-link">Mi entrega</a>
-                <a href="../index.html#guia" class="nav-link">Guía de materiales</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
@@ -38,34 +38,34 @@
 
     <main class="point-detail-page container">
         <nav class="breadcrumb">
-            <a href="../index.html">Inicio</a> / <a href="collection-map.html">Puntos de acopio</a> / <span>Estación Recicla San Miguel</span>
+            <a href="../index.html">Inicio</a> / <a href="collection-map.html">Puntos de acopio</a> / <span id="point-breadcrumb-name">Estación Recicla San Miguel</span>
         </nav>
 
         <section class="point-detail-hero">
             <div class="point-detail-head">
                 <div>
-                    <h1 class="point-detail-title">Estación Recicla San Miguel</h1>
-                    <p class="point-entity-name">Municipalidad Distrital de San Miguel & Programa Recicla Lima</p>
+                    <h1 id="point-detail-title" class="point-detail-title">Estación Recicla San Miguel</h1>
+                    <p id="point-entity-name" class="point-entity-name">Municipalidad Distrital de San Miguel & Programa Recicla Lima</p>
                 </div>
-                <span class="point-status-badge badge-open" style="font-size: 13px; padding: 6px 14px;">Abierto hoy · 08:00 a 18:00</span>
+                <span id="point-status-badge" class="point-status-badge badge-open" style="font-size: 13px; padding: 6px 14px;">Abierto hoy · 08:00 a 18:00</span>
             </div>
 
             <div class="point-meta-strip">
                 <div class="meta-item">
                     <span class="meta-item-label">Dirección</span>
-                    <span class="meta-item-val">Cruce Av. La Marina con Av. Universitaria (Frente a Plaza San Miguel)</span>
+                    <span id="point-meta-address" class="meta-item-val">Cruce Av. La Marina con Av. Universitaria (Frente a Plaza San Miguel)</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-item-label">Distancia</span>
-                    <span class="meta-item-val">0.8 km (11 min a pie)</span>
+                    <span id="point-meta-distance" class="meta-item-val">0.8 km (11 min a pie)</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-item-label">Capacidad de tolva</span>
-                    <span class="meta-item-val">85% libre (vaciado hoy)</span>
+                    <span id="point-meta-capacity" class="meta-item-val">85% libre (vaciado hoy)</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-item-label">Promotor asignado</span>
-                    <span class="meta-item-val">Edgar Ramos (Reg. #SM-402)</span>
+                    <span id="point-meta-promoter" class="meta-item-val">Edgar Ramos (Reg. #SM-402)</span>
                 </div>
             </div>
         </section>
@@ -78,44 +78,46 @@
                         <span>Materiales y condiciones de recepción</span>
                     </h2>
 
-                    <div class="parts-grid" style="margin-bottom: 20px;">
-                        <div class="part-card">
-                            <div class="part-header">
-                                <h3 class="part-name">Botellas plásticas (PET)</h3>
-                                <span class="part-tag tag-recycle">Aceptado</span>
+                    <div id="point-materials-grid">
+                        <div class="parts-grid" style="margin-bottom: 20px;">
+                            <div class="part-card">
+                                <div class="part-header">
+                                    <h3 class="part-name">Botellas plásticas para bebidas</h3>
+                                    <span class="part-tag tag-recycle">Aceptado</span>
+                                </div>
+                                <p class="part-desc">Deben entregarse enjuagadas, escurridas, con la tapa retirada y aplastadas para ocupar menor volumen.</p>
                             </div>
-                            <p class="part-desc">Deben entregarse enjuagadas, escurridas, con la tapa retirada y aplastadas para ocupar menor volumen.</p>
+
+                            <div class="part-card">
+                                <div class="part-header">
+                                    <h3 class="part-name">Envases de vidrio</h3>
+                                    <span class="part-tag tag-recycle">Aceptado</span>
+                                </div>
+                                <p class="part-desc">Frascos y botellas enteros sin quebrar. Depositar suavemente en la boca de recepción acolchada.</p>
+                            </div>
                         </div>
 
-                        <div class="part-card">
-                            <div class="part-header">
-                                <h3 class="part-name">Envases de vidrio</h3>
-                                <span class="part-tag tag-recycle">Aceptado</span>
+                        <div class="parts-grid">
+                            <div class="part-card">
+                                <div class="part-header">
+                                    <h3 class="part-name">Cartón y papel</h3>
+                                    <span class="part-tag tag-recycle">Aceptado</span>
+                                </div>
+                                <p class="part-desc">Cajas corrugadas desarmadas y hojas secas. No se aceptan envases manchados con aceite o pizza.</p>
                             </div>
-                            <p class="part-desc">Frascos y botellas enteros sin quebrar. Depositar suavemente en la boca de recepción acolchada.</p>
+
+                            <div class="part-card">
+                                <div class="part-header">
+                                    <h3 class="part-name">Latas de conserva</h3>
+                                    <span class="part-tag tag-recycle">Aceptado</span>
+                                </div>
+                                <p class="part-desc">Latas de atún, leche y bebidas sin filos peligrosos y lavadas para no generar olores.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="parts-grid">
-                        <div class="part-card">
-                            <div class="part-header">
-                                <h3 class="part-name">Cartón y papel</h3>
-                                <span class="part-tag tag-recycle">Aceptado</span>
-                            </div>
-                            <p class="part-desc">Cajas corrugadas desarmadas y hojas secas. No se aceptan envases manchados con aceite o pizza.</p>
-                        </div>
-
-                        <div class="part-card">
-                            <div class="part-header">
-                                <h3 class="part-name">Latas de conserva</h3>
-                                <span class="part-tag tag-recycle">Aceptado</span>
-                            </div>
-                            <p class="part-desc">Latas de atún, leche y bebidas sin filos peligrosos y lavadas para no generar olores.</p>
-                        </div>
-                    </div>
-
-                    <div class="prep-step-tip" style="margin-top: 20px;">
-                        <strong>Aviso importante:</strong> Este punto NO recibe pilas ni fluorescentes. Para residuos peligrosos o RAEE acude a la Estación Plaza Bandera.
+                    <div id="point-safety-tip" class="prep-step-tip" style="margin-top: 20px;">
+                        <strong>Aviso importante:</strong> Este punto recibe residuos aprovechables limpios y secos. Para residuos especiales consulta campañas municipales.
                     </div>
                 </article>
 
@@ -198,7 +200,7 @@
 
                     <div class="message-template-box">
                         <strong style="font-size: 12.5px; color: #0B4A30; display: block; margin-bottom: 6px;">Mensaje sugerido para consultar:</strong>
-                        <p>“Hola, tengo un lote de botellas PET aplastadas y cartón limpio. ¿Se encuentran atendiendo normalmente hoy en Plaza San Miguel?”</p>
+                        <p>“Hola, tengo un lote de botellas plásticas para bebidas aplastadas y cartón limpio. ¿Se encuentran atendiendo normalmente hoy en Plaza San Miguel?”</p>
                         <button type="button" class="btn-outline-action flex center" style="width: 100%; font-size: 12.5px; padding: 8px;">
                             <span>Copiar texto de consulta</span>
                         </button>
@@ -268,7 +270,7 @@
             </div>
 
             <div class="footer-bottom flex Ycenter">
-                <p class="footer-copy">© 2026 Resaving. Plataforma académica desarrollada para el curso HCI for UX Design - UPC.</p>
+                <p class="footer-copy">© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
                 <div class="footer-legal flex Ycenter">
                     <a href="../index.html#privacidad">Privacidad</a>
                     <span class="separator">·</span>
