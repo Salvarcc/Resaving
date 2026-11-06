@@ -46,30 +46,32 @@
             <button type="button" class="mat-switch-btn active" data-mat="pet" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #0B4A30; background-color: #0B4A30; color: #FFFFFF; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Botellas plásticas (PET #1)</button>
             <button type="button" class="mat-switch-btn" data-mat="vidrio" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Frascos de vidrio</button>
             <button type="button" class="mat-switch-btn" data-mat="carton" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Cajas de cartón y Tetra Pak</button>
-            <button type="button" class="mat-switch-btn" data-mat="metal" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Latas de aluminio</button>
+            <button type="button" class="mat-switch-btn" data-mat="lata" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Latas de aluminio</button>
+            <button type="button" class="mat-switch-btn" data-mat="pead" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Envases PEAD #2</button>
+            <button type="button" class="mat-switch-btn" data-mat="pilas" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Pilas y baterías</button>
         </div>
 
         <section class="detail-hero flex">
             <div class="detail-img-box flex center">
-                <span class="detail-img-badge">Aprovechable</span>
+                <span id="detail-category-badge" class="detail-img-badge">Aprovechable</span>
                 <img src="../Images/waste-pet-bottle.png" id="detail-main-img" alt="Botella de plástico PET transparente para bebidas">
                 <span id="detail-code-badge" class="detail-code-badge">PET #1</span>
             </div>
 
             <div class="detail-info">
-                <p class="eyebrow">Información del material</p>
+                <p class="eyebrow" id="detail-eyebrow">Información del material</p>
                 <h1 id="detail-title" class="detail-title">Botellas de plástico de agua y gaseosa (PET #1)</h1>
                 <p id="detail-subtitle" class="detail-subtitle">La botella de plástico PET puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.</p>
 
-                <div class="detail-status-banner flex Ycenter">
-                    <img src="../Images/icon-check.svg" alt="" style="width: 22px; height: 22px;">
+                <div id="detail-status-banner" class="detail-status-banner flex Ycenter">
+                    <img id="detail-status-icon" src="../Images/icon-check.svg" alt="" style="width: 22px; height: 22px;">
                     <div>
-                        <strong>Condición verificada: Tacho Verde (Aprovechable)</strong>
-                        <p>Clasificación oficial según la Norma Técnica Peruana NTP 900.058:2019 de segregación de residuos.</p>
+                        <strong id="detail-status-title">Condición verificada: Tacho Verde (Aprovechable)</strong>
+                        <p id="detail-status-desc">Clasificación oficial según la Norma Técnica Peruana NTP 900.058:2019 de segregación de residuos.</p>
                     </div>
                 </div>
 
-                <div class="attr-grid">
+                <div id="detail-attr-grid" class="attr-grid">
                     <div class="attr-item">
                         <span class="attr-label">Material</span>
                         <span class="attr-val">Plástico PET #1</span>
@@ -97,7 +99,7 @@
                         <span>Ver qué se acepta y qué se rechaza</span>
                         <img src="../Images/icon-arrow-right.svg" alt="">
                     </a>
-                    <a href="prep-guide.html" class="btn-secondary-action flex Ycenter">
+                    <a href="prep-guide.html" id="detail-action-prep-btn" class="btn-secondary-action flex Ycenter">
                         <span>Prepararla paso a paso</span>
                     </a>
                     <a href="collection-map.html" class="btn-outline-action flex Ycenter">
@@ -108,10 +110,10 @@
         </section>
 
         <section class="section-block">
-            <h2 class="section-block-title">¿De qué componentes está formado?</h2>
-            <p class="section-block-desc">Cada elemento de la botella tiene un tratamiento específico de reciclaje. Revisa cómo separar cada parte antes de entregarla.</p>
+            <h2 id="detail-parts-title" class="section-block-title">¿De qué componentes está formado?</h2>
+            <p id="detail-parts-desc" class="section-block-desc">Cada elemento del residuo tiene un tratamiento específico de reciclaje. Revisa cómo separar cada parte antes de entregarlo.</p>
 
-            <div class="parts-grid">
+            <div id="detail-parts-grid" class="parts-grid">
                 <article class="part-card">
                     <div class="part-header">
                         <h3 class="part-name">Cuerpo de la botella</h3>
@@ -211,7 +213,7 @@
 
         <section class="section-block">
             <h2 class="section-block-title">Preguntas frecuentes sobre este material</h2>
-            <div class="glossary-accordion">
+            <div id="detail-faq-accordion" class="glossary-accordion">
                 <details class="glossary-item">
                     <summary class="glossary-question flex Ycenter">
                         <span>¿Por qué es necesario vaciar y escurrir la botella antes de reciclarla?</span>
@@ -246,11 +248,11 @@
 
         <section class="detail-cta-bar">
             <div class="detail-cta-text">
-                <h3>¿Listo para acondicionar tu botella PET?</h3>
-                <p>Sigue la guía rápida de preparación de 4 pasos para asegurarte de que tu residuo sea aceptado sin observaciones en cualquier punto de Lima.</p>
+                <h3 id="detail-cta-title">¿Listo para acondicionar tu botella PET?</h3>
+                <p id="detail-cta-desc">Sigue la guía rápida de preparación de 4 pasos para asegurarte de que tu residuo sea aceptado sin observaciones en cualquier punto de Lima.</p>
             </div>
             <div class="detail-cta-actions">
-                <a href="prep-guide.html" class="btn-cta-light">
+                <a href="prep-guide.html" id="detail-cta-prep-btn" class="btn-cta-light">
                     <span>Ir a Guía de preparación</span>
                     <img src="../Images/icon-arrow-right.svg" alt="">
                 </a>

@@ -38,24 +38,24 @@
 
     <main class="prep-summary-page container">
         <nav class="breadcrumb">
-            <a href="../index.html">Inicio</a> / <a href="categories.html">Residuos</a> / <a href="waste-detail.html">Botella PET</a> / <a href="prep-guide.html">Guía de preparación</a> / <span>Resumen final</span>
+            <a href="../index.html">Inicio</a> / <a href="categories.html">Residuos</a> / <a href="waste-detail.html" id="breadcrumb-summary-waste">Ficha del material</a> / <a href="prep-guide.html" id="breadcrumb-summary-guide">Guía de preparación</a> / <span>Resumen final</span>
         </nav>
 
         <section class="summary-hero-card">
             <div class="summary-img-box">
-                <img src="../Images/prep-bottle-checklist.png" alt="Botella de plástico acondicionada, aplastada y lista para reciclaje">
+                <img src="../Images/prep-bottle-checklist.png" id="summary-img" alt="Residuo acondicionado y listo para reciclaje">
             </div>
 
             <div class="summary-info">
                 <div class="summary-badge-success">
                     <img src="../Images/icon-check.svg" alt="" style="width: 16px; height: 16px;">
-                    <span>100% Preparación completada (4 de 4 pasos)</span>
+                    <span id="summary-badge-text">100% Preparación completada (4 de 4 pasos)</span>
                 </div>
 
-                <h1 class="summary-title">Tu botella PET está lista para entregar</h1>
-                <p class="summary-subtitle">Cumple con todas las condiciones técnicas exigidas por el Ministerio del Ambiente y los recicladores de Lima para ingresar a la cadena de valor sin ser rechazada.</p>
+                <h1 id="summary-title" class="summary-title">Tu botella PET está lista para entregar</h1>
+                <p id="summary-subtitle" class="summary-subtitle">Cumple con todas las condiciones técnicas exigidas por el Ministerio del Ambiente y los recicladores de Lima para ingresar a la cadena de valor sin ser rechazada.</p>
 
-                <ul class="summary-checklist">
+                <ul id="summary-checklist" class="summary-checklist">
                     <li class="summary-check-item">
                         <img src="../Images/icon-check.svg" alt="">
                         <div class="summary-check-item-text">
@@ -101,7 +101,7 @@
                     <a href="delivery.html" class="btn-secondary-action flex Ycenter">
                         <span>Añadir a Mi Entrega</span>
                     </a>
-                    <a href="prep-guide.html" class="btn-outline-action flex Ycenter">
+                    <a href="prep-guide.html" id="summary-back-link" class="btn-outline-action flex Ycenter">
                         <span>Volver a la guía</span>
                     </a>
                 </div>

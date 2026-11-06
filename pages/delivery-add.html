@@ -100,25 +100,25 @@
                         </div>
                     </div>
 
-                    <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 14px;">3. Confirmación obligatoria de preparación</h2>
+                    <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 14px;">3. Confirmación obligatoria de preparación en cascada</h2>
                     <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;">
-                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;">
-                            <input type="checkbox" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
-                            <span>Los envases fueron enjuagados rápidamente y están completamente secos (sin residuos líquidos).</span>
+                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;" id="label-cond-1">
+                            <input type="checkbox" id="check-cond-1" style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <span id="span-cond-1">Los envases fueron enjuagados rápidamente y están completamente secos (sin residuos líquidos).</span>
                         </label>
-                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;">
-                            <input type="checkbox" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
-                            <span>Se desenroscaron las tapas plásticas (polipropileno #5) y se separaron del cuerpo PET.</span>
+                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: not-allowed; opacity: 0.6;" id="label-cond-2">
+                            <input type="checkbox" id="check-cond-2" disabled style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <span id="span-cond-2">Se desenroscaron las tapas plásticas (polipropileno #5) y se separaron del cuerpo PET.</span>
                         </label>
-                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: pointer;">
-                            <input type="checkbox" checked style="accent-color: #0B4A30; width: 18px; height: 18px;">
-                            <span>Las botellas fueron aplastadas desde la base para reducir su volumen de transporte.</span>
+                        <label style="display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #14251B; cursor: not-allowed; opacity: 0.6;" id="label-cond-3">
+                            <input type="checkbox" id="check-cond-3" disabled style="accent-color: #0B4A30; width: 18px; height: 18px;">
+                            <span id="span-cond-3">Las botellas fueron aplastadas desde la base para reducir su volumen de transporte.</span>
                         </label>
                     </div>
 
                     <div style="display: flex; justify-content: flex-end; gap: 12px; padding-top: 18px; border-top: 1px solid #EEF3F0;">
                         <a href="delivery.html" style="padding: 12px 20px; background-color: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 8px; font-size: 13.5px; font-weight: 700; color: #6C8A79; text-decoration: none;">Cancelar</a>
-                        <button type="submit" style="padding: 12px 24px; background-color: #0B4A30; color: #FFFFFF; border: none; border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: pointer;">Agregar al lote de entrega</button>
+                        <button type="submit" id="btn-submit-delivery" style="padding: 12px 24px; background-color: #6C8A79; color: #FFFFFF; border: none; border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: not-allowed; opacity: 0.7;">Agregar al lote de entrega</button>
                     </div>
                 </form>
             </div>
