@@ -3717,3 +3717,98 @@ body {
     line-height: 1.5;
 }
 
+.week-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.day-pill-card {
+    background-color: #FFFFFF;
+    border: 1.5px solid #DBE7DF;
+    border-radius: 12px;
+    padding: 14px 8px;
+    text-align: center;
+}
+
+.day-pill-card.active {
+    border-color: #0B4A30;
+    background-color: #F7FAF8;
+    box-shadow: 0 2px 8px rgba(11, 74, 48, 0.08);
+}
+
+.day-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: #14251B;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.day-hours {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0B4A30;
+}
+
+.day-hours.empty {
+    color: #A0B2A6;
+    font-weight: 400;
+}
+
+.route-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.route-step-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background-color: #FFFFFF;
+    border: 1.5px solid #DBE7DF;
+    border-radius: 14px;
+}
+
+.route-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #0B4A30;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.radius-chips-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.radius-chip {
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1.5px solid #DBE7DF;
+    color: #3D5A4A;
+    background-color: #FFFFFF;
+}
+
+.radius-chip.active {
+    background-color: #0B4A30;
+    color: #FFFFFF;
+    border-color: #0B4A30;
+}
+
