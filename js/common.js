@@ -57,6 +57,12 @@ function initGlobalMobileHeaderAndNav() {
         burgerBtn.classList.toggle('active', isOpen);
         if (header) header.classList.toggle('nav-opened', isOpen);
         document.body.style.overflow = isOpen ? 'hidden' : '';
+
+        // Si se abre el menú drawer, ocultar cualquier toast activo para evitar solapamientos
+        if (isOpen) {
+            const activeToast = document.getElementById('pronto-toast');
+            if (activeToast) activeToast.classList.remove('is-visible');
+        }
     };
 
     burgerBtn.addEventListener('click', (e) => {
