@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFlip) {
         btnFlip.addEventListener('click', () => {
             isFrontCamera = !isFrontCamera;
-            const icon = btnFlip.querySelector('img');
             const span = btnFlip.querySelector('span');
             if (btnFlip.classList) btnFlip.classList.toggle('flipped');
             if (span) {
@@ -434,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
                     <td><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
                     <td>${item.prepSummary}</td>
-                    <td><span class="badge badge-green">${item.tolva}</span></td>
+                    <td><span class="badge badge-green" style="background-color: #0B4A30; color: #FFFFFF !important; font-weight: 700; padding: 4px 10px; border-radius: 6px; display: inline-block;">${item.tolva}</span></td>
                 </tr>
             `).join('');
         }
@@ -479,6 +478,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lotContainer) {
         renderDeliveryLot();
+    }
+
+    const deliveryCheckDiagnosis = document.querySelector('section[style*="background-color: #EBF7F0"]');
+    if (deliveryCheckDiagnosis && window.location.pathname.includes('delivery-check.html')) {
+        let lot = [];
+        try {
+            const raw = localStorage.getItem('resaving_user_lot');
+            if (raw) lot = JSON.parse(raw);
+        } catch (e) {}
+
+        if (Array.isArray(lot) && lot.length > 0) {
+            const titleEl = deliveryCheckDiagnosis.querySelector('h2');
+            const pEl = deliveryCheckDiagnosis.querySelector('p');
+            if (titleEl) {
+                titleEl.textContent = `¡Tu lote de ${lot.length} material(es) es 100% compatible para entrega!`;
+            }
+            if (pEl) {
+                const names = lot.map(it => it.name).join(', ');
+                pEl.textContent = `Todos los residuos registrados (${names}) corresponden a la categoría Verde y pueden recibirse sin observaciones.`;
+            }
+        }
+    }
+
+    const deliveryConfirmTable = document.querySelector('table tbody');
+    if (deliveryConfirmTable && window.location.pathname.includes('delivery-confirm.html')) {
+        let lot = [];
+        try {
+            const raw = localStorage.getItem('resaving_user_lot');
+            if (raw) lot = JSON.parse(raw);
+        } catch (e) {}
+
+        if (Array.isArray(lot) && lot.length > 0) {
+            deliveryConfirmTable.innerHTML = lot.map(item => `
+                <tr style="border-bottom: 1px solid #EEF3F0;">
+                    <td style="padding: 12px 18px; font-weight: 700; color: #14251B;">${item.name}</td>
+                    <td style="padding: 12px 18px; color: #6C8A79;">${item.qty} unidades</td>
+                    <td style="padding: 12px 18px; font-weight: 700; color: #14251B;">${item.weight} kg</td>
+                    <td style="padding: 12px 18px; text-align: right;"><span style="background-color: #EBF7F0; color: #0B4A30; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">Aprobado</span></td>
+                </tr>
+            `).join('');
+
+            const totalKg = lot.reduce((sum, it) => sum + (parseFloat(it.weight) || 0), 0).toFixed(2);
+            const tfootTd = document.querySelector('table tfoot td:last-child');
+            if (tfootTd) {
+                tfootTd.textContent = `${totalKg} kg aprovechables`;
+            }
+        }
     }
 
     const detailMatData = {
@@ -862,32 +908,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const districtStations = {
         'san-miguel': [
-            { id: '1', num: '1', name: 'Estación Recicla San Miguel', status: 'Abierto hoy', badge: 'badge-open', dist: '0.8 km · 11 min a pie · Cruce Av. La Marina con Universitaria', addr: 'Ingreso peatonal frente a Plaza San Miguel. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel'], x: 48, y: 42, promoter: 'Edgar Ramos (Reg. #SM-402)', capacity: '85% libre (vaciado hoy)' },
-            { id: '2', num: '2', name: 'Punto Limpio Parque Juan Pablo II', status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Riva Agüero cdra. 8', addr: 'Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Latas de conserva', 'Papel'], x: 65, y: 30, promoter: 'Rosa Quispe (Reg. #SM-205)', capacity: '60% libre' },
-            { id: '3', num: '3', name: 'Contenedor Verde Metro La Marina', status: 'Abierto 24h', badge: 'badge-open', dist: '1.9 km · 25 min a pie · Av. La Marina 2500', addr: 'Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.', mats: 'pet vidrio', tags: ['Botellas plásticas', 'Vidrio de conserva'], x: 35, y: 60, promoter: 'Caseta de Seguridad Metro', capacity: '75% libre' },
-            { id: '4', num: '4', name: 'Estación Ambiental Plaza Bandera', status: 'Cierra a las 17:00', badge: 'badge-closing', dist: '2.3 km · 7 min en auto · Límite con Pueblo Libre', addr: 'Punto de acopio municipal para materiales aprovechables y contenedor para pilas usadas.', mats: 'pet metal especial', tags: ['Multimaterial', 'Pilas y baterías'], x: 80, y: 25, promoter: 'Carlos Dávila (Reg. #SM-318)', capacity: '40% libre' }
+            { id: '1', num: '1', name: 'Estación Recicla San Miguel', km: 0.8, status: 'Abierto hoy', badge: 'badge-open', dist: '0.8 km · 11 min a pie · Cruce Av. La Marina con Universitaria', addr: 'Ingreso peatonal frente a Plaza San Miguel. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel', 'Latas'], x: 52, y: 44, promoter: 'Edgar Ramos (Reg. #SM-402)', capacity: '85% libre (vaciado hoy)' },
+            { id: '2', num: '2', name: 'Punto Limpio Parque Juan Pablo II', km: 1.4, status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Riva Agüero cdra. 8', addr: 'Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Latas de conserva', 'Papel'], x: 32, y: 35, promoter: 'Rosa Quispe (Reg. #SM-205)', capacity: '60% libre' },
+            { id: '3', num: '3', name: 'Contenedor Verde Metro La Marina', km: 1.9, status: 'Abierto 24h', badge: 'badge-open', dist: '1.9 km · 25 min a pie · Av. La Marina 2500', addr: 'Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.', mats: 'pet vidrio', tags: ['Botellas plásticas', 'Vidrio de conserva'], x: 46, y: 56, promoter: 'Caseta de Seguridad Metro', capacity: '75% libre' },
+            { id: '4', num: '4', name: 'Estación Ambiental Plaza Bandera', km: 2.3, status: 'Cierra a las 17:00', badge: 'badge-closing', dist: '2.3 km · 7 min en auto · Límite con Pueblo Libre', addr: 'Punto de acopio municipal para materiales aprovechables y contenedor para pilas usadas.', mats: 'pet metal especial', tags: ['Multimaterial', 'Pilas y baterías'], x: 75, y: 30, promoter: 'Carlos Dávila (Reg. #SM-318)', capacity: '40% libre' }
         ],
         'pueblo-libre': [
-            { id: '1', num: '1', name: 'Ecopunto Plaza Bolívar', status: 'Abierto hoy', badge: 'badge-open', dist: '0.6 km · 8 min a pie · Jr. Vivanco frente a Municipalidad', addr: 'Centro de reciclaje selectivo comunal. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel'], x: 50, y: 45, promoter: 'María Elena Fuentes (Reg. #PL-110)', capacity: '70% libre' },
-            { id: '2', num: '2', name: 'Módulo Ambiental Parque El Carmen', status: 'Abierto hoy', badge: 'badge-open', dist: '1.1 km · 14 min a pie · Av. Sucre cdra. 12', addr: 'Isla de segregación con promotor vecinal. Horario: 09:00 a 18:00.', mats: 'pet papel metal', tags: ['Botellas plásticas', 'Latas de aluminio', 'Papel bond'], x: 68, y: 35, promoter: 'Juan Paredes (Reg. #PL-142)', capacity: '50% libre' },
-            { id: '3', num: '3', name: 'Punto Verde Parque Candamo', status: 'Abierto hoy', badge: 'badge-open', dist: '1.8 km · 22 min a pie · Av. Del Río cuadra 3', addr: 'Contenedores para plástico, vidrio y contenedor rojo de pilas. Horario: 07:00 a 19:00.', mats: 'pet vidrio especial', tags: ['Botellas plásticas', 'Vidrio', 'Pilas alcalinas'], x: 32, y: 58, promoter: 'Sofía Delgado (Reg. #PL-203)', capacity: '80% libre' }
+            { id: '1', num: '1', name: 'Ecopunto Plaza Bolívar', km: 0.6, status: 'Abierto hoy', badge: 'badge-open', dist: '0.6 km · 8 min a pie · Jr. Vivanco frente a Municipalidad', addr: 'Centro de reciclaje selectivo comunal. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón y papel'], x: 50, y: 42, promoter: 'María Elena Fuentes (Reg. #PL-110)', capacity: '70% libre' },
+            { id: '2', num: '2', name: 'Módulo Ambiental Parque El Carmen', km: 1.1, status: 'Abierto hoy', badge: 'badge-open', dist: '1.1 km · 14 min a pie · Av. Sucre cdra. 12', addr: 'Isla de segregación con promotor vecinal. Horario: 09:00 a 18:00.', mats: 'pet papel metal', tags: ['Botellas plásticas', 'Latas de aluminio', 'Papel bond'], x: 65, y: 32, promoter: 'Juan Paredes (Reg. #PL-142)', capacity: '50% libre' },
+            { id: '3', num: '3', name: 'Punto Verde Parque Candamo', km: 1.8, status: 'Abierto hoy', badge: 'badge-open', dist: '1.8 km · 22 min a pie · Av. Del Río cuadra 3', addr: 'Contenedores para plástico, vidrio y contenedor rojo de pilas. Horario: 07:00 a 19:00.', mats: 'pet vidrio especial', tags: ['Botellas plásticas', 'Vidrio', 'Pilas alcalinas'], x: 35, y: 58, promoter: 'Sofía Delgado (Reg. #PL-203)', capacity: '80% libre' }
         ],
         'miraflores': [
-            { id: '1', num: '1', name: 'Punto Limpio Parque Kennedy', status: 'Abierto 24h', badge: 'badge-open', dist: '0.5 km · 7 min a pie · Parque Central de Miraflores (Diagonal)', addr: 'Estación soterrada de 4 bocas con promotor diurno. Horario 24h.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Latas'], x: 52, y: 48, promoter: 'Programa Basura Cero Miraflores', capacity: '90% libre' },
-            { id: '2', num: '2', name: 'Estación Ecológica Reducto', status: 'Abierto hoy', badge: 'badge-open', dist: '1.2 km · 15 min a pie · Parque Reducto N° 2 (Av. Benavides)', addr: 'Centro de segregación municipal y recepción de pequeños aparatos. Horario: 08:30 a 18:00.', mats: 'pet papel metal especial', tags: ['Cartón corrugado', 'Plásticos', 'Aparatos electrónicos'], x: 40, y: 65, promoter: 'Asoc. Recicladores Miraflores', capacity: '65% libre' },
-            { id: '3', num: '3', name: 'Ecopunto Malecón Cisneros', status: 'Abierto hoy', badge: 'badge-open', dist: '1.6 km · 20 min a pie · Malecón Cisneros cdra. 5', addr: 'Frente al Parque del Faro. Contenedores de alta capacidad. Horario: 07:00 a 19:00.', mats: 'pet vidrio', tags: ['Botellas de bebidas', 'Vidrio'], x: 25, y: 32, promoter: 'Serenazgo Miraflores Costa', capacity: '80% libre' },
-            { id: '4', num: '4', name: 'Centro de Acopio Estadio Manuel Bonilla', status: 'Abierto hoy', badge: 'badge-open', dist: '2.1 km · 8 min en auto · Av. Del Ejército cdra. 13', addr: 'Recepción general multimaterial, tolva para aceite vegetal y pilas. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal especial', tags: ['Multimaterial', 'Aceite vegetal', 'Pilas'], x: 72, y: 22, promoter: 'Subgerencia Limpieza Pública', capacity: '55% libre' }
+            { id: '1', num: '1', name: 'Punto Limpio Parque Kennedy', km: 0.5, status: 'Abierto 24h', badge: 'badge-open', dist: '0.5 km · 7 min a pie · Parque Central de Miraflores (Diagonal)', addr: 'Estación soterrada de 4 bocas con promotor diurno. Horario 24h.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Latas'], x: 52, y: 45, promoter: 'Programa Basura Cero Miraflores', capacity: '90% libre' },
+            { id: '2', num: '2', name: 'Estación Ecológica Reducto', km: 1.2, status: 'Abierto hoy', badge: 'badge-open', dist: '1.2 km · 15 min a pie · Parque Reducto N° 2 (Av. Benavides)', addr: 'Centro de segregación municipal y recepción de pequeños aparatos. Horario: 08:30 a 18:00.', mats: 'pet papel metal especial', tags: ['Cartón corrugado', 'Plásticos', 'Aparatos electrónicos'], x: 40, y: 62, promoter: 'Asoc. Recicladores Miraflores', capacity: '65% libre' },
+            { id: '3', num: '3', name: 'Ecopunto Malecón Cisneros', km: 1.6, status: 'Abierto hoy', badge: 'badge-open', dist: '1.6 km · 20 min a pie · Malecón Cisneros cdra. 5', addr: 'Frente al Parque del Faro. Contenedores de alta capacidad. Horario: 07:00 a 19:00.', mats: 'pet vidrio', tags: ['Botellas de bebidas', 'Vidrio'], x: 24, y: 34, promoter: 'Serenazgo Miraflores Costa', capacity: '80% libre' },
+            { id: '4', num: '4', name: 'Centro de Acopio Estadio Manuel Bonilla', km: 2.1, status: 'Abierto hoy', badge: 'badge-open', dist: '2.1 km · 8 min en auto · Av. Del Ejército cdra. 13', addr: 'Recepción general multimaterial, tolva para aceite vegetal y pilas. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal especial', tags: ['Multimaterial', 'Aceite vegetal', 'Pilas'], x: 68, y: 24, promoter: 'Subgerencia Limpieza Pública', capacity: '55% libre' }
         ],
         'magdalena': [
-            { id: '1', num: '1', name: 'Estación Recicla Plaza Túpac Amaru', status: 'Abierto hoy', badge: 'badge-open', dist: '0.7 km · 9 min a pie · Jr. Bolognesi cdra. 3', addr: 'Centro comunal frente a la iglesia del Sagrado Corazón. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Cartón', 'Latas'], x: 45, y: 40, promoter: 'Asoc. Recicla Magdalena', capacity: '75% libre' },
-            { id: '2', num: '2', name: 'Ecopunto Malecón Castagnola', status: 'Abierto hoy', badge: 'badge-open', dist: '1.3 km · 16 min a pie · Jr. Diego Ferré cruce con Malecón', addr: 'Contenedores verdes instalados con vista al mar. Horario: 07:00 a 18:00.', mats: 'pet vidrio', tags: ['Botellas para bebidas', 'Frascos de vidrio'], x: 30, y: 60, promoter: 'Serenazgo Costanera', capacity: '85% libre' },
-            { id: '3', num: '3', name: 'Punto Limpio Mercado Magdalena', status: 'Cierra a las 16:00', badge: 'badge-closing', dist: '1.5 km · 19 min a pie · Jr. Leoncio Prado cdra. 7', addr: 'Bahía de reciclaje posterior del mercado municipal. Horario: 07:00 a 16:00.', mats: 'pet papel organico', tags: ['Envases plásticos', 'Cartón limpio'], x: 65, y: 30, promoter: 'Comité Ambiental Mercado', capacity: '50% libre' }
+            { id: '1', num: '1', name: 'Estación Recicla Plaza Túpac Amaru', km: 0.7, status: 'Abierto hoy', badge: 'badge-open', dist: '0.7 km · 9 min a pie · Jr. Bolognesi cdra. 3', addr: 'Centro comunal frente a la iglesia del Sagrado Corazón. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Cartón', 'Latas'], x: 46, y: 38, promoter: 'Asoc. Recicla Magdalena', capacity: '75% libre' },
+            { id: '2', num: '2', name: 'Ecopunto Malecón Castagnola', km: 1.3, status: 'Abierto hoy', badge: 'badge-open', dist: '1.3 km · 16 min a pie · Jr. Diego Ferré cruce con Malecón', addr: 'Contenedores verdes instalados con vista al mar. Horario: 07:00 a 18:00.', mats: 'pet vidrio', tags: ['Botellas para bebidas', 'Frascos de vidrio'], x: 30, y: 58, promoter: 'Serenazgo Costanera', capacity: '85% libre' },
+            { id: '3', num: '3', name: 'Punto Limpio Mercado Magdalena', km: 1.5, status: 'Cierra a las 16:00', badge: 'badge-closing', dist: '1.5 km · 19 min a pie · Jr. Leoncio Prado cdra. 7', addr: 'Bahía de reciclaje posterior del mercado municipal. Horario: 07:00 a 16:00.', mats: 'pet papel organico', tags: ['Envases plásticos', 'Cartón limpio'], x: 62, y: 30, promoter: 'Comité Ambiental Mercado', capacity: '50% libre' }
         ],
         'surco': [
-            { id: '1', num: '1', name: 'Planta de Reciclaje EMUSAP Surco', status: 'Abierto hoy', badge: 'badge-open', dist: '0.9 km · 12 min a pie · Jr. Combate de Angamos s/n', addr: 'Planta modelo de segregación y valorización de residuos. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal especial', tags: ['Plásticos', 'Vidrio', 'Papel y cartón', 'Metales'], x: 55, y: 46, promoter: 'Programa Surco Recicla (EMUSAP)', capacity: '90% libre' },
-            { id: '2', num: '2', name: 'Ecopunto Parque de la Amistad', status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Caminos del Inca cruce con Benavides', addr: 'Punto limpio turístico al costado de la estación del tren. Horario: 08:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Frascos', 'Cartón'], x: 42, y: 32, promoter: 'Promotores Amistad Verde', capacity: '70% libre' },
-            { id: '3', num: '3', name: 'Módulo Verde Jockey Plaza', status: 'Abierto hoy', badge: 'badge-open', dist: '2.0 km · 6 min en auto · Av. Javier Prado Este 4200', addr: 'Zona de estacionamiento peatonal puerta 1. Horario comercial: 09:00 a 21:00.', mats: 'pet vidrio metal', tags: ['Botellas plásticas', 'Latas de bebidas'], x: 75, y: 20, promoter: 'Sostenibilidad Jockey', capacity: '80% libre' },
-            { id: '4', num: '4', name: 'Punto de Acopio Parque Voces por el Clima', status: 'Abierto hoy', badge: 'badge-open', dist: '2.8 km · 9 min en auto · Av. Los Castillos s/n', addr: 'Pabellón de reciclaje ecológico y recepción de ecoladrillos. Horario: 09:00 a 17:00.', mats: 'pet papel metal especial', tags: ['Multimaterial', 'Ecoladrillos', 'Pilas'], x: 60, y: 68, promoter: 'Centro Educación Ambiental Surco', capacity: '60% libre' }
+            { id: '1', num: '1', name: 'Planta de Reciclaje EMUSAP Surco', km: 0.9, status: 'Abierto hoy', badge: 'badge-open', dist: '0.9 km · 12 min a pie · Jr. Combate de Angamos s/n', addr: 'Planta modelo de segregación y valorización de residuos. Horario: 08:00 a 17:00.', mats: 'pet vidrio papel metal especial', tags: ['Plásticos', 'Vidrio', 'Papel y cartón', 'Metales'], x: 52, y: 44, promoter: 'Programa Surco Recicla (EMUSAP)', capacity: '90% libre' },
+            { id: '2', num: '2', name: 'Ecopunto Parque de la Amistad', km: 1.4, status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Caminos del Inca cruce con Benavides', addr: 'Punto limpio turístico al costado de la estación del tren. Horario: 08:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Frascos', 'Cartón'], x: 42, y: 30, promoter: 'Promotores Amistad Verde', capacity: '70% libre' },
+            { id: '3', num: '3', name: 'Módulo Verde Jockey Plaza', km: 2.0, status: 'Abierto hoy', badge: 'badge-open', dist: '2.0 km · 6 min en auto · Av. Javier Prado Este 4200', addr: 'Zona de estacionamiento peatonal puerta 1. Horario comercial: 09:00 a 21:00.', mats: 'pet vidrio metal', tags: ['Botellas plásticas', 'Latas de bebidas'], x: 72, y: 22, promoter: 'Sostenibilidad Jockey', capacity: '80% libre' },
+            { id: '4', num: '4', name: 'Punto de Acopio Parque Voces por el Clima', km: 2.8, status: 'Abierto hoy', badge: 'badge-open', dist: '2.8 km · 9 min en auto · Av. Los Castillos s/n', addr: 'Pabellón de reciclaje ecológico y recepción de ecoladrillos. Horario: 09:00 a 17:00.', mats: 'pet papel metal especial', tags: ['Multimaterial', 'Ecoladrillos', 'Pilas'], x: 58, y: 64, promoter: 'Centro Educación Ambiental Surco', capacity: '60% libre' }
         ]
     };
 
@@ -898,6 +944,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const popupTitle = document.getElementById('popup-point-title');
     const popupDesc = document.getElementById('popup-point-desc');
     const popupLink = document.getElementById('popup-point-link');
+    const sortSelector = document.getElementById('sort-selector');
 
     const updateMapPopup = (st, districtKey) => {
         if (!popupTitle || !popupDesc || !popupLink) return;
@@ -941,37 +988,68 @@ document.addEventListener('DOMContentLoaded', () => {
             updateMapPopup(stations[0], districtKey);
         }
 
-        if (listPointsContainer) {
-            listPointsContainer.innerHTML = stations.map(st => `
-                <article class="list-point-item" data-materials="${st.mats}">
-                    <div class="list-point-info">
-                        <div class="point-card-header">
-                            <h2 class="point-card-title">${st.num}. ${st.name}</h2>
-                            <span class="point-status-badge ${st.badge}">${st.status}</span>
-                        </div>
-                        <p class="point-card-distance">
-                            <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
-                            <span>${st.dist}</span>
-                        </p>
-                        <p class="point-card-address">${st.addr}</p>
-                        <div class="point-materials-row">
-                            ${st.tags.map(t => `<span class="mat-tag">${t}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div class="list-point-actions">
-                        <a href="point-detail.html?punto=${districtKey}-${st.id}" class="btn-primary-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
-                            <span>Ver ficha y horarios</span>
-                        </a>
-                        <a href="point-directions.html?punto=${districtKey}-${st.id}" class="btn-outline-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
-                            <span>Cómo llegar</span>
-                        </a>
-                    </div>
-                </article>
-            `).join('');
-        }
-
         bindMarkerAndCardEvents(districtKey, stations);
     };
+
+    const renderListView = (sortMode = 'distancia', filterMat = 'all') => {
+        if (!listPointsContainer) return;
+
+        let allPoints = [];
+        Object.keys(districtStations).forEach(dKey => {
+            districtStations[dKey].forEach(st => {
+                allPoints.push({ ...st, districtKey: dKey });
+            });
+        });
+
+        if (filterMat !== 'all') {
+            allPoints = allPoints.filter(p => p.mats.includes(filterMat));
+        }
+
+        if (sortMode === 'distancia') {
+            allPoints.sort((a, b) => a.km - b.km);
+        } else if (sortMode === 'alfabetico') {
+            allPoints.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortMode === 'materiales') {
+            allPoints.sort((a, b) => b.tags.length - a.tags.length);
+        } else if (sortMode === 'horario') {
+            allPoints.sort((a, b) => (b.status.includes('24h') ? 1 : 0) - (a.status.includes('24h') ? 1 : 0));
+        }
+
+        listPointsContainer.innerHTML = allPoints.map((st, idx) => `
+            <article class="list-point-item" data-materials="${st.mats}">
+                <div class="list-point-info">
+                    <div class="point-card-header">
+                        <h2 class="point-card-title">${idx + 1}. ${st.name}</h2>
+                        <span class="point-status-badge ${st.badge}">${st.status}</span>
+                    </div>
+                    <p class="point-card-distance">
+                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <span>${st.dist}</span>
+                    </p>
+                    <p class="point-card-address">${st.addr}</p>
+                    <div class="point-materials-row">
+                        ${st.tags.map(t => `<span class="mat-tag">${t}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="list-point-actions">
+                    <a href="point-detail.html?punto=${st.districtKey}-${st.id}" class="btn-primary-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
+                        <span>Ver ficha y horarios</span>
+                    </a>
+                    <a href="point-directions.html?punto=${st.districtKey}-${st.id}" class="btn-outline-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
+                        <span>Cómo llegar</span>
+                    </a>
+                </div>
+            </article>
+        `).join('');
+    };
+
+    if (sortSelector) {
+        sortSelector.addEventListener('change', () => {
+            const activeChip = document.querySelector('.filter-chip.active');
+            const curFilter = activeChip ? activeChip.getAttribute('data-filter') : 'all';
+            renderListView(sortSelector.value, curFilter);
+        });
+    }
 
     const bindMarkerAndCardEvents = (districtKey, stations) => {
         const pointCards = document.querySelectorAll('.point-card');
@@ -1025,6 +1103,10 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDistrictStations(districtSelector.value);
     }
 
+    if (listPointsContainer) {
+        renderListView();
+    }
+
     const allFilterChips = document.querySelectorAll('.filter-chip[data-filter]');
     if (allFilterChips.length > 0) {
         allFilterChips.forEach(chip => {
@@ -1034,6 +1116,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 chip.classList.add('active');
 
                 const filter = chip.getAttribute('data-filter');
+
+                if (listPointsContainer && sortSelector) {
+                    renderListView(sortSelector.value, filter);
+                    return;
+                }
+
                 const targetCards = document.querySelectorAll('.point-card, .list-point-item');
 
                 targetCards.forEach(card => {
@@ -1395,7 +1483,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Abono fértil',
             desc: 'Aportan nitrógeno y enriquecen la tierra de parques y biohuertos comunales. Retirar grapas metálicas de saquitos de té.',
-            img: '../Images/category-organic.png',
+            img: '../Images/accepted-separated-components.png',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -1406,7 +1494,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Restos de poda',
             desc: 'Materia orgánica seca que equilibra el compostaje. Deben entregarse sin alambres, plásticos ni piedras.',
-            img: '../Images/category-organic.png',
+            img: '../Images/accepted-empty-clean.png',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -1461,7 +1549,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Aparatos eléctricos',
             desc: 'Equipos electrónicos en desuso que requieren campañas municipales de acopio RAEE para recuperar metales valiosos y neutralizar tóxicos.',
-            img: '../Images/category-hazardous.png',
+            img: '../Images/gallery-special-waste.png',
             url: 'waste-detail.html?tipo=raee'
         },
         {
@@ -1483,7 +1571,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Tóxico no reciclable',
             desc: 'Los filtros de acetato de celulosa tardan más de una década en degradarse y concentran químicos tóxicos. Van al tacho negro.',
-            img: '../Images/category-sanitary.png',
+            img: '../Images/rejected-with-residue.png',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -1494,7 +1582,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Film metalizado',
             desc: 'Películas complejas de polipropileno con vaporizado de aluminio que no se separan industrialmente en Lima. Tacho negro.',
-            img: '../Images/category-sanitary.png',
+            img: '../Images/rejected-mixed-wet.png',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -1505,7 +1593,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Inerte común',
             desc: 'No funde con el vidrio de botellas por tener temperaturas distintas. Debe envolverse en papel grueso y disponerse en tacho negro.',
-            img: '../Images/category-sanitary.png',
+            img: '../Images/rejected-with-residue.png',
             url: 'waste-detail.html?tipo=no-aprovechable'
         }
     ];
@@ -1591,8 +1679,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-body flex-1">
                         <div class="result-badges flex Ycenter">
-                            <span class="badge ${item.badgeClass}">${item.catLabel}</span>
-                            <span class="badge badge-gray">${item.subBadge}</span>
+                            <span class="badge ${item.badgeClass}" style="color: #FFFFFF !important; font-weight: 800; padding: 4px 10px; border-radius: 6px;">${item.catLabel}</span>
+                            <span class="badge badge-gray" style="color: #0B4A30 !important; font-weight: 700; padding: 4px 10px; border-radius: 6px;">${item.subBadge}</span>
                         </div>
                         <h3>${item.name}</h3>
                         <p class="result-desc">${item.desc}</p>
@@ -1945,38 +2033,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (i === 0) {
                     cb.disabled = false;
+                    card.classList.remove('locked');
                     card.classList.remove('card-disabled');
                     card.style.opacity = '1';
                 } else {
                     const prevChecked = prepCbs[i - 1].checked;
                     if (prevChecked) {
                         cb.disabled = false;
+                        card.classList.remove('locked');
                         card.classList.remove('card-disabled');
                         card.style.opacity = '1';
+                        if (!cb.checked && pill) {
+                            pill.textContent = '▶ En progreso';
+                            pill.className = 'step-lock-pill active';
+                        }
                     } else {
                         cb.checked = false;
                         cb.disabled = true;
-                        card.classList.add('card-disabled');
-                        card.style.opacity = '0.55';
+                        card.classList.add('locked');
+                        card.classList.remove('active-step');
+                        card.classList.remove('card-completed');
+                        card.style.opacity = '0.65';
+                        if (pill) {
+                            pill.textContent = '🔒 Bloqueado';
+                            pill.className = 'step-lock-pill';
+                        }
                     }
                 }
 
                 if (cb.checked) {
                     completed++;
                     card.classList.add('card-completed');
+                    card.classList.remove('locked');
+                    card.classList.remove('active-step');
                     card.style.borderColor = '#1D8A57';
                     card.style.backgroundColor = '#F4FAF6';
                     if (pill) {
-                        pill.textContent = 'Completado';
+                        pill.textContent = '✓ Completado';
+                        pill.className = 'step-lock-pill done';
                         pill.style.backgroundColor = '#DFF3E6';
                         pill.style.color = '#0B4A30';
                     }
-                } else {
+                } else if (i === 0 || (prepCbs[i - 1] && prepCbs[i - 1].checked)) {
                     card.classList.remove('card-completed');
-                    card.style.borderColor = '#DBE7DF';
+                    card.classList.add('active-step');
+                    card.style.borderColor = '#0B4A30';
                     card.style.backgroundColor = '#FFFFFF';
                     if (pill) {
-                        pill.textContent = `Paso ${i + 1}`;
+                        pill.textContent = '▶ En progreso';
+                        pill.className = 'step-lock-pill active';
                         pill.style.backgroundColor = '#EBF7F0';
                         pill.style.color = '#0B4A30';
                     }

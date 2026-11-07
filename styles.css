@@ -1026,24 +1026,28 @@ body {
 }
 
 .badge-green {
-    background-color: #0F5B3A;
+    background-color: #0B4A30;
+    color: #FFFFFF !important;
 }
 
 .badge-brown {
-    background-color: #8D5B28;
+    background-color: #7D4F27;
+    color: #FFFFFF !important;
 }
 
 .badge-red {
-    background-color: #C93B2B;
+    background-color: #C0392B;
+    color: #FFFFFF !important;
 }
 
 .badge-black {
-    background-color: #2B322E;
+    background-color: #2C3E50;
+    color: #FFFFFF !important;
 }
 
 .badge-gray {
     background-color: #F0F9F3;
-    color: #0F5B3A;
+    color: #0B4A30 !important;
     border: 1px solid #DBE7DF;
 }
 
@@ -1279,9 +1283,11 @@ body {
 
 .badge {
     font-size: 11.5px;
-    font-weight: 700;
-    padding: 3px 8px;
+    font-weight: 800;
+    padding: 4px 10px;
     border-radius: 6px;
+    display: inline-block;
+    line-height: 1.3;
 }
 
 .result-body h3 {
@@ -2969,14 +2975,15 @@ body {
 
 .map-popup-card {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
     width: 290px;
     background-color: #FFFFFF;
     border: 1.5px solid #0B4A30;
     border-radius: 12px;
     padding: 16px;
-    box-shadow: 0 8px 24px rgba(7, 53, 34, 0.12);
+    box-shadow: 0 10px 28px rgba(7, 53, 34, 0.18);
+    z-index: 30;
 }
 
 .map-popup-card h4 {
