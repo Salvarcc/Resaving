@@ -6,6 +6,7 @@
     <title>Resaving - Puntos de Acopio: Mapa Interactivo</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/map.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link active">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -62,7 +63,7 @@
                     </select>
 
                     <button type="button" class="btn-my-location">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 16px; height: 16px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 16px; height: 16px;">
                         <span>Usar mi ubicación</span>
                     </button>
                 </div>
@@ -92,7 +93,7 @@
                         <span class="point-status-badge badge-open">Abierto</span>
                     </div>
                     <p class="point-card-distance">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
                         <span>0.8 km · 11 min a pie · Cruce Av. La Marina con Av. Universitaria</span>
                     </p>
                     <p class="point-card-address">Ingreso peatonal frente a Plaza San Miguel. Atiende de lunes a domingo de 08:00 a 18:00.</p>
@@ -104,7 +105,7 @@
                     </div>
                     <a href="point-detail.html" class="btn-primary-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
                         <span>Ver detalle y cómo llegar</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
                     </a>
                 </article>
 
@@ -114,7 +115,7 @@
                         <span class="point-status-badge badge-open">Abierto</span>
                     </div>
                     <p class="point-card-distance">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
                         <span>1.4 km · 18 min a pie · Av. Riva Agüero cdra. 8</span>
                     </p>
                     <p class="point-card-address">Contenedores verdes ubicados junto a la caseta de serenazgo del parque. Horario: 07:00 a 19:00.</p>
@@ -134,7 +135,7 @@
                         <span class="point-status-badge badge-open">Abierto 24h</span>
                     </div>
                     <p class="point-card-distance">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
                         <span>1.9 km · 25 min a pie · Av. La Marina 2500</span>
                     </p>
                     <p class="point-card-address">Área de estacionamiento del supermercado. Acceso vehicular y peatonal las 24 horas.</p>
@@ -153,7 +154,7 @@
                         <span class="point-status-badge badge-closing">Cierra a las 17:00</span>
                     </div>
                     <p class="point-card-distance">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
                         <span>2.3 km · 7 min en auto · Límite con Pueblo Libre</span>
                     </p>
                     <p class="point-card-address">Punto de acopio municipal para materiales aprovechables y contenedor seguro para pilas usadas.</p>
@@ -168,7 +169,7 @@
             </div>
 
             <div class="map-visual-container" id="map-visual-container">
-                <img src="../Images/map-collection-points.svg" alt="Mapa de puntos de acopio en San Miguel y distritos vecinos" class="map-image-layer">
+                <img src="../assets/icons/map-collection-points.svg" alt="Mapa de puntos de acopio en San Miguel y distritos vecinos" class="map-image-layer">
 
                 <div id="map-markers-layer">
                     <div class="map-marker marker-1 selected" data-point-id="1">1</div>
@@ -182,7 +183,7 @@
                     <p id="popup-point-desc">0.8 km · Abierto hoy hasta 18:00 · Acepta botellas plásticas para bebidas, vidrio y cartón.</p>
                     <a id="popup-point-link" href="point-detail.html?punto=san-miguel-1" class="btn-primary-action flex center" style="padding: 8px 14px; font-size: 12.5px; width: 100%;">
                         <span>Ver detalles</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
                     </a>
                 </div>
             </div>
@@ -196,9 +197,9 @@
             <div class="detail-cta-actions">
                 <a href="collection-list.html#rutas" class="btn-cta-light">
                     <span>Ver rutas domiciliarias</span>
-                    <img src="../Images/icon-arrow-right.svg" alt="">
+                    <img src="../assets/icons/icon-arrow-right.svg" alt="">
                 </a>
-                <a href="delivery.html" class="btn-cta-outline-white">Planificar mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="btn-cta-outline-white">Planificar mi entrega</a>
             </div>
         </section>
     </main>
@@ -209,7 +210,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -220,7 +221,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -245,6 +246,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/map.js" defer></script>
 </body>
 </html>

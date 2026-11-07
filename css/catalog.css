@@ -966,3 +966,227 @@
 .confusion-action strong {
     color: #0B4A30;
 }
+
+
+/* Mobile Responsive Overrides for Catalog, Waste Detail, Acceptability & Search */
+@media (max-width: 768px) {
+    .categories-grid {
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .category-card {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .category-img-box {
+        height: 160px !important;
+    }
+
+    .category-callout {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 18px !important;
+        padding: 22px 18px !important;
+    }
+
+    .callout-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .callout-actions a {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+
+    /* Ficha de residuo */
+    .waste-detail-page {
+        padding-top: 16px !important;
+        padding-bottom: 48px !important;
+    }
+
+    .detail-hero {
+        flex-direction: column !important;
+        padding: 18px 16px !important;
+        gap: 20px !important;
+        margin-bottom: 32px !important;
+    }
+
+    .detail-img-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 230px !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+        flex-shrink: 1 !important;
+    }
+
+    .detail-img-box img {
+        max-width: 100% !important;
+        max-height: 180px !important;
+        object-fit: contain !important;
+    }
+
+    .detail-info {
+        width: 100% !important;
+    }
+
+    .detail-title {
+        font-size: 22px !important;
+        line-height: 1.25 !important;
+    }
+
+    .detail-subtitle {
+        font-size: 14px !important;
+    }
+
+    .attr-grid,
+    .attributes-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 22px !important;
+    }
+
+    .detail-action-bar {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .detail-action-bar a,
+    .detail-action-bar button {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+
+    .material-switcher-bar {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 8px !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+    }
+
+    .mat-switch-btn {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    /* Criterios de aceptabilidad */
+    .criteria-columns {
+        flex-direction: column !important;
+        gap: 20px !important;
+        margin-bottom: 32px !important;
+        width: 100% !important;
+    }
+
+    .criteria-col {
+        width: 100% !important;
+        padding: 18px 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Tablas comparativas */
+    .comparison-table-wrap,
+    .comparison-matrix-table {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .comparison-matrix-table {
+        min-width: 560px !important;
+    }
+
+    /* Resultados de búsqueda */
+    .results-search-bar {
+        flex-direction: column !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    .filter-chips,
+    .category-filter-chips {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        flex-wrap: nowrap !important;
+        padding-bottom: 6px !important;
+        gap: 8px !important;
+    }
+
+    .chip,
+    .filter-chip {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    .candidate-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .candidate-card {
+        width: 100% !important;
+    }
+
+    .no-results-help {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 18px !important;
+        padding: 20px 16px !important;
+    }
+
+    .help-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .help-buttons a {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 46px !important;
+    }
+}
+
+    .confirm-actions-bar {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .confirm-actions-bar a {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+
+    .parts-grid {
+        flex-direction: column !important;
+        gap: 14px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .part-card {
+        width: 100% !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    .part-tag {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    .material-switcher-bar {
+        max-width: 100% !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+    }

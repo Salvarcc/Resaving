@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btnSummary.style.opacity = '1';
                     btnSummary.style.cursor = 'pointer';
                     btnSummary.style.backgroundColor = '#0B4A30';
-                    btnSummary.innerHTML = `<span>¡Preparación completa! Ver resumen final</span><img src="../Images/icon-arrow-right.svg" alt="">`;
+                    btnSummary.innerHTML = `<span>¡Preparación completa! Ver resumen final</span><img src="../assets/icons/icon-arrow-right.svg" alt="">`;
                     btnSummary.onclick = null;
                 }
             }
@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pet: {
             title: '¡Tu botella plástica para bebidas está lista!',
             sub: 'Has completado los 4 pasos obligatorios de preparación. Tu residuo cumple todos los estándares para ser recibido en cualquier estación de acopio municipal.',
-            img: '../Images/prep-bottle-checklist.png',
+            img: '../assets/images/prep-bottle-checklist.png',
             crumb: 'Botellas plásticas',
             checks: [
                 'Vaciada al 100% sin residuos de líquidos o refrescos fermentables.',
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         vidrio: {
             title: '¡Tus envases de vidrio están listos!',
             sub: 'Completaste los pasos de preparación segura. El vidrio entero limpio protege las manos de los recicladores y se funde al 100% sin merma.',
-            img: '../Images/delivery-glass.png',
+            img: '../assets/images/delivery-glass.png',
             crumb: 'Vidrio limpio',
             checks: [
                 'Frasco totalmente limpio de mermelada, salsas o café.',
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
         carton: {
             title: '¡Tus cajas de cartón están listas!',
             sub: 'Cartón desarmado, libre de cintas y completamente seco. Listo para ser pesado y procesado en las plantas de celulosa.',
-            img: '../Images/delivery-cardboard.png',
+            img: '../assets/images/delivery-cardboard.png',
             crumb: 'Cartón y papel',
             checks: [
                 'Cajas desarmadas y plegadas planas.',
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lata: {
             title: '¡Tus latas de aluminio están listas!',
             sub: 'Metales enjuagados, sin filos descubiertos y compactados lateralmente.',
-            img: '../Images/delivery-can.png',
+            img: '../assets/images/delivery-can.png',
             crumb: 'Latas de aluminio',
             checks: [
                 'Vaciadas de bebidas o conservas.',
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pead: {
             title: '¡Tus envases de limpieza están listos!',
             sub: 'Galoneras y botellas de champú enjuagadas, secas y con dosificadores separados.',
-            img: '../Images/gallery-plastic-bottle.png',
+            img: '../assets/images/gallery-plastic-bottle.png',
             crumb: 'Envases de limpieza',
             checks: [
                 'Contenido agotado en su totalidad.',
@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pilas: {
             title: '¡Tus pilas están acondicionadas de forma segura!',
             sub: 'Terminales aislados con cinta para prevenir chispas y guardadas en frasco plástico sellado para su entrega en puntos especiales.',
-            img: '../Images/category-hazardous.png',
+            img: '../assets/images/category-hazardous.png',
             crumb: 'Pilas y baterías',
             checks: [
                 'Pilas clasificadas por tipo (alcalinas / recargables).',
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
             summaryChecklist.innerHTML = sData.checks.map(c => `
                 <div class="summary-check-item flex Ycenter">
                     <div class="summary-check-icon flex center">
-                        <img src="../Images/icon-check.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-check.svg" alt="" style="width: 14px; height: 14px;">
                     </div>
                     <span>${c}</span>
                 </div>

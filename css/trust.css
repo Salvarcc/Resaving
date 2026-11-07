@@ -93,3 +93,25 @@
     padding: 6px 12px;
     cursor: pointer;
 }
+
+
+/* Mobile Responsive Overrides for Trust & Report Feedback */
+@media (max-width: 768px) {
+    .report-forms-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .form-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .form-actions button,
+    .form-actions a {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+}

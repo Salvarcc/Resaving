@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Resaving - Estilos Principales de la Solución
+   Archivo principal de estilos CSS (Estructura Handbook HCI for UX Design)
+   Universidad Peruana de Ciencias Aplicadas (UPC)
+   ========================================================================== */
+
+@import url('./base.css');
+@import url('./home.css');
+@import url('./catalog.css');
+@import url('./prep.css');
+@import url('./map.css');
+@import url('./trust.css');
+@import url('./delivery.css');

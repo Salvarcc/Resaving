@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
         pet: {
             title: 'Botellas plásticas para bebidas (Agua y refrescos)',
             sub: 'La botella plástica transparente puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.',
-            img: '../Images/waste-pet-bottle.png',
+            img: '../assets/images/waste-pet-bottle.png',
             badge: 'Tacho Verde · Plástico',
             crumb: 'Botellas plásticas para bebidas',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Clasificación oficial según la Norma Técnica Peruana NTP 900.058:2019 de segregación de residuos.',
-            bannerIcon: '../Images/icon-check.svg',
+            bannerIcon: '../assets/icons/icon-check.svg',
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
@@ -83,13 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
         vidrio: {
             title: 'Botellas y frascos de vidrio (100% aprovechables)',
             sub: 'El vidrio es un recurso noble infinitamente reciclable que nunca pierde calidad ni pureza. Debe entregarse entero y limpio.',
-            img: '../Images/delivery-glass.png',
+            img: '../assets/images/delivery-glass.png',
             badge: 'Tacho Verde · Vidrio',
             crumb: 'Frascos y botellas de vidrio',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'El vidrio se funde al 100% en hornos de reciclaje para producir nuevos frascos y botellas sin generar merma.',
-            bannerIcon: '../Images/icon-check.svg',
+            bannerIcon: '../assets/icons/icon-check.svg',
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
@@ -117,13 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
         carton: {
             title: 'Cajas de cartón corrugado y empaques de jugo',
             sub: 'Las fibras de celulosa pueden reciclarse hasta 7 veces. Deben mantenerse completamente secas y dobladas para optimizar el transporte.',
-            img: '../Images/delivery-cardboard.png',
+            img: '../assets/images/delivery-cardboard.png',
             badge: 'Tacho Verde · Papel y Cartón',
             crumb: 'Cajas de cartón y empaques',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Aceptado por todas las asociaciones de recicladores municipales cuando se mantiene seco y limpio.',
-            bannerIcon: '../Images/icon-check.svg',
+            bannerIcon: '../assets/icons/icon-check.svg',
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
@@ -151,13 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
         lata: {
             title: 'Latas de bebidas y conservas de aluminio / hojalata',
             sub: 'El reciclaje de aluminio ahorra el 95% de la energía frente a la extracción virgen. Enjuaga la lata y comprímela suavemente antes de entregar.',
-            img: '../Images/delivery-can.png',
+            img: '../assets/images/delivery-can.png',
             badge: 'Tacho Verde · Metales',
             crumb: 'Latas de aluminio',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Metal de altísimo valor de rescate comercial para el sustento de los recicladores de base.',
-            bannerIcon: '../Images/icon-check.svg',
+            bannerIcon: '../assets/icons/icon-check.svg',
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
@@ -185,13 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
         pead: {
             title: 'Envases rígidos de detergente, champú y yogur',
             sub: 'El plástico rígido de alta densidad es muy duradero. Se recicla para fabricar tuberías de riego, baldes y nuevas galoneras.',
-            img: '../Images/gallery-plastic-bottle.png',
+            img: '../assets/images/gallery-plastic-bottle.png',
             badge: 'Tacho Verde · Plástico rígido',
             crumb: 'Envases de detergente y champú',
             category: 'Aprovechable',
             bannerStatus: 'Condición verificada: Tacho Verde (Aprovechable)',
             bannerDesc: 'Plástico de gran demanda industrial. Requiere enjuague previo para evitar contaminación química.',
-            bannerIcon: '../Images/icon-check.svg',
+            bannerIcon: '../assets/icons/icon-check.svg',
             bannerColor: '#EBF7F0',
             bannerBorder: '#B8DEC9',
             attrs: [
@@ -218,13 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
         pilas: {
             title: 'Pilas alcalinas y baterías domésticas',
             sub: 'Las pilas contienen metales pesados. NUNCA las arrojes al tacho verde ni negro. Requieren entrega en contenedores rojos o ecopuntos especiales.',
-            img: '../Images/category-hazardous.png',
+            img: '../assets/images/category-hazardous.png',
             badge: 'Tacho Rojo · Peligroso',
             crumb: 'Pilas y baterías alcalinas',
             category: 'Peligrosos · Punto Especial',
             bannerStatus: 'Atención de Seguridad: Tacho Rojo o Punto Especial',
             bannerDesc: 'Prohibido mezclar con residuos aprovechables comunes. Debe depositarse en contenedores rotulados para pilas en supermercados o municipios.',
-            bannerIcon: '../Images/trust-alternative.svg',
+            bannerIcon: '../assets/icons/trust-alternative.svg',
             bannerColor: '#FDE8E8',
             bannerBorder: '#F87171',
             attrs: [
@@ -251,13 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
         bolsa: {
             title: 'Bolsas plásticas de compras y láminas flexibles',
             sub: 'Las bolsas delgadas no se procesan en tachos verdes comunes de Lima porque traban los molinos trituradores. Requieren ecopuntos de película plástica específica.',
-            img: '../Images/category-sanitary.png',
+            img: '../assets/images/category-sanitary.png',
             badge: 'Tacho Especial · Film',
             crumb: 'Bolsas plásticas de compras',
             category: 'Punto Específico',
             bannerStatus: 'Condición especial: No colocar en el tacho verde común',
             bannerDesc: 'Entregar únicamente en campañas municipales de ecoladrillos o módulos específicos para film flexible.',
-            bannerIcon: '../Images/trust-alternative.svg',
+            bannerIcon: '../assets/icons/trust-alternative.svg',
             bannerColor: '#FEF3C7',
             bannerBorder: '#FCD34D',
             attrs: [
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <details class="glossary-item">
                         <summary class="glossary-summary flex Ycenter">
                             <span>${item.q}</span>
-                            <img src="../Images/icon-chevron-down.svg" alt="" class="chevron-icon">
+                            <img src="../assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
                         </summary>
                         <div class="glossary-content">
                             <p>${item.a}</p>
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Plástico transparente',
             desc: 'Aceptada en todas las estaciones de acopio y contenedores verdes. Debe entregarse vacía, limpia, seca y compactada con la tapa separada.',
-            img: '../Images/waste-pet-bottle.png',
+            img: '../assets/images/waste-pet-bottle.png',
             url: 'waste-detail.html?tipo=pet'
         },
         {
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Vidrio',
             desc: 'Material 100% reciclable en infinitos ciclos. Debe entregarse entero, limpio y sin tapas metálicas ni corchos.',
-            img: '../Images/gallery-glass.png',
+            img: '../assets/images/gallery-glass.png',
             url: 'waste-detail.html?tipo=vidrio'
         },
         {
@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Papel y Cartón',
             desc: 'Cajas de encomiendas y hojas de papel secas. Desarmar las cajas para ahorrar espacio y atar en paquetes limpios.',
-            img: '../Images/delivery-cardboard.png',
+            img: '../assets/images/delivery-cardboard.png',
             url: 'waste-detail.html?tipo=carton'
         },
         {
@@ -488,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Metales',
             desc: 'Latas de bebidas y conservas enjuagadas sin restos de alimentos. Comprimir suavemente para facilitar transporte.',
-            img: '../Images/delivery-can.png',
+            img: '../assets/images/delivery-can.png',
             url: 'waste-detail.html?tipo=lata'
         },
         {
@@ -499,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Plástico rígido',
             desc: 'Envases plásticos opacos de alta densidad. Enjuagar para retirar restos de jabón o líquido y desenroscar dosificadores.',
-            img: '../Images/thumb-hdpe-bottle.svg',
+            img: '../assets/icons/thumb-hdpe-bottle.svg',
             url: 'waste-detail.html?tipo=pead'
         },
         {
@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Multicapa cartón',
             desc: 'Compuestos de cartón, aluminio y polietileno. Deben abrirse de las esquinas, enjuagarse y aplanarse secos.',
-            img: '../Images/category-recyclables.png',
+            img: '../assets/images/category-recyclables.png',
             url: 'waste-detail.html?tipo=carton'
         },
         {
@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Compostaje natural',
             desc: 'Restos vegetales crudos ideales para elaborar abono orgánico o compost municipal. No deben mezclarse con plásticos ni bolsas.',
-            img: '../Images/category-organic.png',
+            img: '../assets/images/category-organic.png',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Abono fértil',
             desc: 'Aportan nitrógeno y enriquecen la tierra de parques y biohuertos comunales. Retirar grapas metálicas de saquitos de té.',
-            img: '../Images/thumb-coffee-grounds.svg',
+            img: '../assets/icons/thumb-coffee-grounds.svg',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Restos de poda',
             desc: 'Materia orgánica seca que equilibra el compostaje. Deben entregarse sin alambres, plásticos ni piedras.',
-            img: '../Images/thumb-dry-leaves.svg',
+            img: '../assets/icons/thumb-dry-leaves.svg',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -554,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Mineral y calcio',
             desc: 'Excelente aporte de calcio para suelos. Se deben enjuagar ligeramente para no atraer moscas antes de colocarlas en el tacho marrón.',
-            img: '../Images/thumb-eggshells.svg',
+            img: '../assets/icons/thumb-eggshells.svg',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Punto especial',
             desc: 'Contienen metales pesados contaminantes. Prohibido arrojarlas al tacho verde o negro. Depositar en contenedores rojos o puntos en supermercados.',
-            img: '../Images/category-hazardous.png',
+            img: '../assets/images/category-hazardous.png',
             url: 'waste-detail.html?tipo=pilas'
         },
         {
@@ -576,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Contenedor farmacias',
             desc: 'No tirar por el inodoro ni a la basura común. Deben llevarse a los puntos azules de acopio instalados en farmacias y centros de salud.',
-            img: '../Images/accepted-empty-clean.png',
+            img: '../assets/images/accepted-empty-clean.png',
             url: 'waste-detail.html?tipo=medicamento'
         },
         {
@@ -587,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Vapor de mercurio',
             desc: 'Contienen mercurio gaseoso. Deben entregarse enteros dentro de su caja de cartón en centros de atención especializada.',
-            img: '../Images/thumb-lightbulb.svg',
+            img: '../assets/icons/thumb-lightbulb.svg',
             url: 'waste-detail.html?tipo=focos'
         },
         {
@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Aparatos eléctricos',
             desc: 'Equipos electrónicos en desuso que requieren campañas municipales de acopio RAEE para recuperar metales valiosos y neutralizar tóxicos.',
-            img: '../Images/gallery-special-waste.png',
+            img: '../assets/images/gallery-special-waste.png',
             url: 'waste-detail.html?tipo=raee'
         },
         {
@@ -609,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Relleno sanitario',
             desc: 'Residuos con carga biológica o sanitaria que no pueden recuperarse. Deben ir en bolsa bien cerrada al tacho negro común.',
-            img: '../Images/category-sanitary.png',
+            img: '../assets/images/category-sanitary.png',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -620,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Tóxico no reciclable',
             desc: 'Los filtros de acetato de celulosa tardan más de una década en degradarse y concentran químicos tóxicos. Van al tacho negro.',
-            img: '../Images/thumb-cigarettes.svg',
+            img: '../assets/icons/thumb-cigarettes.svg',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Film metalizado',
             desc: 'Películas complejas de polipropileno con vaporizado de aluminio que no se separan industrialmente en Lima. Tacho negro.',
-            img: '../Images/rejected-mixed-wet.webp',
+            img: '../assets/images/rejected-mixed-wet.webp',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -642,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Inerte común',
             desc: 'No funde con el vidrio de botellas por tener temperaturas distintas. Debe envolverse en papel grueso y disponerse en tacho negro.',
-            img: '../Images/thumb-ceramics.svg',
+            img: '../assets/icons/thumb-ceramics.svg',
             url: 'waste-detail.html?tipo=no-aprovechable'
         }
     ];
@@ -737,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="result-action">
                         <a href="${item.url}" class="btn-primary-action flex Ycenter">
                             <span>Ver detalles y preparación</span>
-                            <img src="../Images/icon-arrow-right.svg" alt="">
+                            <img src="../assets/icons/icon-arrow-right.svg" alt="">
                         </a>
                     </div>
                 </article>
@@ -805,12 +805,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 emptyBox.className = 'empty-notice-card';
                 emptyBox.innerHTML = `
                     <div style="background-color: #FFFFFF; border: 1.5px dashed #DBE7DF; border-radius: 14px; padding: 48px 24px; text-align: center; margin: 24px 0;">
-                        <img src="../Images/icon-check.svg" alt="" style="width: 44px; height: 44px; margin-bottom: 12px; opacity: 0.7;">
+                        <img src="../assets/icons/icon-check.svg" alt="" style="width: 44px; height: 44px; margin-bottom: 12px; opacity: 0.7;">
                         <h3 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 8px;">Historial eliminado con éxito</h3>
                         <p style="font-size: 13.5px; color: #6C8A79; max-width: 460px; margin: 0 auto 20px auto; line-height: 1.5;">Tus consultas y registros locales han sido borrados de este navegador. Puedes iniciar una nueva búsqueda cuando lo desees.</p>
                         <a href="search-results.html" class="btn-primary-action" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13.5px; text-decoration: none;">
                             <span>Explorar residuos</span>
-                            <img src="../Images/icon-arrow-right.svg" alt="">
+                            <img src="../assets/icons/icon-arrow-right.svg" alt="">
                         </a>
                     </div>
                 `;

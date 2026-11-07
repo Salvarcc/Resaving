@@ -6,6 +6,7 @@
     <title>Resaving - Estado y Aforo del Punto de Acopio</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/map.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link active">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -61,7 +62,7 @@
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+            <div class="status-capacities-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
                 <div style="background-color: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 12px; padding: 18px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <span style="font-size: 13px; font-weight: 800; color: #14251B;">Botellas plásticas para bebidas</span>
@@ -112,7 +113,7 @@
             </div>
         </section>
 
-        <section style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 36px;">
+        <section class="status-two-col-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 36px;">
             <div style="background-color: #FFFFFF; border: 1px solid #DBE7DF; border-radius: 14px; padding: 24px;">
                 <h3 style="font-size: 16.5px; font-weight: 800; color: #14251B; margin-bottom: 14px;">Condiciones del punto para tu entrega hoy</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
@@ -137,7 +138,7 @@
                     <p style="font-size: 13px; color: #6C8A79; margin-bottom: 18px;">Agrega tus botellas y latas al lote de entrega para registrar tu comprobante ciudadano.</p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <a href="delivery.html" style="padding: 11px 18px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13px; font-weight: 700; text-align: center; text-decoration: none;">Verificar con mi lote de entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" style="padding: 11px 18px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13px; font-weight: 700; text-align: center; text-decoration: none;">Verificar con mi lote de entrega</a>
                     <!-- Pantalla extra: point-directions.html --><a href="javascript:void(0)" style="padding: 10px 18px; background-color: #FFFFFF; border: 1px solid #0B4A30; color: #0B4A30; border-radius: 8px; font-size: 13px; font-weight: 700; text-align: center; text-decoration: none;">Ver indicaciones giro a giro</a>
                     <!-- Pantalla extra: report-feedback.html --><a href="javascript:void(0)" style="font-size: 12px; color: #6C8A79; text-align: center; text-decoration: underline;">Reportar contenedor lleno o dañado</a>
                 </div>
@@ -151,7 +152,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -162,7 +163,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -187,6 +188,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/map.js" defer></script>
 </body>
 </html>

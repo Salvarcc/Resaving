@@ -472,3 +472,215 @@
     flex-direction: column;
     gap: 24px;
 }
+
+
+/* Mobile Responsive Overrides for Collection Map, List, Point Detail & Routes */
+@media (max-width: 768px) {
+    .filter-toolbar {
+        padding: 16px !important;
+        gap: 14px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .toolbar-row-top {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    .location-input-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .location-select {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .btn-my-location {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 44px !important;
+    }
+
+    .filter-toolbar {
+        max-width: 100% !important;
+        width: 100% !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    .toolbar-row-filters {
+        max-width: 100% !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        flex-wrap: nowrap !important;
+        padding-bottom: 6px !important;
+        gap: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    .filter-chip {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    /* Mapa interactivo split view */
+    .map-split-view {
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 20px !important;
+    }
+
+    .map-points-list {
+        width: 100% !important;
+        max-height: 380px !important;
+        overflow-y: auto !important;
+        padding-right: 0 !important;
+        order: 2 !important;
+    }
+
+    .map-container {
+        width: 100% !important;
+        height: 320px !important;
+        min-height: 280px !important;
+        order: 1 !important;
+    }
+
+    /* Lista de puntos */
+    .list-point-item {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 18px 16px !important;
+        gap: 14px !important;
+    }
+
+    .list-point-info {
+        width: 100% !important;
+    }
+
+    .list-point-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+    }
+
+    .list-point-actions a {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 44px !important;
+    }
+
+    /* Ficha de detalle de punto */
+    .point-detail-layout {
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+    }
+
+    .point-col-main {
+        width: 100% !important;
+    }
+
+    .point-col-side {
+        width: 100% !important;
+        flex-shrink: 1 !important;
+    }
+
+    .point-header-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .point-meta-strip {
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 16px !important;
+    }
+
+    .parts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Rutas de recolección */
+    .week-calendar-grid {
+        display: flex !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 8px !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .day-pill-card {
+        flex: 0 0 calc((100% - 32px) / 5) !important;
+        min-width: 60px !important;
+        text-align: center !important;
+        padding: 10px 6px !important;
+    }
+}
+
+    .status-capacities-grid,
+    .status-two-col-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .alternative-option-card {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 16px !important;
+        gap: 14px !important;
+    }
+
+    .alternative-option-card a {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 44px !important;
+    }
+
+    .radius-chips-row {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        flex-wrap: nowrap !important;
+        padding-bottom: 6px !important;
+        gap: 8px !important;
+    }
+
+    .radius-chip {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    .point-detail-head {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    .point-detail-head span.point-status-badge {
+        align-self: flex-start !important;
+    }
+
+    .parts-grid {
+        flex-direction: column !important;
+        gap: 14px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .part-card {
+        width: 100% !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    .part-tag {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }

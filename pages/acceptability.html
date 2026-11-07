@@ -6,6 +6,7 @@
     <title>Resaving - Criterios de Aceptabilidad: Botella plástica para bebidas</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link active">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -52,7 +53,7 @@
             <div class="criteria-col col-accepted">
                 <div class="criteria-col-header">
                     <h2 class="criteria-col-title">
-                        <img src="../Images/icon-check.svg" alt="" style="width: 22px; height: 22px;">
+                        <img src="../assets/icons/icon-check.svg" alt="" style="width: 22px; height: 22px;">
                         <span>Condiciones Aceptadas</span>
                     </h2>
                     <span class="criteria-col-badge">Admitido para reciclaje</span>
@@ -61,7 +62,7 @@
                 <div class="criteria-card-list">
                     <article class="criteria-card">
                         <div class="criteria-img-box">
-                            <img src="../Images/accepted-empty-clean.png" alt="Botella de plástico limpia, seca y sin contenido residual">
+                            <img src="../assets/images/accepted-empty-clean.png" alt="Botella de plástico limpia, seca y sin contenido residual">
                         </div>
                         <div class="criteria-card-body">
                             <h3 class="criteria-card-title">1. Vacío, enjuagado y seco</h3>
@@ -71,7 +72,7 @@
 
                     <article class="criteria-card">
                         <div class="criteria-img-box">
-                            <img src="../Images/accepted-separated-components.png" alt="Botella plástica con la tapa desenroscada colocada a un costado">
+                            <img src="../assets/images/accepted-separated-components.png" alt="Botella plástica con la tapa desenroscada colocada a un costado">
                         </div>
                         <div class="criteria-card-body">
                             <h3 class="criteria-card-title">2. Tapa y etiqueta aparte</h3>
@@ -93,7 +94,7 @@
                 <div class="criteria-card-list">
                     <article class="criteria-card">
                         <div class="criteria-img-box">
-                            <img src="../Images/rejected-with-residue.png" alt="Botella plástica con residuos oscuros y líquidos en el fondo">
+                            <img src="../assets/images/rejected-with-residue.png" alt="Botella plástica con residuos oscuros y líquidos en el fondo">
                         </div>
                         <div class="criteria-card-body">
                             <h3 class="criteria-card-title">1. Con restos de líquidos o comida</h3>
@@ -103,7 +104,7 @@
 
                     <article class="criteria-card">
                         <div class="criteria-img-box">
-                            <img src="../Images/rejected-mixed-wet.webp" alt="Botellas plásticas mezcladas con cáscaras y residuos orgánicos húmedos">
+                            <img src="../assets/images/rejected-mixed-wet.webp" alt="Botellas plásticas mezcladas con cáscaras y residuos orgánicos húmedos">
                         </div>
                         <div class="criteria-card-body">
                             <h3 class="criteria-card-title">2. Mezclado con basura o químicos</h3>
@@ -156,7 +157,7 @@
             <div class="detail-cta-actions">
                 <a href="prep-guide.html" class="btn-cta-light" id="btn-accept-to-prep">
                     <span>Continuar a Preparación</span>
-                    <img src="../Images/icon-arrow-right.svg" alt="">
+                    <img src="../assets/icons/icon-arrow-right.svg" alt="">
                 </a>
                 <a href="waste-detail.html" class="btn-cta-outline-white" id="btn-accept-to-detail">Volver a la ficha</a>
             </div>
@@ -169,7 +170,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -180,7 +181,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -205,6 +206,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/catalog.js" defer></script>
 </body>
 </html>

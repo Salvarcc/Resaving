@@ -129,3 +129,98 @@
 .consolidated-table tr:last-child td {
     border-bottom: none;
 }
+
+
+/* Mobile Responsive Overrides for Delivery Lot, Add Material & History */
+@media (max-width: 768px) {
+    .delivery-layout {
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+    }
+
+    .delivery-main-col {
+        width: 100% !important;
+    }
+
+    .delivery-side-col {
+        width: 100% !important;
+        flex-shrink: 1 !important;
+    }
+
+    .lot-item-card {
+        padding: 14px !important;
+        gap: 12px !important;
+    }
+
+    .consolidated-table-wrap {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        width: 100% !important;
+        padding: 16px !important;
+    }
+
+    .consolidated-table {
+        min-width: 520px !important;
+    }
+
+    .delivery-action-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .delivery-action-buttons a,
+    .delivery-action-buttons button {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+}
+
+    .history-metrics-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    .history-metrics-header a {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .delivery-metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .history-record-card {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 16px !important;
+        gap: 14px !important;
+    }
+
+    .history-record-card > div:first-child {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    .history-record-card a {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .quantity-selector-card {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 16px !important;
+        gap: 14px !important;
+    }
+
+    .quantity-selector-card > div:last-child {
+        width: 100% !important;
+        justify-content: center !important;
+    }

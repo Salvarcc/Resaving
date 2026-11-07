@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Buscar un residuo por su nombre</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link active">Inicio</a>
+                <a href="categories.html" class="nav-link">Residuos</a>
+                <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
+            </nav>
+            
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
+                </a>
+                <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="Hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="attention-badge">Reciclaje claro y cercano</span>
+
+                <h1 class="hero-title">Reciclar empieza<br>por saber qué<br>tienes</h1>
+                <p class="hero-subtitle">Identifica cualquier residuo, aprende a prepararlo y encuentra un punto de acopio confiable cerca de ti.</p>
+
+                <div class="hero-search-wrap" style="position: relative; width: 100%; max-width: 680px;">
+                    <form class="hero-search-bar flex Ycenter" role="search" action="pages/search-results.html" method="GET">
+                        <img src="../assets/icons/icon-search.svg" alt="" class="search-input-icon">
+                        <input type="text" id="hero-search-input" name="q" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre" autocomplete="off">
+                        <button type="submit" class="btn-search">Buscar</button>
+                    </form>
+                    <div id="hero-search-suggestions" class="suggestions-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 100; background: #FFFFFF; border: 1.5px solid #0B4A30; border-radius: 12px; box-shadow: 0 12px 32px rgba(7, 53, 34, 0.16); overflow: hidden;"></div>
+                    <div class="hero-quick-chips flex Ycenter">
+                        <span style="font-size: 12px; font-weight: 700; color: rgba(255, 255, 255, 0.9);">Frecuentes:</span>
+                        <a href="waste-detail.html?tipo=pet" class="quick-chip">Botellas de plástico</a>
+                        <a href="waste-detail.html?tipo=vidrio" class="quick-chip">Frascos y vidrio</a>
+                        <a href="waste-detail.html?tipo=carton" class="quick-chip">Cajas y cartón</a>
+                        <a href="waste-detail.html?tipo=lata" class="quick-chip">Latas de aluminio</a>
+                        <a href="waste-detail.html?tipo=pead" class="quick-chip">Envases de limpieza</a>
+                        <a href="waste-detail.html?tipo=pilas" class="quick-chip">Pilas y baterías</a>
+                    </div>
+                </div>
+
+                <div class="hero-actions flex">
+                    <label for="hero-file-upload" class="btn-action-white flex Ycenter" style="cursor: pointer; text-decoration: none;">
+                        <img src="../assets/icons/icon-camera.svg" alt="">
+                        <span class="text-desktop-tablet">Adjuntar imagen</span>
+                        <span class="text-mobile">Adjuntar foto o tomar foto</span>
+                        <input type="file" id="hero-file-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                    </label>
+                    <a href="categories.html" class="btn-action-outline flex Ycenter" style="text-decoration: none;">
+                        <img src="../assets/icons/icon-categories.svg" alt="">
+                        <span>Ver las 4 categorías</span>
+                    </a>
+                </div>
+
+                <div class="hero-benefits flex Ycenter">
+                    <div class="benefit-item flex Ycenter">
+                        <img src="../assets/icons/icon-guide.svg" alt="">
+                        <span>Guía paso a paso</span>
+                    </div>
+                    <div class="benefit-item flex Ycenter">
+                        <img src="../assets/icons/icon-pin.svg" alt="">
+                        <span>Puntos con vigencia visible</span>
+                    </div>
+                    <div class="benefit-item flex Ycenter">
+                        <img src="../assets/icons/icon-book.svg" alt="">
+                        <span>Términos explicados</span>
+                    </div>
+                </div>
+
+                <div class="hero-audiences flex">
+                    <a href="#solicitar-info" class="audience-card flex Ycenter">
+                        <div class="audience-icon-wrap flex center">
+                            <img src="../assets/icons/icon-info-request.svg" alt="">
+                        </div>
+                        <div class="audience-text">
+                            <strong>Solicitar información</strong>
+                            <small>Recibe orientación por correo.</small>
+                        </div>
+                    </a>
+                    <a href="#gestores" class="audience-card flex Ycenter">
+                        <div class="audience-icon-wrap flex center">
+                            <img src="../assets/icons/icon-recycler.svg" alt="">
+                        </div>
+                        <div class="audience-text">
+                            <strong>Soy reciclador o encargado</strong>
+                            <small>Administra un punto de acopio.</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="landing-steps container">
+            <div class="section-head">
+                <p class="eyebrow">CÓMO FUNCIONA</p>
+                <h2 class="section-title">Del residuo a una entrega informada</h2>
+                <p class="section-subtitle">Tres pasos con alternativas cuando no deseas compartir una fotografía o ubicación.</p>
+            </div>
+
+            <div class="steps-grid flex">
+                <article class="step-card flex Ycenter">
+                    <div class="step-icon-wrap flex center">
+                        <img src="../assets/icons/step-identify.svg" alt="Paso 1: Identifica">
+                    </div>
+                    <div class="step-info">
+                        <strong>Identifica</strong>
+                        <small>Busca por nombre, categoría o fotografía.</small>
+                    </div>
+                    <span class="step-badge">1</span>
+                </article>
+
+                <article class="step-card flex Ycenter">
+                    <div class="step-icon-wrap flex center">
+                        <img src="../assets/icons/step-prepare.svg" alt="Paso 2: Prepara">
+                    </div>
+                    <div class="step-info">
+                        <strong>Prepara</strong>
+                        <small>Sigue instrucciones y revisa advertencias.</small>
+                    </div>
+                    <span class="step-badge">2</span>
+                </article>
+
+                <article class="step-card flex Ycenter">
+                    <div class="step-icon-wrap flex center">
+                        <img src="../assets/icons/step-deliver.svg" alt="Paso 3: Entrega">
+                    </div>
+                    <div class="step-info">
+                        <strong>Entrega</strong>
+                        <small>Compara mapa, lista, vigencia y compatibilidad.</small>
+                    </div>
+                    <span class="step-badge">3</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="context-gallery container flex" id="residuos">
+            <article class="gallery-card">
+                <div class="gallery-img-wrap">
+                    <img src="../assets/images/gallery-plastic-bottle.png" alt="Botella de plástico">
+                </div>
+                <div class="gallery-card-body">
+                    <strong>Botella de plástico</strong>
+                    <small>Ver preparación</small>
+                </div>
+            </article>
+
+            <article class="gallery-card">
+                <div class="gallery-img-wrap">
+                    <img src="../assets/images/gallery-glass.png" alt="Envase de vidrio">
+                </div>
+                <div class="gallery-card-body">
+                    <strong>Vidrio</strong>
+                    <small>Ver preparación</small>
+                </div>
+            </article>
+
+            <article class="gallery-card">
+                <div class="gallery-img-wrap">
+                    <img src="../assets/images/gallery-special-waste.png" alt="Residuos especiales y pilas">
+                </div>
+                <div class="gallery-card-body">
+                    <strong>Residuos especiales</strong>
+                    <small>Ver preparación</small>
+                </div>
+            </article>
+        </section>
+
+        <section class="trust-section container flex">
+            <div class="trust-copy">
+                <p class="eyebrow muted">INFORMACIÓN CONFIABLE</p>
+                <h2 class="section-title">Los datos deben mostrar quién los actualizó y cuándo</h2>
+                <p class="section-subtitle">Antes de desplazarte, revisa la vigencia, los materiales aceptados y la disponibilidad. Si encuentras una diferencia, envía un aporte para verificación.</p>
+                
+                <div class="trust-actions flex">
+                    <a href="waste-source.html" class="btn-trust-primary flex Ycenter">
+                        <span>Cómo se mantienen los datos</span>
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
+                    </a>
+                    <a href="collection-list.html" class="btn-trust-secondary flex Ycenter">
+                        <span>Ver puntos como lista</span>
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="trust-cards flex">
+                <article class="trust-card">
+                    <img src="../assets/icons/trust-validity.svg" alt="Vigencia visible" class="trust-icon">
+                    <strong>Vigencia visible</strong>
+                    <small>Fecha y responsable de la última actualización.</small>
+                </article>
+
+                <article class="trust-card">
+                    <img src="../assets/icons/trust-verify.svg" alt="Dato por verificar" class="trust-icon">
+                    <strong>Dato por verificar</strong>
+                    <small>El sistema señala información sin confirmación reciente.</small>
+                </article>
+
+                <article class="trust-card">
+                    <img src="../assets/icons/trust-alternative.svg" alt="Alternativa disponible" class="trust-icon">
+                    <strong>Alternativa disponible</strong>
+                    <small>Lista y búsqueda manual si no compartes ubicación.</small>
+                </article>
+            </div>
+        </section>
+
+        <section class="registration-section container flex" id="solicitar-info">
+            <aside class="registration-media">
+                <img src="../assets/images/student-campus.png" alt="Estudiante consultando reciclaje en campus" class="media-bg">
+                <div class="media-overlay"></div>
+                <div class="media-content">
+                    <span class="attention-badge">Conoce Resaving</span>
+                    <h2 class="media-title">Recibe orientación para empezar</h2>
+                    <p class="media-desc">Déjanos tus datos y te enviaremos información clara sobre residuos, puntos de acopio y uso de la plataforma.</p>
+                    
+                    <ul class="media-checklist">
+                        <li class="flex Ycenter">
+                            <img src="../assets/icons/icon-check.svg" alt="">
+                            <span>Información según tu necesidad</span>
+                        </li>
+                        <li class="flex Ycenter">
+                            <img src="../assets/icons/icon-check.svg" alt="">
+                            <span>Orientación clara y accesible</span>
+                        </li>
+                        <li class="flex Ycenter">
+                            <img src="../assets/icons/icon-check.svg" alt="">
+                            <span>Uso responsable de tus datos</span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="registration-panel">
+                <p class="eyebrow">MÁS INFORMACIÓN</p>
+                <h2 class="section-title">Solicita información</h2>
+                <p class="registration-lead">Completa tus datos y selecciona el tema que deseas conocer. Los campos con * son obligatorios.</p>
+
+                <form class="registration-form" action="#" method="POST">
+                    <div class="form-row flex">
+                        <div class="form-group flex-1">
+                            <label for="nombres">Nombres *</label>
+                            <input type="text" id="nombres" name="nombres" placeholder="Yeremy Pedro" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="apellidos">Apellidos *</label>
+                            <input type="text" id="apellidos" name="apellidos" placeholder="Acuña Chavez" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row flex">
+                        <div class="form-group flex-1">
+                            <label for="correo">Correo electrónico *</label>
+                            <input type="email" id="correo" name="correo" placeholder="Yemypro@gmail.com" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="distrito">Distrito *</label>
+                            <select id="distrito" name="distrito" required>
+                                <option value="">Selecciona tu distrito</option>
+                                <option value="ancon">Ancón</option>
+                                <option value="ate">Ate</option>
+                                <option value="barranco">Barranco</option>
+                                <option value="brena">Breña</option>
+                                <option value="carabayllo">Carabayllo</option>
+                                <option value="cercado-de-lima">Cercado de Lima (Lima)</option>
+                                <option value="chaclacayo">Chaclacayo</option>
+                                <option value="chorrillos">Chorrillos</option>
+                                <option value="cieneguilla">Cieneguilla</option>
+                                <option value="comas">Comas</option>
+                                <option value="el-agustino">El Agustino</option>
+                                <option value="independencia">Independencia</option>
+                                <option value="jesus-maria">Jesús María</option>
+                                <option value="la-molina">La Molina</option>
+                                <option value="la-victoria">La Victoria</option>
+                                <option value="lince">Lince</option>
+                                <option value="los-olivos">Los Olivos</option>
+                                <option value="lurigancho-chosica">Lurigancho-Chosica</option>
+                                <option value="lurin">Lurín</option>
+                                <option value="magdalena-del-mar">Magdalena del Mar</option>
+                                <option value="miraflores">Miraflores</option>
+                                <option value="pachacamac">Pachacámac</option>
+                                <option value="pucusana">Pucusana</option>
+                                <option value="pueblo-libre">Pueblo Libre</option>
+                                <option value="puente-piedra">Puente Piedra</option>
+                                <option value="punta-hermosa">Punta Hermosa</option>
+                                <option value="punta-negra">Punta Negra</option>
+                                <option value="rimac">Rímac</option>
+                                <option value="san-bartolo">San Bartolo</option>
+                                <option value="san-borja">San Borja</option>
+                                <option value="san-isidro">San Isidro</option>
+                                <option value="san-juan-de-lurigancho">San Juan de Lurigancho</option>
+                                <option value="san-juan-de-miraflores">San Juan de Miraflores</option>
+                                <option value="san-luis">San Luis</option>
+                                <option value="san-martin-de-porres">San Martín de Porres</option>
+                                <option value="san-miguel">San Miguel</option>
+                                <option value="santa-anita">Santa Anita</option>
+                                <option value="santa-maria-del-mar">Santa María del Mar</option>
+                                <option value="santa-rosa">Santa Rosa</option>
+                                <option value="santiago-de-surco">Santiago de Surco</option>
+                                <option value="surquillo">Surquillo</option>
+                                <option value="villa-el-salvador">Villa El Salvador</option>
+                                <option value="villa-maria-del-triunfo">Villa María del Triunfo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tema">Tema de interés *</label>
+                        <select id="tema" name="tema" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="identificacion">Identificación de residuos</option>
+                            <option value="puntos">Puntos de acopio cercanos</option>
+                            <option value="gestor">Registro de reciclador o encargado</option>
+                            <option value="guias">Talleres y guías de preparación</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="consulta">¿Qué deseas conocer? *</label>
+                        <textarea id="consulta" name="consulta" rows="3" placeholder="Escribe brevemente tu consulta" required></textarea>
+                    </div>
+
+                    <div class="security-note flex Ycenter">
+                        <img src="../assets/icons/icon-lock.svg" alt="Seguridad" class="lock-icon">
+                        <div class="security-text">
+                            <strong>Uso responsable de datos</strong>
+                            <small>Usaremos esta información únicamente para responder tu solicitud. No compartas datos sensibles.</small>
+                        </div>
+                    </div>
+
+                    <div class="consent-row flex Ycenter">
+                        <input type="checkbox" id="consentimiento" name="consentimiento" required>
+                        <label for="consentimiento">Acepto el tratamiento de mis datos para recibir información sobre Resaving. <a href="#privacidad">Leer privacidad</a></label>
+                    </div>
+
+                    <div class="form-submit flex Ycenter">
+                        <button type="submit" class="btn-submit flex Ycenter">
+                            <span>Solicitar información</span>
+                            <img src="../assets/icons/icon-arrow-right.svg" alt="">
+                        </button>
+                        <p class="form-feedback">Responderemos al correo electrónico indicado.</p>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="home-glossary container flex">
+            <div class="glossary-head">
+                <p class="eyebrow">AYUDA CONTEXTUAL</p>
+                <h2 class="section-title">¿Qué significa cada categoría?</h2>
+                <p class="section-subtitle">Consulta únicamente la explicación que necesites.</p>
+            </div>
+
+            <div class="glossary-accordion flex">
+                <details class="glossary-item">
+                    <summary class="glossary-summary flex Ycenter">
+                        <span>Botella de plástico</span>
+                        <img src="../assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
+                    </summary>
+                    <div class="glossary-content">
+                        <p>Pertenecen a los residuos aprovechables (plásticos). Deben entregarse vacías, limpias, secas y aplastadas, con la tapa y etiqueta separadas para facilitar el reciclaje.</p>
+                    </div>
+                </details>
+
+                <details class="glossary-item">
+                    <summary class="glossary-summary flex Ycenter">
+                        <span>Vidrio</span>
+                        <img src="../assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
+                    </summary>
+                    <div class="glossary-content">
+                        <p>Material aprovechable 100% reciclable. Incluye botellas y frascos sin tapas metálicas ni corchos. No se deben mezclar con espejos, focos ni cristales de ventanas rotos.</p>
+                    </div>
+                </details>
+
+                <details class="glossary-item">
+                    <summary class="glossary-summary flex Ycenter">
+                        <span>Residuos especiales</span>
+                        <img src="../assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
+                    </summary>
+                    <div class="glossary-content">
+                        <p>Residuos de manejo especial o peligroso como pilas, baterías, focos fluorescentes y RAEE (electrónicos). Requieren contenedores diferenciados y puntos de acopio autorizados.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container">
+            <div class="footer-grid flex">
+                <div class="footer-brand">
+                    <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
+                        <div class="brand-mark flex center" style="width: 36px; height: 36px;">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                        </div>
+                        <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
+                    </a>
+                    <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Explorar</h5>
+                    <a href="categories.html">Categorías</a>
+                    <a href="collection-map.html">Puntos de acopio</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Confianza</h5>
+                    <a href="waste-source.html">Vigencia de datos</a>
+                    <a href="#vigencia">Privacidad y seguridad</a>
+                    <!-- Pantalla extra: report-feedback.html -->
+                    <a href="javascript:void(0)">Reportar información</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Accesibilidad</h5>
+                    <a href="javascript:void(0)">Escuchar esta pantalla</a>
+                    <a href="collection-list.html">Alternativa textual al mapa</a>
+                    <p class="accessibility-note">Navegable con teclado y etiquetas visibles.</p>
+                </div>
+            </div>
+
+            <div class="footer-legal flex Ycenter">
+                <p>© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js" defer></script>
+    <script src="../js/home.js" defer></script>
+</body>
+</html>

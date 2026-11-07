@@ -2,7 +2,7 @@
 
 .hero-section {
     position: relative;
-    background-image: url('../Images/hero-banner.webp');
+    background-image: url('../assets/images/hero-banner.webp');
     background-size: cover;
     background-position: center;
     min-height: 600px;
@@ -616,4 +616,180 @@
     border-top: 1px solid #DBE7DF;
     padding: 56px 0 72px 0;
     gap: 48px;
+}
+
+
+/* Mobile Responsive Overrides for Home Page */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: auto;
+        padding: 32px 0 44px 0;
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    .hero-title {
+        font-size: 30px !important;
+        letter-spacing: -1px !important;
+        line-height: 1.18 !important;
+        margin-bottom: 12px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 14.5px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 18px !important;
+    }
+
+    .hero-search-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .hero-search-bar {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 6px 6px 6px 14px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .hero-search-bar input {
+        font-size: 15px !important;
+        min-width: 0 !important;
+    }
+
+    .btn-search {
+        padding: 10px 18px !important;
+        font-size: 14px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .hero-quick-chips {
+        margin-top: 12px !important;
+        margin-bottom: 22px !important;
+        gap: 8px 10px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .quick-chip {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .hero-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .btn-action-white,
+    .btn-action-outline {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+        font-size: 14.5px !important;
+    }
+
+    .hero-benefits {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    /* Cómo funciona: Apilar los 3 pasos a 1 columna */
+    .steps-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .step-card {
+        padding: 20px 18px !important;
+        width: 100% !important;
+    }
+
+    /* Grids de materiales y callouts */
+    .materials-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .callout-banner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 20px !important;
+        padding: 24px 18px !important;
+    }
+
+    .callout-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .btn-callout-camera,
+    .btn-callout-search {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+
+    /* Sección de confianza */
+    .home-trust-banner {
+        flex-direction: column !important;
+        gap: 24px !important;
+        padding: 28px 18px !important;
+    }
+
+    .trust-copy {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+    }
+
+    .trust-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .btn-trust-primary,
+    .btn-trust-secondary {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+    }
+
+    .trust-cards {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 14px !important;
+    }
+
+    .registration-section {
+        flex-direction: column !important;
+        gap: 28px !important;
+    }
+
+    .registration-media {
+        width: 100% !important;
+        min-height: 280px !important;
+    }
+
+    .registration-form-wrap {
+        width: 100% !important;
+    }
+
+    .report-forms-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .home-glossary {
+        flex-direction: column !important;
+        gap: 24px !important;
+        padding: 36px 0 48px 0 !important;
+    }
 }

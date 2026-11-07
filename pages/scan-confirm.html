@@ -6,6 +6,7 @@
     <title>Resaving - Confirmar Identificación</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -56,14 +57,14 @@
                     <div>
                         <div class="confidence-badge confidence-high">87 % de coincidencia · confianza alta</div>
                         <div style="height: 180px; display: flex; align-items: center; justify-content: center; background-color: #FFFFFF; border-radius: 12px; margin-bottom: 14px; border: 1px solid #EEF3F0;">
-                            <img src="../Images/scan-photo-bottle.png" alt="Botella de plástico detectada" style="max-height: 160px; object-fit: contain;">
+                            <img src="../assets/images/scan-photo-bottle.png" alt="Botella de plástico detectada" style="max-height: 160px; object-fit: contain;">
                         </div>
                         <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 6px;">Botella plástica para bebidas</h2>
                         <p style="font-size: 13.5px; color: #3D5A4A; line-height: 1.45; margin-bottom: 12px;">Envase transparente o translúcido utilizado para bebidas, agua de mesa, gaseosas o rehidratantes. Apto para el contenedor blanco aprovechable.</p>
                     </div>
 
                     <div style="display: flex; align-items: center; gap: 8px; color: #0B4A30; font-weight: 700; font-size: 13.5px;">
-                        <img src="../Images/icon-check.svg" alt="" style="width: 18px; height: 18px;">
+                        <img src="../assets/icons/icon-check.svg" alt="" style="width: 18px; height: 18px;">
                         <span>Candidato recomendado</span>
                     </div>
                 </article>
@@ -72,7 +73,7 @@
                     <div>
                         <div class="confidence-badge confidence-mid">62 % de coincidencia · requiere confirmación</div>
                         <div style="height: 180px; display: flex; align-items: center; justify-content: center; background-color: #FFFFFF; border-radius: 12px; margin-bottom: 14px; border: 1px solid #EEF3F0;">
-                            <img src="../Images/thumb-hdpe-bottle.svg" alt="Envase plástico rígido" style="max-height: 160px; object-fit: contain;">
+                            <img src="../assets/icons/thumb-hdpe-bottle.svg" alt="Envase plástico rígido" style="max-height: 160px; object-fit: contain;">
                         </div>
                         <h2 style="font-size: 18px; font-weight: 800; color: #14251B; margin-bottom: 6px;">Envase plástico rígido (Champú o detergente)</h2>
                         <p style="font-size: 13.5px; color: #3D5A4A; line-height: 1.45; margin-bottom: 12px;">Envase opaco y grueso utilizado para productos de limpieza, champú, yogur o detergente líquido. Requiere enjuague completo sin dosificador.</p>
@@ -89,10 +90,10 @@
                 <strong>Regla de confianza:</strong> Si la coincidencia es menor a 70 %, no se confirma automáticamente. Puedes adjuntar otra imagen más clara, buscar por nombre o explorar directamente las categorías.
             </div>
 
-            <div style="display: flex; gap: 14px; align-items: center; margin-top: 24px;">
+            <div class="confirm-actions-bar" style="display: flex; gap: 14px; align-items: center; margin-top: 24px;">
                 <a href="waste-detail.html" class="btn-primary-action flex center" style="flex: 2;">
                     <span>Confirmar selección y ver ficha técnica</span>
-                    <img src="../Images/icon-arrow-right.svg" alt="">
+                    <img src="../assets/icons/icon-arrow-right.svg" alt="">
                 </a>
 
                 <a href="scan-camera.html" class="btn-outline-action flex center" style="flex: 1;">
@@ -113,7 +114,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -124,7 +125,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -149,6 +150,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/catalog.js" defer></script>
 </body>
 </html>

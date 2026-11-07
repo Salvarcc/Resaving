@@ -6,6 +6,7 @@
     <title>Resaving - Detalle del Punto: Estación Recicla San Miguel</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/map.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link">Residuos</a>
                 <a href="collection-map.html" class="nav-link active">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -75,7 +76,7 @@
             <div class="point-col-main">
                 <article class="detail-subcard">
                     <h2 class="detail-subcard-title">
-                        <img src="../Images/icon-check.svg" alt="" style="width: 20px; height: 20px;">
+                        <img src="../assets/icons/icon-check.svg" alt="" style="width: 20px; height: 20px;">
                         <span>Materiales y condiciones de recepción</span>
                     </h2>
 
@@ -124,7 +125,7 @@
 
                 <article class="detail-subcard" id="como-llegar">
                     <h2 class="detail-subcard-title">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 20px; height: 20px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 20px; height: 20px;">
                         <span>Cómo llegar desde tu ubicación</span>
                     </h2>
 
@@ -170,7 +171,7 @@
                     </div>
 
                     <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-outline-action flex center" id="btn-gmaps-link" style="width: fit-content;">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px; margin-right: 6px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px; margin-right: 6px;">
                         <span>Abrir indicaciones en Google Maps</span>
                     </a>
                 </article>
@@ -212,9 +213,9 @@
                     <h2 class="detail-subcard-title" style="color: #0B4A30;">Planifica tu visita</h2>
                     <p class="section-block-desc" style="margin-bottom: 18px;">Agrega este punto a tu lote de entrega para confirmar que todos tus residuos son compatibles antes de salir.</p>
                     
-                    <a href="delivery.html" class="btn-primary-action flex center" style="width: 100%; margin-bottom: 10px;">
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="btn-primary-action flex center" style="width: 100%; margin-bottom: 10px;">
                         <span>Añadir a Mi Entrega</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
                     </a>
 
                     <a href="../index.html#reportar" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">
@@ -231,7 +232,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -242,7 +243,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -267,6 +268,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/map.js" defer></script>
 </body>
 </html>

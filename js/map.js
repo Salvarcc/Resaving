@@ -71,12 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const districtMapSvg = {
-        'san-miguel': '../Images/map-collection-points.svg',
-        'miraflores': '../Images/map-miraflores.svg',
-        'surco': '../Images/map-surco.svg',
-        'magdalena': '../Images/map-magdalena.svg',
-        'pueblo-libre': '../Images/map-pueblo-libre.svg',
-        'san-borja': '../Images/map-san-borja.svg'
+        'san-miguel': '../assets/icons/map-collection-points.svg',
+        'miraflores': '../assets/icons/map-miraflores.svg',
+        'surco': '../assets/icons/map-surco.svg',
+        'magdalena': '../assets/icons/map-magdalena.svg',
+        'pueblo-libre': '../assets/icons/map-pueblo-libre.svg',
+        'san-borja': '../assets/icons/map-san-borja.svg'
     };
 
     const renderDistrictStations = (districtKey) => {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="point-status-badge ${st.badge}">${st.status}</span>
                     </div>
                     <p class="point-card-distance">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
                         <span>${st.dist}</span>
                     </p>
                     <p class="point-card-address">${st.addr}</p>
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="point-status-badge ${st.badge}">${st.status}</span>
                     </div>
                     <p class="point-card-distance">
-                        <img src="../Images/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-pin.svg" alt="" style="width: 14px; height: 14px;">
                         <span>${st.dist}</span>
                     </p>
                     <p class="point-card-address">${st.addr}</p>

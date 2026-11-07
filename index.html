@@ -6,6 +6,7 @@
     <title>Resaving - Buscar un residuo por su nombre</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="index.html" class="nav-link active">Inicio</a>
                 <a href="pages/categories.html" class="nav-link">Residuos</a>
                 <a href="pages/collection-map.html" class="nav-link">Puntos de acopio</a>
-                <a href="pages/delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="pages/prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="pages/search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="Images/icon-header-search.svg" alt="Buscar">
+                    <img src="assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -48,7 +49,7 @@
 
                 <div class="hero-search-wrap" style="position: relative; width: 100%; max-width: 680px;">
                     <form class="hero-search-bar flex Ycenter" role="search" action="pages/search-results.html" method="GET">
-                        <img src="Images/icon-search.svg" alt="" class="search-input-icon">
+                        <img src="assets/icons/icon-search.svg" alt="" class="search-input-icon">
                         <input type="text" id="hero-search-input" name="q" placeholder="Ejemplo: botella, cartón o pilas" aria-label="Buscar un residuo por nombre" autocomplete="off">
                         <button type="submit" class="btn-search">Buscar</button>
                     </form>
@@ -66,28 +67,28 @@
 
                 <div class="hero-actions flex">
                     <label for="hero-file-upload" class="btn-action-white flex Ycenter" style="cursor: pointer; text-decoration: none;">
-                        <img src="Images/icon-camera.svg" alt="">
+                        <img src="assets/icons/icon-camera.svg" alt="">
                         <span class="text-desktop-tablet">Adjuntar imagen</span>
                         <span class="text-mobile">Adjuntar foto o tomar foto</span>
                         <input type="file" id="hero-file-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
                     </label>
                     <a href="pages/categories.html" class="btn-action-outline flex Ycenter" style="text-decoration: none;">
-                        <img src="Images/icon-categories.svg" alt="">
+                        <img src="assets/icons/icon-categories.svg" alt="">
                         <span>Ver las 4 categorías</span>
                     </a>
                 </div>
 
                 <div class="hero-benefits flex Ycenter">
                     <div class="benefit-item flex Ycenter">
-                        <img src="Images/icon-guide.svg" alt="">
+                        <img src="assets/icons/icon-guide.svg" alt="">
                         <span>Guía paso a paso</span>
                     </div>
                     <div class="benefit-item flex Ycenter">
-                        <img src="Images/icon-pin.svg" alt="">
+                        <img src="assets/icons/icon-pin.svg" alt="">
                         <span>Puntos con vigencia visible</span>
                     </div>
                     <div class="benefit-item flex Ycenter">
-                        <img src="Images/icon-book.svg" alt="">
+                        <img src="assets/icons/icon-book.svg" alt="">
                         <span>Términos explicados</span>
                     </div>
                 </div>
@@ -95,7 +96,7 @@
                 <div class="hero-audiences flex">
                     <a href="#solicitar-info" class="audience-card flex Ycenter">
                         <div class="audience-icon-wrap flex center">
-                            <img src="Images/icon-info-request.svg" alt="">
+                            <img src="assets/icons/icon-info-request.svg" alt="">
                         </div>
                         <div class="audience-text">
                             <strong>Solicitar información</strong>
@@ -104,7 +105,7 @@
                     </a>
                     <a href="#gestores" class="audience-card flex Ycenter">
                         <div class="audience-icon-wrap flex center">
-                            <img src="Images/icon-recycler.svg" alt="">
+                            <img src="assets/icons/icon-recycler.svg" alt="">
                         </div>
                         <div class="audience-text">
                             <strong>Soy reciclador o encargado</strong>
@@ -125,7 +126,7 @@
             <div class="steps-grid flex">
                 <article class="step-card flex Ycenter">
                     <div class="step-icon-wrap flex center">
-                        <img src="Images/step-identify.svg" alt="Paso 1: Identifica">
+                        <img src="assets/icons/step-identify.svg" alt="Paso 1: Identifica">
                     </div>
                     <div class="step-info">
                         <strong>Identifica</strong>
@@ -136,7 +137,7 @@
 
                 <article class="step-card flex Ycenter">
                     <div class="step-icon-wrap flex center">
-                        <img src="Images/step-prepare.svg" alt="Paso 2: Prepara">
+                        <img src="assets/icons/step-prepare.svg" alt="Paso 2: Prepara">
                     </div>
                     <div class="step-info">
                         <strong>Prepara</strong>
@@ -147,7 +148,7 @@
 
                 <article class="step-card flex Ycenter">
                     <div class="step-icon-wrap flex center">
-                        <img src="Images/step-deliver.svg" alt="Paso 3: Entrega">
+                        <img src="assets/icons/step-deliver.svg" alt="Paso 3: Entrega">
                     </div>
                     <div class="step-info">
                         <strong>Entrega</strong>
@@ -161,7 +162,7 @@
         <section class="context-gallery container flex" id="residuos">
             <article class="gallery-card">
                 <div class="gallery-img-wrap">
-                    <img src="Images/gallery-plastic-bottle.png" alt="Botella de plástico">
+                    <img src="assets/images/gallery-plastic-bottle.png" alt="Botella de plástico">
                 </div>
                 <div class="gallery-card-body">
                     <strong>Botella de plástico</strong>
@@ -171,7 +172,7 @@
 
             <article class="gallery-card">
                 <div class="gallery-img-wrap">
-                    <img src="Images/gallery-glass.png" alt="Envase de vidrio">
+                    <img src="assets/images/gallery-glass.png" alt="Envase de vidrio">
                 </div>
                 <div class="gallery-card-body">
                     <strong>Vidrio</strong>
@@ -181,7 +182,7 @@
 
             <article class="gallery-card">
                 <div class="gallery-img-wrap">
-                    <img src="Images/gallery-special-waste.png" alt="Residuos especiales y pilas">
+                    <img src="assets/images/gallery-special-waste.png" alt="Residuos especiales y pilas">
                 </div>
                 <div class="gallery-card-body">
                     <strong>Residuos especiales</strong>
@@ -199,30 +200,30 @@
                 <div class="trust-actions flex">
                     <a href="pages/waste-source.html" class="btn-trust-primary flex Ycenter">
                         <span>Cómo se mantienen los datos</span>
-                        <img src="Images/icon-arrow-right.svg" alt="">
+                        <img src="assets/icons/icon-arrow-right.svg" alt="">
                     </a>
                     <a href="pages/collection-list.html" class="btn-trust-secondary flex Ycenter">
                         <span>Ver puntos como lista</span>
-                        <img src="Images/icon-arrow-right.svg" alt="">
+                        <img src="assets/icons/icon-arrow-right.svg" alt="">
                     </a>
                 </div>
             </div>
 
             <div class="trust-cards flex">
                 <article class="trust-card">
-                    <img src="Images/trust-validity.svg" alt="Vigencia visible" class="trust-icon">
+                    <img src="assets/icons/trust-validity.svg" alt="Vigencia visible" class="trust-icon">
                     <strong>Vigencia visible</strong>
                     <small>Fecha y responsable de la última actualización.</small>
                 </article>
 
                 <article class="trust-card">
-                    <img src="Images/trust-verify.svg" alt="Dato por verificar" class="trust-icon">
+                    <img src="assets/icons/trust-verify.svg" alt="Dato por verificar" class="trust-icon">
                     <strong>Dato por verificar</strong>
                     <small>El sistema señala información sin confirmación reciente.</small>
                 </article>
 
                 <article class="trust-card">
-                    <img src="Images/trust-alternative.svg" alt="Alternativa disponible" class="trust-icon">
+                    <img src="assets/icons/trust-alternative.svg" alt="Alternativa disponible" class="trust-icon">
                     <strong>Alternativa disponible</strong>
                     <small>Lista y búsqueda manual si no compartes ubicación.</small>
                 </article>
@@ -231,7 +232,7 @@
 
         <section class="registration-section container flex" id="solicitar-info">
             <aside class="registration-media">
-                <img src="Images/student-campus.png" alt="Estudiante consultando reciclaje en campus" class="media-bg">
+                <img src="assets/images/student-campus.png" alt="Estudiante consultando reciclaje en campus" class="media-bg">
                 <div class="media-overlay"></div>
                 <div class="media-content">
                     <span class="attention-badge">Conoce Resaving</span>
@@ -240,15 +241,15 @@
                     
                     <ul class="media-checklist">
                         <li class="flex Ycenter">
-                            <img src="Images/icon-check.svg" alt="">
+                            <img src="assets/icons/icon-check.svg" alt="">
                             <span>Información según tu necesidad</span>
                         </li>
                         <li class="flex Ycenter">
-                            <img src="Images/icon-check.svg" alt="">
+                            <img src="assets/icons/icon-check.svg" alt="">
                             <span>Orientación clara y accesible</span>
                         </li>
                         <li class="flex Ycenter">
-                            <img src="Images/icon-check.svg" alt="">
+                            <img src="assets/icons/icon-check.svg" alt="">
                             <span>Uso responsable de tus datos</span>
                         </li>
                     </ul>
@@ -345,7 +346,7 @@
                     </div>
 
                     <div class="security-note flex Ycenter">
-                        <img src="Images/icon-lock.svg" alt="Seguridad" class="lock-icon">
+                        <img src="assets/icons/icon-lock.svg" alt="Seguridad" class="lock-icon">
                         <div class="security-text">
                             <strong>Uso responsable de datos</strong>
                             <small>Usaremos esta información únicamente para responder tu solicitud. No compartas datos sensibles.</small>
@@ -360,7 +361,7 @@
                     <div class="form-submit flex Ycenter">
                         <button type="submit" class="btn-submit flex Ycenter">
                             <span>Solicitar información</span>
-                            <img src="Images/icon-arrow-right.svg" alt="">
+                            <img src="assets/icons/icon-arrow-right.svg" alt="">
                         </button>
                         <p class="form-feedback">Responderemos al correo electrónico indicado.</p>
                     </div>
@@ -379,7 +380,7 @@
                 <details class="glossary-item">
                     <summary class="glossary-summary flex Ycenter">
                         <span>Botella de plástico</span>
-                        <img src="Images/icon-chevron-down.svg" alt="" class="chevron-icon">
+                        <img src="assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
                     </summary>
                     <div class="glossary-content">
                         <p>Pertenecen a los residuos aprovechables (plásticos). Deben entregarse vacías, limpias, secas y aplastadas, con la tapa y etiqueta separadas para facilitar el reciclaje.</p>
@@ -389,7 +390,7 @@
                 <details class="glossary-item">
                     <summary class="glossary-summary flex Ycenter">
                         <span>Vidrio</span>
-                        <img src="Images/icon-chevron-down.svg" alt="" class="chevron-icon">
+                        <img src="assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
                     </summary>
                     <div class="glossary-content">
                         <p>Material aprovechable 100% reciclable. Incluye botellas y frascos sin tapas metálicas ni corchos. No se deben mezclar con espejos, focos ni cristales de ventanas rotos.</p>
@@ -399,7 +400,7 @@
                 <details class="glossary-item">
                     <summary class="glossary-summary flex Ycenter">
                         <span>Residuos especiales</span>
-                        <img src="Images/icon-chevron-down.svg" alt="" class="chevron-icon">
+                        <img src="assets/icons/icon-chevron-down.svg" alt="" class="chevron-icon">
                     </summary>
                     <div class="glossary-content">
                         <p>Residuos de manejo especial o peligroso como pilas, baterías, focos fluorescentes y RAEE (electrónicos). Requieren contenedores diferenciados y puntos de acopio autorizados.</p>
@@ -415,7 +416,7 @@
                 <div class="footer-brand">
                     <a href="index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -426,7 +427,7 @@
                     <h5>Explorar</h5>
                     <a href="pages/categories.html">Categorías</a>
                     <a href="pages/collection-map.html">Puntos de acopio</a>
-                    <a href="pages/delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -451,6 +452,7 @@
         </div>
     </footer>
 
+    <script src="js/common.js" defer></script>
     <script src="js/home.js" defer></script>
 </body>
 </html>

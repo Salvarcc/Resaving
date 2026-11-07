@@ -10,3 +10,9 @@ desktop.ini
 
 # Engram AI agent memory
 .engram/
+
+# Scratch directories
+scratch/
+
+# Pantallas extras (fuera de las 30 HU core evaluadas)
+pantallas_extras/

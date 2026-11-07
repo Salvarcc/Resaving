@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             unitWeight: 0.030,
             weightLabel: 'botellas plásticas',
             tag: 'Acepta botellas plásticas para bebidas',
-            img: '../Images/delivery-bottle.png',
+            img: '../assets/images/delivery-bottle.png',
             tolva: 'Boca 1 (Plásticos)',
             prepSummary: 'Enjuagada, escurrida, compactada y sin tapa',
             cond1: 'Los envases fueron enjuagados rápidamente y están completamente secos (sin residuos líquidos).',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             unitWeight: 0.250,
             weightLabel: 'envases de vidrio',
             tag: 'Acepta frascos y botellas de vidrio',
-            img: '../Images/delivery-glass.png',
+            img: '../assets/images/delivery-glass.png',
             tolva: 'Boca 2 (Vidrio)',
             prepSummary: 'Enjuagado, seco, entero y sin tapa metálica',
             cond1: 'Los frascos y botellas fueron enjuagados y escurridos sin restos de alimentos ni líquidos.',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             unitWeight: 0.015,
             weightLabel: 'latas de aluminio',
             tag: 'Acepta latas de aluminio y hojalata',
-            img: '../Images/delivery-can.png',
+            img: '../assets/images/delivery-can.png',
             tolva: 'Boca 3 (Metales)',
             prepSummary: 'Enjuagada, seca y comprimida sin filo',
             cond1: 'Las latas fueron escurridas y enjuagadas para eliminar restos de grasa o líquido.',
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             unitWeight: 0.250,
             weightLabel: 'cartón corrugado y papel',
             tag: 'Acepta cartón y papel limpio',
-            img: '../Images/delivery-cardboard.png',
+            img: '../assets/images/delivery-cardboard.png',
             tolva: 'Boca 4 (Papel y Cartón)',
             prepSummary: 'Desarmado, plano, seco y atado',
             cond1: 'Las cajas y papeles están 100% secos (sin manchas de grasa, comida o humedad).',
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lotContainer.innerHTML = `
                 <div class="empty-lot-card" style="background-color: #F7FAF8; border: 2px dashed #B8DDC8; border-radius: 14px; padding: 40px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
                     <div style="width: 56px; height: 56px; border-radius: 50%; background-color: #EBF7F0; display: flex; align-items: center; justify-content: center;">
-                        <img src="../Images/icon-recycler.svg" alt="" style="width: 28px; height: 28px;">
+                        <img src="../assets/icons/icon-recycler.svg" alt="" style="width: 28px; height: 28px;">
                     </div>
                     <h3 style="font-size: 18px; font-weight: 800; color: #14251B; margin: 0;">Tu lote actual está vacío</h3>
                     <p style="font-size: 13.5px; color: #5F7066; max-width: 440px; margin: 0; line-height: 1.5;">Aún no has agregado materiales para tu entrega. Puedes añadir botellas plásticas, latas, cartón u otros residuos aprovechables ya acondicionados.</p>
@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                     <span class="lot-chip chip-ready">Listo para entrega</span>
                     <button type="button" class="btn-remove-lot-item" data-lot-id="${item.id}" aria-label="Eliminar ${item.name}" style="background: none; border: 1px solid #E0E7E3; border-radius: 8px; padding: 6px 12px; color: #C0392B; cursor: pointer; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
-                        <img src="../Images/icon-trash-delete.svg" alt="" style="width: 14px; height: 14px;">
+                        <img src="../assets/icons/icon-trash-delete.svg" alt="" style="width: 14px; height: 14px;">
                         <span>Eliminar</span>
                     </button>
                 </div>
@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sidebarMatchList) {
             sidebarMatchList.innerHTML = lot.map(item => `
                 <li>
-                    <img src="../Images/icon-check.svg" alt="" style="width: 14px; height: 14px;">
+                    <img src="../assets/icons/icon-check.svg" alt="" style="width: 14px; height: 14px;">
                     <span>${item.name} (${item.qty} un · ${item.weight} kg)</span>
                 </li>
             `).join('');

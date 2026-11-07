@@ -6,6 +6,7 @@
     <title>Resaving - Material Principal y Anatomía</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link active">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -51,7 +52,7 @@
         <div style="max-width: 840px; margin: 0 auto;">
             <div class="report-form-card" style="margin-bottom: 24px; display: flex; gap: 24px; align-items: center;">
                 <div style="width: 140px; height: 140px; background-color: #F7FAF8; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid #DBE7DF;">
-                    <img src="../Images/waste-pet-bottle.png" alt="Botella de plástico transparente" style="max-height: 120px; object-fit: contain;">
+                    <img src="../assets/images/waste-pet-bottle.png" alt="Botella de plástico transparente" style="max-height: 120px; object-fit: contain;">
                 </div>
                 <div>
                     <span class="match-chip" style="margin-bottom: 6px;">Plástico reciclable · Bebidas</span>
@@ -112,9 +113,9 @@
             </div>
 
             <div style="display: flex; gap: 14px;">
-                <!-- Pantalla extra: confusing-materials.html --><a href="javascript:void(0)" class="btn-primary-action flex center" style="flex: 1;">
+                <a href="confusing-materials.html" class="btn-primary-action flex center" style="flex: 1;">
                     <span>Comparar con otros materiales</span>
-                    <img src="../Images/icon-arrow-right.svg" alt="">
+                    <img src="../assets/icons/icon-arrow-right.svg" alt="">
                 </a>
                 <a href="waste-detail.html" class="btn-outline-action flex center" style="flex: 1;">
                     <span>Volver a la ficha técnica completa</span>
@@ -129,7 +130,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -140,7 +141,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -165,6 +166,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/catalog.js" defer></script>
 </body>
 </html>

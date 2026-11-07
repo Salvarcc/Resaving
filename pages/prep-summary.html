@@ -6,6 +6,7 @@
     <title>Resaving - Resumen de Preparación: Botella plástica para bebidas</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/prep.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="header-inner flex Ycenter">
             <a href="../index.html" class="brand flex Ycenter">
                 <div class="brand-mark flex center">
-                    <img id="logo" src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
                 </div>
                 <span class="brand-name dark-principal">Resaving</span>
             </a>
@@ -22,13 +23,13 @@
                 <a href="../index.html" class="nav-link">Inicio</a>
                 <a href="categories.html" class="nav-link active">Residuos</a>
                 <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
-                <a href="delivery.html" class="nav-link">Mi entrega</a>
+                <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="nav-link">Mi entrega</a>
                 <a href="prep-guide.html" class="nav-link active">Guía de preparación</a>
             </nav>
             
             <div class="header-actions flex Ycenter">
                 <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
-                    <img src="../Images/icon-header-search.svg" alt="Buscar">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
                 </a>
                 <div class="user-avatar flex center" title="Perfil de Yeremy Acuña">
                     <span>YA</span>
@@ -44,12 +45,12 @@
 
         <section class="summary-hero-card">
             <div class="summary-img-box">
-                <img src="../Images/prep-bottle-checklist.png" id="summary-img" alt="Residuo acondicionado y listo para reciclaje">
+                <img src="../assets/images/prep-bottle-checklist.png" id="summary-img" alt="Residuo acondicionado y listo para reciclaje">
             </div>
 
             <div class="summary-info">
                 <div class="summary-badge-success">
-                    <img src="../Images/icon-check.svg" alt="" style="width: 16px; height: 16px;">
+                    <img src="../assets/icons/icon-check.svg" alt="" style="width: 16px; height: 16px;">
                     <span id="summary-badge-text">100% Preparación completada (4 de 4 pasos)</span>
                 </div>
 
@@ -58,7 +59,7 @@
 
                 <ul id="summary-checklist" class="summary-checklist">
                     <li class="summary-check-item">
-                        <img src="../Images/icon-check.svg" alt="">
+                        <img src="../assets/icons/icon-check.svg" alt="">
                         <div class="summary-check-item-text">
                             <strong>1. Totalmente vacía</strong>
                             <span>Sin restos de líquido residual ni sedimentos en el fondo.</span>
@@ -67,7 +68,7 @@
                     </li>
 
                     <li class="summary-check-item">
-                        <img src="../Images/icon-check.svg" alt="">
+                        <img src="../assets/icons/icon-check.svg" alt="">
                         <div class="summary-check-item-text">
                             <strong>2. Enjuagada responsablemente</strong>
                             <span>Sin manchas pegajosas, azúcares ni suciedad que atraiga insectos.</span>
@@ -76,7 +77,7 @@
                     </li>
 
                     <li class="summary-check-item">
-                        <img src="../Images/icon-check.svg" alt="">
+                        <img src="../assets/icons/icon-check.svg" alt="">
                         <div class="summary-check-item-text">
                             <strong>3. Secada al aire</strong>
                             <span>Completamente escurrida para no humedecer cartones ni papeles vecinos.</span>
@@ -85,7 +86,7 @@
                     </li>
 
                     <li class="summary-check-item">
-                        <img src="../Images/icon-check.svg" alt="">
+                        <img src="../assets/icons/icon-check.svg" alt="">
                         <div class="summary-check-item-text">
                             <strong>4. Tapa separada y volumen reducido</strong>
                             <span>Tapa de polipropileno aparte y cuerpo compactado al 70%.</span>
@@ -97,9 +98,9 @@
                 <div class="summary-actions-row">
                     <a href="collection-map.html" class="btn-primary-action flex Ycenter">
                         <span>Buscar puntos de acopio cercanos</span>
-                        <img src="../Images/icon-arrow-right.svg" alt="">
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
                     </a>
-                    <a href="delivery.html" class="btn-secondary-action flex Ycenter">
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)" class="btn-secondary-action flex Ycenter">
                         <span>Añadir a Mi Entrega</span>
                     </a>
                     <a href="prep-guide.html" id="summary-back-link" class="btn-outline-action flex Ycenter">
@@ -150,7 +151,7 @@
                 <div class="footer-brand">
                     <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
                         <div class="brand-mark flex center" style="width: 36px; height: 36px;">
-                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
                         <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
@@ -161,7 +162,7 @@
                     <h5>Explorar</h5>
                     <a href="categories.html">Categorías</a>
                     <a href="collection-map.html">Puntos de acopio</a>
-                    <a href="delivery.html">Mi entrega</a>
+                    <!-- Pantalla extra: delivery.html --><a href="javascript:void(0)">Mi entrega</a>
                 </div>
 
                 <div class="footer-col">
@@ -186,6 +187,7 @@
         </div>
     </footer>
 
+    <script src="../js/common.js" defer></script>
     <script src="../js/prep.js" defer></script>
 </body>
 </html>
