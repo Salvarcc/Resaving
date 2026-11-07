@@ -649,11 +649,15 @@
         max-width: 100% !important;
     }
 
+    .hero-search-bar-wrap {
+        margin-bottom: 12px !important;
+    }
+
     .hero-search-bar {
         max-width: 100% !important;
         width: 100% !important;
         padding: 6px 6px 6px 14px !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 0 !important;
     }
 
     .hero-search-bar input {
@@ -768,14 +772,65 @@
         gap: 14px !important;
     }
 
+    /* Galería de residuos: 2 columnas en móvil para mejor visualización (de 2 en 2) */
+    .context-gallery {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 14px !important;
+        padding: 20px 0 36px 0 !important;
+    }
+
+    .context-gallery .gallery-card:nth-child(3) {
+        grid-column: span 2 !important;
+    }
+
+    .gallery-img-wrap {
+        height: 160px !important;
+    }
+
     .registration-section {
         flex-direction: column !important;
         gap: 28px !important;
     }
 
+    /* Solución a recorte de Salvador y textos en banner "Para empezar" */
     .registration-media {
         width: 100% !important;
-        min-height: 280px !important;
+        min-height: auto !important;
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+        background-color: #073522 !important;
+    }
+
+    .registration-media .media-bg {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: 200px !important;
+        object-fit: cover !important;
+    }
+
+    .registration-media .media-overlay {
+        display: none !important;
+    }
+
+    .registration-media .media-content {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        padding: 24px 20px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .registration-media .media-title {
+        font-size: 22px !important;
+        line-height: 1.25 !important;
     }
 
     .registration-form-wrap {

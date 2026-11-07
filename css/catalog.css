@@ -1103,11 +1103,34 @@
         min-width: 560px !important;
     }
 
+    /* Canales de entrega y fuentes de verificación */
+    .destinations-grid {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 16px !important;
+    }
+
+    .dest-card {
+        width: 100% !important;
+    }
+
+    .sources-grid {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 14px !important;
+    }
+
+    .source-card {
+        width: 100% !important;
+    }
+
     /* Resultados de búsqueda */
     .results-search-bar {
-        flex-direction: column !important;
+        flex-direction: row !important;
+        align-items: center !important;
         gap: 10px !important;
         width: 100% !important;
+        padding: 8px 14px !important;
     }
 
     .filter-chips,

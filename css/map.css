@@ -543,11 +543,13 @@
         order: 2 !important;
     }
 
+    .map-visual-container,
     .map-container {
         width: 100% !important;
-        height: 320px !important;
+        height: 340px !important;
         min-height: 280px !important;
         order: 1 !important;
+        position: relative !important;
     }
 
     /* Lista de puntos */
