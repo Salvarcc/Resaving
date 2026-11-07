@@ -1201,11 +1201,13 @@
 
     .filter-chips,
     .category-filter-chips {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        flex-wrap: nowrap !important;
-        padding-bottom: 6px !important;
-        gap: 8px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
+        white-space: normal !important;
+        padding-bottom: 0 !important;
+        gap: 8px 10px !important;
+        width: 100% !important;
     }
 
     .chip,

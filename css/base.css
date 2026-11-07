@@ -220,11 +220,9 @@ body {
     border: 1.5px solid #DBE7DF;
     width: 44px;
     height: 44px;
-    padding: 10px 9px;
+    padding: 0;
     cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
     border-radius: 12px;
     transition: all 0.2s ease;
     flex-shrink: 0;
@@ -237,24 +235,40 @@ body {
 }
 
 .hamburger-bar {
-    display: block;
-    width: 22px;
+    position: absolute;
+    width: 20px;
     height: 2.5px;
     background-color: #0B4A30;
     border-radius: 2px;
-    transition: all 0.22s ease-in-out;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    left: 11px;
+}
+
+.hamburger-bar:nth-child(1) {
+    top: 14px;
+}
+
+.hamburger-bar:nth-child(2) {
+    top: 20.75px;
+}
+
+.hamburger-bar:nth-child(3) {
+    top: 27.5px;
 }
 
 .mobile-menu-btn.active .hamburger-bar:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
+    top: 20.75px;
+    transform: rotate(45deg);
 }
 
 .mobile-menu-btn.active .hamburger-bar:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .mobile-menu-btn.active .hamburger-bar:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+    top: 20.75px;
+    transform: rotate(-45deg);
 }
 
 
@@ -1549,8 +1563,9 @@ body {
     }
 
     .landing-steps .steps-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px !important;
     }
 
     .context-gallery {
@@ -1671,13 +1686,13 @@ body {
 
     .main-nav-inner {
         background-color: #FFFFFF;
-        border-bottom: 3px solid #0B4A30;
-        padding: 18px 20px 24px 20px;
-        box-shadow: 0 18px 36px rgba(7, 53, 34, 0.22);
+        border-bottom: 2px solid #DBE7DF;
+        padding: 10px 16px 20px 16px;
+        box-shadow: 0 16px 36px rgba(7, 53, 34, 0.16);
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        max-height: 82vh;
+        gap: 0;
+        max-height: 84vh;
         overflow-y: auto;
         animation: mobileNavSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -1685,28 +1700,37 @@ body {
     .main-nav-inner .nav-link {
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important;
-        min-height: 48px !important;
-        padding: 12px 18px !important;
-        font-size: 15.5px !important;
-        font-weight: 700 !important;
-        color: #14251B !important;
-        border-radius: 10px !important;
-        border: 1px solid #EEF3F0 !important;
-        background-color: #F7FAF8 !important;
+        justify-content: flex-start !important;
+        min-height: 50px !important;
+        padding: 14px 16px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #2C3E50 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-bottom: 1px solid #EEF3F0 !important;
+        background-color: #FFFFFF !important;
         text-decoration: none !important;
         flex-shrink: 0 !important;
+        transition: color 0.15s ease, background-color 0.15s ease, padding-left 0.15s ease;
+    }
+
+    .main-nav-inner .nav-link:last-of-type {
+        border-bottom: none !important;
     }
 
     .main-nav-inner .nav-link:hover {
-        background-color: #EBF7F0 !important;
+        background-color: #F8FAF9 !important;
         color: #0B4A30 !important;
     }
 
+    /* Enlace activo: Sin bloque oscuro, fondo blanco, texto verde y acento lateral */
     .main-nav-inner .nav-link.active {
-        background-color: #0B4A30 !important;
-        color: #FFFFFF !important;
-        border-color: #0B4A30 !important;
+        background-color: #FFFFFF !important;
+        color: #0B4A30 !important;
+        font-weight: 800 !important;
+        border-left: 4px solid #0B4A30 !important;
+        padding-left: 12px !important;
     }
 
     .nav-user-mobile-bar {
@@ -1827,8 +1851,32 @@ body {
     }
 
     .landing-steps .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 14px !important;
+        border: none !important;
+        margin-top: 20px !important;
+    }
+
+    .landing-steps .step-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 16px 18px !important;
+        box-sizing: border-box !important;
+        background-color: #FFFFFF !important;
+        border: 1.5px solid #DBE7DF !important;
+        border-radius: 14px !important;
+        position: relative !important;
+        gap: 14px !important;
+    }
+
+    .landing-steps .step-badge {
+        position: static !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
     }
 
     .context-gallery {
@@ -1876,15 +1924,18 @@ body {
     }
 
     .filter-chips {
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 6px;
-        gap: 8px;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
+        white-space: normal !important;
+        padding-bottom: 0 !important;
+        gap: 8px 10px !important;
+        width: 100% !important;
     }
 
     .chip {
-        flex-shrink: 0;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
     }
 
     .results-meta {

@@ -536,11 +536,10 @@
     .toolbar-row-filters {
         max-width: 100% !important;
         width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        flex-wrap: nowrap !important;
-        padding-bottom: 6px !important;
-        gap: 8px !important;
+        overflow-x: visible !important;
+        flex-wrap: wrap !important;
+        padding-bottom: 0 !important;
+        gap: 8px 10px !important;
         box-sizing: border-box !important;
     }
 

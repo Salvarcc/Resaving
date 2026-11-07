@@ -715,13 +715,32 @@
 
     /* Cómo funciona: Apilar los 3 pasos a 1 columna */
     .steps-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 14px !important;
+        border: none !important;
+        margin-top: 20px !important;
     }
 
     .step-card {
-        padding: 20px 18px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
         width: 100% !important;
+        padding: 16px 18px !important;
+        box-sizing: border-box !important;
+        background-color: #FFFFFF !important;
+        border: 1.5px solid #DBE7DF !important;
+        border-radius: 14px !important;
+        position: relative !important;
+        gap: 14px !important;
+    }
+
+    .step-badge {
+        position: static !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
     }
 
     /* Grids de materiales y callouts */
