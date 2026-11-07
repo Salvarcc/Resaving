@@ -807,8 +807,9 @@ body {
 }
 
 .hero-quick-chips {
-    margin-top: 12px;
-    gap: 8px;
+    margin-top: 14px;
+    margin-bottom: 26px;
+    gap: 8px 10px;
     flex-wrap: wrap;
 }
 
@@ -1712,7 +1713,7 @@ body {
         margin-top: 14px;
         padding-top: 14px;
         border-top: 1px solid #EEF3F0;
-        display: flex;
+        display: flex !important;
         align-items: center;
         gap: 12px;
     }
@@ -1968,8 +1969,15 @@ body {
     }
 
     .confusion-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .confusion-box {
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .property-pills-grid {
@@ -1978,8 +1986,15 @@ body {
     }
 
     .verification-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .verification-card {
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .alternatives-grid {

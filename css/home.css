@@ -106,9 +106,17 @@
     background-color: #0B4A30;
 }
 
+.hero-quick-chips {
+    margin-top: 14px;
+    margin-bottom: 26px;
+    gap: 8px 10px;
+    flex-wrap: wrap;
+}
+
 .hero-actions {
+    display: flex;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .btn-action-white {
@@ -419,6 +427,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
 }
 
 .media-overlay {
@@ -810,8 +819,9 @@
         top: auto !important;
         left: auto !important;
         width: 100% !important;
-        height: 200px !important;
+        height: 240px !important;
         object-fit: cover !important;
+        object-position: top center !important;
     }
 
     .registration-media .media-overlay {

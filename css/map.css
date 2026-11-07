@@ -301,6 +301,27 @@
     z-index: 30;
 }
 
+.btn-close-popup {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: 700;
+    color: #5F7066;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-close-popup:hover {
+    background-color: #EEF3F0;
+    color: #14251B;
+}
+
 .map-popup-card h4 {
     font-size: 15px;
     font-weight: 800;
@@ -550,6 +571,16 @@
         min-height: 280px !important;
         order: 1 !important;
         position: relative !important;
+    }
+
+    .map-popup-card {
+        left: 12px !important;
+        right: 12px !important;
+        bottom: 12px !important;
+        width: auto !important;
+        max-width: calc(100% - 24px) !important;
+        padding: 14px 16px !important;
+        box-sizing: border-box !important;
     }
 
     /* Lista de puntos */

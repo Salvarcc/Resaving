@@ -63,7 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapUrlParams = new URLSearchParams(window.location.search);
     const initialDistrictParam = mapUrlParams.get('distrito');
 
+    const popupCard = document.getElementById('map-popup-card');
+    const closePopupBtn = document.getElementById('btn-close-map-popup');
+    if (closePopupBtn && popupCard) {
+        closePopupBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            popupCard.style.display = 'none';
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popupCard) {
+            popupCard.style.display = 'none';
+        }
+    });
+
     const updateMapPopup = (st, districtKey) => {
+        if (popupCard) popupCard.style.display = 'block';
         if (!popupTitle || !popupDesc || !popupLink) return;
         popupTitle.textContent = st.name;
         popupDesc.textContent = `${st.dist} · ${st.status} · Acepta ${st.tags.join(', ')}.`;

@@ -35,47 +35,49 @@ document.addEventListener('DOMContentLoaded', () => {
             heroSuggestions.style.display = 'block';
         };
 
-        heroSearchInput.addEventListener('focus', () => {
-            if (heroSearchInput.value.trim().length === 0) {
-                renderSuggestions(searchCatalog, true);
-            }
-        });
-
-        heroSearchInput.addEventListener('click', () => {
-            if (heroSearchInput.value.trim().length === 0) {
-                renderSuggestions(searchCatalog, true);
-            }
-        });
-
-        heroSearchInput.addEventListener('input', () => {
+        const triggerSearch = () => {
             const query = heroSearchInput.value.trim().toLowerCase();
             if (query.length === 0) {
                 renderSuggestions(searchCatalog, true);
-                return;
-            }
-
-            const matches = searchCatalog.filter(item => 
-                item.name.toLowerCase().includes(query) || 
-                item.cat.toLowerCase().includes(query)
-            );
-
-            if (matches.length > 0) {
-                renderSuggestions(matches, false);
             } else {
-                heroSuggestions.innerHTML = `
-                    <div style="padding: 16px 18px; text-align: center;">
-                        <p style="font-size: 13px; color: #5F7066; margin-bottom: 8px;">No encontramos coincidencias exactas para "${query}"</p>
-                        <a href="${basePath}search-results.html?q=${encodeURIComponent(query)}" style="font-size: 12.5px; font-weight: 700; color: #0B4A30; text-decoration: underline;">
-                            Buscar en todo el catálogo de residuos &rarr;
-                        </a>
-                    </div>
-                `;
-                heroSuggestions.style.display = 'block';
+                const matches = searchCatalog.filter(item => 
+                    item.name.toLowerCase().includes(query) || 
+                    item.cat.toLowerCase().includes(query)
+                );
+
+                if (matches.length > 0) {
+                    renderSuggestions(matches, false);
+                } else {
+                    heroSuggestions.innerHTML = `
+                        <div style="padding: 16px 18px; text-align: center;">
+                            <p style="font-size: 13px; color: #5F7066; margin-bottom: 8px;">No encontramos coincidencias exactas para "${query}"</p>
+                            <a href="${basePath}search-results.html?q=${encodeURIComponent(query)}" style="font-size: 12.5px; font-weight: 700; color: #0B4A30; text-decoration: underline;">
+                                Buscar en todo el catálogo de residuos &rarr;
+                            </a>
+                        </div>
+                    `;
+                    heroSuggestions.style.display = 'block';
+                }
             }
+        };
+
+        heroSearchInput.addEventListener('focus', triggerSearch);
+
+        heroSearchInput.addEventListener('click', (e) => {
+            e.stopPropagation();
+            triggerSearch();
         });
+
+        heroSearchInput.addEventListener('input', triggerSearch);
 
         document.addEventListener('click', (e) => {
             if (!heroSearchInput.contains(e.target) && !heroSuggestions.contains(e.target)) {
+                heroSuggestions.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && heroSuggestions) {
                 heroSuggestions.style.display = 'none';
             }
         });
