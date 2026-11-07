@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resaving - Ficha de Residuo: Botella plástica para bebidas</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/catalog.css">
 </head>
 <body>
 
@@ -47,21 +48,21 @@
             <button type="button" class="mat-switch-btn" data-mat="vidrio" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Frascos de vidrio</button>
             <button type="button" class="mat-switch-btn" data-mat="carton" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Cajas de cartón y Tetra Pak</button>
             <button type="button" class="mat-switch-btn" data-mat="lata" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Latas de aluminio</button>
-            <button type="button" class="mat-switch-btn" data-mat="pead" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Envases PEAD #2</button>
+            <button type="button" class="mat-switch-btn" data-mat="pead" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Envases de limpieza</button>
             <button type="button" class="mat-switch-btn" data-mat="pilas" style="padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DBE7DF; background-color: #FFFFFF; color: #14251B; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Pilas y baterías</button>
         </div>
 
         <section class="detail-hero flex">
             <div class="detail-img-box flex center">
                 <span id="detail-category-badge" class="detail-img-badge">Aprovechable</span>
-                <img src="../Images/waste-pet-bottle.png" id="detail-main-img" alt="Botella de plástico PET transparente para bebidas">
+                <img src="../Images/waste-pet-bottle.png" id="detail-main-img" alt="Botella de plástico transparente transparente para bebidas">
                 <span id="detail-code-badge" class="detail-code-badge">Plástico bebidas</span>
             </div>
 
             <div class="detail-info">
                 <p class="eyebrow" id="detail-eyebrow">Información del material</p>
                 <h1 id="detail-title" class="detail-title">Botellas plásticas para bebidas (Agua y refrescos)</h1>
-                <p id="detail-subtitle" class="detail-subtitle">La botella de plástico PET puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.</p>
+                <p id="detail-subtitle" class="detail-subtitle">La botella de plástico transparente puede recuperarse al 100% mediante reciclaje mecánico cuando se entrega vacía, limpia y seca.</p>
 
                 <div id="detail-status-banner" class="detail-status-banner flex Ycenter">
                     <img id="detail-status-icon" src="../Images/icon-check.svg" alt="" style="width: 22px; height: 22px;">
@@ -119,7 +120,7 @@
                         <h3 class="part-name">Cuerpo de la botella</h3>
                         <span class="part-tag tag-recycle">Aprovechable</span>
                     </div>
-                    <p class="part-material">Tereftalato de polietileno (PET #1)</p>
+                    <p class="part-material">Tereftalato de polietileno (Plástico transparente)</p>
                     <p class="part-desc">Es el componente de mayor valor de reciclaje. Se tritura en hojuelas limpias para producir nuevas botellas y fibras sintéticas.</p>
                 </article>
 
@@ -137,7 +138,7 @@
                         <h3 class="part-name">Etiqueta envolvente</h3>
                         <span class="part-tag tag-optional">Opcional</span>
                     </div>
-                    <p class="part-material">Film termoencogible (PVC / PEAD)</p>
+                    <p class="part-material">Film termoencogible (Película plástica)</p>
                     <p class="part-desc">Retírala fácilmente cortando la línea punteada. Si no es posible, la planta de molienda la separa por flotación.</p>
                 </article>
             </div>
@@ -145,7 +146,7 @@
 
         <section class="section-block">
             <h2 class="section-block-title">Dónde colocar este material</h2>
-            <p class="section-block-desc">Canales formales y recomendados para entregar botellas de plástico en Lima Metropolitana.</p>
+            <p class="section-block-desc" id="detail-channels-desc">Canales formales y recomendados para entregar este material en Lima Metropolitana.</p>
 
             <div class="destinations-grid">
                 <article class="dest-card">
@@ -215,31 +216,31 @@
             <h2 class="section-block-title">Preguntas frecuentes sobre este material</h2>
             <div id="detail-faq-accordion" class="glossary-accordion">
                 <details class="glossary-item">
-                    <summary class="glossary-question flex Ycenter">
+                    <summary class="glossary-summary flex Ycenter">
                         <span>¿Por qué es necesario vaciar y escurrir la botella antes de reciclarla?</span>
                         <img src="../Images/icon-chevron-down.svg" alt="" class="chevron-icon">
                     </summary>
-                    <div class="glossary-answer">
+                    <div class="glossary-content">
                         <p>Los líquidos residuales fermentan, producen malos olores y humedecen papeles y cartones cercanos en el tacho verde, inutilizando todo el lote reciclable.</p>
                     </div>
                 </details>
 
                 <details class="glossary-item">
-                    <summary class="glossary-question flex Ycenter">
+                    <summary class="glossary-summary flex Ycenter">
                         <span>¿Es obligatorio aplastar o compactar la botella?</span>
                         <img src="../Images/icon-chevron-down.svg" alt="" class="chevron-icon">
                     </summary>
-                    <div class="glossary-answer">
+                    <div class="glossary-content">
                         <p>No es obligatorio, pero sí muy recomendable. Compactar la botella reduce su volumen hasta en un 70%, permitiendo almacenar más residuos en casa y facilitando el traslado del reciclador.</p>
                     </div>
                 </details>
 
                 <details class="glossary-item">
-                    <summary class="glossary-question flex Ycenter">
+                    <summary class="glossary-summary flex Ycenter">
                         <span>¿Qué pasa con las botellas plásticas de aceite de cocina?</span>
                         <img src="../Images/icon-chevron-down.svg" alt="" class="chevron-icon">
                     </summary>
-                    <div class="glossary-answer">
+                    <div class="glossary-content">
                         <p>Las botellas de aceite de cocina NO deben mezclarse con las botellas plásticas para bebidas regulares debido a que la grasa contamina la molienda. Requieren un lavado profundo con agua caliente y detergente o entregarse en centros de acopio especializados.</p>
                     </div>
                 </details>
@@ -263,62 +264,46 @@
 
     <footer class="site-footer">
         <div class="footer-inner container">
-            <div class="footer-top flex">
-                <div class="footer-brand-col">
-                    <a href="../index.html" class="brand flex Ycenter" style="margin-bottom: 12px; text-decoration: none;">
-                        <div class="brand-mark flex center">
-                            <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+            <div class="footer-grid flex">
+                <div class="footer-brand">
+                    <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
+                        <div class="brand-mark flex center" style="width: 36px; height: 36px;">
+                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
-                        <span class="brand-name dark-principal">Resaving</span>
+                        <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
-                    <p class="footer-tagline">Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
-                    <p class="footer-subtext">Diseñado para ciudadanos, familias y recicladores de base bajo la Norma Técnica Peruana NTP 900.058:2019.</p>
+                    <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
                 </div>
 
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Explorar</h4>
-                    <ul class="footer-links">
-                        <li><a href="categories.html">Categorías</a></li>
-                        <li><a href="collection-map.html">Puntos de acopio</a></li>
-                        <li><a href="delivery.html">Mi entrega</a></li>
-                        <li><a href="scan-camera.html"><span class="text-desktop-tablet">Adjuntar imagen</span><span class="text-mobile">Adjuntar foto o tomar foto</span></a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h5>Explorar</h5>
+                    <a href="categories.html">Categorías</a>
+                    <a href="collection-map.html">Puntos de acopio</a>
+                    <a href="delivery.html">Mi entrega</a>
                 </div>
 
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Confianza</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html#vigencia">Vigencia de datos</a></li>
-                        <li><a href="../index.html#privacidad">Privacidad y seguridad</a></li>
-                        <li><a href="../index.html#reportar">Reportar información</a></li>
-                        <li><a href="../index.html#metodologia">Metodología de validación</a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h5>Confianza</h5>
+                    <a href="waste-source.html">Vigencia de datos</a>
+                    <a href="../index.html#vigencia">Privacidad y seguridad</a>
+                    <!-- Pantalla extra: report-feedback.html -->
+                    <a href="javascript:void(0)">Reportar información</a>
                 </div>
 
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Accesibilidad</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html#audio">Escuchar esta pantalla</a></li>
-                        <li><a href="../index.html#mapa-texto">Alternativa textual al mapa</a></li>
-                        <li><a href="../index.html#alto-contraste">Modo alto contraste</a></li>
-                        <li><a href="../index.html#atajos">Navegación por teclado</a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h5>Accesibilidad</h5>
+                    <a href="javascript:void(0)">Escuchar esta pantalla</a>
+                    <a href="collection-list.html">Alternativa textual al mapa</a>
+                    <p class="accessibility-note">Navegable con teclado y etiquetas visibles.</p>
                 </div>
             </div>
 
-            <div class="footer-bottom flex Ycenter">
-                <p class="footer-copy">© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
-                <div class="footer-legal flex Ycenter">
-                    <a href="../index.html#privacidad">Privacidad</a>
-                    <span class="separator">·</span>
-                    <a href="../index.html#accesibilidad">Accesibilidad</a>
-                    <span class="separator">·</span>
-                    <a href="../index.html#ayuda">Ayuda</a>
-                </div>
+            <div class="footer-legal flex Ycenter">
+                <p>© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
             </div>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../js/catalog.js" defer></script>
 </body>
 </html>

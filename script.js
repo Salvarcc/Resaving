@@ -152,6 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
             cond2: 'Se desenroscaron las tapas plásticas y se separaron del envase principal.',
             cond3: 'Las botellas fueron aplastadas desde la base para reducir su volumen de transporte.'
         },
+        glass: {
+            name: 'Frascos y botellas de vidrio',
+            unitWeight: 0.250,
+            weightLabel: 'envases de vidrio',
+            tag: 'Acepta frascos y botellas de vidrio',
+            img: '../Images/delivery-glass.png',
+            tolva: 'Boca 2 (Vidrio)',
+            prepSummary: 'Enjuagado, seco, entero y sin tapa metálica',
+            cond1: 'Los frascos y botellas fueron enjuagados y escurridos sin restos de alimentos ni líquidos.',
+            cond2: 'Se retiraron las tapas metálicas, corchos o precintos del cuello del envase.',
+            cond3: 'Los envases de vidrio se encuentran 100% enteros, sin rajaduras ni bordes astillados.'
+        },
         can: {
             name: 'Latas de aluminio y hojalata',
             unitWeight: 0.015,
@@ -177,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cond3: 'Las cajas fueron desarmadas y dobladas planas para formar un paquete compacto.'
         }
     };
+    materialConfig.vidrio = materialConfig.glass;
 
     const getSelectedMaterialKey = () => {
         const checked = document.querySelector('input[name="material-type"]:checked');
@@ -860,18 +873,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('');
             }
 
-            const destDesc = document.getElementById('detail-dest-desc');
+            const destDesc = document.getElementById('detail-dest-desc') || document.getElementById('detail-channels-desc');
             if (destDesc && data.destDesc) destDesc.textContent = data.destDesc;
 
             const faqAccordion = document.getElementById('detail-faq-accordion');
             if (faqAccordion && data.faq) {
                 faqAccordion.innerHTML = data.faq.map(item => `
-                    <details class="faq-item">
-                        <summary class="faq-question">
+                    <details class="glossary-item">
+                        <summary class="glossary-summary flex Ycenter">
                             <span>${item.q}</span>
-                            <img src="../Images/icon-chevron-down.svg" alt="" class="faq-arrow">
+                            <img src="../Images/icon-chevron-down.svg" alt="" class="chevron-icon">
                         </summary>
-                        <div class="faq-answer">
+                        <div class="glossary-content">
                             <p>${item.a}</p>
                         </div>
                     </details>
@@ -934,6 +947,12 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: '2', num: '2', name: 'Ecopunto Parque de la Amistad', km: 1.4, status: 'Abierto hoy', badge: 'badge-open', dist: '1.4 km · 18 min a pie · Av. Caminos del Inca cruce con Benavides', addr: 'Punto limpio turístico al costado de la estación del tren. Horario: 08:00 a 19:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Frascos', 'Cartón'], x: 42, y: 30, promoter: 'Promotores Amistad Verde', capacity: '70% libre' },
             { id: '3', num: '3', name: 'Módulo Verde Jockey Plaza', km: 2.0, status: 'Abierto hoy', badge: 'badge-open', dist: '2.0 km · 6 min en auto · Av. Javier Prado Este 4200', addr: 'Zona de estacionamiento peatonal puerta 1. Horario comercial: 09:00 a 21:00.', mats: 'pet vidrio metal', tags: ['Botellas plásticas', 'Latas de bebidas'], x: 72, y: 22, promoter: 'Sostenibilidad Jockey', capacity: '80% libre' },
             { id: '4', num: '4', name: 'Punto de Acopio Parque Voces por el Clima', km: 2.8, status: 'Abierto hoy', badge: 'badge-open', dist: '2.8 km · 9 min en auto · Av. Los Castillos s/n', addr: 'Pabellón de reciclaje ecológico y recepción de ecoladrillos. Horario: 09:00 a 17:00.', mats: 'pet papel metal especial', tags: ['Multimaterial', 'Ecoladrillos', 'Pilas'], x: 58, y: 64, promoter: 'Centro Educación Ambiental Surco', capacity: '60% libre' }
+        ],
+        'san-borja': [
+            { id: '1', num: '1', name: 'Ecopunto Pentagonito · Parque Olímpico', km: 0.7, status: 'Abierto 24h', badge: 'badge-open', dist: '0.7 km · 9 min a pie · Av. San Borja Norte cdra. 10', addr: 'Estación ecológica municipal junto al circuito deportivo del Pentagonito. Horario: 24 horas.', mats: 'pet vidrio papel metal', tags: ['Botellas plásticas', 'Vidrio', 'Cartón', 'Latas'], x: 35, y: 32, promoter: 'Programa San Borja Recicla', capacity: '85% libre' },
+            { id: '2', num: '2', name: 'Estación Ambiental Parque de la Felicidad', km: 1.1, status: 'Abierto hoy', badge: 'badge-open', dist: '1.1 km · 14 min a pie · Cruce Av. San Borja Sur con Boulevard', addr: 'Módulo de segregación asistida con promotor ambiental acreditado. Horario: 08:00 a 18:00.', mats: 'pet vidrio papel', tags: ['Botellas plásticas', 'Frascos de vidrio', 'Papel bond'], x: 54, y: 42, promoter: 'Luis Alberto Soto (Reg. #SB-108)', capacity: '75% libre' },
+            { id: '3', num: '3', name: 'Punto Limpio Estación La Cultura', km: 1.6, status: 'Abierto hoy', badge: 'badge-open', dist: '1.6 km · 19 min a pie · Av. Aviación cdra. 23 (Frente a Biblioteca Nacional)', addr: 'Contenedores selectivos de alta capacidad y buzón especial para pilas usadas. Horario: 07:00 a 20:00.', mats: 'pet metal especial', tags: ['Botellas plásticas', 'Latas de aluminio', 'Pilas y baterías'], x: 74, y: 24, promoter: 'Gerencia de Sostenibilidad San Borja', capacity: '65% libre' },
+            { id: '4', num: '4', name: 'Módulo Recicla Polideportivo Limatambo', km: 2.2, status: 'Cierra a las 17:30', badge: 'badge-closing', dist: '2.2 km · 7 min en auto · Av. Malachowsky 560 (Urb. Limatambo)', addr: 'Centro de acopio vecinal para fardos de cartón, plásticos rígidos y vidrio limpio.', mats: 'pet vidrio papel metal', tags: ['Multimaterial', 'Cartón corrugado', 'Vidrio'], x: 66, y: 63, promoter: 'Asociación Recicladores San Borja', capacity: '50% libre' }
         ]
     };
 
@@ -953,8 +972,21 @@ document.addEventListener('DOMContentLoaded', () => {
         popupLink.href = `point-detail.html?punto=${districtKey}-${st.id}`;
     };
 
+    const districtMapSvg = {
+        'san-miguel': '../Images/map-collection-points.svg',
+        'miraflores': '../Images/map-miraflores.svg',
+        'surco': '../Images/map-surco.svg',
+        'magdalena': '../Images/map-magdalena.svg',
+        'pueblo-libre': '../Images/map-pueblo-libre.svg',
+        'san-borja': '../Images/map-san-borja.svg'
+    };
+
     const renderDistrictStations = (districtKey) => {
         const stations = districtStations[districtKey] || districtStations['san-miguel'];
+        const mapBgImg = document.querySelector('.map-image-layer, .map-bg-img');
+        if (mapBgImg) {
+            mapBgImg.src = districtMapSvg[districtKey] || districtMapSvg['san-miguel'];
+        }
 
         if (mapPointsContainer) {
             mapPointsContainer.innerHTML = stations.map((st, i) => `
@@ -1035,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="point-detail.html?punto=${st.districtKey}-${st.id}" class="btn-primary-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
                         <span>Ver ficha y horarios</span>
                     </a>
-                    <a href="point-directions.html?punto=${st.districtKey}-${st.id}" class="btn-outline-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
+                    <a href="javascript:void(0)" class="btn-outline-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
                         <span>Cómo llegar</span>
                     </a>
                 </div>
@@ -1352,6 +1384,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 capacity: '60% libre',
                 promoter: 'Centro Educación Ambiental Surco',
                 tip: 'Parque temático ecológico. Acepta ecoladrillos, multimaterial aprovechable y residuos de pilas.'
+            },
+            'san-borja-1': {
+                name: 'Ecopunto Pentagonito · Parque Olímpico',
+                entity: 'Municipalidad de San Borja · Programa San Borja Recicla',
+                status: 'Abierto 24 horas',
+                badgeClass: 'badge-open',
+                addr: 'Av. San Borja Norte cdra. 10 (Circuito Deportivo Pentagonito)',
+                dist: '0.7 km (9 min a pie)',
+                capacity: '85% libre (vaciado diario)',
+                promoter: 'Programa San Borja Recicla',
+                tip: 'Estación ecológica municipal de acceso continuo. Recibe botellas plásticas limpias, frascos de vidrio, latas y cartón plegado.'
+            },
+            'san-borja-2': {
+                name: 'Estación Ambiental Parque de la Felicidad',
+                entity: 'Municipalidad de San Borja',
+                status: 'Abierto hoy · 08:00 a 18:00',
+                badgeClass: 'badge-open',
+                addr: 'Cruce Av. San Borja Sur con Paseo del Bosque',
+                dist: '1.1 km (14 min a pie)',
+                capacity: '75% libre',
+                promoter: 'Luis Alberto Soto (Reg. #SB-108)',
+                tip: 'Módulo asistido con orientación vecinal y recepción de botellas plásticas, vidrio y papel bond seco.'
+            },
+            'san-borja-3': {
+                name: 'Punto Limpio Estación La Cultura',
+                entity: 'Gerencia de Sostenibilidad de San Borja',
+                status: 'Abierto hoy · 07:00 a 20:00',
+                badgeClass: 'badge-open',
+                addr: 'Av. Aviación cdra. 23 (Explanada Biblioteca Nacional)',
+                dist: '1.6 km (19 min a pie)',
+                capacity: '65% libre',
+                promoter: 'Promotores Ambientales La Cultura',
+                tip: 'Ubicado en zona de alto tránsito peatonal. Dispone de contenedor rojo hermético para pilas alcalinas y baterías domésticas.'
+            },
+            'san-borja-4': {
+                name: 'Módulo Recicla Polideportivo Limatambo',
+                entity: 'Asociación de Recicladores San Borja Sostenible',
+                status: 'Cierra hoy a las 17:30',
+                badgeClass: 'badge-closing',
+                addr: 'Av. Malachowsky 560 (Urb. Limatambo, San Borja)',
+                dist: '2.2 km (7 min en auto)',
+                capacity: '50% libre',
+                promoter: 'Asociación Recicladores San Borja',
+                tip: 'Centro de acopio vecinal con balanza para fardos de cartón corrugado, plásticos rígidos y botellas.'
             }
         };
 
@@ -1450,7 +1526,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-green',
             subBadge: 'Plástico rígido',
             desc: 'Envases plásticos opacos de alta densidad. Enjuagar para retirar restos de jabón o líquido y desenroscar dosificadores.',
-            img: '../Images/gallery-plastic-bottle.png',
+            img: '../Images/thumb-hdpe-bottle.svg',
             url: 'waste-detail.html?tipo=pead'
         },
         {
@@ -1483,7 +1559,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Abono fértil',
             desc: 'Aportan nitrógeno y enriquecen la tierra de parques y biohuertos comunales. Retirar grapas metálicas de saquitos de té.',
-            img: '../Images/accepted-separated-components.png',
+            img: '../Images/thumb-coffee-grounds.svg',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -1494,7 +1570,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Restos de poda',
             desc: 'Materia orgánica seca que equilibra el compostaje. Deben entregarse sin alambres, plásticos ni piedras.',
-            img: '../Images/accepted-empty-clean.png',
+            img: '../Images/thumb-dry-leaves.svg',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -1505,7 +1581,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-brown',
             subBadge: 'Mineral y calcio',
             desc: 'Excelente aporte de calcio para suelos. Se deben enjuagar ligeramente para no atraer moscas antes de colocarlas en el tacho marrón.',
-            img: '../Images/category-organic.png',
+            img: '../Images/thumb-eggshells.svg',
             url: 'waste-detail.html?tipo=organico'
         },
         {
@@ -1527,7 +1603,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Contenedor farmacias',
             desc: 'No tirar por el inodoro ni a la basura común. Deben llevarse a los puntos azules de acopio instalados en farmacias y centros de salud.',
-            img: '../Images/gallery-special-waste.png',
+            img: '../Images/accepted-empty-clean.png',
             url: 'waste-detail.html?tipo=medicamento'
         },
         {
@@ -1538,7 +1614,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-red',
             subBadge: 'Vapor de mercurio',
             desc: 'Contienen mercurio gaseoso. Deben entregarse enteros dentro de su caja de cartón en centros de atención especializada.',
-            img: '../Images/category-hazardous.png',
+            img: '../Images/thumb-lightbulb.svg',
             url: 'waste-detail.html?tipo=focos'
         },
         {
@@ -1571,7 +1647,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Tóxico no reciclable',
             desc: 'Los filtros de acetato de celulosa tardan más de una década en degradarse y concentran químicos tóxicos. Van al tacho negro.',
-            img: '../Images/rejected-with-residue.png',
+            img: '../Images/thumb-cigarettes.svg',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -1582,7 +1658,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Film metalizado',
             desc: 'Películas complejas de polipropileno con vaporizado de aluminio que no se separan industrialmente en Lima. Tacho negro.',
-            img: '../Images/rejected-mixed-wet.png',
+            img: '../Images/rejected-mixed-wet.webp',
             url: 'waste-detail.html?tipo=no-aprovechable'
         },
         {
@@ -1593,7 +1669,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeClass: 'badge-black',
             subBadge: 'Inerte común',
             desc: 'No funde con el vidrio de botellas por tener temperaturas distintas. Debe envolverse en papel grueso y disponerse en tacho negro.',
-            img: '../Images/rejected-with-residue.png',
+            img: '../Images/thumb-ceramics.svg',
             url: 'waste-detail.html?tipo=no-aprovechable'
         }
     ];
@@ -2277,7 +2353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formReport) {
         formReport.addEventListener('submit', (e) => {
             e.preventDefault();
-            window.location.href = 'report-success.html';
+            /* Pantalla extra desactivada: report-success.html */
         });
     }
 
@@ -2285,7 +2361,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formSuggest) {
         formSuggest.addEventListener('submit', (e) => {
             e.preventDefault();
-            window.location.href = 'report-success.html';
+            /* Pantalla extra desactivada: report-success.html */
         });
     }
 });

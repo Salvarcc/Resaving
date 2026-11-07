@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resaving - Verificación de Compatibilidad de Lote</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/delivery.css">
 </head>
 <body>
 
@@ -106,7 +107,7 @@
                         <span>✓ Acepta Latas</span>
                         <span>✓ Acepta Papel y Cartón</span>
                     </div>
-                    <a href="point-directions.html" style="display: block; text-align: center; padding: 11px 16px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none;">Ver indicaciones para llegar</a>
+                    <!-- Pantalla extra: point-directions.html --><a href="javascript:void(0)" style="display: block; text-align: center; padding: 11px 16px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none;">Ver indicaciones para llegar</a>
                 </div>
 
                 <div style="background-color: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 16px; padding: 20px; text-align: center;">
@@ -118,38 +119,47 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-inner container flex">
-            <div class="footer-brand">
-                <div class="brand flex Ycenter">
-                    <div class="brand-mark flex center">
-                        <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
-                    </div>
-                    <span class="brand-name white">Resaving</span>
+        <div class="footer-inner container">
+            <div class="footer-grid flex">
+                <div class="footer-brand">
+                    <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
+                        <div class="brand-mark flex center" style="width: 36px; height: 36px;">
+                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                        </div>
+                        <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
+                    </a>
+                    <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
                 </div>
-                <p class="footer-desc">Plataforma ciudadana para el reciclaje y segregación responsable de residuos conforme a la normativa peruana NTP 900.058:2019.</p>
-            </div>
-            <div class="footer-links-grid flex">
+
                 <div class="footer-col">
-                    <h3 class="footer-col-title">Secciones</h3>
-                    <a href="../index.html" class="footer-link">Inicio</a>
-                    <a href="categories.html" class="footer-link">Categorías</a>
-                    <a href="collection-map.html" class="footer-link">Puntos de acopio</a>
-                    <a href="delivery.html" class="footer-link">Mi entrega</a>
+                    <h5>Explorar</h5>
+                    <a href="categories.html">Categorías</a>
+                    <a href="collection-map.html">Puntos de acopio</a>
+                    <a href="delivery.html">Mi entrega</a>
                 </div>
+
                 <div class="footer-col">
-                    <h3 class="footer-col-title">Normativa</h3>
-                    <a href="waste-source.html" class="footer-link">NTP 900.058:2019</a>
-                    <a href="waste-source.html" class="footer-link">MINAM</a>
-                    <a href="waste-source.html" class="footer-link">INACAL</a>
+                    <h5>Confianza</h5>
+                    <a href="waste-source.html">Vigencia de datos</a>
+                    <a href="../index.html#vigencia">Privacidad y seguridad</a>
+                    <!-- Pantalla extra: report-feedback.html -->
+                    <a href="javascript:void(0)">Reportar información</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Accesibilidad</h5>
+                    <a href="javascript:void(0)">Escuchar esta pantalla</a>
+                    <a href="collection-list.html">Alternativa textual al mapa</a>
+                    <p class="accessibility-note">Navegable con teclado y etiquetas visibles.</p>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom container flex Ycenter">
-            <p class="footer-copy">© 2026 Resaving. Todos los derechos reservados.</p>
-            <p class="footer-tagline">Recicla con certeza, cuida tu comunidad.</p>
+
+            <div class="footer-legal flex Ycenter">
+                <p>© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../js/delivery.js" defer></script>
 </body>
 </html>

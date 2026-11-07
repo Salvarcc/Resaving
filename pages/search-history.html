@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resaving - Consultas Recientes</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/catalog.css">
 </head>
 <body>
 
@@ -42,7 +43,7 @@
         </nav>
 
         <section class="categories-header">
-            <p class="eyebrow">Identificacion · HU-008</p>
+            <p class="eyebrow">Identificacion</p>
             <h1 class="section-title">Consultas recientes de la sesión</h1>
             <p class="section-subtitle">Retoma rápidamente una consulta realizada durante esta sesión sin necesidad de volver a escribir o buscar el material.</p>
         </section>
@@ -127,62 +128,46 @@
 
     <footer class="site-footer">
         <div class="footer-inner container">
-            <div class="footer-top flex">
-                <div class="footer-brand-col">
-                    <a href="../index.html" class="brand flex Ycenter" style="margin-bottom: 12px; text-decoration: none;">
-                        <div class="brand-mark flex center">
-                            <img src="../Images/resaving-mark.webp" alt="Isotipo Resaving">
+            <div class="footer-grid flex">
+                <div class="footer-brand">
+                    <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
+                        <div class="brand-mark flex center" style="width: 36px; height: 36px;">
+                            <img src="../Images/resaving-mark.webp" alt="Resaving Logo" width="28">
                         </div>
-                        <span class="brand-name dark-principal">Resaving</span>
+                        <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
                     </a>
-                    <p class="footer-tagline">Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
-                    <p class="footer-subtext">Diseñado para ciudadanos, familias y recicladores de base bajo la Norma Técnica Peruana NTP 900.058:2019.</p>
+                    <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
                 </div>
 
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Explorar</h4>
-                    <ul class="footer-links">
-                        <li><a href="categories.html">Categorías</a></li>
-                        <li><a href="collection-map.html">Puntos de acopio</a></li>
-                        <li><a href="delivery.html">Mi entrega</a></li>
-                        <li><a href="scan-camera.html"><span class="text-desktop-tablet">Adjuntar imagen</span><span class="text-mobile">Adjuntar foto o tomar foto</span></a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h5>Explorar</h5>
+                    <a href="categories.html">Categorías</a>
+                    <a href="collection-map.html">Puntos de acopio</a>
+                    <a href="delivery.html">Mi entrega</a>
                 </div>
 
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Confianza</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html#vigencia">Vigencia de datos</a></li>
-                        <li><a href="../index.html#privacidad">Privacidad y seguridad</a></li>
-                        <li><a href="report-feedback.html">Reportar información</a></li>
-                        <li><a href="../index.html#metodologia">Metodología de validación</a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h5>Confianza</h5>
+                    <a href="waste-source.html">Vigencia de datos</a>
+                    <a href="../index.html#vigencia">Privacidad y seguridad</a>
+                    <!-- Pantalla extra: report-feedback.html -->
+                    <a href="javascript:void(0)">Reportar información</a>
                 </div>
 
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Accesibilidad</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html#audio">Escuchar esta pantalla</a></li>
-                        <li><a href="../index.html#mapa-texto">Alternativa textual al mapa</a></li>
-                        <li><a href="../index.html#alto-contraste">Modo alto contraste</a></li>
-                        <li><a href="../index.html#atajos">Navegación por teclado</a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h5>Accesibilidad</h5>
+                    <a href="javascript:void(0)">Escuchar esta pantalla</a>
+                    <a href="collection-list.html">Alternativa textual al mapa</a>
+                    <p class="accessibility-note">Navegable con teclado y etiquetas visibles.</p>
                 </div>
             </div>
 
-            <div class="footer-bottom flex Ycenter">
-                <p class="footer-copy">© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
-                <div class="footer-legal flex Ycenter">
-                    <a href="../index.html#privacidad">Privacidad</a>
-                    <span class="separator">·</span>
-                    <a href="../index.html#accesibilidad">Accesibilidad</a>
-                    <span class="separator">·</span>
-                    <a href="../index.html#ayuda">Ayuda</a>
-                </div>
+            <div class="footer-legal flex Ycenter">
+                <p>© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
             </div>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../js/catalog.js" defer></script>
 </body>
 </html>

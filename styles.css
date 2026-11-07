@@ -4614,3 +4614,82 @@ body {
 .material-choice-card:hover {
     box-shadow: 0 4px 12px rgba(7, 53, 34, 0.08);
 }
+
+.trust-copy {
+    flex: 0 0 490px !important;
+}
+
+.trust-actions {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-trust-primary,
+.btn-trust-secondary {
+    white-space: nowrap;
+}
+
+.search-input-wrap img.search-icon {
+    margin-right: 10px;
+}
+
+.btn-trust-secondary img,
+.btn-cta-light img,
+.btn-category-action img,
+.btn-callout-search img,
+.results-search-bar img.search-input-icon,
+.search-input-wrap img.search-icon {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(85%) saturate(995%) hue-rotate(120deg) brightness(92%) contrast(98%);
+}
+
+.btn-callout-camera img,
+.btn-ctrl-action img,
+.btn-primary-action img,
+.btn-trust-primary img,
+.btn-submit img {
+    filter: brightness(0) invert(1);
+}
+
+#detail-faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+summary.glossary-summary::-webkit-details-marker,
+summary.glossary-question::-webkit-details-marker {
+    display: none;
+}
+
+summary.glossary-summary,
+summary.glossary-question {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 18px 22px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #14251B;
+    cursor: pointer;
+}
+
+.glossary-item {
+    background-color: #FFFFFF;
+    border: 1.5px solid #DBE7DF;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.glossary-content,
+.glossary-answer {
+    padding: 0 22px 18px 22px;
+    font-size: 14px;
+    color: #4A6354;
+    line-height: 1.6;
+}
