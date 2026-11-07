@@ -47,6 +47,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const popupDesc = document.getElementById('popup-point-desc');
     const popupLink = document.getElementById('popup-point-link');
     const sortSelector = document.getElementById('sort-selector');
+    const labelListDistrict = document.getElementById('label-list-district');
+    const tabToMap = document.getElementById('tab-to-map');
+
+    const districtNames = {
+        'all': 'Todos los distritos',
+        'san-miguel': 'San Miguel',
+        'pueblo-libre': 'Pueblo Libre',
+        'magdalena': 'Magdalena del Mar',
+        'miraflores': 'Miraflores',
+        'surco': 'Santiago de Surco',
+        'san-borja': 'San Borja'
+    };
+
+    const mapUrlParams = new URLSearchParams(window.location.search);
+    const initialDistrictParam = mapUrlParams.get('distrito');
 
     const updateMapPopup = (st, districtKey) => {
         if (!popupTitle || !popupDesc || !popupLink) return;
@@ -65,10 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderDistrictStations = (districtKey) => {
-        const stations = districtStations[districtKey] || districtStations['san-miguel'];
+        const normKey = (districtKey === 'all' || !districtStations[districtKey]) ? 'san-miguel' : districtKey;
+        const stations = districtStations[normKey] || districtStations['san-miguel'];
         const mapBgImg = document.querySelector('.map-image-layer, .map-bg-img');
         if (mapBgImg) {
-            mapBgImg.src = districtMapSvg[districtKey] || districtMapSvg['san-miguel'];
+            mapBgImg.src = districtMapSvg[normKey] || districtMapSvg['san-miguel'];
+        }
+
+        const tabToList = document.querySelector('a[href^="collection-list.html"]');
+        if (tabToList) {
+            tabToList.href = `collection-list.html?distrito=${normKey}`;
         }
 
         if (mapPointsContainer) {
@@ -86,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="point-materials-row">
                         ${st.tags.map(t => `<span class="mat-tag">${t}</span>`).join('')}
                     </div>
-                    <a href="point-detail.html?punto=${districtKey}-${st.id}" class="btn-outline-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
+                    <a href="point-detail.html?punto=${normKey}-${st.id}" class="btn-outline-action flex center" style="padding: 9px 16px; font-size: 13.5px; width: 100%;">
                         <span>Ver detalle</span>
                     </a>
                 </article>
@@ -100,17 +121,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (stations.length > 0) {
-            updateMapPopup(stations[0], districtKey);
+            updateMapPopup(stations[0], normKey);
         }
 
-        bindMarkerAndCardEvents(districtKey, stations);
+        bindMarkerAndCardEvents(normKey, stations);
     };
 
-    const renderListView = (sortMode = 'distancia', filterMat = 'all') => {
+    const renderListView = (sortMode = 'distancia', filterMat = 'all', selDistrict = null) => {
         if (!listPointsContainer) return;
 
+        if (!selDistrict && districtSelector) {
+            selDistrict = districtSelector.value;
+        }
+
+        let targetDistricts = (selDistrict && selDistrict !== 'all' && districtStations[selDistrict])
+            ? [selDistrict]
+            : Object.keys(districtStations);
+
         let allPoints = [];
-        Object.keys(districtStations).forEach(dKey => {
+        targetDistricts.forEach(dKey => {
             districtStations[dKey].forEach(st => {
                 allPoints.push({ ...st, districtKey: dKey });
             });
@@ -150,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="point-detail.html?punto=${st.districtKey}-${st.id}" class="btn-primary-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
                         <span>Ver ficha y horarios</span>
                     </a>
-                    <a href="javascript:void(0)" class="btn-outline-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
+                    <a href="point-detail.html?punto=${st.districtKey}-${st.id}#como-llegar" class="btn-outline-action flex center" style="padding: 10px 18px; font-size: 13.5px; text-decoration: none;">
                         <span>Cómo llegar</span>
                     </a>
                 </div>
@@ -162,7 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sortSelector.addEventListener('change', () => {
             const activeChip = document.querySelector('.filter-chip.active');
             const curFilter = activeChip ? activeChip.getAttribute('data-filter') : 'all';
-            renderListView(sortSelector.value, curFilter);
+            const curDistrict = districtSelector ? districtSelector.value : 'all';
+            renderListView(sortSelector.value, curFilter, curDistrict);
         });
     }
 
@@ -212,13 +242,34 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (districtSelector) {
-        districtSelector.addEventListener('change', () => {
-            renderDistrictStations(districtSelector.value);
-        });
-        renderDistrictStations(districtSelector.value);
-    }
+        if (initialDistrictParam && (initialDistrictParam === 'all' || districtStations[initialDistrictParam])) {
+            districtSelector.value = initialDistrictParam;
+        }
 
-    if (listPointsContainer) {
+        if (mapPointsContainer) {
+            districtSelector.addEventListener('change', () => {
+                renderDistrictStations(districtSelector.value);
+            });
+            renderDistrictStations(districtSelector.value);
+        } else if (listPointsContainer) {
+            const updateListDistrict = () => {
+                const curVal = districtSelector.value;
+                if (labelListDistrict) {
+                    labelListDistrict.textContent = `${districtNames[curVal] || 'San Miguel'}, Lima`;
+                }
+                if (tabToMap) {
+                    tabToMap.href = `collection-map.html?distrito=${curVal === 'all' ? 'san-miguel' : curVal}`;
+                }
+                const activeChip = document.querySelector('.filter-chip.active');
+                const curFilter = activeChip ? activeChip.getAttribute('data-filter') : 'all';
+                const curSort = sortSelector ? sortSelector.value : 'distancia';
+                renderListView(curSort, curFilter, curVal);
+            };
+
+            districtSelector.addEventListener('change', updateListDistrict);
+            updateListDistrict();
+        }
+    } else if (listPointsContainer) {
         renderListView();
     }
 
@@ -232,8 +283,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const filter = chip.getAttribute('data-filter');
 
-                if (listPointsContainer && sortSelector) {
-                    renderListView(sortSelector.value, filter);
+                if (listPointsContainer) {
+                    const curSort = sortSelector ? sortSelector.value : 'distancia';
+                    const curDistrict = districtSelector ? districtSelector.value : 'all';
+                    renderListView(curSort, filter, curDistrict);
                     return;
                 }
 
@@ -559,6 +612,126 @@ document.addEventListener('DOMContentLoaded', () => {
             stepInstructions[1].innerHTML = `<strong>Ingresa al perímetro de ${pointData.name}</strong><p>Usa el crucero peatonal señalizado junto a la zona de recepción.</p>`;
             stepInstructions[2].innerHTML = `<strong>Ubica los contenedores selectivos autorizados</strong><p>Identifica las bocas rotuladas con el apoyo de: ${pointData.promoter}.</p>`;
         }
+
+        const km = pointData.km || parseFloat(pointData.dist) || 0.8;
+        const walkMins = Math.round(km * 13);
+        const walkMeters = Math.round(km * 1000);
+        const bikeMins = Math.max(2, Math.round(km * 4.5));
+        const driveMins = Math.max(2, Math.round(km * 3.2));
+
+        const attrWalk = document.getElementById('attr-time-walk');
+        const attrBike = document.getElementById('attr-time-bike');
+        const attrDrive = document.getElementById('attr-time-drive');
+        const btnGmaps = document.getElementById('btn-gmaps-link');
+
+        if (attrWalk) attrWalk.textContent = `${walkMins} minutos (${walkMeters} m)`;
+        if (attrBike) attrBike.textContent = `${bikeMins} minutos`;
+        if (attrDrive) attrDrive.textContent = `${driveMins} minutos (estacionamiento libre)`;
+        if (btnGmaps) {
+            btnGmaps.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pointData.name + ', ' + pointData.addr + ', Lima')}`;
+        }
+    }
+
+    // Collection routes handling
+    const routePageTitle = document.getElementById('route-page-title');
+    if (routePageTitle) {
+        const routesDictionary = {
+            'san-miguel-03': {
+                name: 'Ruta San Miguel 03',
+                pageTitle: 'Ruta municipal San Miguel 03',
+                subtitle: 'Consulta días, frecuencias de recojo y el área de cobertura del programa de segregación en la fuente.',
+                sector: 'Sector 3 de San Miguel',
+                cardTitle: 'Ruta de recolección selectiva 03',
+                nextVisit: 'Próxima visita: Sábado 10',
+                desc: 'El vehículo recolector y los recicladores formalizados del programa distrital recorren las calles recolectando residuos aprovechables empacados en bolsas verdes.',
+                materials: 'Plásticos, botellas, cartón, papel bond y latas limpios.',
+                coverage: 'Av. La Marina, Av. Universitaria y Av. Bertolotto.',
+                activeDays: {
+                    'Mié': '08:00–12:00',
+                    'Sáb': '08:00–12:00'
+                }
+            },
+            'pueblo-libre-01': {
+                name: 'Ruta Pueblo Libre 01',
+                pageTitle: 'Ruta municipal Pueblo Libre 01',
+                subtitle: 'Programa Recicla Pueblo Libre para predios y condominios del sector histórico.',
+                sector: 'Sector 1 de Pueblo Libre',
+                cardTitle: 'Ruta de recolección selectiva 01',
+                nextVisit: 'Próxima visita: Jueves 08',
+                desc: 'El camión baranda recorre las urbanizaciones del cuadrante histórico de Pueblo Libre en horario matutino.',
+                materials: 'Botellas plásticas, frascos de vidrio, papel y cartón seco.',
+                coverage: 'Cuadrante Av. Sucre, Av. Bolívar y Av. Vivanco.',
+                activeDays: {
+                    'Mar': '09:00–13:00',
+                    'Jue': '09:00–13:00'
+                }
+            },
+            'magdalena-02': {
+                name: 'Ruta Magdalena 02',
+                pageTitle: 'Ruta municipal Magdalena 02',
+                subtitle: 'Ruta de recolección diferenciada para vecinos del sector comercial y residencial.',
+                sector: 'Sector 2 de Magdalena',
+                cardTitle: 'Ruta de recolección selectiva 02',
+                nextVisit: 'Próxima visita: Viernes 09',
+                desc: 'Brigada de recicladores acreditados recorre comercios y residencias con vehículo recolector ligero.',
+                materials: 'Plásticos, envases de hojalata y aluminio, papel y cartón.',
+                coverage: 'Cuadrante Jr. Bolognesi, Av. Brasil y Jr. Leoncio Prado.',
+                activeDays: {
+                    'Lun': '08:30–12:30',
+                    'Vie': '08:30–12:30'
+                }
+            }
+        };
+
+        const routeParams = new URLSearchParams(window.location.search);
+        const rutaKey = routeParams.get('ruta') || 'san-miguel-03';
+        const routeData = routesDictionary[rutaKey] || routesDictionary['san-miguel-03'];
+
+        document.title = `Resaving - ${routeData.name}`;
+        routePageTitle.textContent = routeData.pageTitle;
+
+        const routeCrumb = document.getElementById('route-breadcrumb-name');
+        if (routeCrumb) routeCrumb.textContent = routeData.name;
+
+        const routeSub = document.getElementById('route-page-subtitle');
+        if (routeSub) routeSub.textContent = routeData.subtitle;
+
+        const routeSector = document.getElementById('route-sector-badge');
+        if (routeSector) routeSector.textContent = routeData.sector;
+
+        const routeCardTitle = document.getElementById('route-card-title');
+        if (routeCardTitle) routeCardTitle.textContent = routeData.cardTitle;
+
+        const routeNextVisit = document.getElementById('route-next-visit');
+        if (routeNextVisit) routeNextVisit.textContent = routeData.nextVisit;
+
+        const routeDesc = document.getElementById('route-card-desc');
+        if (routeDesc) routeDesc.textContent = routeData.desc;
+
+        const routeMats = document.getElementById('route-materials-text');
+        if (routeMats) routeMats.textContent = routeData.materials;
+
+        const routeCov = document.getElementById('route-coverage-text');
+        if (routeCov) routeCov.textContent = routeData.coverage;
+
+        const dayCards = document.querySelectorAll('#route-week-calendar .day-pill-card');
+        dayCards.forEach(card => {
+            const dayName = card.getAttribute('data-day') || (card.querySelector('.day-name') ? card.querySelector('.day-name').textContent.trim() : '');
+            const hoursEl = card.querySelector('.day-hours');
+            if (routeData.activeDays && routeData.activeDays[dayName]) {
+                card.classList.add('active');
+                if (hoursEl) {
+                    hoursEl.classList.remove('empty');
+                    hoursEl.textContent = routeData.activeDays[dayName];
+                }
+            } else {
+                card.classList.remove('active');
+                if (hoursEl) {
+                    hoursEl.classList.add('empty');
+                    hoursEl.textContent = '—';
+                }
+            }
+        });
     }
 
 

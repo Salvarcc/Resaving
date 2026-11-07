@@ -51,22 +51,33 @@
         <section class="filter-toolbar">
             <div class="toolbar-row-top">
                 <div class="location-input-group">
-                    <label for="sort-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B;">Ordenar por:</label>
-                    <select id="sort-selector" class="location-select">
+                    <label for="district-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B;">Distrito:</label>
+                    <select id="district-selector" class="location-select">
+                        <option value="all">Todos los distritos</option>
+                        <option value="san-miguel" selected>San Miguel</option>
+                        <option value="pueblo-libre">Pueblo Libre</option>
+                        <option value="magdalena">Magdalena del Mar</option>
+                        <option value="miraflores">Miraflores</option>
+                        <option value="surco">Santiago de Surco</option>
+                        <option value="san-borja">San Borja</option>
+                    </select>
+
+                    <label for="sort-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B; margin-left: 8px;">Ordenar por:</label>
+                    <select id="sort-selector" class="location-select" style="min-width: 170px;">
                         <option value="distancia" selected>Menor distancia (más cercanos)</option>
                         <option value="horario">Horario más amplio</option>
                         <option value="materiales">Mayor cantidad de materiales</option>
                         <option value="alfabetico">Nombre alfabético</option>
                     </select>
 
-                    <button type="button" class="btn-my-location">
+                    <button type="button" class="btn-my-location" id="btn-list-location-pill">
                         <img src="../Images/icon-pin.svg" alt="" style="width: 16px; height: 16px;">
-                        <span>San Miguel, Lima</span>
+                        <span id="label-list-district">San Miguel, Lima</span>
                     </button>
                 </div>
 
                 <div class="view-switcher">
-                    <a href="collection-map.html" class="view-tab">Mapa</a>
+                    <a href="collection-map.html" class="view-tab" id="tab-to-map">Mapa</a>
                     <a href="collection-list.html" class="view-tab active">Lista</a>
                 </div>
             </div>
@@ -206,7 +217,7 @@
                     </div>
 
                     <p style="font-size: 13px; color: #5F7066; line-height: 1.45; margin-bottom: 16px;">Cobertura: Cuadrante Av. Universitaria, Av. La Marina y Av. Bertolotto. Entrega en costal o bolsa rotulada.</p>
-                    <a href="point-detail.html" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">Consultar ruta</a>
+                    <a href="collection-routes.html?ruta=san-miguel-03" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">Consultar ruta</a>
                 </article>
 
                 <article class="route-card">
@@ -225,7 +236,7 @@
                     </div>
 
                     <p style="font-size: 13px; color: #5F7066; line-height: 1.45; margin-bottom: 16px;">Cobertura: Alrededores de Plaza Bolívar, Av. Sucre y Av. Vivanco. Acepta botellas plásticas para bebidas, vidrio y cartón.</p>
-                    <a href="point-detail.html?punto=pueblo-libre" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">Consultar ruta</a>
+                    <a href="collection-routes.html?ruta=pueblo-libre-01" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">Consultar ruta</a>
                 </article>
 
                 <article class="route-card">
@@ -244,7 +255,7 @@
                     </div>
 
                     <p style="font-size: 13px; color: #5F7066; line-height: 1.45; margin-bottom: 16px;">Cobertura: Jirón Bolognesi, Av. Brasil cuadras finales y Malecón Castagnola. Acepta papel y plástico.</p>
-                    <a href="point-detail.html?punto=magdalena" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">Consultar ruta</a>
+                    <a href="collection-routes.html?ruta=magdalena-02" class="btn-outline-action flex center" style="width: 100%; font-size: 13px;">Consultar ruta</a>
                 </article>
             </div>
         </section>

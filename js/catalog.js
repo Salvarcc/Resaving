@@ -409,6 +409,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (actionPrepBtn) {
                 actionPrepBtn.href = `prep-guide.html?tipo=${normKey}`;
             }
+
+            const acceptLinks = document.querySelectorAll('a[href^="acceptability.html"]');
+            acceptLinks.forEach(link => {
+                link.href = `acceptability.html?tipo=${normKey}`;
+            });
         };
 
         matSwitchBtns.forEach(btn => {
@@ -421,6 +426,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const requestedType = urlParams.get('tipo') || 'pet';
         switchMaterial(requestedType);
+    }
+
+    // Dynamic criteria buttons on acceptability.html
+    const btnAcceptToPrep = document.getElementById('btn-accept-to-prep');
+    const btnAcceptToDetail = document.getElementById('btn-accept-to-detail');
+    if (btnAcceptToPrep || btnAcceptToDetail) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tipo = urlParams.get('tipo') || 'pet';
+        if (btnAcceptToPrep) btnAcceptToPrep.href = `prep-guide.html?tipo=${tipo}`;
+        if (btnAcceptToDetail) btnAcceptToDetail.href = `waste-detail.html?tipo=${tipo}`;
     }
 
 

@@ -902,12 +902,15 @@ body {
 }
 
 .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 36px;
     margin-bottom: 42px;
 }
 
 .footer-brand {
+    flex: 1 1 300px;
     max-width: 360px;
 }
 
@@ -921,6 +924,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex: 1 1 150px;
+    min-width: 140px;
 }
 
 .footer-col h5 {

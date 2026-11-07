@@ -222,6 +222,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pageSub) pageSub.textContent = curData.sub;
         if (wasteBreadcrumb) wasteBreadcrumb.href = `waste-detail.html?tipo=${curMat}`;
 
+        const linkAccept = document.getElementById('link-to-acceptability') || document.querySelector('a[href^="acceptability.html"]');
+        if (linkAccept) {
+            linkAccept.href = `acceptability.html?tipo=${curMat}`;
+        }
+
+        // Restore saved cascade state if available
+        try {
+            const savedState = sessionStorage.getItem(`resaving_prep_${curMat}`);
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                if (Array.isArray(parsed)) {
+                    parsed.forEach((val, idx) => {
+                        if (prepCbs[idx]) prepCbs[idx].checked = !!val;
+                    });
+                }
+            }
+        } catch (e) {
+            console.error('Error loading prep state:', e);
+        }
+
         const chips = document.querySelectorAll('.prep-mat-chip');
         chips.forEach(chip => {
             const m = chip.getAttribute('data-mat');
@@ -342,6 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     btnSummary.innerHTML = `<span>¡Preparación completa! Ver resumen final</span><img src="../Images/icon-arrow-right.svg" alt="">`;
                     btnSummary.onclick = null;
                 }
+            }
+
+            try {
+                sessionStorage.setItem(`resaving_prep_${curMat}`, JSON.stringify(prepCbs.map(cb => cb ? cb.checked : false)));
+            } catch (e) {
+                console.error('Error saving prep state:', e);
             }
         };
 
