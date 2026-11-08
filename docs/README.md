@@ -31,7 +31,7 @@ Resaving responde a la problemática de la desinformación, desconfianza y dispe
 
 ---
 
-## 🎯 Cobertura de 30 Historias de Usuario Core
+## 🚀 Cobertura de 30 Historias de Usuario Core
 La plataforma implementa fielmente las **30 Historias de Usuario Core** priorizadas en el Product Backlog del TB2, garantizando trazabilidad completa con el Needfinding, Arquitectura de Información, User Flows y Prototipo en Figma:
 
 * **Descubrimiento y Búsqueda (HU-001 a HU-009):** Portada informativa, buscador en vivo con sugerencias contextuales, historial de búsquedas recientes, manejo de consultas sin resultados, escaneo fotográfico y confirmación.
@@ -42,7 +42,7 @@ La plataforma implementa fielmente las **30 Historias de Usuario Core** prioriza
 ---
 
 ## 📁 Estructura del Repositorio
-Organizado estrictamente bajo el estándar establecido en el **Handbook de HCI for UX Design**:
+Organizado modularmente bajo el estándar establecido en el **Handbook de HCI for UX Design**:
 
 ```text
 Resaving/
@@ -68,14 +68,13 @@ Resaving/
 │   ├── prep.js               # Checklist de acondicionamiento interactivo
 │   ├── map.js                # Geolocalización simulada, selector mapa/lista y filtros
 │   └── trust.js              # Interacciones de verificación de datos
-├── pages/
+├── Pages/
 │   ├── index.html            # Réplica de landing para navegación interna
 │   └── [29 pantallas .html]  # Vistas completas de las 30 HU core
 ├── docs/
 │   └── README.md             # Documentación, instrucciones y créditos
 ├── favicon.ico               # Ícono oficial del sitio web
-├── index.html                # Punto de entrada principal para GitHub Pages
-└── .gitignore                # Reglas de exclusión de Git
+└── index.html                # Punto de entrada principal para GitHub Pages
 ```
 
 ---
@@ -83,7 +82,7 @@ Resaving/
 ## ♿ Accesibilidad y Buenas Prácticas
 * **Contraste WCAG 2.1 AA:** Ratios de contraste optimizados entre texto y fondo.
 * **Diseño Responsive:** Adaptación fluida sin pérdida de funcionalidades en Desktop (1280px+), Tablet (768px) y Mobile (390px). Cero scroll horizontal inesperado.
-* **Navegación Intuitiva:** Atributos semánticos `aria-label`, foco visible en enlaces interactivos y retroalimentación mediante Toasts interactivos (`¡Pronto! ⚠️`) en funcionalidades programadas para versiones futuras.
+* **Navegación Intuitiva:** Atributos semánticos `aria-label`, foco visible en enlaces interactivos y retroalimentación mediante Toasts interactivos (`¡Pronto! 🚀`) en funcionalidades programadas para versiones futuras.
 
 ---
 
