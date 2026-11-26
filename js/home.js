@@ -92,4 +92,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const infoForm = document.getElementById('form-solicitar-info') || document.querySelector('.registration-form');
+    const infoFeedback = document.getElementById('info-form-feedback');
+    if (infoForm) {
+        infoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombres = document.getElementById('nombres')?.value?.trim() || '';
+            const apellidos = document.getElementById('apellidos')?.value?.trim() || '';
+            const correo = document.getElementById('correo')?.value?.trim() || '';
+            const distritoSelect = document.getElementById('distrito');
+            const temaSelect = document.getElementById('tema');
+            const consulta = document.getElementById('consulta')?.value?.trim() || '';
+            const consentimiento = document.getElementById('consentimiento')?.checked;
+
+            const showFeedback = (msg, isError = false) => {
+                if (infoFeedback) {
+                    infoFeedback.textContent = msg;
+                    infoFeedback.style.display = 'block';
+                    infoFeedback.style.backgroundColor = isError ? '#FEF2F2' : '#EBF7F0';
+                    infoFeedback.style.border = isError ? '1.5px solid #B91C1C' : '1.5px solid #0B4A30';
+                    infoFeedback.style.color = isError ? '#991B1B' : '#0B4A30';
+                    infoFeedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                if (typeof window.resavingNotify === 'function') {
+                    window.resavingNotify(msg, isError ? 'Revisa el formulario' : 'Solicitud registrada', isError ? '!' : '✓');
+                }
+            };
+
+            if (!nombres || !apellidos || !correo || !distritoSelect?.value || !temaSelect?.value || !consulta || !consentimiento) {
+                showFeedback('Completa todos los campos obligatorios y acepta el tratamiento de datos antes de enviar.', true);
+                return;
+            }
+
+            const distritoTxt = distritoSelect.options[distritoSelect.selectedIndex]?.text || distritoSelect.value;
+            const temaTxt = temaSelect.options[temaSelect.selectedIndex]?.text || temaSelect.value;
+            showFeedback(`¡Gracias, ${nombres}! Registramos tu consulta sobre "${temaTxt}" (${distritoTxt}). Te responderemos a ${correo}.`);
+            infoForm.reset();
+        });
+    }
+
 });

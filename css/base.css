@@ -29,6 +29,18 @@ body {
     line-height: 1.5;
 }
 
+/* Accesibilidad WCAG 2.2: indicador de foco visible para navegación por teclado */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid #0F5B3A !important;
+    outline-offset: 2px;
+}
+
 .breadcrumb {
     display: flex;
     flex-wrap: wrap;
@@ -1111,7 +1123,6 @@ body {
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
-    outline: none;
     border-color: #0B4A30;
     background-color: #FFFFFF;
 }

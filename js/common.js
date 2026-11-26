@@ -35,18 +35,6 @@ function initGlobalMobileHeaderAndNav() {
         const inner = document.createElement('div');
         inner.className = 'main-nav-inner';
         links.forEach(link => inner.appendChild(link));
-        
-        // Add mobile user info at bottom of drawer
-        const userDiv = document.createElement('div');
-        userDiv.className = 'nav-user-mobile-bar';
-        userDiv.innerHTML = `
-            <div class="user-avatar flex center" style="width: 36px; height: 36px; border-radius: 50%; background: #0B4A30; color: #FFF; font-weight: 800; font-size: 13px;">YA</div>
-            <div>
-                <strong style="font-size: 13.5px; color: #14251B; display: block;">Yeremy Acuña</strong>
-                <span style="font-size: 11.5px; color: #1F6B47; font-weight: 700;">Ciudadano comprometido · San Miguel</span>
-            </div>
-        `;
-        inner.appendChild(userDiv);
         mainNav.appendChild(inner);
     }
 
@@ -114,7 +102,7 @@ function initDevicePhotoUpload() {
                         confirmImg.src = event.target.result;
                     };
                     reader.readAsDataURL(e.target.files[0]);
-                    alert('¡Nueva imagen cargada correctamente desde tu computadora!');
+                    showStatusToast('¡Nueva imagen cargada correctamente desde tu dispositivo!', 'Imagen lista');
                 } else {
                     window.location.href = basePath + 'scan-confirm.html';
                 }
@@ -135,35 +123,36 @@ function initDevicePhotoUpload() {
     });
 }
 
-// --- TOAST INTERACTIVO "PRONTO ⚠️" ---
-function showProntoToast(customMessage) {
+// --- TOAST ACCESIBLE DE ESTADO Y "PRONTO" ---
+function showStatusToast(customMessage, customTitle = 'Aviso', iconText = '✓') {
     let toast = document.getElementById('pronto-toast');
     if (!toast) {
         toast = document.createElement('div');
         toast.id = 'pronto-toast';
         toast.className = 'pronto-toast-container';
-        toast.setAttribute('role', 'alert');
+        toast.setAttribute('role', 'status');
         toast.setAttribute('aria-live', 'polite');
         toast.innerHTML = `
-            <div class="pronto-toast-icon">!</div>
+            <div class="pronto-toast-icon" id="pronto-toast-icon">${iconText}</div>
             <div class="pronto-toast-content">
-                <span class="pronto-toast-title">¡Pronto!</span>
-                <span class="pronto-toast-desc" id="pronto-toast-desc">Esta función estará disponible en la próxima versión.</span>
+                <span class="pronto-toast-title" id="pronto-toast-title">${customTitle}</span>
+                <span class="pronto-toast-desc" id="pronto-toast-desc">${customMessage}</span>
             </div>
         `;
         document.body.appendChild(toast);
-        
+
         toast.addEventListener('click', () => {
             toast.classList.remove('is-visible');
         });
     }
 
+    const titleEl = document.getElementById('pronto-toast-title');
     const descEl = document.getElementById('pronto-toast-desc');
-    if (descEl) {
-        descEl.textContent = customMessage || 'Esta función estará disponible en la próxima versión.';
-    }
+    const iconEl = document.getElementById('pronto-toast-icon');
+    if (titleEl) titleEl.textContent = customTitle;
+    if (descEl) descEl.textContent = customMessage;
+    if (iconEl) iconEl.textContent = iconText;
 
-    // Force animation restart
     toast.classList.remove('is-visible');
     void toast.offsetWidth;
     toast.classList.add('is-visible');
@@ -173,20 +162,72 @@ function showProntoToast(customMessage) {
     }
     window._prontoToastTimer = setTimeout(() => {
         toast.classList.remove('is-visible');
-    }, 3200);
+    }, 3600);
+}
+
+function showProntoToast(customMessage) {
+    showStatusToast(
+        customMessage || 'Esta función estará disponible en la próxima versión.',
+        '¡Pronto!',
+        '!'
+    );
+}
+
+window.resavingNotify = showStatusToast;
+
+function handleSpeakScreen(linkEl) {
+    if (!('speechSynthesis' in window)) {
+        showStatusToast('Tu navegador no admite síntesis de voz integrada; puedes usar el lector de pantalla de tu sistema.', 'Lectura en voz alta', 'i');
+        return;
+    }
+
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        linkEl.textContent = 'Escuchar esta pantalla';
+        showStatusToast('Lectura en voz alta detenida.', 'Lectura en voz alta', 'i');
+        return;
+    }
+
+    const mainEl = document.querySelector('main') || document.body;
+    const rawText = (mainEl.innerText || '').replace(/\s+/g, ' ').trim();
+    if (!rawText) return;
+
+    const utterance = new SpeechSynthesisUtterance(rawText.slice(0, 3500));
+    utterance.lang = 'es-PE';
+    utterance.rate = 1.0;
+
+    linkEl.textContent = 'Detener lectura en voz alta';
+    showStatusToast('Reproduciendo contenido principal de la pantalla en español.', 'Lectura en voz alta', '♪');
+
+    utterance.onend = () => {
+        linkEl.textContent = 'Escuchar esta pantalla';
+    };
+    utterance.onerror = () => {
+        linkEl.textContent = 'Escuchar esta pantalla';
+    };
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
 }
 
 function initProntoButtons() {
-    // Capturar clics en enlaces o botones sin función activa (javascript:void(0), data-pronto, etc.)
+    // Capturar clics en enlaces o botones auxiliares o "Escuchar esta pantalla"
     document.addEventListener('click', (e) => {
         const target = e.target.closest('a, button');
         if (!target) return;
+
+        const text = target.textContent.trim().replace(/\s+/g, ' ');
+        if (text.includes('Escuchar esta pantalla') || text.includes('Detener lectura en voz alta')) {
+            e.preventDefault();
+            e.stopPropagation();
+            handleSpeakScreen(target);
+            return;
+        }
 
         const href = target.getAttribute('href');
         const isVoid = href === 'javascript:void(0)' || href === 'javascript:void(0);' || href === '#';
         const hasPronto = target.hasAttribute('data-pronto') || target.classList.contains('btn-pronto');
 
-        // Ignorar si es un botón funcional interno (como pestañas, modal o acordeón)
         if (target.closest('.faq-accordion') || target.closest('summary') || target.closest('#mobile-menu-toggle')) {
             return;
         }
@@ -195,19 +236,10 @@ function initProntoButtons() {
             e.preventDefault();
             e.stopPropagation();
 
-            const text = target.textContent.trim().replace(/\s+/g, ' ');
             let message = 'Esta función estará disponible en la próxima versión.';
-
-            if (text.includes('Mi entrega') || text.includes('lote') || text.includes('Entrega')) {
-                message = 'El módulo de Mi Entrega estará disponible en la próxima versión.';
-            } else if (text.includes('Reportar') || text.includes('incidencia') || text.includes('dañado')) {
-                message = 'El canal de reporte ciudadano estará disponible en la próxima versión.';
-            } else if (text.includes('ruta') || text.includes('llegar') || text.includes('indicaciones')) {
-                message = 'Las rutas e indicaciones paso a paso estarán disponibles en la próxima versión.';
-            } else if (text.includes('Escuchar')) {
-                message = 'La función de lectura en voz alta estará disponible próximamente.';
+            if (text.includes('ruta') || text.includes('llegar') || text.includes('indicaciones')) {
+                message = 'Las rutas giro a giro estarán disponibles en la próxima versión.';
             }
-
             showProntoToast(message);
         }
     }, true);

@@ -40,7 +40,6 @@
 }
 
 .location-select:focus {
-    outline: none;
     border-color: #0B4A30;
 }
 

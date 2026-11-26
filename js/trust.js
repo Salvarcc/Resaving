@@ -26,11 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const feedbackBox = document.getElementById('report-live-feedback');
+    const showReportFeedback = (msg) => {
+        if (feedbackBox) {
+            feedbackBox.textContent = msg;
+            feedbackBox.style.display = 'block';
+            feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        if (typeof window.resavingNotify === 'function') {
+            window.resavingNotify(msg, 'Registro enviado', '✓');
+        }
+    };
+
     const formReport = document.getElementById('form-report-incident');
     if (formReport) {
         formReport.addEventListener('submit', (e) => {
             e.preventDefault();
-            /* Pantalla extra desactivada: report-success.html */
+            const punto = document.getElementById('punto-select')?.value || 'el punto seleccionado';
+            showReportFeedback(`¡Gracias! Registramos tu reporte sobre "${punto}" para revisión de vigencia comunitaria.`);
+            formReport.reset();
+            if (reportFileStatus) {
+                reportFileStatus.textContent = 'Archivos JPG, PNG o WebP (solo vista local)';
+                reportFileStatus.style.color = '#5F7066';
+            }
         });
     }
 
@@ -38,7 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formSuggest) {
         formSuggest.addEventListener('submit', (e) => {
             e.preventDefault();
-            /* Pantalla extra desactivada: report-success.html */
+            const nombre = document.getElementById('nombre-nuevo-punto')?.value?.trim() || 'la estación sugerida';
+            const distrito = document.getElementById('distrito-nuevo-punto')?.value || 'Lima Metropolitana';
+            showReportFeedback(`¡Sugerencia recibida! Verificaremos "${nombre}" (${distrito}) antes de publicarlo en el mapa.`);
+            formSuggest.reset();
         });
     }
 });

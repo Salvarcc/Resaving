@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaving - Mi Entrega: Lote Temporal</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/delivery.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+
+    <header class="site-header flex Ycenter">
+        <div class="header-inner flex Ycenter">
+            <a href="../index.html" class="brand flex Ycenter">
+                <div class="brand-mark flex center">
+                    <img id="logo" src="../assets/images/resaving-mark.webp" alt="Isotipo Resaving">
+                </div>
+                <span class="brand-name dark-principal">Resaving</span>
+            </a>
+
+            <nav class="main-nav flex Ycenter">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="categories.html" class="nav-link">Residuos</a>
+                <a href="collection-map.html" class="nav-link">Puntos de acopio</a>
+                <a href="delivery.html" class="nav-link active">Mi entrega</a>
+                <a href="prep-guide.html" class="nav-link">Guía de preparación</a>
+            </nav>
+
+            <div class="header-actions flex Ycenter">
+                <a href="search-results.html" class="btn-icon" aria-label="Buscar residuo">
+                    <img src="../assets/icons/icon-header-search.svg" alt="Buscar">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="delivery-page container" style="padding-top: 36px; padding-bottom: 72px;">
+        <nav class="breadcrumb">
+            <a href="../index.html">Inicio</a> / <span>Mi entrega</span>
+        </nav>
+
+        <section class="categories-header">
+            <p class="eyebrow">Organización previa a la entrega</p>
+            <h1 class="section-title">Mi lista temporal de entrega</h1>
+            <p class="section-subtitle">Organiza los materiales ya preparados en tu navegador (sin crear cuenta) y confirma un punto de acopio compatible antes de salir.</p>
+        </section>
+
+        <div id="delivery-live-status" role="status" aria-live="polite" style="display: none; margin-bottom: 20px; padding: 14px 18px; background-color: #EBF7F0; border: 1.5px solid #0B4A30; border-radius: 12px; color: #0B4A30; font-weight: 600;"></div>
+
+        <div class="delivery-layout">
+            <div class="delivery-main-col">
+                <section id="section-quick-add" style="background: #FFFFFF; border: 1px solid #DBE7DF; border-radius: 16px; padding: 24px;">
+                    <h2 class="section-block-title" style="margin-bottom: 6px;">Agregar material acondicionado</h2>
+                    <p class="section-block-desc" style="margin-bottom: 16px;">Selecciona un residuo que ya limpiaste, secaste y separaste según la guía de preparación.</p>
+                    <form id="form-quick-lot-add" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;">
+                        <div style="flex: 2; min-width: 220px;">
+                            <label for="quick-material-select" style="display: block; font-size: 13px; font-weight: 700; color: #14251B; margin-bottom: 6px;">Material</label>
+                            <select id="quick-material-select" style="width: 100%; padding: 10px 12px; border: 1.5px solid #DBE7DF; border-radius: 10px; font-size: 14px; background: #F7FAF8; color: #14251B;">
+                                <option value="pet">Botellas plásticas (PET)</option>
+                                <option value="glass">Frascos y botellas de vidrio</option>
+                                <option value="can">Latas de aluminio</option>
+                                <option value="cardboard">Cartón corrugado y papel</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1; min-width: 120px;">
+                            <label for="quick-material-qty" style="display: block; font-size: 13px; font-weight: 700; color: #14251B; margin-bottom: 6px;">Cantidad</label>
+                            <input type="number" id="quick-material-qty" min="1" max="200" value="3" style="width: 100%; padding: 10px 12px; border: 1.5px solid #DBE7DF; border-radius: 10px; font-size: 14px; background: #F7FAF8; color: #14251B;">
+                        </div>
+                        <button type="submit" class="btn-primary-action flex center" style="padding: 11px 20px;">
+                            <span>+ Añadir a mi entrega</span>
+                        </button>
+                    </form>
+                </section>
+
+                <section id="section-lot-items">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 12px; flex-wrap: wrap;">
+                        <h2 id="lot-items-header" class="section-block-title" style="margin-bottom: 0;">Residuos en tu lote actual</h2>
+                        <button type="button" id="btn-clear-lot" style="display: none; padding: 7px 12px; background: none; border: 1px solid #C0392B; color: #C0392B; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;">Vaciar lote</button>
+                    </div>
+                    <p id="lot-items-desc" class="section-block-desc">Se conserva localmente en tu navegador mientras planificas tu visita.</p>
+
+                    <div id="lot-items-container" class="lot-items-grid" style="margin-top: 14px;"></div>
+                </section>
+
+                <section id="section-lot-table">
+                    <h2 class="section-block-title">Requisitos consolidados de entrega</h2>
+                    <p class="section-block-desc">Resumen técnico de verificación según criterios de recepción en estaciones de acopio.</p>
+
+                    <div class="consolidated-table-wrap">
+                        <table class="consolidated-table">
+                            <thead>
+                                <tr>
+                                    <th>Material</th>
+                                    <th>Limpio</th>
+                                    <th>Seco</th>
+                                    <th>Estado de preparación</th>
+                                    <th>Tolva asignada</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lot-table-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="notice-box">
+                    <strong>¿Tienes pilas, bombillas o residuos especiales?</strong>
+                    <p>No los mezcles en bolsas comunes. Revisa primero las advertencias de resguardo en <a href="prep-safety.html" style="color: #0B4A30; font-weight: 700;">Seguridad en preparación</a>.</p>
+                </section>
+            </div>
+
+            <aside class="delivery-side-col">
+                <article class="match-point-card">
+                    <span class="match-chip" id="sidebar-match-chip">Lote en preparación</span>
+                    <h2 class="match-title" id="sidebar-match-title">Estación Recicla San Miguel</h2>
+                    <p class="match-stats" id="sidebar-match-stats">0.8 km · Abierto hoy hasta 18:00</p>
+
+                    <ul class="match-checklist" id="sidebar-match-list"></ul>
+
+                    <a href="point-detail.html" class="btn-primary-action flex center" style="width: 100%; margin-bottom: 10px; text-decoration: none;">
+                        <span>Ver estación compatible recomendada</span>
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
+                    </a>
+
+                    <a href="collection-map.html" class="btn-outline-action flex center" style="width: 100%; font-size: 13.5px; text-decoration: none;">
+                        <span>Explorar otros puntos en el mapa</span>
+                    </a>
+                </article>
+
+                <article class="detail-subcard">
+                    <h3 class="detail-subcard-title">¿Falta revisar algún paso?</h3>
+                    <p class="section-block-desc" style="margin-bottom: 16px;">Antes de entregar tu lote, asegúrate de haber vaciado, enjuagado y secado cada envase para evitar rechazos.</p>
+                    <a href="prep-guide.html" class="btn-outline-action flex center" style="width: 100%; font-size: 13.5px; text-decoration: none;">
+                        <span>Ir a la guía paso a paso</span>
+                    </a>
+                </article>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container">
+            <div class="footer-grid flex">
+                <div class="footer-brand">
+                    <a href="../index.html" class="flex Ycenter" style="gap: 10px; margin-bottom: 14px; text-decoration: none;">
+                        <div class="brand-mark flex center" style="width: 36px; height: 36px;">
+                            <img src="../assets/images/resaving-mark.webp" alt="Resaving Logo" width="28">
+                        </div>
+                        <span class="brand-name" style="color: #FFFFFF; font-size: 16px;">Resaving</span>
+                    </a>
+                    <p>Información clara para identificar, preparar y entregar residuos mediante canales confiables en Lima Metropolitana.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Explorar</h5>
+                    <a href="categories.html">Categorías</a>
+                    <a href="collection-map.html">Puntos de acopio</a>
+                    <a href="delivery.html">Mi entrega</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Confianza</h5>
+                    <a href="waste-source.html">Vigencia de datos</a>
+                    <a href="privacy.html">Privacidad y seguridad</a>
+                    <a href="report-feedback.html">Reportar información</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Accesibilidad</h5>
+                    <a href="javascript:void(0)">Escuchar esta pantalla</a>
+                    <a href="collection-list.html">Alternativa textual al mapa</a>
+                    <p class="accessibility-note">Navegable con teclado y etiquetas visibles.</p>
+                </div>
+            </div>
+
+            <div class="footer-legal flex Ycenter">
+                <p>© 2026 Resaving. Plataforma ciudadana para el reciclaje y segregación responsable en Lima Metropolitana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js" defer></script>
+    <script src="../js/delivery.js" defer></script>
+</body>
+</html>

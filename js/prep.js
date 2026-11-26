@@ -353,7 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     btnSummary.innerHTML = `<span>Completa los 4 pasos en orden para continuar (${completed}/4)</span>`;
                     btnSummary.onclick = (e) => {
                         e.preventDefault();
-                        alert(`Debes completar los pasos en orden de cascada. Actualmente te encuentras en el Paso ${completed + 1}.`);
+                        const msg = `Completa los pasos en orden secuencial. Actualmente te encuentras en el Paso ${completed + 1}.`;
+                        if (typeof window.resavingNotify === 'function') {
+                            window.resavingNotify(msg, 'Paso pendiente', '!');
+                        }
+                        if (progressDesc) {
+                            progressDesc.textContent = msg;
+                            progressDesc.style.color = '#8C6105';
+                        }
                     };
                 } else {
                     btnSummary.style.opacity = '1';

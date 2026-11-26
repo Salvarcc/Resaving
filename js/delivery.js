@@ -217,7 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
         formAddMaterial.addEventListener('submit', (e) => {
             e.preventDefault();
             if (btnSubmitDelivery && btnSubmitDelivery.disabled) {
-                alert('Debes confirmar los 3 pasos de preparación obligatoria antes de agregar el residuo al lote.');
+                if (typeof window.resavingNotify === 'function') {
+                    window.resavingNotify('Debes confirmar los 3 pasos de preparación antes de agregar el residuo al lote.', 'Preparación incompleta', '!');
+                }
                 return;
             }
 
@@ -281,8 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <img src="../assets/icons/icon-recycler.svg" alt="" style="width: 28px; height: 28px;">
                     </div>
                     <h3 style="font-size: 18px; font-weight: 800; color: #14251B; margin: 0;">Tu lote actual está vacío</h3>
-                    <p style="font-size: 13.5px; color: #5F7066; max-width: 440px; margin: 0; line-height: 1.5;">Aún no has agregado materiales para tu entrega. Puedes añadir botellas plásticas, latas, cartón u otros residuos aprovechables ya acondicionados.</p>
-                    <a href="delivery-add.html" style="margin-top: 6px; padding: 10px 20px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <p style="font-size: 13.5px; color: #5F7066; max-width: 440px; margin: 0; line-height: 1.5;">Aún no has agregado materiales para tu entrega. Selecciona un material arriba para armar tu lista temporal sin necesidad de cuenta.</p>
+                    <a href="#quick-material-select" style="margin-top: 6px; padding: 10px 20px; background-color: #0B4A30; color: #FFFFFF; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                         <span>+ Agregar mi primer material</span>
                     </a>
                 </div>
@@ -360,12 +362,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const formQuickLotAdd = document.getElementById('form-quick-lot-add');
+    const deliveryLiveStatus = document.getElementById('delivery-live-status');
+    const showDeliveryStatus = (msg) => {
+        if (deliveryLiveStatus) {
+            deliveryLiveStatus.textContent = msg;
+            deliveryLiveStatus.style.display = 'block';
+        }
+        if (typeof window.resavingNotify === 'function') {
+            window.resavingNotify(msg, 'Mi entrega', '✓');
+        }
+    };
+
+    if (formQuickLotAdd) {
+        formQuickLotAdd.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const sel = document.getElementById('quick-material-select');
+            const qtyInput = document.getElementById('quick-material-qty');
+            const key = sel ? sel.value : 'pet';
+            const conf = materialConfig[key] || materialConfig.pet;
+            let qty = parseInt(qtyInput ? qtyInput.value : '1', 10);
+            if (isNaN(qty) || qty < 1) qty = 1;
+            if (qty > 200) qty = 200;
+
+            let currentLot = [];
+            try {
+                const stored = localStorage.getItem('resaving_user_lot');
+                if (stored) currentLot = JSON.parse(stored);
+                if (!Array.isArray(currentLot)) currentLot = [];
+            } catch (err) {
+                currentLot = [];
+            }
+
+            currentLot.push({
+                id: 'item_' + Date.now(),
+                key,
+                name: conf.name,
+                qty,
+                weight: (qty * conf.unitWeight).toFixed(2),
+                img: conf.img,
+                tolva: conf.tolva,
+                prepSummary: conf.prepSummary,
+                condition: 'Limpio, seco y preparado'
+            });
+            localStorage.setItem('resaving_user_lot', JSON.stringify(currentLot));
+            renderDeliveryLot();
+            showDeliveryStatus(`Se añadió "${conf.name}" (${qty} un.) a tu lote temporal.`);
+        });
+    }
+
     if (btnClearLot) {
         btnClearLot.addEventListener('click', () => {
-            if (confirm('¿Deseas vaciar todos los materiales de tu lote actual?')) {
-                localStorage.removeItem('resaving_user_lot');
-                renderDeliveryLot();
-            }
+            localStorage.removeItem('resaving_user_lot');
+            renderDeliveryLot();
+            showDeliveryStatus('Se vació tu lista temporal de entrega.');
         });
     }
 
