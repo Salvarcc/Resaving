@@ -1,0 +1,319 @@
+================================================================================
+AUDITORIA INTEGRAL, ESTADO DE AVANCE Y PENDIENTES - PROYECTO RESAVING (TB2)
+Curso: HCI for UX Design (1ASI0784) - UPC (Ciclo 2026-20)
+Referencia normativa: Final Project Handbook V2 (202620) + Feedback TB1
+Fecha de corte: 2026-11-26
+================================================================================
+
+1. CONTEXTO Y RECURSOS DEL PROYECTO
+--------------------------------------------------------------------------------
+- Informe Google Doc:
+  https://docs.google.com/document/d/1ajsAgE5kjGl5Md52GIhwrgUGKdgHBeokJF-E2n7Wx1I/edit?tab=t.0
+  (Document ID: 1ajsAgE5kjGl5Md52GIhwrgUGKdgHBeokJF-E2n7Wx1I, Tab: t.0)
+- Repositorio local (este directorio):
+  C:\Users\Salva\OneDrive\Documentos\UPC\IV cycle\HCI for UX Design\Pages
+- Repositorio remoto y despliegue:
+  GitHub: https://github.com/Salvarcc/Resaving
+  GitHub Pages: https://salvarcc.github.io/Resaving/
+- Norma guia oficial:
+  C:\Users\Salva\OneDrive\Documentos\UPC\IV cycle\HCI for UX Design\Extras\Final Project Handbook_HCI for UX Design_202620_V2.pdf
+- Decision de alcance confirmada por el equipo:
+  Se MANTIENEN las 30 Historias de Usuario Core (HU-001 a HU-030) en la Landing
+  Page para proteger la coherencia del Capitulo VI (Pruebas de aceptacion PA-01
+  a PA-30 y validacion SUS con n=35) y cumplir el minimo oficial del Handbook V2,
+  complementadas con pantallas reales de soporte (privacidad, reportes, guia
+  para recicladores/encargados y mi entrega) para eliminar enlaces muertos.
+
+
+2. JERARQUIA DE PRIORIDADES DEFINIDA
+--------------------------------------------------------------------------------
+- [PRIORIDAD ALTA]: Fallos con impacto directo y severo en la rubrica V2
+  (contradicciones entre documento y codigo, trazabilidad rota entre
+  capitulos, requisitos obligatorios faltantes del Handbook V2, funcionalidad
+  rota en produccion o enlaces muertos en la web).
+- [PRIORIDAD MEDIA]: Descuentos puntuales por rigor metodologico de HCI,
+  accesibilidad HTML5 en vistas internas, errores conceptuales y oraciones
+  rotas o discordancias tras ediciones previas.
+- [PRIORIDAD BAJA]: Pulido tecnico e ingenieril (alineacion de imagenes
+  flotantes antes de exportar PDF, exactitud matematica de ratios WCAG,
+  referencia normativa complementaria y ajuste fino de guion).
+
+
+3. LISTA COMPLETA DE ERRORES ENCONTRADOS Y ESTADO ACTUAL (NUMERACION 1 A 17)
+--------------------------------------------------------------------------------
+
+>>> PRIORIDAD ALTA
+
+#1 [Documento - 4.3 User Flow Diagrams y Tabla 23 vs. Anexo A]
+   Problema encontrado:
+   Emparejamiento mecanico de 2 en 2 (HU-001 a HU-048) entre UF-01..UF-24 sin
+   corresponder con los titulos reales del Anexo A. Desfases en:
+   - UF-03 (Consultar ficha tecnica) apunta a HU-007 (sin resultado) y HU-008
+     (consulta reciente).
+   - UF-07 (Consultar preparacion) apunta a HU-013 y HU-014, pero describe
+     toxicidad y checklist.
+   - UF-08 apunta a HU-015 y HU-016.
+   - UF-12 apunta a HU-023 y HU-024.
+   - UF-19 apunta a HU-037 y HU-038.
+   - UF-20 apunta a HU-039 y HU-040.
+   - UF-23 (Acceder como gestor) apunta a HU-045 y HU-046, pero ninguna HU del
+     backlog define autenticacion o login de gestor.
+   Estado: [PENDIENTE - A CARGO DEL EQUIPO]
+   Nota: El equipo indico explicitamente que resolvera este punto por su
+   cuenta porque implica ajustar documento y Figma conjuntamente.
+
+#2 [Documento - Tablas 19-22 (MoSCoW), 3.4, 5.1, 7.3 y Tabla 1]
+   Problema encontrado:
+   Contradiccion directa entre la narrativa "Aplicando MoSCoW acotamos el
+   producto a las 30 Historias de Usuario Core (HU-001 a HU-030)" y el backlog
+   real, que tiene 25 Must Have pero deja fuera 9 Must Have (HU-033, 036, 040,
+   041, 043-047) mientras implementa 2 Could Have (HU-008 y HU-016).
+   Estado: [COMPLETADO Y VERIFICADO]
+   Que se hizo: Se actualizo 3.4, 7.3 y Tabla 1 (Student Outcome) aclarando con
+   precision que la seleccion del primer despliegue estatico combino MoSCoW con
+   continuidad de flujo ciudadano completo en frontend sin servidor backend
+   (HU-001 a HU-030, conservando HU-008 y HU-016 de 2-3 SP para evitar
+   callejones sin salida) y difiriendo las historias con backend/gestion de
+   sedes (HU-031 a HU-048) a una segunda fase.
+
+#3 [Documento - 1.2 Solution Profile (introduccion) y 1.2.3.1]
+   Problema encontrado:
+   Los parrafos iniciales de 1.2 (antes de 1.2.1 Antecedentes) adelantan la
+   solucion ("plataforma web responsive", nombre "Resaving" y 5 modulos)
+   antes de analizar el problema (observacion TB1), y 1.2.3.1 omite al 3er
+   segmento (recicladores y encargados) como usuarios activos.
+   Estado: [DESCARTADO POR DECISION DEL EQUIPO]
+   Nota: El usuario instruyo explicitamente no tocar el punto 3.
+
+#4 [Documento - Capitulo VII (7.1, 7.2, 7.4) y Referencias APA 7]
+   Problema encontrado:
+   Brechas frente al Handbook V2 (pags. 17-20):
+   - 7.1: Scrum muy generico y sin referencias cruzadas concretas a evidencias.
+   - 7.2: No citaba sistemas de diseno/guias externas (Material Design / Apple
+     HIG) ni normativa de proteccion de datos personales (Ley N.° 29733).
+   - 7.4: Faltaban alternativas y criterios explicados para accesibilidad /
+     usabilidad y para priorizacion del nucleo de 30 HUs.
+   Estado: [PARCIALMENTE COMPLETADO - TEXTO Y TABLAS LISTOS; FALTAN CAPTURAS]
+   Que se hizo:
+   - Se enriquecio 7.1 (Lean UX con trazabilidad a Sec. 1.2.3, Fig. 3, Cap. II
+     y Tablas 27-29; Scrum con 3 sprints reales, roles de Tabla 1, Planning
+     Poker/MoSCoW y GitHub). Se anadio Tabla 30 y Tabla 31.
+   - Se completo 7.2 con referentes externos (Material Design 3 y Apple HIG),
+     Ley N.° 29733 enlazada a pages/privacy.html y verificacion WCAG 2.2 AA
+     real. Se anadio Tabla 32.
+   - Se completo 7.4 con los 6 ejes obligatorios del Handbook V2 y se anadio
+     Tabla 33 (matriz comparativa de alternativas).
+   - Se anadieron en Referencias (APA 7): Apple Inc. (2024), Congreso de la
+     Republica del Peru (2011 - Ley 29733) y Google (2024 - Material Design 3).
+   Que falta:
+   - Insertar las capturas reales del equipo en los marcadores dejados en el
+     documento ("[Espacio reservado para captura de tablero Trello e historial
+     de commits en GitHub]" en 7.1 y "[Espacio reservado para captura de
+     auditoria Lighthouse y verificacion de contraste WCAG 2.2 AA]" en 7.2).
+   - Dar formato visual APA 7 uniforme a los titulos/Nota de Tabla 30 a 33 si
+     el revisor lo considera necesario tras insertarlas por batch.
+
+#5 [Landing Page - index.html y js/home.js]
+   Problema encontrado:
+   1) El formulario #solicitar-info en index.html usa <form action="#"
+      method="POST"> sin manejador submit en js/home.js, lo que provoca error
+      HTTP 405 Method Not Allowed al enviarlo en GitHub Pages.
+   2) Los placeholders exponen datos reales de un integrante ("Yeremy Pedro",
+      "Acuna Chavez", "Yemypro@gmail.com").
+   Estado: [PENDIENTE - NO INCLUIDO EN LA LISTA APROBADA]
+   Nota: El usuario no incluyo el punto 5 en su lista de cambios aprobados. Se
+   recomienda interceptar el evento submit en js/home.js con e.preventDefault(),
+   validacion y mensaje accesible en DOM, y anonimizar los 3 placeholders.
+
+#6 [Landing Page - css/base.css, css/trust.css, css/map.css]
+   Problema encontrado:
+   El informe (5.4 y 7.2) afirma haber implementado contorno de foco visual de
+   2 px (#0F5B3A) con separacion de 2 px, pero en CSS esa regla no existia y
+   varios :focus tenian outline: none sin reemplazo visible.
+   Estado: [COMPLETADO EN LOCAL - PENDIENTE DE PUSH A GITHUB]
+   Que se hizo: Se agrego la regla global :focus-visible { outline: 2px solid
+   #0F5B3A !important; outline-offset: 2px; } en css/base.css y se removio
+   outline: none en :focus de base.css, trust.css y map.css.
+
+#7 [Landing Page - index.html, pages/*.html, js/common.js, js/trust.js, js/delivery.js]
+   Problema encontrado:
+   1) Avatar logueado fijo "YA / Yeremy Acuna · Ciudadano comprometido · San
+      Miguel" en el header de las 31 paginas y en el drawer movil (js/common.js),
+      contradiciendo la narrativa "sin cuentas ni perfiles".
+   2) Anclas rotos en index.html (#gestores, #privacidad, #vigencia).
+   3) Enlaces javascript:void(0) en menu principal ("Mi entrega") y footer
+      ("Reportar informacion", "Escuchar esta pantalla").
+   Estado: [COMPLETADO EN LOCAL - PENDIENTE DE PUSH A GITHUB]
+   Que se hizo (segun instruccion expresa de crear pantallas reales simples y
+   quitar el prefijo/avatar de Yeremy Acuna):
+   - Eliminado .user-avatar ("YA / Yeremy Acuna") en todos los HTML (0
+     restantes) y eliminada la barra de usuario movil en js/common.js.
+   - Creada pages/privacy.html (principio sin cuentas, almacenamiento local y
+     Ley N.° 29733), conectada a #privacidad, #vigencia y footer de todo el sitio.
+   - Creada pages/collectors-guide.html (guia para recicladores y encargados),
+     conectada a la tarjeta #gestores en index.html.
+   - Creada pages/delivery.html (lista temporal interactiva con localStorage y
+     tabla de requisitos), conectada a "Mi entrega" en header/footer y botones
+     de "Anadir a Mi Entrega" / "Planificar mi entrega".
+   - Creada pages/report-feedback.html (reporte de punto y sugerencia de nuevo
+     punto con feedback accesible en DOM via js/trust.js), conectada a
+     "Reportar informacion" y "Reportar contenedor lleno o danado".
+   - Implementada lectura real en voz alta con window.speechSynthesis (es-PE)
+     para "Escuchar esta pantalla" en js/common.js.
+   Nota menor: Quedan 4 botones secundarios internos de flujo futuro
+   ("Consultar ruta", "Como llegar", "Ver indicaciones giro a giro", "Ver rutas
+   selectivas ->") usando showProntoToast("...proxima version") de forma
+   intencional.
+
+#8 [Documento y Repositorio - rutas pages/, pages/index.html y .gitignore]
+   Problema encontrado:
+   En el documento figuraba Pages/ con mayuscula (provoca 404 en GitHub Pages),
+   faltaba .gitignore en GitHub y existia un duplicado pages/index.html.
+   Estado: [COMPLETADO EN DOC Y LOCAL - .gitignore EXCLUIDO POR DECISION DEL USUARIO]
+   Que se hizo:
+   - Unificado Pages/ -> pages/ en todo el documento (5.1, 5.2, 5.5, Tabla 24,
+     Tabla 25, Anexo H y Anexo I). Verificado: 0 ocurrencias restantes de Pages/.
+   - Eliminado el duplicado local pages/index.html (ningun archivo lo enlazaba).
+   - No se agrego .gitignore al repo remoto (por instruccion del usuario, quien
+     tomara captura de los archivos desde su PC para la seccion 5.5).
+
+
+>>> PRIORIDAD MEDIA
+
+#9 [Documento - 2.2.3 y Tabla 25 PA-14]
+   Problema encontrado:
+   Oracion incompleta en 2.2.3 ("casos de Edgar y Julian") y conjuncion "y"
+   faltante en Tabla 25 PA-14 ("Recicla San Miguel (05/10/2026), comunidad.").
+   Estado: [COMPLETADO Y VERIFICADO]
+   Que se hizo: Completada la triangulacion metodologica en 2.2.3 y corregida
+   la redaccion en Tabla 25 PA-14 ("...Recicla San Miguel (05/10/2026) y comunidad.").
+
+#10 [Landing Page - pages/search-*.html, js/prep.js, js/common.js, js/delivery.js]
+    Problema encontrado:
+    - pages/search-results.html no tenia <h1> y saltaba directo a <h4>.
+    - pages/search-no-results.html y pages/search-suggestions.html tenian
+      <input> sin <label> ni aria-label.
+    - js/common.js, js/prep.js y js/delivery.js usaban alert() nativo.
+    Estado: [COMPLETADO EN LOCAL - PENDIENTE DE PUSH A GITHUB]
+    Que se hizo: Anadido <h1> y corregido <h4>-><h2> en search-results.html;
+    anadidos aria-label en ambos inputs de busqueda; reemplazados todos los
+    alert() (y confirm() de vaciado de lote) por notificaciones accesibles en DOM
+    (role="status" / aria-live="polite" via window.resavingNotify). Verificado:
+    34/34 HTML con <h1>, 0 inputs sin etiqueta, 0 links/imagenes rotas y 0 alert().
+
+#11 [Documento - Tabla 13 (R1, R4, R5)]
+    Problema encontrado:
+    Discordancias gramaticales singular/plural con el sujeto "Alexandro" ("vive
+    solos... refieren", "solo llevan... si deben", "temen... y dudan").
+    Estado: [COMPLETADO Y VERIFICADO]
+    Que se hizo: Corregida la concordancia gramatical en R1, R4 y R5.
+
+#12 [Documento - Tabla 4 (nota) y Tabla 15 (2.3.7)]
+    Problema encontrado:
+    La nota de Tabla 4 llamaba "evaluacion heuristica" a un benchmarking UX/UI;
+    Tabla 15 adelantaba componentes UI especificos ("checklist interactivo",
+    "modulo de catalogo tecnico").
+    Estado: [COMPLETADO Y VERIFICADO]
+    Que se hizo: Cambiado a "analisis comparativo (benchmarking) UX/UI" en
+    Tabla 4 y reformuladas las 2 oportunidades de Tabla 15 centradas en la
+    necesidad del usuario.
+
+#13 [Documento - Tabla 1 (Student Outcome)]
+    Problema encontrado:
+    Inconsistencia de version WCAG (2.1 vs. 2.2) en la seccion Student Outcome.
+    Estado: [COMPLETADO Y VERIFICADO]
+    Que se hizo: Unificado a "WCAG 2.2 nivel AA" en Tabla 1 y todo el informe.
+
+
+>>> PRIORIDAD BAJA
+
+#14 [Documento - Tabla 2 (R4-R6), Figura 3 y Figura A40]
+    Problema encontrado:
+    5 imagenes flotantes (positionedObject) en riesgo de moverse al exportar PDF.
+    Estado: [COMPLETADO Y VERIFICADO]
+    Que se hizo: Eliminados los 5 objetos flotantes y reinsertadas en linea
+    (inline) manteniendo sus proporciones en Tabla 2 (Orihuela, Rivera,
+    Rodriguez), Figura 3 (Lean UX Canvas) y Figura A40 (.feature HU-040).
+    (Solo permanece flotante el logotipo institucional de la caratula E1).
+
+#15 [Documento - 5.4 y 7.2]
+    Problema encontrado:
+    Ratios de contraste declarados subestimados respecto al calculo WCAG real
+    (12.8 a 1, 6.2 a 1, 8.6 a 1).
+    Estado: [COMPLETADO Y VERIFICADO]
+    Que se hizo: Actualizados a los valores exactos verificados: 14.95:1
+    (#14251B sobre #F4F8F5), 8.15:1 (#0F5B3A sobre #FFFFFF) y 10.31:1 (#0B4A30
+    sobre #FFFFFF) tanto en 5.4 como en 7.2.
+
+#16 [Documento - 7.2 y Referencias]
+    Problema encontrado:
+    Faltaba citar la Ley N.° 29733 (Proteccion de Datos Personales).
+    Estado: [COMPLETADO Y VERIFICADO]
+    Que se hizo: Incorporada dentro del punto #4 en 7.2 y Referencias APA 7.
+
+#17 [Documento - Tabla 7 P8 y Tabla 9 P4/7/9/10]
+    Problema encontrado:
+    Preguntas levemente inductivas o repetitivas en el guion de entrevistas.
+    Estado: [PENDIENTE / OPCIONAL]
+    Nota: Baja prioridad si las entrevistas de investigacion ya estan cerradas.
+
+
+4. LO QUE FALTA POR HACER (GUIA PARA CONTINUAR LA RESOLUCION)
+--------------------------------------------------------------------------------
+
+A. PENDIENTES EN REPOSITORIO LOCAL Y GITHUB (PRIORIDAD ALTA)
+   1. Revisar el punto #5 (#solicitar-info en index.html y js/home.js):
+      - Agregar manejador submit con e.preventDefault() en js/home.js y mostrar
+        confirmacion en el DOM (evita HTTP 405 al enviar en GitHub Pages).
+      - Cambiar los placeholders reales ("Yeremy Pedro", "Acuna Chavez",
+        "Yemypro@gmail.com") por ejemplos genericos.
+   2. CUIDADO CON MAYUSCULAS EN WINDOWS ANTES DE HACER COMMIT:
+      En git status actual, las 4 paginas nuevas figuran como:
+      ?? Pages/collectors-guide.html
+      ?? Pages/delivery.html
+      ?? Pages/privacy.html
+      ?? Pages/report-feedback.html
+      (con "P" mayuscula en el sistema de archivos NTFS, mientras el resto de
+      archivos en el indice de Git usa "pages/" minuscula). Antes de commit/push,
+      renombrar la carpeta local Pages -> pages_tmp -> pages (o mover/stagear
+      explicitamente bajo "pages/" en minuscula) para evitar error 404 en
+      GitHub Pages (Linux es case-sensitive).
+   3. Antes de que el usuario tome su captura local para la seccion 5.5, MOVER o
+      ELIMINAR este archivo REVISION_Y_PENDIENTES_RESAVING.txt de la raiz del
+      repositorio para que no aparezca en la captura de archivos entregables.
+   4. Ejecutar git add, git commit y git push a origin main para publicar en
+      https://salvarcc.github.io/Resaving/.
+   5. Correr pruebas en navegador real (Desktop y Mobile < 768 px):
+      - Verificar Tab con teclado en portada y paginas internas (:focus-visible).
+      - Probar links a pages/privacy.html, pages/collectors-guide.html,
+        pages/delivery.html, pages/report-feedback.html y "Escuchar esta pantalla".
+      - Correr auditoria Google Lighthouse (Desktop + Mobile) sobre la URL
+        desplegada para obtener capturas reales de Accessibility/Contrast.
+
+B. PENDIENTES EN EL GOOGLE DOC (PRIORIDAD ALTA / MEDIA)
+   1. Punto #1 (a cargo del equipo): Corregir mapeo UF <-> HU en 4.3 User Flow
+      Diagrams y Tabla 23 contra Anexo A (y alinear Figma si aplica).
+   2. Formato fino de las 4 tablas nuevas del Capitulo VII (Tabla 30 a Tabla 33):
+      - Revisar visualmente en Google Docs que los titulos tengan "Tabla XX" en
+        negrita + salto de linea + titulo en cursiva, "Nota." en cursiva,
+        tipografia uniforme (Times New Roman) y bordes/anchos limpios; limpiar
+        parrafos vacios sobrantes si gdocs batch dejo alguno antes de cada tabla.
+      - Revisar visualmente que Tabla 2 (filas 4-6), Figura 3 y Figura A40 se
+        vean centradas y con tamano proporcionado tras convertirlas a inline.
+   3. Insertar las capturas pendientes del equipo cuando las envien:
+      - En 5.5: captura local de estructura de archivos desde el equipo.
+      - En 7.1: captura de tablero Trello e historial de commits/contribuidores
+        de GitHub (reemplazando el marcador "[Espacio reservado...]").
+      - En 7.2: captura de auditoria Lighthouse / verificacion de contraste WCAG
+        2.2 AA (reemplazando el marcador "[Espacio reservado...]").
+   4. Si el equipo agrega screens de privacy/delivery/report en Anexo H/I o solo
+      las mantiene como vistas soporte descritas en 5.1 y 5.5, mantener la
+      redaccion consistente antes de entregar.
+   5. Antes de exportar el PDF final:
+      - Actualizar en Google Docs el Indice de Contenido, Indice de Tablas
+        (para que aparezcan Tabla 30, 31, 32 y 33) e Indice de Figuras.
+      - Revisar saltos de pagina y que no haya tablas partidas de forma incomoda.
+
+================================================================================
+FIN DEL INFORME DE ESTADO
+================================================================================
