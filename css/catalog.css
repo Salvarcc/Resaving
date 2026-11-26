@@ -999,13 +999,6 @@
         height: 160px !important;
     }
 
-@media (max-width: 600px) {
-    .categories-grid {
-        grid-template-columns: 1fr !important;
-        gap: 14px !important;
-    }
-}
-
     .category-callout {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -1087,16 +1080,23 @@
     }
 
     .material-switcher-bar {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        padding-bottom: 8px !important;
-        flex-wrap: nowrap !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
         gap: 8px !important;
+        padding-bottom: 0 !important;
+        box-sizing: border-box !important;
     }
 
-    .mat-switch-btn {
-        flex-shrink: 0 !important;
-        white-space: nowrap !important;
+    .mat-switch-btn,
+    .prep-mat-chip {
+        flex-shrink: 1 !important;
+        white-space: normal !important;
+        text-align: center !important;
+        max-width: 100% !important;
     }
 
     /* Criterios de aceptabilidad */
@@ -1114,15 +1114,17 @@
     }
 
     /* Tablas comparativas */
-    .comparison-table-wrap,
-    .comparison-matrix-table {
+    .comparison-table-wrap {
         width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        border: none !important;
+        background: transparent !important;
     }
 
     .comparison-matrix-table {
-        min-width: 560px !important;
+        width: 100% !important;
+        min-width: 0 !important;
     }
 
     /* Canales de entrega y fuentes de verificación */
@@ -1243,7 +1245,6 @@
         justify-content: center !important;
         min-height: 46px !important;
     }
-}
 
     .confirm-actions-bar {
         flex-direction: column !important;
@@ -1277,7 +1278,15 @@
     .material-switcher-bar {
         max-width: 100% !important;
         width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
         box-sizing: border-box !important;
     }
+}
+
+@media (max-width: 600px) {
+    .categories-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+}

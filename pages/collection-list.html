@@ -41,9 +41,9 @@
         </nav>
 
         <section class="categories-header">
-            <p class="eyebrow">Entrega y ubicacion</p>
-            <h1 class="section-title">Listado de puntos de acopio y rutas</h1>
-            <p class="section-subtitle">Consulta estaciones de reciclaje ordenadas por distancia desde tu posición o revisa los horarios del camión recolector municipal.</p>
+            <p class="eyebrow">Entrega y ubicación</p>
+            <h1 class="section-title">Listado de puntos y rutas</h1>
+            <p class="section-subtitle">Ordena por cercanía u horario sin usar GPS.</p>
         </section>
 
         <section class="filter-toolbar">
@@ -51,7 +51,7 @@
                 <div class="location-input-group">
                     <label for="district-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B;">Distrito:</label>
                     <select id="district-selector" class="location-select">
-                        <option value="all">Todos los distritos</option>
+                        <option value="all">Todos</option>
                         <option value="san-miguel" selected>San Miguel</option>
                         <option value="pueblo-libre">Pueblo Libre</option>
                         <option value="magdalena">Magdalena del Mar</option>
@@ -60,17 +60,17 @@
                         <option value="san-borja">San Borja</option>
                     </select>
 
-                    <label for="sort-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B; margin-left: 8px;">Ordenar por:</label>
-                    <select id="sort-selector" class="location-select" style="min-width: 170px;">
-                        <option value="distancia" selected>Menor distancia (más cercanos)</option>
-                        <option value="horario">Horario más amplio</option>
-                        <option value="materiales">Mayor cantidad de materiales</option>
-                        <option value="alfabetico">Nombre alfabético</option>
+                    <label for="sort-selector" style="font-size: 13.5px; font-weight: 700; color: #14251B;">Ordenar:</label>
+                    <select id="sort-selector" class="location-select">
+                        <option value="distancia" selected>Más cercanos</option>
+                        <option value="horario">Mayor horario</option>
+                        <option value="materiales">Más materiales</option>
+                        <option value="alfabetico">A-Z</option>
                     </select>
 
                     <button type="button" class="btn-my-location" id="btn-list-location-pill">
                         <img src="../assets/icons/icon-pin.svg" alt="" style="width: 16px; height: 16px;">
-                        <span id="label-list-district">San Miguel, Lima</span>
+                        <span id="label-list-district">San Miguel</span>
                     </button>
                 </div>
 
@@ -81,13 +81,13 @@
             </div>
 
             <div class="toolbar-row-filters">
-                <span class="filter-label">Filtrar por material:</span>
-                <button type="button" class="filter-chip active" data-filter="all">Todos los materiales</button>
-                <button type="button" class="filter-chip" data-filter="pet">Botellas plásticas para bebidas</button>
+                <span class="filter-label">Material:</span>
+                <button type="button" class="filter-chip active" data-filter="all">Todos</button>
+                <button type="button" class="filter-chip" data-filter="pet">Plástico PET</button>
                 <button type="button" class="filter-chip" data-filter="vidrio">Vidrio</button>
-                <button type="button" class="filter-chip" data-filter="papel">Papel y Cartón</button>
-                <button type="button" class="filter-chip" data-filter="metal">Latas y Metales</button>
-                <button type="button" class="filter-chip" data-filter="especial">Pilas y Especiales</button>
+                <button type="button" class="filter-chip" data-filter="papel">Papel y cartón</button>
+                <button type="button" class="filter-chip" data-filter="metal">Latas y metal</button>
+                <button type="button" class="filter-chip" data-filter="especial">Pilas y especiales</button>
             </div>
         </section>
 

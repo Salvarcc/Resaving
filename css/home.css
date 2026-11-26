@@ -433,14 +433,14 @@
 .media-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(5, 38, 23, 0.15) 10%, rgba(5, 38, 23, 0.92) 85%);
+    background: linear-gradient(180deg, rgba(5, 38, 23, 0.04) 38%, rgba(5, 38, 23, 0.88) 92%);
 }
 
 .media-content {
     position: absolute;
-    bottom: 32px;
-    left: 32px;
-    right: 32px;
+    bottom: 24px;
+    left: 28px;
+    right: 28px;
     color: #FFFFFF;
 }
 
@@ -627,6 +627,85 @@
     gap: 48px;
 }
 
+
+/* Tablet Responsive Overrides for Home Page (641px - 1024px) */
+@media (max-width: 1024px) {
+    .registration-section {
+        flex-direction: column !important;
+        margin: 40px auto !important;
+    }
+
+    .registration-media {
+        width: 100% !important;
+        flex: none !important;
+        min-height: 270px !important;
+        height: auto !important;
+        display: grid !important;
+        grid-template-columns: 280px 1fr !important;
+        background-color: #073522 !important;
+        overflow: hidden !important;
+    }
+
+    .registration-media .media-bg {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 270px !important;
+        object-fit: cover !important;
+        object-position: 50% 15% !important;
+    }
+
+    .registration-media .media-overlay {
+        display: none !important;
+    }
+
+    .registration-media .media-content {
+        position: relative !important;
+        inset: auto !important;
+        padding: 28px 28px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+
+    .registration-media .attention-badge {
+        align-self: flex-start !important;
+        width: fit-content !important;
+    }
+
+    .registration-panel {
+        width: 100% !important;
+        padding: 32px 28px !important;
+        box-sizing: border-box !important;
+    }
+
+    .trust-section {
+        flex-direction: column !important;
+        gap: 28px !important;
+    }
+
+    .trust-copy {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+    }
+
+    .trust-cards {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    .trust-card {
+        border-left: none !important;
+        border-top: 2px solid #DBE7DF !important;
+        padding: 16px 0 0 0 !important;
+    }
+}
 
 /* Mobile Responsive Overrides for Home Page */
 @media (max-width: 768px) {
@@ -821,14 +900,14 @@
         gap: 28px !important;
     }
 
-    /* Solución a recorte de Salvador y textos en banner "Para empezar" */
+    /* Solución a recorte de persona y textos en banner de formulario */
     .registration-media {
         width: 100% !important;
         min-height: auto !important;
         height: auto !important;
         display: flex !important;
         flex-direction: column !important;
-        border-radius: 16px !important;
+        border-radius: 16px 16px 0 0 !important;
         overflow: hidden !important;
         background-color: #073522 !important;
     }
@@ -838,9 +917,10 @@
         top: auto !important;
         left: auto !important;
         width: 100% !important;
-        height: 240px !important;
+        height: 250px !important;
+        min-height: 250px !important;
         object-fit: cover !important;
-        object-position: top center !important;
+        object-position: 50% 15% !important;
     }
 
     .registration-media .media-overlay {

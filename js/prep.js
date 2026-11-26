@@ -26,182 +26,182 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prepMatData = {
         pet: {
-            pageTitle: 'Prepara tu botella plástica para bebidas',
-            sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para acondicionar tu botella antes de la entrega.',
+            pageTitle: 'Prepara tu botella plástica',
+            sub: 'Completa los 4 pasos en orden antes de entregar.',
             steps: [
                 {
-                    title: '1. Vacía el contenido por completo',
-                    desc: 'Asegúrate de retirar hasta la última gota de refresco, agua o jugo. Los restos líquidos arruinan el reciclaje de cartones y generan hongos en el tacho verde.',
-                    tip: 'No es necesario usar jabón si solo contuvo agua de mesa. Basta con drenar todo el líquido.',
-                    label: 'Paso 1 completado: Envase totalmente vacío'
+                    title: '1. Vacía el envase',
+                    desc: 'Retira todo el líquido para no mojar otros reciclables.',
+                    tip: 'Si solo tuvo agua, basta con escurrir.',
+                    label: 'Paso 1: Envase vacío'
                 },
                 {
-                    title: '2. Enjuaga con un chorrito de agua',
-                    desc: 'Si contuvo bebidas azucaradas, néctares o yogur ligero, agrega un poco de agua, agita suavemente y deséchala. Esto evita hormigas y malos olores en tu zona de almacenamiento.',
-                    tip: 'Aprovecha el agua residual del lavado de vajilla o verduras para no malgastar agua potable limpia.',
-                    label: 'Paso 2 completado: Enjuague realizado sin residuos visibles'
+                    title: '2. Enjuaga rápido',
+                    desc: 'Si tuvo jugo o gaseosa, agita con un poco de agua para evitar olores.',
+                    tip: 'Reutiliza agua del lavado de platos.',
+                    label: 'Paso 2: Enjuague listo'
                 },
                 {
-                    title: '3. Deja escurrir boca abajo',
-                    desc: 'Coloca la botella invertida en un escurridor o espacio ventilado durante 20 a 30 minutos. La humedad es la causa número uno de rechazo de papel y cartón en acopio.',
-                    tip: 'Deja que se seque al aire; no utilices toallas de papel desechable para secar el interior.',
-                    label: 'Paso 3 completado: Escurrida y seca al tacto'
+                    title: '3. Escurre boca abajo',
+                    desc: 'Déjala secar al aire para evitar humedad en el acopio.',
+                    tip: 'Seca al aire, sin usar servilletas.',
+                    label: 'Paso 3: Botella seca'
                 },
                 {
-                    title: '4. Separa la tapa y compacta la botella',
-                    desc: 'Desenrosca la tapa de plástico y guárdala por separado. Aplasta el cuerpo de la botella desde la base hacia el pico para ahorrar hasta 70% de volumen.',
-                    tip: 'Las botellas compactadas permiten al reciclador de base recolectar el triple de material en un solo viaje.',
-                    label: 'Paso 4 completado: Tapa retirada y envase compactado'
+                    title: '4. Quita la tapa y aplasta',
+                    desc: 'Separa la tapa plástica y aplasta la botella para ahorrar 70% de espacio.',
+                    tip: 'Aplastada cabe el triple en cada recolección.',
+                    label: 'Paso 4: Sin tapa y aplastada'
                 }
             ]
         },
         vidrio: {
-            pageTitle: 'Prepara tus botellas y frascos de vidrio',
-            sub: 'Sigue estos cuatro sencillos pasos en orden de cascada para garantizar una entrega 100% segura para los recicladores.',
+            pageTitle: 'Prepara frascos y botellas de vidrio',
+            sub: 'Sigue los 4 pasos en orden para una entrega segura.',
             steps: [
                 {
-                    title: '1. Retira todo el contenido sólido o líquido',
-                    desc: 'Drena aceites, mermeladas o jugos del frasco con una espátula o cuchara. Los restos grasos atraen plagas y complican el acopio.',
-                    tip: 'Nunca entregues frascos quebrados ni astillados; pueden causar cortes graves a los operarios.',
-                    label: 'Paso 1 completado: Frasco completamente libre de contenido'
+                    title: '1. Retira todo el contenido',
+                    desc: 'Vacía restos de comida o líquido del frasco.',
+                    tip: 'Nunca entregues vidrio roto ni astillado.',
+                    label: 'Paso 1: Frasco vacío'
                 },
                 {
-                    title: '2. Enjuaga con agua corriente',
-                    desc: 'Pasa un chorrito de agua para que las paredes de vidrio queden cristalinas y sin olores fermentados.',
-                    tip: 'El vidrio no absorbe químicos ni grasa, por lo que un enjuague rápido basta.',
-                    label: 'Paso 2 completado: Vidrio lavado y sin olores'
+                    title: '2. Enjuaga con agua',
+                    desc: 'Pasa un chorro de agua para quitar restos y olores.',
+                    tip: 'Un enjuague rápido es suficiente.',
+                    label: 'Paso 2: Vidrio limpio'
                 },
                 {
-                    title: '3. Deja escurrir boca abajo hasta secar',
-                    desc: 'Colócalo invertido sobre un secador. La estación de acopio exige material seco para no manchar otras entregas.',
-                    tip: 'No dejes agua estancada dentro del frasco cerrado con tapa.',
-                    label: 'Paso 3 completado: Vidrio seco'
+                    title: '3. Escurre boca abajo',
+                    desc: 'Déjalo secar al aire antes de guardarlo.',
+                    tip: 'Evita dejar agua dentro del envase.',
+                    label: 'Paso 3: Vidrio seco'
                 },
                 {
                     title: '4. Retira la tapa metálica',
-                    desc: 'Desenrosca la tapa de hojalata y colócala en el contenedor de metales. Entrega el frasco destapado para su inspección visual.',
-                    tip: 'Las tapas de metal se funden a temperaturas distintas al vidrio sódico.',
-                    label: 'Paso 4 completado: Frasco destapado y listo'
+                    desc: 'Desenrosca la tapa de metal y sepárala aparte.',
+                    tip: 'Entrega el frasco entero y destapado.',
+                    label: 'Paso 4: Sin tapa y listo'
                 }
             ]
         },
         carton: {
-            pageTitle: 'Prepara tus cajas de cartón corrugado',
-            sub: 'Sigue estos pasos en orden de cascada para desarmar, secar y atar tus fardos de cartón para entrega.',
+            pageTitle: 'Prepara cajas de cartón',
+            sub: 'Desarma, limpia y ata el cartón en 4 pasos.',
             steps: [
                 {
-                    title: '1. Desarma la caja desde las solapas inferiores',
-                    desc: 'Abre las solapas con cuidado para que la caja quede completamente plana en una sola lámina rectangular.',
-                    tip: 'El cartón plano ocupa 8 veces menos espacio en casa y en el camión de acopio.',
-                    label: 'Paso 1 completado: Caja desarmada y aplanada'
+                    title: '1. Desarma y aplana la caja',
+                    desc: 'Abre las solapas para dejarla completamente plana.',
+                    tip: 'Aplanada ocupa 8 veces menos espacio.',
+                    label: 'Paso 1: Caja aplanada'
                 },
                 {
-                    title: '2. Retira cintas plásticas de embalaje y grapas',
-                    desc: 'Desprende las tiras de cinta gruesa plástica y alambres para evitar que traben las aspas de las plantas de pulpeo.',
-                    tip: 'Si la cinta está muy adherida, córtala con tijeras sin romper el cartón.',
-                    label: 'Paso 2 completado: Cinta plástica retirada'
+                    title: '2. Retira cintas y grapas',
+                    desc: 'Quita cintas gruesas de embalaje y grapas metálicas.',
+                    tip: 'Usa tijeras si la cinta está muy adherida.',
+                    label: 'Paso 2: Cinta retirada'
                 },
                 {
-                    title: '3. Verifica que esté completamente seco y limpio',
-                    desc: 'Asegúrate de que no tenga manchas de aceite de pizza, comida ni hongos. Las partes sucias van al tacho negro.',
-                    tip: 'Una sola caja de cartón con grasa de comida puede contaminar 50 kg de celulosa limpia.',
-                    label: 'Paso 3 completado: Cartón seco y sin grasa'
+                    title: '3. Verifica que esté seco',
+                    desc: 'No incluyas cartón mojado ni con grasa de comida.',
+                    tip: 'Las zonas con aceite van al tacho negro.',
+                    label: 'Paso 3: Cartón limpio y seco'
                 },
                 {
-                    title: '4. Agrupa y ata con soga o pita',
-                    desc: 'Junta de 5 a 10 cajas aplanadas del mismo tamaño y átalas con pabilo o soga biodegradable para facilitar su transporte.',
-                    tip: 'Los recicladores de base agradecen los paquetes atados porque aceleran su pesaje y carga.',
-                    label: 'Paso 4 completado: Paquete de cartón atado'
+                    title: '4. Agrupa y ata el fardo',
+                    desc: 'Apila las láminas planas y átalas con pita o soga.',
+                    tip: 'Facilita el pesaje y traslado del reciclador.',
+                    label: 'Paso 4: Paquete atado'
                 }
             ]
         },
         lata: {
-            pageTitle: 'Prepara tus latas de bebidas y conservas',
-            sub: 'Cuatro pasos en cascada para entregar aluminio y hojalata limpia, segura y sin bordes cortantes.',
+            pageTitle: 'Prepara latas de aluminio y hojalata',
+            sub: '4 pasos rápidos para entregar metales sin riesgo.',
             steps: [
                 {
-                    title: '1. Escurre todo residuo de jugo o salmuera',
-                    desc: 'Vacía la lata al 100%. Si era una lata de atún, escurre bien el aceite para evitar manchas en tu bolsa.',
-                    tip: 'No viertas el aceite de conservas al lavadero; guárdalo en una botella para acopio de aceite usado.',
-                    label: 'Paso 1 completado: Lata vaciada'
+                    title: '1. Escurre todo líquido',
+                    desc: 'Vacía la lata por completo y drena aceite si es conserva.',
+                    tip: 'No tires aceite usado al caño.',
+                    label: 'Paso 1: Lata vacía'
                 },
                 {
-                    title: '2. Enjuaga con una gota de detergente',
-                    desc: 'Pasa agua y una esponja rápida para remover la capa interna azucarada o salada.',
-                    tip: 'Una lata limpia no genera olores en tu hogar durante los días previos a la entrega.',
-                    label: 'Paso 2 completado: Lata enjuagada'
+                    title: '2. Enjuaga el interior',
+                    desc: 'Pasa agua rápida para evitar olores en casa.',
+                    tip: 'Usa una gota de detergente si tuvo atún.',
+                    label: 'Paso 2: Lata enjuagada'
                 },
                 {
-                    title: '3. Deja secar al aire libre',
-                    desc: 'Coloca la lata invertida para que no queden charcos de agua en el fondo.',
-                    tip: 'El metal se seca en pocos minutos si está boca abajo en un lugar ventilado.',
-                    label: 'Paso 3 completado: Lata escurrida'
+                    title: '3. Seca boca abajo',
+                    desc: 'Escúrrela en lugar ventilado unos minutos.',
+                    tip: 'El metal seca muy rápido al aire.',
+                    label: 'Paso 3: Lata seca'
                 },
                 {
-                    title: '4. Comprime lateralmente protegiendo bordes',
-                    desc: 'Para latas de bebidas, aplasta de costado con el pie o la mano. Para conservas con tapa filuda, empuja la tapa adentro.',
-                    tip: 'Nunca dejes tapas de conserva sueltas con filo hacia afuera para proteger las manos del reciclador.',
-                    label: 'Paso 4 completado: Lata compactada de forma segura'
+                    title: '4. Aplasta con cuidado',
+                    desc: 'Comprime lateralmente o dobla la tapa filuda hacia adentro.',
+                    tip: 'Evita dejar bordes cortantes expuestos.',
+                    label: 'Paso 4: Lata compactada'
                 }
             ]
         },
         pead: {
-            pageTitle: 'Prepara tus envases de limpieza y champú',
-            sub: 'Acondiciona tus envases plásticos opacos para una recolección segura y sin químicos residuales.',
+            pageTitle: 'Prepara envases de limpieza',
+            sub: 'Acondiciona frascos de detergente o champú sin espuma.',
             steps: [
                 {
-                    title: '1. Vacía el producto restante',
-                    desc: 'Usa hasta la última gota de champú o detergente agregando un poco de agua al final.',
-                    tip: 'Aprovecha todo el producto antes de acondicionar el frasco para reciclaje.',
-                    label: 'Paso 1 completado: Envase vacío'
+                    title: '1. Vacía el producto',
+                    desc: 'Usa el contenido restante antes de reciclar.',
+                    tip: 'Un poco de agua aprovecha el último resto.',
+                    label: 'Paso 1: Envase vacío'
                 },
                 {
-                    title: '2. Enjuaga dos veces el interior',
-                    desc: 'Enjuaga bien para que no quede espuma persistente ni restos resbalosos.',
-                    tip: 'El agua jabonosa del enjuague sirve para limpiar el piso del baño o patio.',
-                    label: 'Paso 2 completado: Sin residuos químicos'
+                    title: '2. Enjuaga dos veces',
+                    desc: 'Elimina restos de jabón o espuma del interior.',
+                    tip: 'El enjuague sirve para limpiar el piso.',
+                    label: 'Paso 2: Sin espuma ni residuos'
                 },
                 {
-                    title: '3. Deja escurrir boca abajo',
-                    desc: 'Seca el frasco invertido para eliminar el agua del enjuague.',
-                    tip: 'Un envase bien seco no genera moho en almacenamiento.',
-                    label: 'Paso 3 completado: Envase seco'
+                    title: '3. Escurre boca abajo',
+                    desc: 'Déjalo secar al aire antes de cerrarlo.',
+                    tip: 'Evita humedad acumulada al guardar.',
+                    label: 'Paso 3: Envase seco'
                 },
                 {
-                    title: '4. Retira el dispensador mecánico',
-                    desc: 'Desenrosca las bombas con resorte de metal (van al tacho negro). Si la tapa es simple, enróscala ligeramente.',
-                    tip: 'Los resortes metálicos de los dosificadores dañan los molinos de picado de plástico.',
-                    label: 'Paso 4 completado: Dosificador separado'
+                    title: '4. Retira el dispensador',
+                    desc: 'Quita bombas con resorte de metal (van al tacho negro).',
+                    tip: 'Los resortes dañan el molino de plástico.',
+                    label: 'Paso 4: Dosificador separado'
                 }
             ]
         },
         pilas: {
-            pageTitle: 'Acondiciona tus pilas y baterías domésticas',
-            sub: 'Medidas de seguridad obligatorias en cascada para aislar y entregar pilas sin riesgo de fugas ácidas.',
+            pageTitle: 'Prepara pilas y baterías',
+            sub: '4 medidas de seguridad para entrega en punto especial.',
             steps: [
                 {
-                    title: '1. Identifica y separa por tipo',
-                    desc: 'Separa pilas alcalinas comunes (AA, AAA, D) de baterías recargables de litio o pilas de botón.',
-                    tip: 'NUNCA recargues ni calientes una pila que no sea expresamente rotulada como recargable.',
-                    label: 'Paso 1 completado: Pilas clasificadas'
+                    title: '1. Separa por tipo',
+                    desc: 'Clasifica pilas comunes y baterías sin golpearlas.',
+                    tip: 'Nunca desarmes ni calientes una pila.',
+                    label: 'Paso 1: Pilas separadas'
                 },
                 {
-                    title: '2. Protege ambos polos con cinta adhesiva transparente',
-                    desc: 'Coloca un trozo de cinta aislante o de embalaje cubriendo el polo positivo (+) y negativo (-) de cada pila.',
-                    tip: 'El encintado de polos previene cortocircuitos e incendios por fricción dentro del contenedor.',
-                    label: 'Paso 2 completado: Polos aislados con cinta'
+                    title: '2. Cubre ambos polos',
+                    desc: 'Pega cinta adhesiva en los extremos (+) y (-).',
+                    tip: 'Previene cortocircuitos dentro del acopio.',
+                    label: 'Paso 2: Polos aislados'
                 },
                 {
-                    title: '3. Almacena en un envase plástico seco con tapa',
-                    desc: 'Usa una botella plástica limpia o frasco plástico hermético para guardar las pilas en tu hogar.',
-                    tip: 'Guarda el frasco en un lugar fresco y fuera del alcance de niños y mascotas.',
-                    label: 'Paso 3 completado: Envasadas en contenedor seco'
+                    title: '3. Guarda en envase seco',
+                    desc: 'Colócalas en una botella o frasco plástico con tapa.',
+                    tip: 'Mantenlo en un lugar fresco y seguro.',
+                    label: 'Paso 3: Envase cerrado'
                 },
                 {
-                    title: '4. Ubica un contenedor especial rojo o de supermercado',
-                    desc: 'Llévalas a los depósitos identificados para pilas en farmacias, supermercados o municipios autorizados.',
-                    tip: 'NUNCA arrojes pilas en el tacho verde ni en la basura común de casa.',
-                    label: 'Paso 4 completado: Punto especial identificado'
+                    title: '4. Entrega en tacho rojo',
+                    desc: 'Llévalas a un contenedor autorizado de supermercado o distrito.',
+                    tip: 'Nunca van al tacho verde ni negro.',
+                    label: 'Paso 4: Punto especial ubicado'
                 }
             ]
         }
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const labelEl = document.getElementById(`step-${idx + 1}-label`);
             if (titleEl) titleEl.textContent = step.title;
             if (descEl) descEl.textContent = step.desc;
-            if (tipEl) tipEl.textContent = step.tip;
+            if (tipEl) tipEl.innerHTML = `<strong>Tip:</strong> ${step.tip}`;
             if (labelEl) labelEl.textContent = step.label;
         });
 

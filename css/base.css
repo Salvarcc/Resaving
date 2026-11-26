@@ -1567,9 +1567,22 @@ textarea:focus-visible,
     .header-inner {
         padding-left: 20px;
         padding-right: 20px;
+        gap: 12px;
+    }
+
+    .main-nav,
+    .main-nav-inner {
+        gap: 4px;
+    }
+
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 13px;
+        white-space: nowrap;
     }
 
     .categories-grid {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
@@ -1581,47 +1594,86 @@ textarea:focus-visible,
     }
 
     .context-gallery {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
 
-    .criteria-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
-
-    .confusion-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
-
-    .property-pills-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .routes-cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
-
+    .criteria-grid,
+    .confusion-grid,
+    .property-pills-grid,
+    .routes-cards-grid,
     .footer-grid {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        gap: 16px;
     }
 
-    .delivery-layout {
-        grid-template-columns: 1fr;
+    .delivery-layout,
+    .report-forms-grid,
+    .detail-hero,
+    .summary-hero-card,
+    .prep-layout,
+    .point-detail-layout {
+        display: flex;
+        flex-direction: column;
         gap: 24px;
+        width: 100%;
     }
 
-    .report-forms-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    .delivery-main-col,
+    .delivery-side-col,
+    .detail-img-box,
+    .detail-info,
+    .summary-img-box,
+    .summary-info,
+    .prep-main-col,
+    .prep-side-col,
+    .point-col-main,
+    .point-col-side {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        flex-shrink: 1;
+        box-sizing: border-box;
     }
 
     .map-split-view {
-        grid-template-columns: 360px 1fr;
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        gap: 20px;
+        height: auto;
+    }
+
+    .map-points-list {
+        width: 100%;
+        max-height: 540px;
+    }
+
+    .toolbar-row-top {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .location-input-group {
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+
+    .location-select {
+        min-width: 0;
+    }
+
+    .toolbar-row-filters,
+    .filter-chips,
+    .material-switcher-bar,
+    .radius-chips-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
+        white-space: normal !important;
+        max-width: 100% !important;
+        gap: 8px !important;
     }
 }
 
@@ -2005,9 +2057,23 @@ textarea:focus-visible,
         gap: 10px;
     }
 
-    .candidate-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+    .tips-grid,
+    .candidate-grid,
+    .alternatives-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .tip-card,
+    .candidate-card,
+    .alternative-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        flex: none !important;
     }
 
     .detail-hero {
@@ -2061,8 +2127,26 @@ textarea:focus-visible,
     }
 
     .alternatives-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .report-form-card {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 18px 16px !important;
+    }
+
+    .report-form-card > a,
+    .report-form-card .btn-primary-action {
+        width: 100% !important;
+        justify-content: center !important;
     }
 
     .destinations-grid {
@@ -2172,22 +2256,35 @@ textarea:focus-visible,
         text-align: center;
     }
 
-    .toolbar-row-filters {
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 6px;
-        gap: 8px;
+    .toolbar-row-filters,
+    .material-switcher-bar,
+    .radius-chips-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
+        white-space: normal !important;
+        padding-bottom: 0 !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
-    .filter-chip {
-        flex-shrink: 0;
+    .filter-chip,
+    .mat-switch-btn,
+    .prep-mat-chip,
+    .radius-chip {
+        flex-shrink: 1 !important;
+        white-space: normal !important;
+        max-width: 100% !important;
+        text-align: center !important;
     }
 
     .map-split-view {
-        display: flex;
+        display: flex !important;
         flex-direction: column !important;
-        gap: 16px;
+        gap: 16px !important;
+        height: auto !important;
     }
 
     .map-visual-container {
@@ -2221,23 +2318,41 @@ textarea:focus-visible,
     }
 
     .routes-cards-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+        width: 100% !important;
+    }
+
+    .route-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .route-days-pills {
+        flex-wrap: wrap !important;
     }
 
     .week-calendar-grid {
+        display: grid !important;
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
 
     .delivery-layout {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
     }
 
     .delivery-main-col, .delivery-side-col {
-        width: 100%;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        flex-shrink: 1 !important;
     }
 
     .lot-item-card {
@@ -2258,19 +2373,87 @@ textarea:focus-visible,
         object-fit: cover;
     }
 
-    .consolidated-table-wrap {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        margin: 0 -16px;
-        padding: 0 16px;
+    .consolidated-table-wrap,
+    .comparison-table-wrap {
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
-    .consolidated-table {
-        min-width: 540px;
-    }
-
+    .consolidated-table,
     .comparison-matrix-table {
-        min-width: 540px;
+        min-width: 0 !important;
+        width: 100% !important;
+        display: block !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    .consolidated-table thead,
+    .comparison-matrix-table thead {
+        display: none !important;
+    }
+
+    .consolidated-table tbody,
+    .comparison-matrix-table tbody {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .consolidated-table tr,
+    .comparison-matrix-table tr {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+        padding: 14px 16px !important;
+        margin-bottom: 12px !important;
+        background-color: #FFFFFF !important;
+        border: 1.5px solid #DBE7DF !important;
+        border-radius: 14px !important;
+        box-shadow: 0 2px 8px rgba(7, 53, 34, 0.04) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .consolidated-table td,
+    .comparison-matrix-table td {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 4px 0 !important;
+        border: none !important;
+        text-align: right !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-break: break-word !important;
+    }
+
+    .consolidated-table td:first-child,
+    .comparison-matrix-table td:first-child {
+        justify-content: flex-start !important;
+        text-align: left !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #14251B !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 4px !important;
+        border-bottom: 1px solid #EEF3F0 !important;
+    }
+
+    .consolidated-table td[data-label]:not(:first-child)::before,
+    .comparison-matrix-table td[data-label]:not(:first-child)::before {
+        content: attr(data-label);
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #5F7066;
+        text-align: left;
+        flex-shrink: 0;
     }
 
     .report-forms-grid {
@@ -2420,21 +2603,23 @@ textarea:focus-visible,
     box-shadow: 0 4px 12px rgba(7, 53, 34, 0.08);
 }
 
-.trust-copy {
-    flex: 0 0 490px !important;
-}
+@media (min-width: 1025px) {
+    .trust-copy {
+        flex: 0 0 490px !important;
+    }
 
-.trust-actions {
-    display: flex;
-    flex-direction: row !important;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 12px;
-}
+    .trust-actions {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 12px;
+    }
 
-.btn-trust-primary,
-.btn-trust-secondary {
-    white-space: nowrap;
+    .btn-trust-primary,
+    .btn-trust-secondary {
+        white-space: nowrap;
+    }
 }
 
 .search-input-wrap img.search-icon {

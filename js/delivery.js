@@ -324,11 +324,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lotTableBody) {
             lotTableBody.innerHTML = lot.map(item => `
                 <tr>
-                    <td><strong>${item.name}</strong></td>
-                    <td><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
-                    <td><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
-                    <td>${item.prepSummary}</td>
-                    <td><span class="badge badge-green" style="background-color: #0B4A30; color: #FFFFFF !important; font-weight: 700; padding: 4px 10px; border-radius: 6px; display: inline-block;">${item.tolva}</span></td>
+                    <td data-label="Material"><strong>${item.name}</strong></td>
+                    <td data-label="Limpio"><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
+                    <td data-label="Seco"><span class="table-check" style="color: #1D8A57; font-weight: 700;">✓ Sí</span></td>
+                    <td data-label="Estado">${item.prepSummary}</td>
+                    <td data-label="Tolva"><span class="badge badge-green" style="background-color: #0B4A30; color: #FFFFFF !important; font-weight: 700; padding: 4px 10px; border-radius: 6px; display: inline-block;">${item.tolva}</span></td>
                 </tr>
             `).join('');
         }

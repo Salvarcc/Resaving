@@ -494,6 +494,24 @@
 }
 
 
+/* Tablet Responsive Overrides for Routes & Toolbar (769px - 1024px) */
+@media (max-width: 1024px) {
+    .routes-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .route-card {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .route-days-pills {
+        flex-wrap: wrap;
+    }
+}
+
 /* Mobile Responsive Overrides for Collection Map, List, Point Detail & Routes */
 @media (max-width: 768px) {
     .filter-toolbar {
@@ -655,7 +673,6 @@
         text-align: center !important;
         padding: 10px 6px !important;
     }
-}
 
     .status-capacities-grid,
     .status-two-col-grid {
@@ -715,3 +732,4 @@
         flex-shrink: 0 !important;
         white-space: nowrap !important;
     }
+}
