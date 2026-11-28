@@ -17,6 +17,54 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Papel higiénico y servilletas usadas', cat: 'No aprovechable · Tacho Negro', url: 'search-results.html?cat=no-aprovechables', color: '#2C3E50' }
     ];
 
+    const fullCatalogKeywords = [
+        'botella', 'plastico', 'plástica', 'pet', 'agua', 'gaseosa', 'vidrio', 'frasco',
+        'carton', 'cartón', 'papel', 'bond', 'caja', 'lata', 'aluminio', 'conserva',
+        'champu', 'champú', 'detergente', 'yogur', 'pead', 'rigido', 'rígido', 'tetra',
+        'fruta', 'verdura', 'hortaliza', 'organico', 'orgánico', 'cafe', 'café', 'te', 'té',
+        'hoja', 'jardin', 'jardín', 'huevo', 'cascara', 'cáscara', 'pila', 'bateria', 'batería',
+        'medicamento', 'blister', 'blíster', 'foco', 'fluorescente', 'raee', 'electronico',
+        'electrónico', 'cargador', 'cable', 'higienico', 'higiénico', 'panuelo', 'pañuelo',
+        'servilleta', 'colilla', 'cigarro', 'envoltura', 'galleta', 'papa', 'ceramica', 'cerámica',
+        'loza', 'bolsa', 'aprovechable', 'peligroso'
+    ];
+
+    const recordSearchHistory = (term, url, statusLabel = 'Consultado') => {
+        if (!term) return;
+        try {
+            const raw = localStorage.getItem('resaving_search_history');
+            const history = raw ? JSON.parse(raw) : [];
+            const next = [{ term, url, statusLabel, ts: Date.now() }, ...history.filter(h => h.term.toLowerCase() !== term.toLowerCase())].slice(0, 8);
+            localStorage.setItem('resaving_search_history', JSON.stringify(next));
+        } catch (e) {}
+    };
+
+    const hasCatalogMatch = (rawQuery) => {
+        const q = rawQuery.trim().toLowerCase();
+        if (!q) return true;
+        const quickHit = searchCatalog.some(item =>
+            item.name.toLowerCase().includes(q) || item.cat.toLowerCase().includes(q)
+        );
+        if (quickHit) return true;
+        return fullCatalogKeywords.some(kw => kw.includes(q) || q.includes(kw));
+    };
+
+    const heroSearchForm = heroSearchInput ? heroSearchInput.closest('form') : null;
+    if (heroSearchForm && heroSearchInput) {
+        heroSearchForm.addEventListener('submit', (e) => {
+            const raw = heroSearchInput.value.trim();
+            if (!raw) return;
+            if (!hasCatalogMatch(raw)) {
+                e.preventDefault();
+                const targetUrl = `${basePath}search-no-results.html?q=${encodeURIComponent(raw)}`;
+                recordSearchHistory(raw, targetUrl, 'Sin coincidencia');
+                window.location.href = targetUrl;
+            } else {
+                recordSearchHistory(raw, `${basePath}search-results.html?q=${encodeURIComponent(raw)}`, 'Búsqueda en catálogo');
+            }
+        });
+    }
+
     if (heroSearchInput && heroSuggestions) {
         const renderSuggestions = (items, isDefault = false) => {
             let headerHtml = '';
@@ -24,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headerHtml = '<div style="padding: 10px 18px; background-color: #F7FAF8; border-bottom: 1px solid #EEF3F0; font-size: 11.5px; font-weight: 800; color: #0B4A30; text-transform: uppercase; letter-spacing: 0.5px;">Materiales recomendados y frecuentes</div>';
             }
             heroSuggestions.innerHTML = headerHtml + items.map(item => `
-                <a href="${basePath}${item.url}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #EEF3F0; text-decoration: none; color: #14251B; transition: background-color 0.15s ease;">
+                <a href="${basePath}${item.url}" class="hero-suggestion-link" data-term="${item.name}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #EEF3F0; text-decoration: none; color: #14251B; transition: background-color 0.15s ease;">
                     <div>
                         <strong style="display: block; font-size: 14px; color: #14251B;">${item.name}</strong>
                         <span style="font-size: 11.5px; font-weight: 700; color: ${item.color};">${item.cat}</span>
@@ -32,30 +80,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span style="font-size: 11px; font-weight: 800; color: #0B4A30; background-color: #EBF7F0; padding: 4px 8px; border-radius: 6px;">Ver ficha</span>
                 </a>
             `).join('');
+            heroSuggestions.querySelectorAll('.hero-suggestion-link').forEach(a => {
+                a.addEventListener('click', () => recordSearchHistory(a.getAttribute('data-term'), a.getAttribute('href'), 'Desde sugerencia'));
+            });
             heroSuggestions.style.display = 'block';
         };
 
         const triggerSearch = () => {
-            const query = heroSearchInput.value.trim().toLowerCase();
+            const rawQuery = heroSearchInput.value.trim();
+            const query = rawQuery.toLowerCase();
             if (query.length === 0) {
                 renderSuggestions(searchCatalog, true);
             } else {
-                const matches = searchCatalog.filter(item => 
-                    item.name.toLowerCase().includes(query) || 
+                const matches = searchCatalog.filter(item =>
+                    item.name.toLowerCase().includes(query) ||
                     item.cat.toLowerCase().includes(query)
                 );
 
                 if (matches.length > 0) {
                     renderSuggestions(matches, false);
                 } else {
+                    const noResUrl = `${basePath}search-no-results.html?q=${encodeURIComponent(rawQuery)}`;
                     heroSuggestions.innerHTML = `
-                        <div style="padding: 16px 18px; text-align: center;">
-                            <p style="font-size: 13px; color: #5F7066; margin-bottom: 8px;">No encontramos coincidencias exactas para "${query}"</p>
-                            <a href="${basePath}search-results.html?q=${encodeURIComponent(query)}" style="font-size: 12.5px; font-weight: 700; color: #0B4A30; text-decoration: underline;">
-                                Buscar en todo el catálogo de residuos &rarr;
+                        <div style="padding: 16px 18px; text-align: left;">
+                            <p style="font-size: 13px; color: #3D5A4A; margin-bottom: 10px;">No encontramos coincidencias exactas para <strong id="hero-no-match-q"></strong>. Puedes explorar términos sugeridos o alternativas:</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                                <a href="${basePath}waste-detail.html?tipo=carton" style="font-size: 12px; font-weight: 700; color: #0B4A30; background: #EBF7F0; padding: 4px 10px; border-radius: 6px; text-decoration: none;">Cartón multicapa</a>
+                                <a href="${basePath}waste-detail.html?tipo=pet" style="font-size: 12px; font-weight: 700; color: #0B4A30; background: #EBF7F0; padding: 4px 10px; border-radius: 6px; text-decoration: none;">Botellas plásticas</a>
+                                <a href="${basePath}categories.html" style="font-size: 12px; font-weight: 700; color: #0B4A30; background: #EBF7F0; padding: 4px 10px; border-radius: 6px; text-decoration: none;">Ver 4 categorías</a>
+                            </div>
+                            <a href="${noResUrl}" style="display: inline-block; font-size: 12.5px; font-weight: 800; color: #0B4A30; text-decoration: underline;">
+                                Ver pantalla de alternativas para este término &rarr;
                             </a>
                         </div>
                     `;
+                    const qSpan = document.getElementById('hero-no-match-q');
+                    if (qSpan) qSpan.textContent = `«${rawQuery}»`;
                     heroSuggestions.style.display = 'block';
                 }
             }

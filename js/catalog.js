@@ -701,11 +701,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (filtered.length === 0) {
+                if (urlQ && urlQ.trim().length > 0 && currentQuery === urlQ.trim() && currentFilter === 'all') {
+                    window.location.replace(`search-no-results.html?q=${encodeURIComponent(currentQuery)}`);
+                    return;
+                }
+                const noResHref = currentQuery ? `search-no-results.html?q=${encodeURIComponent(currentQuery)}` : 'search-no-results.html';
                 searchResultsList.innerHTML = `
                     <div style="background-color: #F7FAF8; border: 1.5px dashed #DBE7DF; border-radius: 14px; padding: 36px 20px; text-align: center; width: 100%;">
                         <h3 style="font-size: 17px; font-weight: 800; color: #14251B; margin-bottom: 8px;">No se encontraron materiales para esta búsqueda</h3>
-                        <p style="font-size: 13.5px; color: #5F7066; margin-bottom: 16px;">Prueba buscando con palabras más generales (ej: plástico, papel, pilas) o explora nuestras categorías.</p>
-                        <button type="button" id="btn-reset-search" style="padding: 9px 18px; background-color: #0B4A30; color: #FFFFFF; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer;">Ver todos los materiales</button>
+                        <p style="font-size: 13.5px; color: #5F7066; margin-bottom: 16px;">Prueba buscando con palabras más generales (ej: plástico, papel, pilas) o revisa nuestras rutas alternativas guiadas.</p>
+                        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <button type="button" id="btn-reset-search" style="padding: 9px 18px; background-color: #0B4A30; color: #FFFFFF; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer;">Ver todos los materiales</button>
+                            <a href="${noResHref}" style="padding: 9px 18px; background-color: #FFFFFF; color: #0B4A30; border: 1.5px solid #0B4A30; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none;">Ver alternativas recomendadas &rarr;</a>
+                        </div>
                     </div>
                 `;
                 const resetBtn = document.getElementById('btn-reset-search');
@@ -777,6 +785,17 @@ document.addEventListener('DOMContentLoaded', () => {
             formSearchResults.addEventListener('submit', (e) => {
                 e.preventDefault();
                 if (searchInputField) currentQuery = searchInputField.value.trim();
+                const hasAny = fullMaterialsCatalog.some(item => {
+                    const matchesCategory = (currentFilter === 'all') || (item.category === currentFilter);
+                    if (!matchesCategory) return false;
+                    if (!currentQuery) return true;
+                    const q = currentQuery.toLowerCase();
+                    return item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q) || item.subBadge.toLowerCase().includes(q) || item.catLabel.toLowerCase().includes(q);
+                });
+                if (!hasAny && currentQuery && currentFilter === 'all') {
+                    window.location.href = `search-no-results.html?q=${encodeURIComponent(currentQuery)}`;
+                    return;
+                }
                 renderMaterials();
             });
         }
@@ -786,12 +805,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const noResultsTitle = document.getElementById('no-results-title');
+    if (noResultsTitle) {
+        const noResParams = new URLSearchParams(window.location.search);
+        const queryTerm = (noResParams.get('q') || '').trim();
+        if (queryTerm) {
+            noResultsTitle.textContent = `No encontramos “${queryTerm}”`;
+            document.title = `Resaving - Sin resultados para ${queryTerm}`;
+            const noResInput = document.getElementById('no-results-input');
+            if (noResInput) noResInput.value = queryTerm;
+            const noResSub = document.getElementById('no-results-subtitle');
+            if (noResSub) {
+                noResSub.textContent = `No hay una coincidencia exacta para «${queryTerm}». Selecciona una alternativa sugerida o busca un término equivalente del catálogo.`;
+            }
+        }
+    }
+
     const btnClearHistory = document.getElementById('btn-clear-history');
     const historyList = document.querySelector('.history-list');
     const historyContainer = document.getElementById('history-container');
 
+    if (historyList) {
+        try {
+            const savedHistory = JSON.parse(localStorage.getItem('resaving_search_history') || '[]');
+            if (Array.isArray(savedHistory) && savedHistory.length > 0) {
+                const dynamicItems = savedHistory.map(h => `
+                    <a href="${h.url.replace(/^pages\//, '')}" class="history-item">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <img src="../assets/icons/icon-search.svg" alt="" style="width: 24px; height: 24px; padding: 6px; background: #EBF7F0; border-radius: 8px;">
+                            <div>
+                                <div style="font-size: 15px; font-weight: 700; color: #14251B; margin-bottom: 2px;">${h.term.replace(/[<>&"]/g, '')}</div>
+                                <span class="history-time">Búsqueda reciente en esta sesión</span>
+                            </div>
+                        </div>
+                        <span class="match-chip" style="margin-bottom: 0; font-size: 11px;">${h.statusLabel || 'Reciente'}</span>
+                    </a>
+                `).join('');
+                historyList.insertAdjacentHTML('afterbegin', dynamicItems);
+            }
+        } catch (e) {}
+    }
+
     if (btnClearHistory && (historyList || historyContainer)) {
         btnClearHistory.addEventListener('click', () => {
+            try { localStorage.removeItem('resaving_search_history'); } catch (e) {}
             if (historyList) {
                 historyList.style.display = 'none';
             }

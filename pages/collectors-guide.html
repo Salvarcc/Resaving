@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resaving - Guía para Recicladores y Encargados de Acopio</title>
+    <title>Resaving - Portal para Recicladores y Encargados de Acopio</title>
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/map.css">
     <link rel="stylesheet" href="../css/trust.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
@@ -41,44 +42,149 @@
         </nav>
 
         <section class="categories-header">
-            <p class="eyebrow">Operadores y puntos de acopio</p>
-            <h1 class="section-title">Herramientas para recicladores y encargados de estación</h1>
-            <p class="section-subtitle">Reduce rechazos por contaminación cruzada compartiendo criterios claros de recepción y mantén actualizada la disponibilidad de tu punto en Lima Metropolitana.</p>
+            <p class="eyebrow">Segmento 3 · Ley N.° 29419 y NTP 900.058:2019</p>
+            <h1 class="section-title">Portal para recicladores y encargados de estación</h1>
+            <p class="section-subtitle">Consulta el catálogo técnico y condiciones de recepción de materiales, y mantén al día los datos, horarios y disponibilidad temporal de tu punto de acopio.</p>
         </section>
 
+        <div id="collector-live-feedback" role="status" aria-live="polite" style="display: none; margin-bottom: 24px; padding: 16px 20px; background-color: #EBF7F0; border: 1.5px solid #0B4A30; border-radius: 12px; color: #0B4A30; font-weight: 600;"></div>
+
+        <!-- Bloque A: Catálogo técnico, condiciones de recepción y residuos especiales (HU-041, HU-043, HU-044) -->
+        <section class="report-form-card" style="margin-bottom: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                <div>
+                    <span class="match-chip" style="margin-bottom: 8px;">HU-041 · HU-043 · HU-044</span>
+                    <h2 class="section-block-title" style="margin-bottom: 4px;">1. Catálogo técnico, condiciones de recepción y residuos especiales</h2>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <a href="acceptability.html" class="btn-outline-action" style="padding: 8px 14px; font-size: 13px; text-decoration: none;">Guía visual aceptado/rechazado</a>
+                    <a href="prep-safety.html" class="btn-outline-action" style="padding: 8px 14px; font-size: 13px; text-decoration: none;">Protocolo de especiales</a>
+                </div>
+            </div>
+            <p class="section-block-desc" style="margin-bottom: 16px;">Selecciona un material para revisar los criterios técnicos de admisión y prevención de contaminación cruzada en tu estación.</p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;" role="group" aria-label="Materiales del catálogo técnico">
+                <button type="button" class="filter-chip collector-tech-tab active" data-tech-mat="pet" aria-pressed="true">Botellas PET</button>
+                <button type="button" class="filter-chip collector-tech-tab" data-tech-mat="vidrio" aria-pressed="false">Vidrio</button>
+                <button type="button" class="filter-chip collector-tech-tab" data-tech-mat="papel" aria-pressed="false">Cartón y papel</button>
+                <button type="button" class="filter-chip collector-tech-tab" data-tech-mat="metal" aria-pressed="false">Latas y metales</button>
+                <button type="button" class="filter-chip collector-tech-tab" data-tech-mat="especial" aria-pressed="false">Pilas y especiales</button>
+            </div>
+
+            <div id="collector-tech-panel" style="background: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 12px; padding: 18px;"></div>
+        </section>
+
+        <!-- Bloque B: Gestión operativa del punto de acopio (HU-045, HU-046, HU-047) -->
+        <section class="report-form-card" style="margin-bottom: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+                <div>
+                    <span class="match-chip" style="margin-bottom: 8px; background-color: #1F6B47;">HU-045 · HU-046 · HU-047</span>
+                    <h2 class="section-block-title" style="margin-bottom: 4px;">2. Actualizar punto de acopio e indisponibilidad temporal</h2>
+                    <p id="mgr-live-summary" class="section-block-desc" style="margin: 0;"></p>
+                </div>
+                <span id="mgr-live-status-badge" class="point-status-badge badge-open" style="font-size: 12.5px; padding: 6px 12px;">Abierto hoy</span>
+            </div>
+
+            <form id="form-collector-station">
+                <div class="form-group">
+                    <label for="manager-station-select">Estación o punto de acopio a gestionar</label>
+                    <select id="manager-station-select" class="form-select"></select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="mgr-hours">Horario de atención (HU-045)</label>
+                        <input type="text" id="mgr-hours" class="form-select" required placeholder="Ej: 08:00 a 18:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="mgr-promoter">Responsable / Asociación acreditada (Ley N.° 29419)</label>
+                        <input type="text" id="mgr-promoter" class="form-select" required placeholder="Nombre y registro">
+                    </div>
+                    <div class="form-group">
+                        <label for="mgr-capacity">Capacidad disponible actual</label>
+                        <input type="text" id="mgr-capacity" class="form-select" required placeholder="Ej: 75% libre">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mgr-address">Dirección o referencia de ingreso (HU-045)</label>
+                    <input type="text" id="mgr-address" class="form-select" required>
+                </div>
+
+                <div class="form-group">
+                    <span style="display: block; font-size: 13.5px; font-weight: 700; color: #14251B; margin-bottom: 8px;">Materiales aceptados en este punto (HU-046)</span>
+                    <div style="display: flex; flex-wrap: wrap; gap: 14px; background: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 10px; padding: 12px 14px;">
+                        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13.5px; cursor: pointer;">
+                            <input type="checkbox" name="mgr-materials" value="pet"> Botellas plásticas
+                        </label>
+                        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13.5px; cursor: pointer;">
+                            <input type="checkbox" name="mgr-materials" value="vidrio"> Vidrio
+                        </label>
+                        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13.5px; cursor: pointer;">
+                            <input type="checkbox" name="mgr-materials" value="papel"> Cartón y papel
+                        </label>
+                        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13.5px; cursor: pointer;">
+                            <input type="checkbox" name="mgr-materials" value="metal"> Latas y metales
+                        </label>
+                        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13.5px; cursor: pointer;">
+                            <input type="checkbox" name="mgr-materials" value="especial"> Pilas y especiales
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mgr-condition-note">Condición específica de recepción (HU-046)</label>
+                    <input type="text" id="mgr-condition-note" class="form-select" placeholder="Ej: Solo cartón seco desarmado y botellas aplastadas sin tapa.">
+                </div>
+
+                <div style="background: #FEF3D6; border: 1.5px solid #D97706; border-radius: 12px; padding: 16px; margin-bottom: 18px;">
+                    <label style="display: flex; align-items: center; gap: 10px; font-weight: 800; color: #14251B; font-size: 14.5px; cursor: pointer;">
+                        <input type="checkbox" id="mgr-closed-toggle">
+                        <span>Registrar indisponibilidad o cierre temporal de este punto (HU-047)</span>
+                    </label>
+                    <div id="mgr-closure-fields" style="display: none; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 14px;">
+                        <div>
+                            <label for="mgr-closure-reason" style="display: block; font-size: 13px; font-weight: 700; color: #14251B; margin-bottom: 6px;">Motivo de cierre temporal</label>
+                            <select id="mgr-closure-reason" class="form-select">
+                                <option value="Mantenimiento preventivo">Mantenimiento preventivo</option>
+                                <option value="Contenedores saturados / espera de recojo">Contenedores saturados / espera de recojo</option>
+                                <option value="Fumigación o limpieza sanitaria">Fumigación o limpieza sanitaria</option>
+                                <option value="Evento municipal o cierre de vía">Evento municipal o cierre de vía</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="mgr-reopen-date" style="display: block; font-size: 13px; font-weight: 700; color: #14251B; margin-bottom: 6px;">Fecha u hora estimada de reapertura</label>
+                            <input type="text" id="mgr-reopen-date" class="form-select" placeholder="Ej: Mañana 08:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                    <button type="submit" class="btn-primary-action flex center" style="padding: 12px 22px;">
+                        <span>Guardar cambios en el punto</span>
+                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
+                    </button>
+                    <button type="button" id="btn-mgr-reset" class="btn-outline-action" style="padding: 11px 18px;">
+                        Restablecer datos por defecto
+                    </button>
+                    <a id="mgr-link-detail" href="point-detail.html?punto=san-miguel-1" style="font-size: 13.5px; font-weight: 700; color: #0B4A30;">Ver ficha ciudadana &rarr;</a>
+                    <a id="mgr-link-status" href="point-status.html?punto=san-miguel-1" style="font-size: 13.5px; font-weight: 700; color: #0B4A30;">Ver estado y aforo &rarr;</a>
+                    <a id="mgr-link-map" href="collection-map.html?distrito=san-miguel" style="font-size: 13.5px; font-weight: 700; color: #0B4A30;">Ver en mapa &rarr;</a>
+                </div>
+            </form>
+        </section>
+
+        <!-- Accesos complementarios -->
         <div class="report-forms-grid">
             <article class="report-form-card">
-                <span class="match-chip" style="margin-bottom: 10px;">Estándares de recepción</span>
-                <h2 class="section-block-title" style="margin-bottom: 8px;">1. Verifica criterios y orienta al ciudadano</h2>
-                <p class="section-block-desc" style="margin-bottom: 18px;">
-                    Usa nuestras guías alineadas a la norma <strong>NTP 900.058:2019</strong> para mostrar rápidamente qué condiciones debe cumplir cada material antes de ser entregado en tolva.
-                </p>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <a href="acceptability.html" class="btn-primary-action flex center" style="width: 100%; text-decoration: none;">
-                        <span>Ver criterios aceptados y rechazados</span>
-                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
-                    </a>
-                    <a href="categories.html" class="btn-outline-action flex center" style="width: 100%; text-decoration: none;">
-                        <span>Consultar las 4 categorías normativas</span>
-                    </a>
-                </div>
+                <h3 class="section-block-title" style="margin-bottom: 8px;">Categorías normativas</h3>
+                <p class="section-block-desc" style="margin-bottom: 14px;">Consulta la clasificación oficial de los 4 contenedores según NTP 900.058:2019.</p>
+                <a href="categories.html" class="btn-outline-action flex center" style="width: 100%; text-decoration: none;">Explorar las 4 categorías</a>
             </article>
-
             <article class="report-form-card">
-                <span class="match-chip" style="margin-bottom: 10px; background-color: #1F6B47;">Gestión operativa</span>
-                <h2 class="section-block-title" style="margin-bottom: 8px;">2. Vigencia, capacidad y nuevos puntos</h2>
-                <p class="section-block-desc" style="margin-bottom: 18px;">
-                    Revisa cómo aparece tu estación en el mapa ciudadano, verifica horarios publicados o envía una actualización operativa si cambiaron los materiales recibidos o la capacidad disponible.
-                </p>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <a href="report-feedback.html" class="btn-primary-action flex center" style="width: 100%; text-decoration: none; background-color: #1F6B47;">
-                        <span>Actualizar o sugerir un punto de acopio</span>
-                        <img src="../assets/icons/icon-arrow-right.svg" alt="">
-                    </a>
-                    <a href="point-status.html" class="btn-outline-action flex center" style="width: 100%; text-decoration: none;">
-                        <span>Ver ejemplo de estado y aforo de estación</span>
-                    </a>
-                </div>
+                <h3 class="section-block-title" style="margin-bottom: 8px;">Reportar o sugerir un nuevo punto</h3>
+                <p class="section-block-desc" style="margin-bottom: 14px;">¿Abrió una nueva estación de reciclaje o detectaste un dato ciudadano desactualizado?</p>
+                <a href="report-feedback.html" class="btn-outline-action flex center" style="width: 100%; text-decoration: none;">Ir a reportes y sugerencias</a>
             </article>
         </div>
     </main>
@@ -125,5 +231,7 @@
     </footer>
 
     <script src="../js/common.js" defer></script>
+    <script src="../js/stations-store.js" defer></script>
+    <script src="../js/collectors.js" defer></script>
 </body>
 </html>

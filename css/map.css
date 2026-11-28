@@ -186,6 +186,12 @@
     color: #8C6105;
 }
 
+.badge-closed {
+    background-color: #FDECEC;
+    color: #991B1B;
+    border: 1px solid #F5C2C2;
+}
+
 .point-card-distance {
     font-size: 12.5px;
     font-weight: 700;

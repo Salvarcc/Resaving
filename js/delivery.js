@@ -67,6 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
             cond1: 'Las cajas y papeles están 100% secos (sin manchas de grasa, comida o humedad).',
             cond2: 'Se retiraron cintas plásticas de embalaje gruesas y grapas de gran tamaño.',
             cond3: 'Las cajas fueron desarmadas y dobladas planas para formar un paquete compacto.'
+        },
+        pilas: {
+            name: 'Pilas alcalinas y baterías domésticas',
+            unitWeight: 0.025,
+            weightLabel: 'pilas y baterías',
+            tag: 'Requiere buzón rojo autorizado',
+            img: '../assets/images/category-hazardous.png',
+            tolva: 'Buzón Rojo (Especiales)',
+            prepSummary: 'Polos aislados con cinta, intactas y secas',
+            cond1: 'Las pilas están íntegras, sin fugas ni corrosión visible.',
+            cond2: 'Los polos metálicos fueron cubiertos con cinta adhesiva aislante.',
+            cond3: 'Se transportan en recipiente rígido separado de envases aprovechables.'
         }
     };
     materialConfig.vidrio = materialConfig.glass;
@@ -263,6 +275,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarMatchTitle = document.getElementById('sidebar-match-title');
     const sidebarMatchStats = document.getElementById('sidebar-match-stats');
     const sidebarMatchList = document.getElementById('sidebar-match-list');
+    const sidebarPointLink = document.getElementById('sidebar-point-link');
+    const deliveryAlternativeBox = document.getElementById('delivery-alternative-box');
+    const deliveryDistrictSelect = document.getElementById('delivery-district-select');
 
     const renderDeliveryLot = () => {
         if (!lotContainer) return;
@@ -299,6 +314,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (sidebarMatchList) {
                 sidebarMatchList.innerHTML = '<li><span>Agrega materiales para verificar la compatibilidad de tolva</span></li>';
             }
+            if (sidebarPointLink) sidebarPointLink.style.display = 'none';
+            if (deliveryAlternativeBox) deliveryAlternativeBox.style.display = 'none';
             return;
         }
 
@@ -338,10 +355,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const totalUnits = lot.reduce((acc, it) => acc + (parseInt(it.qty, 10) || 0), 0);
         const totalKg = lot.reduce((acc, it) => acc + (parseFloat(it.weight) || 0), 0).toFixed(2);
+        const activeDistrict = deliveryDistrictSelect ? deliveryDistrictSelect.value : 'san-miguel';
+        const store = window.ResavingStations;
+        const compat = store ? store.checkLotCompatibility(lot, activeDistrict) : null;
+        const distName = (store && store.DISTRICT_NAMES[activeDistrict]) || activeDistrict;
 
-        if (sidebarMatchChip) sidebarMatchChip.textContent = 'Mejor coincidencia encontrada';
-        if (sidebarMatchTitle) sidebarMatchTitle.textContent = 'Estación Recicla San Miguel';
-        if (sidebarMatchStats) sidebarMatchStats.textContent = `0.8 km · Abierto hoy hasta 18:00 · ${totalUnits} unidades (${totalKg} kg)`;
+        if (compat && compat.compatibleStations.length > 0) {
+            const best = compat.compatibleStations[0];
+            if (sidebarMatchChip) {
+                sidebarMatchChip.textContent = `100 % compatible · ${compat.compatibleStations.length} estación(es)`;
+                sidebarMatchChip.style.backgroundColor = '';
+                sidebarMatchChip.style.color = '';
+            }
+            if (sidebarMatchTitle) sidebarMatchTitle.textContent = best.name;
+            if (sidebarMatchStats) sidebarMatchStats.textContent = `${best.km} km · ${best.status} · ${totalUnits} unidades (${totalKg} kg)`;
+            if (sidebarPointLink) {
+                sidebarPointLink.style.display = 'flex';
+                sidebarPointLink.href = `point-detail.html?punto=${best.code}`;
+            }
+            if (deliveryAlternativeBox) deliveryAlternativeBox.style.display = 'none';
+        } else if (compat) {
+            const alt = compat.nearestAlternative;
+            if (sidebarMatchChip) {
+                sidebarMatchChip.textContent = 'Sin punto compatible en el distrito';
+                sidebarMatchChip.style.backgroundColor = '#FDECEC';
+                sidebarMatchChip.style.color = '#991B1B';
+            }
+            if (sidebarMatchTitle) sidebarMatchTitle.textContent = `Sin coincidencia en ${distName}`;
+            if (sidebarMatchStats) sidebarMatchStats.textContent = `Ninguna estación abierta acepta toda esta combinación (${totalUnits} un. · ${totalKg} kg).`;
+            if (sidebarPointLink) sidebarPointLink.style.display = 'none';
+            if (deliveryAlternativeBox) {
+                deliveryAlternativeBox.style.display = 'block';
+                deliveryAlternativeBox.innerHTML = alt
+                    ? `<strong>Alternativa sugerida (HU-040):</strong> La estación abierta más cercana compatible con tu lote está en <strong>${alt.districtName}</strong> (<a href="point-detail.html?punto=${alt.code}" style="color: #0B4A30; font-weight: 800;">${alt.name}</a>). También puedes entregar por separado los materiales comunes y consultar <a href="prep-safety.html" style="color: #0B4A30; font-weight: 700;">manejo seguro</a>.`
+                    : `<strong>Alternativa sugerida (HU-040):</strong> No hay una estación única abierta para toda la combinación a la vez. Divide tu lote por familia de material o revisa <a href="prep-alternative.html" style="color: #0B4A30; font-weight: 700;">vías responsables de entrega</a>.`;
+            }
+        } else {
+            if (sidebarMatchChip) sidebarMatchChip.textContent = 'Mejor coincidencia encontrada';
+            if (sidebarMatchTitle) sidebarMatchTitle.textContent = 'Estación Recicla San Miguel';
+            if (sidebarMatchStats) sidebarMatchStats.textContent = `0.8 km · Abierto hoy hasta 18:00 · ${totalUnits} unidades (${totalKg} kg)`;
+        }
+
         if (sidebarMatchList) {
             sidebarMatchList.innerHTML = lot.map(item => `
                 <li>
@@ -361,6 +415,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     };
+
+    if (deliveryDistrictSelect) {
+        deliveryDistrictSelect.addEventListener('change', renderDeliveryLot);
+    }
 
     const formQuickLotAdd = document.getElementById('form-quick-lot-add');
     const deliveryLiveStatus = document.getElementById('delivery-live-status');
