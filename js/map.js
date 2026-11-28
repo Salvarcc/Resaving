@@ -451,10 +451,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const metaEl = document.getElementById('status-station-meta');
         const hoursEl = document.getElementById('status-station-hours');
         const closureAlertEl = document.getElementById('status-closure-alert');
+        const dirLinkEl = document.getElementById('status-directions-link');
 
         if (titleEl) titleEl.textContent = st.name;
         if (metaEl) metaEl.textContent = `${st.addr} · Responsable: ${st.promoter} · Actualización: ${st.updatedAt}`;
         if (hoursEl) hoursEl.textContent = st.hours;
+        if (dirLinkEl) dirLinkEl.href = `point-detail.html?punto=${st.code}#como-llegar`;
 
         if (st.closedTemporarily) {
             statusBadgeEl.textContent = st.status;
@@ -469,47 +471,100 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Collection routes handling
+    // Collection routes handling (shared across route detail & collection-list drawer)
+    const routesDictionary = {
+        'san-miguel-03': {
+            name: 'Ruta San Miguel 03',
+            districtKey: 'san-miguel',
+            pageTitle: 'Ruta municipal San Miguel 03',
+            subtitle: 'Consulta días, frecuencias de recojo y el área de cobertura del programa de segregación en la fuente.',
+            sector: 'Sector 3 de San Miguel',
+            cardTitle: 'Ruta de recolección selectiva 03',
+            nextVisit: 'Próxima visita: Sábado 10',
+            desc: 'El vehículo recolector y los recicladores formalizados del programa distrital recorren las calles recolectando residuos aprovechables empacados en bolsas verdes.',
+            materials: 'Plásticos, botellas, cartón, papel bond y latas limpios.',
+            coverage: 'Av. La Marina, Av. Universitaria y Av. Bertolotto.',
+            activeDays: { Mié: '08:00–12:00', Sáb: '08:00–12:00' }
+        },
+        'pueblo-libre-01': {
+            name: 'Ruta Pueblo Libre 01',
+            districtKey: 'pueblo-libre',
+            pageTitle: 'Ruta municipal Pueblo Libre 01',
+            subtitle: 'Programa Recicla Pueblo Libre para predios y condominios del sector histórico.',
+            sector: 'Sector 1 de Pueblo Libre',
+            cardTitle: 'Ruta de recolección selectiva 01',
+            nextVisit: 'Próxima visita: Martes 13',
+            desc: 'El camión baranda recorre las urbanizaciones del cuadrante histórico de Pueblo Libre en horario matutino.',
+            materials: 'Botellas plásticas, frascos de vidrio, papel y cartón seco.',
+            coverage: 'Cuadrante Av. Sucre, Av. Bolívar y Av. Vivanco.',
+            activeDays: { Mar: '09:00–13:00', Vie: '09:00–13:00' }
+        },
+        'magdalena-02': {
+            name: 'Ruta Magdalena 02',
+            districtKey: 'magdalena',
+            pageTitle: 'Ruta municipal Magdalena 02',
+            subtitle: 'Ruta de recolección diferenciada para vecinos del sector comercial y residencial.',
+            sector: 'Sector 2 de Magdalena',
+            cardTitle: 'Ruta de recolección selectiva 02',
+            nextVisit: 'Próxima visita: Jueves 15',
+            desc: 'Brigada de recicladores acreditados recorre comercios y residencias con vehículo recolector ligero.',
+            materials: 'Plásticos, envases de hojalata y aluminio, papel y cartón.',
+            coverage: 'Cuadrante Jr. Bolognesi, Av. Brasil y Malecón Castagnola.',
+            activeDays: { Jue: '08:30–12:30' }
+        }
+    };
+
+    const routeButtons = document.querySelectorAll('.btn-consult-route[data-ruta]');
+    const routeDrawer = document.getElementById('route-detail-drawer');
+    if (routeButtons.length > 0 && routeDrawer) {
+        routeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.getAttribute('data-ruta');
+                const data = routesDictionary[key];
+                if (!data) return;
+
+                const isSameOpen = routeDrawer.style.display === 'block' && routeDrawer.getAttribute('data-active-ruta') === key;
+                routeButtons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+                if (isSameOpen) {
+                    routeDrawer.style.display = 'none';
+                    routeDrawer.removeAttribute('data-active-ruta');
+                    return;
+                }
+
+                btn.setAttribute('aria-expanded', 'true');
+                routeDrawer.setAttribute('data-active-ruta', key);
+                const scheduleText = Object.entries(data.activeDays).map(([d, h]) => `${d} (${h})`).join(' · ');
+                routeDrawer.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;">
+                        <div>
+                            <span class="route-badge">${data.sector}</span>
+                            <h3 style="margin: 6px 0 4px 0; font-size: 18px; font-weight: 800; color: #14251B;">${data.cardTitle} — ${data.name}</h3>
+                        </div>
+                        <button type="button" id="btn-close-route-drawer" style="background: #F7FAF8; border: 1px solid #DBE7DF; border-radius: 8px; padding: 6px 12px; font-size: 12.5px; font-weight: 700; color: #0B4A30; cursor: pointer;">Cerrar detalle</button>
+                    </div>
+                    <p style="margin: 0 0 10px 0; font-size: 13.5px; color: #3D5A4A; line-height: 1.5;">${data.desc}</p>
+                    <p style="margin: 0 0 6px 0; font-size: 13.5px; color: #14251B;"><strong>Horarios de paso:</strong> ${scheduleText}</p>
+                    <p style="margin: 0 0 6px 0; font-size: 13.5px; color: #14251B;"><strong>Cobertura exacta:</strong> ${data.coverage}</p>
+                    <p style="margin: 0 0 14px 0; font-size: 13.5px; color: #14251B;"><strong>Materiales admitidos:</strong> ${data.materials}</p>
+                    <a href="collection-map.html?distrito=${data.districtKey}" class="btn-primary-action" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 13px; text-decoration: none;">Ver estaciones fijas en este distrito &rarr;</a>
+                `;
+                routeDrawer.style.display = 'block';
+                routeDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                const closeBtn = document.getElementById('btn-close-route-drawer');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        routeDrawer.style.display = 'none';
+                        routeDrawer.removeAttribute('data-active-ruta');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                }
+            });
+        });
+    }
+
     const routePageTitle = document.getElementById('route-page-title');
     if (routePageTitle) {
-        const routesDictionary = {
-            'san-miguel-03': {
-                name: 'Ruta San Miguel 03',
-                pageTitle: 'Ruta municipal San Miguel 03',
-                subtitle: 'Consulta días, frecuencias de recojo y el área de cobertura del programa de segregación en la fuente.',
-                sector: 'Sector 3 de San Miguel',
-                cardTitle: 'Ruta de recolección selectiva 03',
-                nextVisit: 'Próxima visita: Sábado 10',
-                desc: 'El vehículo recolector y los recicladores formalizados del programa distrital recorren las calles recolectando residuos aprovechables empacados en bolsas verdes.',
-                materials: 'Plásticos, botellas, cartón, papel bond y latas limpios.',
-                coverage: 'Av. La Marina, Av. Universitaria y Av. Bertolotto.',
-                activeDays: { Mié: '08:00–12:00', Sáb: '08:00–12:00' }
-            },
-            'pueblo-libre-01': {
-                name: 'Ruta Pueblo Libre 01',
-                pageTitle: 'Ruta municipal Pueblo Libre 01',
-                subtitle: 'Programa Recicla Pueblo Libre para predios y condominios del sector histórico.',
-                sector: 'Sector 1 de Pueblo Libre',
-                cardTitle: 'Ruta de recolección selectiva 01',
-                nextVisit: 'Próxima visita: Jueves 08',
-                desc: 'El camión baranda recorre las urbanizaciones del cuadrante histórico de Pueblo Libre en horario matutino.',
-                materials: 'Botellas plásticas, frascos de vidrio, papel y cartón seco.',
-                coverage: 'Cuadrante Av. Sucre, Av. Bolívar y Av. Vivanco.',
-                activeDays: { Mar: '09:00–13:00', Jue: '09:00–13:00' }
-            },
-            'magdalena-02': {
-                name: 'Ruta Magdalena 02',
-                pageTitle: 'Ruta municipal Magdalena 02',
-                subtitle: 'Ruta de recolección diferenciada para vecinos del sector comercial y residencial.',
-                sector: 'Sector 2 de Magdalena',
-                cardTitle: 'Ruta de recolección selectiva 02',
-                nextVisit: 'Próxima visita: Viernes 09',
-                desc: 'Brigada de recicladores acreditados recorre comercios y residencias con vehículo recolector ligero.',
-                materials: 'Plásticos, envases de hojalata y aluminio, papel y cartón.',
-                coverage: 'Cuadrante Jr. Bolognesi, Av. Brasil y Jr. Leoncio Prado.',
-                activeDays: { Lun: '08:30–12:30', Vie: '08:30–12:30' }
-            }
-        };
 
         const routeParams = new URLSearchParams(window.location.search);
         const rutaKey = routeParams.get('ruta') || 'san-miguel-03';
