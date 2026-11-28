@@ -96,6 +96,13 @@
 
 /* Mobile Responsive Overrides for Trust & Report Feedback */
 @media (max-width: 768px) {
+    .report-form-card {
+        padding: 20px;
+        box-sizing: border-box;
+        min-width: 0;
+        max-width: 100%;
+    }
+
     .report-forms-grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
